@@ -1,0 +1,46 @@
+<template>
+  <view>
+    <button type="primary" @tap="plus"> +  </button>
+    <view class="num">
+      about us{{myNum}}{{now}}aa
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import testMixin from '../../mixins/test'
+
+  export default class AboutUs extends wepy.page {
+    config = {
+      navigationBarTitleText: 'test'
+    }
+
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {
+      myNum: 20
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      plus () {
+        this.myNum++
+      }
+    }
+
+    events = {}
+
+    onLoad() {
+    }
+  }
+</script>
