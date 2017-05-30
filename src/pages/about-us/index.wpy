@@ -1,0 +1,46 @@
+<template>
+  <view>
+    <button type="primary" @tap="plus">加 1</button>
+    <view class="num">
+      {{num}}-{{now}}
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import testMixin from '../../mixins/test'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '关于'
+    }
+
+    components = {}
+
+    mixins = [testMixin]
+
+    data = {
+      num: 0
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      plus () {
+        this.num++
+      }
+    }
+
+    events = {}
+
+    onLoad() {
+    }
+  }
+</script>
