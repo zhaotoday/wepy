@@ -2,7 +2,7 @@
   <view>
     <button type="primary" @tap="plus">加 1</button>
     <view class="num">
-      {{ user.nickname }}222
+      {{ user.nickname }}wode
     </view>
   </view>
 </template>

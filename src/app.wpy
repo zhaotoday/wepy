@@ -26,7 +26,8 @@
     config = {
       pages: [
         'pages/home/index',
-        'pages/about-us/index'
+        'pages/help/index',
+        'pages/mine/index'
       ],
       window: {
         backgroundTextStyle: 'light',
@@ -43,12 +44,17 @@
           pagePath: 'pages/home/index',
           iconPath: 'images/icons/api.png',
           selectedIconPath: 'images/icons/api-active.png',
-          text: '首页'
+          text: '淘'
         }, {
-          pagePath: 'pages/about-us/index',
+          pagePath: 'pages/help/index',
           iconPath: 'images/icons/component.png',
           selectedIconPath: 'images/icons/component-active.png',
-          text: '关于'
+          text: '帮忙'
+        }, {
+          pagePath: 'pages/mine/index',
+          iconPath: 'images/icons/api.png',
+          selectedIconPath: 'images/icons/api-active.png',
+          text: '我的'
         } ]
       }
     }
