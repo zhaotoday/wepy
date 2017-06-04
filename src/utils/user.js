@@ -30,7 +30,7 @@ export default {
         success (res) {
           request.GET({
             path: '/wx/user/save',
-            params: { encrypted: res.encryptedData, res: res.iv }
+            params: { encrypted: res.encryptedData, iv: res.iv }
           }).then((res) => {
             resolve(res)
           })

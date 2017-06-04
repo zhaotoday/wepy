@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="home">
-      home22 {{ globalData.user.nickname }}
+      home22 {{ user.nickname }}
     </view>
   </view>
 </template>
@@ -10,6 +10,7 @@
 
 <script>
   import wepy from 'wepy'
+  import globalMixin from '../../utils/mixins/global'
 
   export default class extends wepy.page {
     config = {
@@ -18,7 +19,7 @@
 
     components = {}
 
-    mixins = []
+    mixins = [ globalMixin ]
 
     data = {
       num: 0
@@ -30,8 +31,7 @@
       }
     }
 
-    methods = {
-    }
+    methods = {}
 
     events = {}
 

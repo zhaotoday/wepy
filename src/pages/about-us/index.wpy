@@ -2,7 +2,7 @@
   <view>
     <button type="primary" @tap="plus">加 1</button>
     <view class="num">
-      {{num}}-{{now}}
+      {{ user.nickname }}222
     </view>
   </view>
 </template>
@@ -11,7 +11,7 @@
 
 <script>
   import wepy from 'wepy'
-  import testMixin from '../../mixins/test'
+  import globalMixin from '../../utils/mixins/global'
 
   export default class extends wepy.page {
     config = {
@@ -20,7 +20,7 @@
 
     components = {}
 
-    mixins = [ testMixin ]
+    mixins = [ globalMixin ]
 
     data = {
       num: 0

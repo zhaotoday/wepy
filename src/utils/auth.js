@@ -30,14 +30,5 @@ export default {
    */
   loggedIn () {
     return !!session.get()
-  },
-
-  /**
-   * check session
-   */
-  checkSession () {
-    return new Promise((resolve) => {
-      resolve()
-    })
   }
 }
