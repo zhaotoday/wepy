@@ -30,7 +30,7 @@
         selectedColor: '#3cc51f',
         borderStyle: 'black',
         backgroundColor: '#ffffff',
-        list: [{
+        list: [ {
           pagePath: 'pages/home/index',
           iconPath: 'images/icons/api.png',
           selectedIconPath: 'images/icons/api-active.png',
@@ -40,7 +40,7 @@
           iconPath: 'images/icons/component.png',
           selectedIconPath: 'images/icons/component-active.png',
           text: '关于'
-        }]
+        } ]
       }
     }
 
@@ -48,16 +48,16 @@
       userInfo: null
     }
 
-    constructor() {
+    constructor () {
       super()
       this.use('requestfix')
     }
 
-    onLaunch() {
+    onLaunch () {
       this.testAsync()
     }
 
-    sleep(s) {
+    sleep (s) {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve('promise resolved')
@@ -65,12 +65,12 @@
       })
     }
 
-    async testAsync() {
+    async testAsync () {
       const data = await this.sleep(3)
       console.log(data)
     }
 
-    getUserInfo(cb) {
+    getUserInfo (cb) {
       const that = this
       if (this.globalData.userInfo) {
         return this.globalData.userInfo

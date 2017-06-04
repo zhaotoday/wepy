@@ -19,7 +19,7 @@
 
     components = {}
 
-    mixins = [testMixin]
+    mixins = [ testMixin ]
 
     data = {
       num: 0
@@ -39,7 +39,7 @@
 
     events = {}
 
-    onLoad() {
+    onLoad () {
     }
   }
 </script>
