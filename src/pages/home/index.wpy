@@ -1,5 +1,8 @@
 <template>
   <view>
+    <view class="section">
+      <Input placeholder="请输入商品或店铺" />
+    </view>
     <view class="home">
       home22 {{ user.nickname }}
     </view>
@@ -10,6 +13,7 @@
 
 <script>
   import wepy from 'wepy'
+  import Input from '../../components/input'
   import globalMixin from '../../utils/mixins/global'
 
   export default class extends wepy.page {
@@ -17,7 +21,7 @@
       navigationBarTitleText: '首页'
     }
 
-    components = {}
+    components = { Input }
 
     mixins = [ globalMixin ]
 
