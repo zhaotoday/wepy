@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="home">
-      home
+      home22 {{ globalData.user.nickname }}
     </view>
   </view>
 </template>
@@ -10,7 +10,6 @@
 
 <script>
   import wepy from 'wepy'
-  import testMixin from '../../mixins/test'
 
   export default class extends wepy.page {
     config = {
@@ -19,22 +18,19 @@
 
     components = {}
 
-    mixins = [ testMixin ]
+    mixins = []
 
     data = {
       num: 0
     }
 
     computed = {
-      now () {
-        return +new Date()
+      globalData () {
+        return this.$parent.getGlobalData()
       }
     }
 
     methods = {
-      plus () {
-        this.num++
-      }
     }
 
     events = {}
