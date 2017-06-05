@@ -1,6 +1,6 @@
 <template>
   <view class="input-wrap">
-    <input type="text" placeholder="{{placeholder}}" @focus="handleFocus" @input="handleInput" />
+    <input class="weui-search-bar__input" type="text" placeholder="{{placeholder}}" @focus="handleFocus" @input="handleInput" confirm-type="search" />
   </view>
 </template>
 
