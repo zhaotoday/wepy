@@ -1,3 +1,5 @@
+<style lang="less" src="./assets/weui/weui.less"></style>
+
 <style lang="scss">
   .container {
     height: 100%;
@@ -44,7 +46,7 @@
           pagePath: 'pages/home/index',
           iconPath: 'images/icons/api.png',
           selectedIconPath: 'images/icons/api-active.png',
-          text: '淘'
+          text: '购物'
         }, {
           pagePath: 'pages/help/index',
           iconPath: 'images/icons/component.png',

@@ -1,10 +1,35 @@
 <template>
   <view>
     <view class="section">
-      <Input placeholder="请输入商品或店铺" />
+      <Input placeholder="请输入商品或店铺" input="handleInput" />
+      <swiper interval="3000" duration="500" autoplay indicator-dots autoplay circular>
+        <block wx:for="{{swiperImages}}">
+          <swiper-item>
+            <image src="{{item}}" @tap="handleTapImage" />
+          </swiper-item>
+        </block>
+      </swiper>
+
+      <view style="padding: 10rpx;">
+        <button type="default" size="mini" hover-class="other-button-hover">农产品</button>
+      </view>
+
+
+      <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+        <view class="picker">
+          当前选择: {{date}}
+        </view>
+      </picker>
+
+      <picker @change="handlePickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          当前选择：{{array[ index ]}}
+        </view>
+      </picker>
+
     </view>
     <view class="home">
-      home22 {{ user.nickname }}
+      {{ user.nickname }}
     </view>
   </view>
 </template>
@@ -13,7 +38,7 @@
 
 <script>
   import wepy from 'wepy'
-  import Input from '../../components/input'
+  import Input from '../../components/input/index'
   import globalMixin from '../../utils/mixins/global'
 
   export default class extends wepy.page {
@@ -26,20 +51,33 @@
     mixins = [ globalMixin ]
 
     data = {
-      num: 0
+      num: 0,
+      swiperImages: [],
+      array: [ '分类', '农产品', '电子产品', '特产' ],
+      index: 0,
+      date: '2016-09-01'
     }
 
-    computed = {
-      globalData () {
-        return this.$parent.getGlobalData()
+    computed = {}
+
+    methods = {
+      handlePickerChange (e) {
+        this.index = e.detail.value
       }
     }
 
-    methods = {}
-
-    events = {}
+    events = {
+      handleInput (e) {
+        console.log(e)
+      }
+    }
 
     onLoad () {
+      this.swiperImages = [
+        'http://img.alicdn.com/imgextra/i3/167/TB22cgbvhlmpuFjSZPfXXc9iXXa_!!167-0-luban.jpg_q100.jpg_.webp',
+        'https://img.alicdn.com/simba/img/TB1WNEMRpXXXXbKapXXSutbFXXX.jpg',
+        'https://img.alicdn.com/simba/img/TB11zTRRXXXXXb8aFXXSutbFXXX.jpg'
+      ]
     }
   }
 </script>
