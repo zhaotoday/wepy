@@ -1,28 +1,44 @@
-swiper {
-  height: 350rpx;
+@import "../../styles/utils/functions";
+@import "../../styles/utils/mixins";
+
+$swiper-weight: 350;
+
+// home searchbar
+@include b(home-searchbar) {
+}
+
+// home swiper
+@include b(home-swiper) {
+  height: rpx($swiper-weight);
 
   image {
     width: 100%;
-    height: 350rpx;
+    height: rpx($swiper-weight);
   }
 }
 
-image {
-  display: block;
-  margin: 0 auto;
-  width: 100rpx;
-  height: 100rpx;
-}
+// home commodity categories
+@include b(home-commodity-categories) {
+  @include b(weui-flex) {
+    padding-top: rpx(20);
+    padding-bottom: rpx(20);
 
-.categories {
-  .weui-flex {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    @include e(item) {
+      text-align: center;
+    }
+  }
+
+  image {
+    @include img--block(rpx(90), rpx(90));
+    @include block--center;
+    border-radius: 4px;
+    margin-bottom: rpx(20);
   }
 }
 
-.commodity {
-  background-color: white;
-  padding: 10px;
-  margin-right: 5px;
+// home shops
+@include b(home-shops) {
+  image {
+    border-radius: 4px;
+  }
 }

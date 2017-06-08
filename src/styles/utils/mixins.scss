@@ -1,5 +1,8 @@
-@import "./variables";
-@import "./functions";
+// BEM element 分隔符
+$element-separator: '__';
+
+// BEM modifier 分隔符
+$modifier-separator: '--';
 
 /**
  * 文字垂直居中
@@ -7,7 +10,7 @@
  */
 @mixin text--middle($height) {
   height: $height;
-  line-height: $height + px2rem(1px);
+  line-height: $height;
   overflow: hidden;
 }
 
@@ -41,30 +44,6 @@
   display: block;
   width: $width;
   height: $height;
-}
-
-/**
- * 字体
- * @param {array} $fonts 字体列表
- * @param {number} $index 字体列表索引
- */
-@mixin _font($fonts, $index) {
-  $font: nth($fonts, $index);
-  $font-size: nth($font, 1);
-
-  font-size: $font-size;
-
-  @if (length($font) == 2) {
-    font-weight: nth($font, 2);
-  }
-
-  [data-dpr="2"] & {
-    font-size: $font-size * 2;
-  }
-
-  [data-dpr="3"] & {
-    font-size: $font-size * 3;
-  }
 }
 
 /**
