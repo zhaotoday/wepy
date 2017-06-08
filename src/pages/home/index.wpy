@@ -1,11 +1,11 @@
 <template>
-  <view>
+  <view class="container">
 
     <view class="weui-search-bar">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
-          <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索商家、商品名称" @focus="" />
+          <icon class="weui-icon-search_in-box" type="search" size="18"></icon>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索商家、商品名称" />
         </view>
       </view>
     </view>
@@ -18,37 +18,119 @@
       </block>
     </swiper>
 
-    <view class="weui-flex">
-      <view class="weui-flex__item" style="text-align: center;">
-        <image src="https://img.alicdn.com/i2/2/TB1jIxPRpXXXXb1XXXXSutbFXXX.jpg" />
-        weui
-      </view>
-      <view class="weui-flex__item" style="text-align: center;">
-        <image src="https://img.alicdn.com/i2/2/TB1jIxPRpXXXXb1XXXXSutbFXXX.jpg" />
-        weui
-      </view>
-      <view class="weui-flex__item" style="text-align: center;">
-        <image src="https://img.alicdn.com/i2/2/TB1jIxPRpXXXXb1XXXXSutbFXXX.jpg" />
-        weui
-      </view>
-      <view class="weui-flex__item" style="text-align: center;">
-        <image src="https://img.alicdn.com/i2/2/TB1jIxPRpXXXXb1XXXXSutbFXXX.jpg" />
-        weui
+    <view class="weui-panel">
+      <view class="weui-panel__hd">商品分类</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__desc">
+
+            <view class="categories">
+              <view class="weui-flex">
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/bao/upload/TB1XskXNFXXXXcPXXXXwu0bFXXX.png_400x400q60.jpg" />
+                  农产品
+                </view>
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/bao/upload/TB10A94LXXXXXbNXXXXwu0bFXXX.png_400x400q60.jpg" />
+                  电子产品
+                </view>
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/bao/upload/TB1X.HCNFXXXXXgapXXwu0bFXXX.png_400x400q60.jpg" />
+                  零食
+                </view>
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/i1/TB1ManBRXXXXXceXVXXXXXXXXXX_!!0-item_pic.jpg_400x400q60.jpg" />
+                  特产
+                </view>
+              </view>
+              <view class="weui-flex">
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/i2/725677994/TB23UhVbCB0XKJjSZFsXXaxfpXa_!!725677994.jpg_400x400q60.jpg" />
+                  农产品
+                </view>
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/i2/TB1jclURpXXXXaqXFXXXXXXXXXX_!!0-item_pic.jpg_400x400q60.jpg" />
+                  电子产品
+                </view>
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/i2/TB1UA5kRXXXXXXUaXXXXXXXXXXX_!!0-item_pic.jpg_400x400q60.jpg" />
+                  零食
+                </view>
+                <view class="weui-flex__item" style="text-align: center;">
+                  <image
+                    src="https://img.alicdn.com/bao/uploaded/bao/upload/TB1k9xVRpXXXXaNXFXXwu0bFXXX.png_400x400q60.jpg" />
+                  特产
+                </view>
+              </view>
+            </view>
+
+          </view>
+
+        </view>
       </view>
     </view>
 
-    <view class="weui-panel">
-      <view class="weui-panel__hd">文字列表附来源</view>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">推荐商家</view>
       <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text">
-          <view class="weui-media-box__title weui-media-box__title_in-text">标题一</view>
-          <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
-          <view class="weui-media-box__info">
-            <view class="weui-media-box__info__meta">文字来源</view>
-            <view class="weui-media-box__info__meta">时间</view>
-            <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb"
+                   src="https://img.alicdn.com/bao/uploaded/i4/TB1fTINOXXXXXc7aXXXXXXXXXXX_!!0-item_pic.jpg_400x400q60.jpg" />
           </view>
-        </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">标题一</view>
+            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+          </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb"
+                   src="https://img.alicdn.com/bao/uploaded/bao/upload/TB1XskXNFXXXXcPXXXXwu0bFXXX.png_400x400q60.jpg" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">标题二</view>
+            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+          </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb"
+                   src="https://img.alicdn.com/bao/uploaded/bao/upload/TB1Jc4sRpXXXXcNXVXXwu0bFXXX.png_400x400q60.jpg" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">标题二</view>
+            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+          </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb"
+                   src="https://img.alicdn.com/bao/uploaded/i3/725677994/TB2Kco2cB8kpuFjSspeXXc7IpXa_!!725677994.jpg_400x400q60.jpg" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">标题二</view>
+            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+          </view>
+        </navigator>
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb"
+                   src="https://img.alicdn.com/bao/uploaded/bao/upload/TB1CDYaQVXXXXXYXXXXwu0bFXXX.png_400x400q60.jpg" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">标题二</view>
+            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+          </view>
+        </navigator>
       </view>
     </view>
 
@@ -57,6 +139,8 @@
   <view class="home">
     {{ user.nickname }}
   </view>
+
+
 </template>
 
 <style lang="scss" src="./styles.scss"></style>

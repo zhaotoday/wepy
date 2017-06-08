@@ -6,7 +6,23 @@ swiper {
     height: 350rpx;
   }
 }
+
 image {
-  width: 160rpx;
-  height: 160rpx;
+  display: block;
+  margin: 0 auto;
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.categories {
+  .weui-flex {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+.commodity {
+  background-color: white;
+  padding: 10px;
+  margin-right: 5px;
 }

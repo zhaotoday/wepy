@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="container">
     <button type="primary" @tap="plus">加 1</button>
     <view class="num">
       {{ user.nickname }}wode
