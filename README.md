@@ -22,6 +22,22 @@ $ npm install
 $ wepy build --watch
 ```
 
+## 目录结构
+```
+├── dist                     编译目录
+├── src                      源码目录
+|   ├── components           通用组件
+|   |   ├── my-component     my-component 组件
+|   |       ├── index.wpy    my-component 业务
+|   |       └── styles.scss  my-component 样式
+|   ├── pages                页面目录
+|   |   ├── my-page          my-page 页面
+|   |       ├── index.wpy    my-page 业务
+|   |       └── styles.scss  my-page 样式
+|   └── app.wpy              小程序配置项（全局样式配置、声明钩子等）
+└── package.json             package 配置
+```
+
 ## 微信开发者工具的使用
 - 使用微信开发者工具新建项目，本地开发选择 dist 目录；
 - 微信开发者工具 --> 项目 --> 关闭ES6转ES5。
