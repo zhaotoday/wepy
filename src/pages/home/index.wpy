@@ -31,6 +31,14 @@
                 </view>
               </repeat>
             </view>
+            <view class="weui-flex">
+              <repeat for="{{commodityCategories}}" key="index">
+                <view class="weui-flex__item">
+                  <image src="{{item.image}}" />
+                  {{item.name}}
+                </view>
+              </repeat>
+            </view>
           </view>
         </view>
       </view>
