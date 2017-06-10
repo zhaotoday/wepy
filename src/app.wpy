@@ -22,7 +22,8 @@
       pages: [
         'pages/home/index',
         'pages/help/index',
-        'pages/mine/index'
+        'pages/mine/index',
+        'pages/bind/index'
       ],
       window: {
         backgroundTextStyle: 'light',

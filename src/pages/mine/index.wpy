@@ -81,8 +81,9 @@
 
       </view>
     </view>
-    <button class="weui-btn" type="primary" style="margin-left: 15px; margin-right: 15px;">绑定手机号</button>
-
+    <button class="weui-btn" type="primary" style="margin-left: 15px; margin-right: 15px;" @tap="handleRedirectBind">
+      绑定手机号
+    </button>
   </view>
 </template>
 
@@ -101,19 +102,15 @@
 
     mixins = [ globalMixin ]
 
-    data = {
-      num: 0
-    }
+    data = {}
 
-    computed = {
-      now () {
-        return +new Date()
-      }
-    }
+    computed = {}
 
     methods = {
-      plus () {
-        this.num++
+      handleRedirectBind () {
+        wepy.navigateTo({
+          url: '/pages/bind/index'
+        })
       }
     }
 
