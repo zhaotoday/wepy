@@ -26,14 +26,18 @@ $ wepy build --watch
 ```
 ├── dist                     编译目录
 ├── src                      源码目录
+|   ├── assets               引用的第三方资源（如：WeUI）
 |   ├── components           通用组件
-|   |   ├── my-component     my-component 组件
+|   |   └── my-component     my-component 组件
 |   |       ├── index.wpy    my-component 业务
 |   |       └── styles.scss  my-component 样式
+|   ├── images               图片
 |   ├── pages                页面目录
-|   |   ├── my-page          my-page 页面
+|   |   └── my-page          my-page 页面
 |   |       ├── index.wpy    my-page 业务
 |   |       └── styles.scss  my-page 样式
+|   ├── styles               Sass function、mixin 等
+|   ├── utils                JS 工具集合
 |   └── app.wpy              小程序配置项（全局样式配置、声明钩子等）
 └── package.json             package 配置
 ```
