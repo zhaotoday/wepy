@@ -22,6 +22,7 @@
       pages: [
         'pages/home/index',
         'pages/help/index',
+        'pages/cart/index',
         'pages/mine/index',
         'pages/bind/index'
       ],
@@ -38,23 +39,23 @@
         backgroundColor: '#ffffff',
         list: [ {
           pagePath: 'pages/home/index',
-          iconPath: 'images/icons/api.png',
-          selectedIconPath: 'images/icons/api-active.png',
+          iconPath: 'images/icons/tabs/buy.png',
+          selectedIconPath: 'images/icons/tabs/buy-hl.png',
           text: '购物'
         }, {
           pagePath: 'pages/help/index',
-          iconPath: 'images/icons/api.png',
-          selectedIconPath: 'images/icons/api-active.png',
+          iconPath: 'images/icons/tabs/help.png',
+          selectedIconPath: 'images/icons/tabs/help-hl.png',
           text: '帮忙'
         }, {
-          pagePath: 'pages/mine/index',
-          iconPath: 'images/icons/api.png',
-          selectedIconPath: 'images/icons/api-active.png',
+          pagePath: 'pages/cart/index',
+          iconPath: 'images/icons/tabs/cart.png',
+          selectedIconPath: 'images/icons/tabs/cart-hl.png',
           text: '购物车'
         }, {
           pagePath: 'pages/mine/index',
-          iconPath: 'images/icons/api.png',
-          selectedIconPath: 'images/icons/api-active.png',
+          iconPath: 'images/icons/tabs/me.png',
+          selectedIconPath: 'images/icons/tabs/me-hl.png',
           text: '我的'
         } ]
       }
