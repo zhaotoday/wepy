@@ -44,7 +44,7 @@ $ wepy build --watch
 
 ## 微信开发者工具的使用
 - 使用微信开发者工具新建项目，本地开发选择 dist 目录；
-- 微信开发者工具 --> 项目 --> 关闭ES6转ES5。
+- 微信开发者工具 --> 项目 --> 关闭 ES6 转 ES5。
 
 ## WebStorm 代码高亮
 - File --> Settings --> File Types --> [Recognized File Types] Vue.js Templates --> 添加 *.wpy。

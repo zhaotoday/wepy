@@ -28,7 +28,7 @@
       </view>
     </view>
     <button class="weui-btn" type="primary" style="margin-left: 15px; margin-right: 15px;" @tap="handleBind">绑定</button>
-    <view class="weui-cells__tips">请绑定您的手机号，以便我们为您提供更完善的服务。</view>
+    <view class="weui-cells__tips">请绑定手机号，以便为您提供更完善的服务。</view>
   </view>
 </template>
 
