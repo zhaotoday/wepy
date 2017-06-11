@@ -2,6 +2,9 @@
 基于 WePY + WeUI，以组件化思想开发微信小程序。
 
 ## 相关
+- [微信公众平台](https://mp.weixin.qq.com/)
+- [微信小程序简易教程](https://mp.weixin.qq.com/debug/wxadoc/dev/index.html)
+- [Wafer - 小程序开发全栈资源套件](https://github.com/tencentyun/wafer)
 - [WePY](https://github.com/wepyjs/wepy)
 - [小程序框架 WePY 文档](https://wepyjs.github.io/wepy)
 - [WeUI WXSS](https://github.com/weui/weui-wxss)
