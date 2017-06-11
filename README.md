@@ -9,6 +9,7 @@
 - [小程序框架 WePY 文档](https://wepyjs.github.io/wepy)
 - [WeUI WXSS](https://github.com/weui/weui-wxss)
 - [阿里巴巴 Icon Font](http://iconfont.cn/)
+- [腾讯云微信小程序 扶持计划](https://dnspod.qcloud.com/la/apply?from=solution)
 
 ## 感谢整理
 - [WePY WeUI Demo](https://github.com/wepyjs/wepy-weui-demo)
