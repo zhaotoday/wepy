@@ -1,11 +1,8 @@
 <template>
   <view class="container">
-
-
     <view class="weui-panel">
       <view class="weui-panel__bd">
         <view class="weui-media-box">
-
           <view class="weui-cell">
             <view class="weui-cell__hd" style="position: relative;margin-right: 10px;">
               <image src="{{user.avatar}}" style="width: 50px; height: 50px; display: block" />
@@ -15,70 +12,71 @@
               <view style="font-size: 13px;color: #888888;">手机号：[未绑定]</view>
             </view>
           </view>
-
         </view>
       </view>
     </view>
 
     <view class="weui-panel">
-      <view class="weui-media-box">
-
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">
-              住址：淮安国际住区铂宫二期 21#204
-            </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">
+            住址：淮安国际住区铂宫二期 21#204
           </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
 
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">钱包：120.00 元</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">钱包：120.00 元</view>
         </view>
-
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
     </view>
 
     <view class="weui-panel">
-      <view class="weui-media-box">
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">已买到的</view>
-            <view class="weui-badge" style="margin-left: 5px;">3</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">已买到的</view>
+          <view class="weui-badge" style="margin-left: 5px;">3</view>
         </view>
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">已卖出的</view>
-            <view class="weui-badge" style="margin-left: 5px;">5</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">已卖出的</view>
+          <view class="weui-badge" style="margin-left: 5px;">5</view>
         </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
 
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">帮过的人</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">帮过的人</view>
         </view>
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">被谁帮过</view>
-            <view class="weui-badge" style="margin-left: 5px;">3</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">被谁帮过</view>
+          <view class="weui-badge" style="margin-left: 5px;">3</view>
         </view>
-        <view class="weui-cell">
-          <view class="weui-cell__bd">
-            <view style="display: inline-block; vertical-align: middle">联系客服</view>
-          </view>
-          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
-        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+    </view>
 
+    <view class="weui-panel">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">关于我们</view>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </view>
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view style="display: inline-block; vertical-align: middle">联系客服</view>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
     </view>
     <button class="weui-btn" type="primary" style="margin-left: 15px; margin-right: 15px;" @tap="handleRedirectBind">

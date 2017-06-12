@@ -21,7 +21,7 @@
     <view class="home-commodity-categories weui-panel">
       <view class="weui-panel__hd">商品分类</view>
       <view class="weui-panel__bd">
-        <view class="weui-media-box weui-media-box_text">
+        <view class="weui-media-box">
           <view class="weui-media-box__desc">
             <view class="weui-flex">
               <repeat for="{{commodityCategories}}" key="index">
@@ -31,6 +31,7 @@
                 </view>
               </repeat>
             </view>
+
             <view class="weui-flex">
               <repeat for="{{commodityCategories}}" key="index">
                 <view class="weui-flex__item">
