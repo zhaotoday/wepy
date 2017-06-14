@@ -24,7 +24,9 @@
         'pages/help/index',
         'pages/cart/index',
         'pages/mine/index',
-        'pages/bind/index'
+        'pages/bind/index',
+        'pages/search/index',
+        'pages/demo/index'
       ],
       window: {
         backgroundTextStyle: 'light',

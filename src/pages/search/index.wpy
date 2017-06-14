@@ -1,6 +1,79 @@
+<style>
+  .searchbar-result {
+    margin-top: 0;
+    font-size: 14px;
+  }
+
+  .searchbar-result:before {
+    display: none;
+  }
+
+  .weui-cell {
+    padding: 12px 15px 12px 35px;
+  }
+</style>
+
 <template>
-  <view>
-    购物车
+  <view class="container">
+
+    <view class="search-bar weui-search-bar">
+      <view class="weui-search-bar__form">
+        <view class="weui-search-bar__box">
+          <icon class="weui-icon-search_in-box" type="search" size="18"></icon>
+          <input type="text" confirm-type="search" class="weui-search-bar__input" value="{{searchValue}}"
+                 @input="handleInput"
+                 placeholder="搜索商家、商品名称"
+                 maxlength="15" auto-focus/>
+        </view>
+      </view>
+    </view>
+
+    <view class="search-result weui-cells searchbar-result" wx:if="{{searchValue.length}}">
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>{{searchValue}}</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>{{searchValue}}</view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
+        <view class="weui-cell__bd">
+          <view>{{searchValue}}</view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="search-history weui-panel" style="margin-top: -1px;">
+    <view class="weui-panel__hd">历史搜索</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box">
+        <button type="default" size="mini">小米手机</button>
+        <button type="default" size="mini">玩具屋</button>
+        <button type="default" size="mini">笔记本电脑</button>
+        <button type="default" size="mini">鼠标</button>
+        <button type="default" size="mini">联想笔记本电脑</button>
+        <button type="default" size="mini">鼠标</button>
+        <button type="default" size="mini">玩具屋</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="search-history weui-panel">
+    <view class="weui-panel__hd">热门搜索</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box">
+        <button type="default" size="mini">小米</button>
+        <button type="default" size="mini">玩具</button>
+        <button type="default" size="mini">电脑</button>
+        <button type="default" size="mini">鼠标</button>
+        <button type="default" size="mini">电脑</button>
+        <button type="default" size="mini">鼠标</button>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -17,10 +90,10 @@
 
     components = {}
 
-    mixins = [ globalMixin ]
+    mixins = [globalMixin]
 
     data = {
-      num: 0
+      searchValue: ''
     }
 
     computed = {
@@ -30,8 +103,8 @@
     }
 
     methods = {
-      plus () {
-        this.num++
+      handleInput (e) {
+        this.searchValue = e.detail.value
       }
     }
 

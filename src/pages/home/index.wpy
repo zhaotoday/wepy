@@ -5,7 +5,7 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="18"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索商家、商品名称" />
+          <input type="text" class="weui-search-bar__input" placeholder="搜索商家、商品名称" @focus="handleRedirectSearch"/>
         </view>
       </view>
     </view>
@@ -13,7 +13,7 @@
     <swiper class="home-swiper" interval="3000" duration="500" autoplay indicator-dots autoplay circular>
       <repeat for="{{swiperImages}}" key="index">
         <swiper-item>
-          <image src="{{item}}" @tap="handleTapImage" />
+          <image src="{{item}}" @tap="handleTapImage"/>
         </swiper-item>
       </repeat>
     </swiper>
@@ -26,7 +26,7 @@
             <view class="weui-flex">
               <repeat for="{{commodityCategories}}" key="index">
                 <view class="weui-flex__item">
-                  <image src="{{item.image}}" />
+                  <image src="{{item.image}}"/>
                   {{item.name}}
                 </view>
               </repeat>
@@ -35,7 +35,7 @@
             <view class="weui-flex">
               <repeat for="{{commodityCategories}}" key="index">
                 <view class="weui-flex__item">
-                  <image src="{{item.image}}" />
+                  <image src="{{item.image}}"/>
                   {{item.name}}
                 </view>
               </repeat>
@@ -51,7 +51,7 @@
         <repeat for="{{shops}}" key="index">
           <navigator url="{{item.url}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb" src="{{item.image}}" />
+              <image class="weui-media-box__thumb" src="{{item.image}}"/>
             </view>
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
               <view class="weui-media-box__title">{{item.name}}</view>
@@ -62,7 +62,7 @@
         <repeat for="{{shops}}" key="index">
           <navigator url="{{item.url}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-              <image class="weui-media-box__thumb" src="{{item.image}}" />
+              <image class="weui-media-box__thumb" src="{{item.image}}"/>
             </view>
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
               <view class="weui-media-box__title">{{item.name}}</view>
@@ -90,7 +90,7 @@
   ]
 
   // commodity categories
-  const commodityCategories = [ {
+  const commodityCategories = [{
     name: '农产品',
     url: '',
     image: 'https://img.alicdn.com/bao/uploaded/i3/150072812/TB20hnVkVXXXXa9XXXXXXXXXXXX_!!150072812.jpg_250x250.jpg'
@@ -110,10 +110,10 @@
     name: '床上用品',
     url: '',
     image: 'https://img.alicdn.com/bao/uploaded/i3/1854306043488471739/TB2zz.RsYJmpuFjSZFwXXaE4VXa_!!0-saturn_solar.jpg_250x250.jpg'
-  } ]
+  }]
 
   // shops
-  const shops = [ {
+  const shops = [{
     name: '右欧童装精品欧范',
     url: '',
     image: 'https://img.alicdn.com/bao/uploaded/i3/2663043508/TB25f_wol0lpuFjSszdXXcdxFXa_!!2663043508.jpg_250x250.jpg'
@@ -133,7 +133,7 @@
     name: '小辣椒BABY女童装 定制品',
     url: '',
     image: 'https://img.alicdn.com/bao/uploaded/i7/TB1HFLUMXXXXXcsXpXXJraz_FXX_061426.jpg_250x250.jpg'
-  } ]
+  }]
 
   export default class extends wepy.page {
     config = {
@@ -142,7 +142,7 @@
 
     components = {}
 
-    mixins = [ globalMixin ]
+    mixins = [globalMixin]
 
     data = {
       num: 0,
@@ -156,6 +156,12 @@
     methods = {
       handlePickerChange (e) {
         this.index = e.detail.value
+      },
+
+      handleRedirectSearch () {
+        wepy.navigateTo({
+          url: '/pages/search/index'
+        })
       }
     }
 

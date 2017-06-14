@@ -1,3 +1,26 @@
-.num {
-  background-color: yellow;
+@import "../../styles/utils/functions";
+@import "../../styles/utils/mixins";
+
+@include b(search-bar) {
+}
+
+@include b(search-result) {
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+@include b(search-history) {
+  button {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    &::after {
+      border: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  }
 }
