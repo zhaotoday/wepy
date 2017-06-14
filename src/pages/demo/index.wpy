@@ -1,0 +1,43 @@
+<template>
+  <view>
+    购物车
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import globalMixin from '../../utils/mixins/global'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '关于'
+    }
+
+    components = {}
+
+    mixins = [ globalMixin ]
+
+    data = {
+      num: 0
+    }
+
+    computed = {
+      now () {
+        return +new Date()
+      }
+    }
+
+    methods = {
+      plus () {
+        this.num++
+      }
+    }
+
+    events = {}
+
+    onLoad () {
+    }
+  }
+</script>
