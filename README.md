@@ -53,8 +53,9 @@ $ wepy build --watch
 ## WebStorm 代码高亮
 - File --> Settings --> File Types --> [Recognized File Types] Vue.js Templates --> 添加 *.wpy。
 
-## 小贴士
+## 贴士
 - [iconfont.cn](http://iconfont.cn/) 上有丰富的图标资源，下载时可编辑尺寸颜色，选择 PNG 下载，即可获得小程序可用的图标文件；
-- 解决用 WebStorm 开发小程序，格式化 CSS 时，数值和 rpx 之间被加了空格的 bug，请参考 [[链接](http://www.qianduan.org/post-471.html)]。
+- 解决用 WebStorm 开发小程序，格式化 CSS 时，数值和 rpx 之间被加了空格的 bug，请参考 [[链接](http://www.qianduan.org/post-471.html)]；
+- 在 JS 脚本中引用图片，请使用绝对路劲，如：`/images/icons/message/warn.png`。
 
 ## 未完待续
