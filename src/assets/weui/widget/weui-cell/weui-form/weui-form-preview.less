@@ -19,7 +19,7 @@
 .weui-form-preview__hd{
     position: relative;
     padding: @weuiCellGapV @weuiCellGapH;
-    text-align: right;
+    text-align: left;
     line-height: 2.5em;
     &:after{
         .setBottomLine(@weuiCellBorderColor);
@@ -29,7 +29,7 @@
 .weui-form-preview__bd{
     padding: @weuiCellGapV @weuiCellGapH;
     font-size: .9em;
-    text-align: right;
+    text-align: left;
     color: @weuiTextColorGray;
     line-height: 2;
 }
@@ -45,6 +45,7 @@
     overflow: hidden;
 }
 .weui-form-preview__label{
+    padding-top: 2px;
     float: left;
     margin-right: 1em;
     min-width: 4em;

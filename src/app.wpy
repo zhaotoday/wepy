@@ -26,7 +26,8 @@
         'pages/mine/index',
         'pages/bind/index',
         'pages/search/index',
-        'pages/demo/index'
+        'pages/demo/index',
+        'pages/shop/index'
       ],
       window: {
         backgroundTextStyle: 'light',
@@ -39,7 +40,7 @@
         selectedColor: '#3cc51f',
         borderStyle: 'black',
         backgroundColor: '#ffffff',
-        list: [ {
+        list: [{
           pagePath: 'pages/home/index',
           iconPath: 'images/icons/tabs/buy.png',
           selectedIconPath: 'images/icons/tabs/buy-hl.png',
@@ -58,8 +59,8 @@
           pagePath: 'pages/mine/index',
           iconPath: 'images/icons/tabs/me.png',
           selectedIconPath: 'images/icons/tabs/me-hl.png',
-          text: '我的'
-        } ]
+          text: '我'
+        }]
       }
     }
 

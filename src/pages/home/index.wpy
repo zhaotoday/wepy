@@ -49,7 +49,8 @@
       <view class="weui-panel__hd">推荐商家</view>
       <view class="weui-panel__bd">
         <repeat for="{{shops}}" key="index">
-          <navigator url="{{item.url}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <navigator url="/pages/shop/index?id=1" class="weui-media-box weui-media-box_appmsg"
+                     hover-class="weui-cell_active">
             <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
               <image class="weui-media-box__thumb" src="{{item.image}}"/>
             </view>
@@ -158,6 +159,18 @@
       },
 
       handleRedirectSearch () {
+        wepy.navigateTo({
+          url: '/pages/search/index'
+        })
+      },
+
+      handleCall () {
+        wepy.makePhoneCall({
+          phoneNumber: '13950442340'
+        })
+      },
+
+      handleRedirectShop () {
         wepy.navigateTo({
           url: '/pages/search/index'
         })
