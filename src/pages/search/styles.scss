@@ -2,6 +2,27 @@
 @import "../../styles/utils/mixins";
 
 @include b(search-bar) {
+  @include e(picker) {
+    width: 80px;
+    height: 40px;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  // reset
+  .weui-search-bar__box {
+    padding-left: 120px;
+  }
+
+  .weui-icon-search_in-box {
+    left: 90px;
+  }
+
+  .weui-select {
+    padding-right: 0;
+  }
 }
 
 @include b(search-result) {

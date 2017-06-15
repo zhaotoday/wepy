@@ -29,7 +29,7 @@ $swiper-weight: 350;
   }
 
   image {
-    @include img--block(rpx(90), rpx(90));
+    @include img--block(rpx(120), rpx(120));
     @include block--center;
     border-radius: 4px;
     margin-bottom: rpx(20);

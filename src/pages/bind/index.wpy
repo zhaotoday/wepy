@@ -58,7 +58,7 @@
       },
 
       handleBind () {
-        message.success('手机号绑定成功')
+        message.success('绑定成功')
       }
     }
 

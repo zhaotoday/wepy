@@ -19,62 +19,81 @@
     <view class="search-bar weui-search-bar">
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
+          <view class="search-bar__picker">
+            <picker value="{{index}}" range="{{types}}" @change="handleChangeType">
+              <view class="weui-select">{{types[index]}}</view>
+            </picker>
+          </view>
           <icon class="weui-icon-search_in-box" type="search" size="18"></icon>
           <input type="text" confirm-type="search" class="weui-search-bar__input" value="{{searchValue}}"
                  @input="handleInput"
-                 placeholder="搜索商家、商品名称"
+                 @focus="handleFocus"
+                 @blur="handleBlur"
+                 placeholder="输入关键字"
                  maxlength="15" auto-focus/>
         </view>
       </view>
     </view>
 
-    <view class="search-result weui-cells searchbar-result" wx:if="{{searchValue.length}}">
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>{{searchValue}}</view>
+    <view class="search-result weui-cells searchbar-result" wx:if="{{searchFocus && searchValue.length}}">
+      <repeat for="{{[1, 2, 3]}}" key="index">
+        <view class="weui-cell" hover-class="weui-cell_active" @tap="handleSearch">
+          <view class="weui-cell__bd">
+            <view>{{searchValue}}</view>
+          </view>
         </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>{{searchValue}}</view>
-        </view>
-      </navigator>
-      <navigator url="" class="weui-cell" hover-class="weui-cell_active">
-        <view class="weui-cell__bd">
-          <view>{{searchValue}}</view>
-        </view>
-      </navigator>
+      </repeat>
     </view>
-  </view>
 
-  <view class="search-history weui-panel" style="margin-top: -1px;">
-    <view class="weui-panel__hd">历史搜索</view>
-    <view class="weui-panel__bd">
-      <view class="weui-media-box">
-        <button type="default" size="mini">小米手机</button>
-        <button type="default" size="mini">玩具屋</button>
-        <button type="default" size="mini">笔记本电脑</button>
-        <button type="default" size="mini">鼠标</button>
-        <button type="default" size="mini">联想笔记本电脑</button>
-        <button type="default" size="mini">鼠标</button>
-        <button type="default" size="mini">玩具屋</button>
+    <view class="search-history weui-panel" style="margin-top: -1px;">
+      <view class="weui-panel__hd">历史搜索</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box">
+          <button type="default" size="mini">小米手机</button>
+          <button type="default" size="mini">玩具屋</button>
+          <button type="default" size="mini">笔记本电脑</button>
+          <button type="default" size="mini">鼠标</button>
+          <button type="default" size="mini">联想笔记本电脑</button>
+          <button type="default" size="mini">鼠标</button>
+          <button type="default" size="mini">玩具屋</button>
+        </view>
       </view>
     </view>
-  </view>
 
-  <view class="search-history weui-panel">
-    <view class="weui-panel__hd">热门搜索</view>
-    <view class="weui-panel__bd">
-      <view class="weui-media-box">
-        <button type="default" size="mini">小米</button>
-        <button type="default" size="mini">玩具</button>
-        <button type="default" size="mini">电脑</button>
-        <button type="default" size="mini">鼠标</button>
-        <button type="default" size="mini">电脑</button>
-        <button type="default" size="mini">鼠标</button>
+    <view class="search-history weui-panel">
+      <view class="weui-panel__hd">热门搜索</view>
+      <view class="weui-panel__bd">
+        <view class="weui-media-box">
+          <button type="default" size="mini">小米</button>
+          <button type="default" size="mini">玩具</button>
+          <button type="default" size="mini">电脑</button>
+          <button type="default" size="mini">鼠标</button>
+          <button type="default" size="mini">电脑</button>
+          <button type="default" size="mini">鼠标</button>
+        </view>
       </view>
     </view>
+
+    <view class="home-shops weui-panel">
+      <view class="weui-panel__hd">找到的商家</view>
+      <view class="weui-panel__bd">
+        <repeat for="{{shops}}" key="index">
+          <navigator url="{{item.url}}" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <image class="weui-media-box__thumb" src="{{item.image}}"/>
+            </view>
+            <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+              <view class="weui-media-box__title">{{item.name}}</view>
+              <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+            </view>
+          </navigator>
+        </repeat>
+      </view>
+    </view>
+
   </view>
+
+
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -82,10 +101,34 @@
 <script>
   import wepy from 'wepy'
   import globalMixin from '../../utils/mixins/global'
+  import message from '../../utils/message'
+
+  // shops
+  const shops = [{
+    name: '右欧童装精品欧范',
+    url: '',
+    image: 'https://img.alicdn.com/bao/uploaded/i3/2663043508/TB25f_wol0lpuFjSszdXXcdxFXa_!!2663043508.jpg_250x250.jpg'
+  }, {
+    name: '露喜龙童装店 2至10岁精品',
+    url: '',
+    image: 'https://img.alicdn.com/bao/uploaded/i4/661290306/TB2NO42pxRDOuFjSZFzXXcIipXa_!!661290306.jpg_250x250.jpg'
+  }, {
+    name: '贝壳童装打造宝宝的七彩童',
+    url: '',
+    image: 'https://img.alicdn.com/bao/uploaded/i4/238216539/TB2LDDHa31J.eBjy0FpXXaMoXXa_!!238216539.jpg_250x250.jpg'
+  }, {
+    name: '辰辰妈的婴童店',
+    url: '',
+    image: 'https://img.alicdn.com/bao/uploaded/http://img.alicdn.com/imgextra/i4/TB19__XQXXXXXbIXXXXXXXXXXXX_!!0-item_pic.jpg_250x250.jpg'
+  }, {
+    name: '小辣椒BABY女童装 定制品',
+    url: '',
+    image: 'https://img.alicdn.com/bao/uploaded/i7/TB1HFLUMXXXXXcsXpXXJraz_FXX_061426.jpg_250x250.jpg'
+  }]
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: '关于'
+      navigationBarTitleText: '搜索'
     }
 
     components = {}
@@ -93,7 +136,13 @@
     mixins = [globalMixin]
 
     data = {
-      searchValue: ''
+      index: 0,
+      searchValue: '',
+      searchFocus: true,
+      shops: [],
+      types: ['商家', '商品'],
+      resultTabs: ['商家', '商品'],
+      resultIndex: 0
     }
 
     computed = {
@@ -105,12 +154,25 @@
     methods = {
       handleInput (e) {
         this.searchValue = e.detail.value
+      },
+      handleFocus () {
+        this.searchFocus = true
+      },
+      handleBlur () {
+        this.searchFocus = false
+      },
+      handleSearch () {
+        message.loading()
+      },
+      handleChangeType (e) {
+        this.index = e.detail.value
       }
     }
 
     events = {}
 
     onLoad () {
+      this.shops = shops
     }
   }
 </script>
