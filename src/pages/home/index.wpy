@@ -89,7 +89,8 @@
 
   // swiper images
   const swiperImages = [
-    'https://img.alicdn.com/simba/img/TB1KcWcRFXXXXa7XVXXSutbFXXX.jpg',
+    'https://img.alicdn.com/simba/img/TB1TFMbRFXXXXa9aXXXSutbFXXX.jpg',
+    'https://img.alicdn.com/simba/img/TB1R3Y5RFXXXXc3XXXXSutbFXXX.jpg',
     'https://img.alicdn.com/simba/img/TB11zTRRXXXXXb8aFXXSutbFXXX.jpg'
   ]
 
@@ -116,23 +117,19 @@
   const shops = [{
     name: '右欧童装精品欧范',
     url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i3/2663043508/TB25f_wol0lpuFjSszdXXcdxFXa_!!2663043508.jpg_250x250.jpg'
+    image: 'https://img.alicdn.com/bao/uploaded/i1/628189716/TB2mSWxqFXXXXXQXpXXXXXXXXXX_!!628189716.png_400x400q60.jpg'
   }, {
     name: '露喜龙童装店 2至10岁精品',
     url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i4/661290306/TB2NO42pxRDOuFjSZFzXXcIipXa_!!661290306.jpg_250x250.jpg'
+    image: 'https://img.alicdn.com/bao/uploaded/i3/TB17r9jRXXXXXcNXVXXXXXXXXXX_!!0-item_pic.jpg_400x400q60.jpg'
   }, {
     name: '贝壳童装打造宝宝的七彩童',
     url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i4/238216539/TB2LDDHa31J.eBjy0FpXXaMoXXa_!!238216539.jpg_250x250.jpg'
+    image: 'https://img.alicdn.com/bao/uploaded/bao/upload/TB1_81eRpXXXXbOaXXXwu0bFXXX.png_400x400q60.jpg'
   }, {
     name: '辰辰妈的婴童店',
     url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/http://img.alicdn.com/imgextra/i4/TB19__XQXXXXXbIXXXXXXXXXXXX_!!0-item_pic.jpg_250x250.jpg'
-  }, {
-    name: '小辣椒BABY女童装 定制品',
-    url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i7/TB1HFLUMXXXXXcsXpXXJraz_FXX_061426.jpg_250x250.jpg'
+    image: 'https://img.alicdn.com/bao/uploaded/bao/upload/TB1h_jFQpXXXXavaXXXwu0bFXXX.png_400x400q60.jpg'
   }]
 
   export default class extends wepy.page {
