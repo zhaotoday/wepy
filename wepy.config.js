@@ -1,7 +1,15 @@
+const path = require('path');
 var prod = process.env.NODE_ENV === 'production'
 
 module.exports = {
   wpyExt: '.wpy',
+  build: {
+    web: {
+      htmlTemplate: path.join('src', 'index.template.html'),
+      htmlOutput: path.join('web', 'index.html'),
+      jsOutput: path.join('web', 'index.js')
+    }
+  },
   eslint: true,
   compilers: {
     less: {
@@ -23,11 +31,13 @@ module.exports = {
       ]
     }
   },
-  plugins: {}
+  plugins: {
+  }
 }
 
 if (prod) {
-  delete module.exports.compilers.babel.sourcesMap
+
+  delete module.exports.compilers.babel.sourcesMap;
   // 压缩sass
   module.exports.compilers['sass'] = {outputStyle: 'compressed'}
 
@@ -38,7 +48,8 @@ if (prod) {
   module.exports.plugins = {
     uglifyjs: {
       filter: /\.js$/,
-      config: {}
+      config: {
+      }
     },
     imagemin: {
       filter: /\.(jpg|png|jpeg)$/,
