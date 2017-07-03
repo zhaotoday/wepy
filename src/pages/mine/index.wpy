@@ -37,22 +37,21 @@
     <view class="weui-panel">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <view style="display: inline-block; vertical-align: middle">已买到的</view>
+          <view style="display: inline-block; vertical-align: middle">成为商家</view>
           <view class="weui-badge" style="margin-left: 5px;">3</view>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <view style="display: inline-block; vertical-align: middle">已卖出的</view>
+          <view style="display: inline-block; vertical-align: middle">我的订单</view>
           <view class="weui-badge" style="margin-left: 5px;">5</view>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>
-
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <view style="display: inline-block; vertical-align: middle">帮过的人</view>
+          <view style="display: inline-block; vertical-align: middle">我的帮忙</view>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </view>

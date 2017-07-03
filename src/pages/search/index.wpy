@@ -140,8 +140,8 @@
       searchValue: '',
       searchFocus: true,
       shops: [],
-      types: ['商家', '商品'],
-      resultTabs: ['商家', '商品'],
+      types: ['商品', '商家'],
+      resultTabs: ['商品', '商家'],
       resultIndex: 0
     }
 
