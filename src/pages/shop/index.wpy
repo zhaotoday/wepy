@@ -7,27 +7,39 @@
       <view class="weui-form-preview__bd">
         <image class="shop"
                src="https://img.alicdn.com/bao/uploaded/i3/150072812/TB20hnVkVXXXXa9XXXXXXXXXXXX_!!150072812.jpg_250x250.jpg"/>
-
-        <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">商家描述</view>
-          <view class="weui-form-preview__value">很长很长的名字很长很长的名字很长很长的名字很长很长的名字很长很长的名字</view>
-        </view>
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">商家分类</view>
           <view class="weui-form-preview__value">农产品</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">商家地址</view>
-          <view class="weui-form-preview__value">淮安国际住区一期 21#204</view>
+          <view class="weui-form-preview__label">商家描述</view>
+          <view class="weui-form-preview__value">亲们！欢迎光临本店，小店刚刚营业，主营农产品，请多多照顾哦！</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">营业时间</view>
+          <view class="weui-form-preview__value">08:00-22:00</view>
+        </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">店铺状态</view>
+          <view class="weui-form-preview__value">已打烊</view>
         </view>
         <view class="weui-form-preview__item">
           <view class="weui-form-preview__label">联系电话</view>
           <view class="weui-form-preview__value">13950442340</view>
         </view>
+        <view class="weui-form-preview__item">
+          <view class="weui-form-preview__label">商家地址</view>
+          <view class="weui-form-preview__value">淮安国际住区一期 21#204</view>
+        </view>
       </view>
       <view class="weui-form-preview__ft">
         <view class="weui-form-preview__btn weui-form-preview__btn_primary"
-              hover-class="weui-form-preview__btn_active" @tap="handleCall">打电话
+              hover-class="weui-form-preview__btn_active" @tap="handleCall">
+          收藏店铺
+        </view>
+        <view class="weui-form-preview__btn weui-form-preview__btn_primary"
+              hover-class="weui-form-preview__btn_active" @tap="handleCall">
+          联系商家
         </view>
       </view>
     </view>
@@ -47,7 +59,7 @@
 
     components = {}
 
-    mixins = [ globalMixin ]
+    mixins = [globalMixin]
 
     data = {
       num: 0
