@@ -15,8 +15,6 @@
   </navigator>
 </template>
 
-<style lang="scss" src="./styles.scss"></style>
-
 <script>
   import wepy from 'wepy'
 
