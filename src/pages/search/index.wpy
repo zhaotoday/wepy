@@ -102,6 +102,8 @@
   import wepy from 'wepy'
   import globalMixin from '../../utils/mixins/global'
   import message from '../../utils/message'
+  import ShopItem from '../../components/shop-item/index'
+  import ProductItem from '../../components/product-item/index'
 
   // shops
   const shops = [{
@@ -131,7 +133,10 @@
       navigationBarTitleText: '搜索'
     }
 
-    components = {}
+    components = {
+      'shop-item': ShopItem,
+      'product-item': ProductItem
+    }
 
     mixins = [globalMixin]
 

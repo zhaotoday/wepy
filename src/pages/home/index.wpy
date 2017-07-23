@@ -61,6 +61,7 @@
   import wepy from 'wepy'
   import globalMixin from '../../utils/mixins/global'
   import ShopItem from '../../components/shop-item/index'
+  import request from '../../utils/request'
 
   // swiper images
   const swiperImages = [
@@ -160,7 +161,12 @@
     onLoad () {
       this.swiperImages = swiperImages
       this.commodityCategories = commodityCategories
-      this.shops = shops
+
+      request.GET({
+        path: '/api/merchant/gets'
+      }).then((res) => {
+        this.shops = res.list
+      })
     }
   }
 </script>
