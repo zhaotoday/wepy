@@ -9,8 +9,8 @@
       <view class="weui-media-box__title">{{ item.title }}</view>
       <view class="weui-media-box__desc">
         <view>分类：{{ item.tags }}</view>
+        <view>掌柜：{{ item.landlord }}</view>
         <view>地址：{{ item.address }}</view>
-        <view>营业时间：08:00-22:00</view>
       </view>
     </view>
   </navigator>
