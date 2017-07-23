@@ -2,34 +2,26 @@
   <view class="container">
     <view class="weui-form-preview">
       <view class="weui-form-preview__hd">
-        <view class="weui-form-preview__value_in-hd">淮安半岛三味书屋</view>
+        <view class="weui-form-preview__value_in-hd">{{ shop.title }}</view>
       </view>
       <view class="weui-form-preview__bd">
         <image class="shop"
                src="https://img.alicdn.com/bao/uploaded/i3/150072812/TB20hnVkVXXXXa9XXXXXXXXXXXX_!!150072812.jpg_250x250.jpg"/>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">商家分类</view>
-          <view class="weui-form-preview__value">农产品</view>
+          <view class="weui-form-preview__label">分类</view>
+          <view class="weui-form-preview__value">{{ shop.tags }}</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">商家描述</view>
-          <view class="weui-form-preview__value">亲们！欢迎光临本店，小店刚刚营业，主营农产品，请多多照顾哦！</view>
+          <view class="weui-form-preview__label">描述</view>
+          <view class="weui-form-preview__value">{{ shop.desc }}</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">营业时间</view>
-          <view class="weui-form-preview__value">08:00-22:00</view>
+          <view class="weui-form-preview__label">电话</view>
+          <view class="weui-form-preview__value">{{ shop.mobile }}</view>
         </view>
         <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">店铺状态</view>
-          <view class="weui-form-preview__value">已打烊</view>
-        </view>
-        <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">联系电话</view>
-          <view class="weui-form-preview__value">13950442340</view>
-        </view>
-        <view class="weui-form-preview__item">
-          <view class="weui-form-preview__label">商家地址</view>
-          <view class="weui-form-preview__value">淮安国际住区一期 21#204</view>
+          <view class="weui-form-preview__label">地址</view>
+          <view class="weui-form-preview__value">{{ shop.address }}</view>
         </view>
       </view>
       <view class="weui-form-preview__ft">
@@ -51,6 +43,7 @@
 <script>
   import wepy from 'wepy'
   import globalMixin from '../../utils/mixins/global'
+  import request from '../../utils/request'
 
   export default class extends wepy.page {
     config = {
@@ -62,26 +55,28 @@
     mixins = [globalMixin]
 
     data = {
-      num: 0
+      shop: {}
     }
 
     computed = {
-      now () {
-        return +new Date()
-      }
     }
 
     methods = {
       handleCall () {
         wepy.makePhoneCall({
-          phoneNumber: '13950442340'
+          phoneNumber: this.shop.mobile
         })
       }
     }
 
     events = {}
 
-    onLoad () {
+    onLoad (options) {
+      request.GET({
+        path: `/api/merchant/get?id=${options.id}`
+      }).then((res) => {
+        this.shop = res.data
+      })
     }
   }
 </script>
