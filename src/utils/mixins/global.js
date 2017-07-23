@@ -49,7 +49,7 @@ export default class extends wepy.mixin {
     }
   }
 
-  onLoad () {
+  onShow () {
     this.$nextTick((user) => {
       this.user = user
       this.$apply()

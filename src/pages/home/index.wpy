@@ -113,28 +113,24 @@
 
     events = {}
 
-    onLoad () {
+    onShow () {
+      this.commodityCategories = commodityCategories
+
       this.$nextTick(() => {
         request.GET({
           path: '/api/ads/gets'
         }).then((res) => {
           this.ads = res.list
           this.$apply()
+        })
 
-          request.GET({
-            path: '/api/merchant/gets'
-          }).then((res) => {
-            this.shops = res.list
-            this.$apply()
-          })
+        request.GET({
+          path: '/api/merchant/gets'
+        }).then((res) => {
+          this.shops = res.list
+          this.$apply()
         })
       })
-    }
-
-    onShow () {
-      this.commodityCategories = commodityCategories
-
-
     }
   }
 </script>

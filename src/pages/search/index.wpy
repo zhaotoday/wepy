@@ -146,12 +146,14 @@
 
     events = {}
 
-    onLoad () {
-      request.GET({
-        path: '/api/merchant/gets'
-      }).then((res) => {
-        this.shops = res.list
-        this.$apply()
+    onShow () {
+      this.$nextTick(() => {
+        request.GET({
+          path: '/api/merchant/gets'
+        }).then((res) => {
+          this.shops = res.list
+          this.$apply()
+        })
       })
     }
   }

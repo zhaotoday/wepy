@@ -55,6 +55,7 @@
     mixins = [globalMixin]
 
     data = {
+      id: 0,
       shop: {}
     }
 
@@ -71,11 +72,18 @@
     events = {}
 
     onLoad (options) {
-      request.GET({
-        path: `/api/merchant/get?id=${options.id}`
-      }).then((res) => {
-        this.shop = res.data
-        this.$apply()
+      this.id = options.id
+      this.$apply()
+    }
+
+    onShow () {
+      this.$nextTick(() => {
+        request.GET({
+          path: `/api/merchant/get?id=${this.id}`
+        }).then((res) => {
+          this.shop = res.data
+          this.$apply()
+        })
       })
     }
   }
