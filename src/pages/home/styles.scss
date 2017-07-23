@@ -35,10 +35,3 @@ $swiper-weight: 350;
     margin-bottom: rpx(20);
   }
 }
-
-// home shops
-@include b(home-shops) {
-  image {
-    border-radius: 4px;
-  }
-}
