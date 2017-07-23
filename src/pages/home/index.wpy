@@ -5,7 +5,7 @@
       <view class="weui-search-bar__form">
         <view class="weui-search-bar__box">
           <icon class="weui-icon-search_in-box" type="search" size="18"></icon>
-          <input type="text" class="weui-search-bar__input" placeholder="搜索商家、商品名称" @focus="handleRedirectSearch"/>
+          <input type="text" class="weui-search-bar__input" placeholder="搜索商家、商品名称" @focus="handleNavigateToSearch"/>
         </view>
       </view>
     </view>
@@ -102,23 +102,7 @@
     computed = {}
 
     methods = {
-      handlePickerChange (e) {
-        this.index = e.detail.value
-      },
-
-      handleRedirectSearch () {
-        wepy.navigateTo({
-          url: '/pages/search/index'
-        })
-      },
-
-      handleCall () {
-        wepy.makePhoneCall({
-          phoneNumber: '13950442340'
-        })
-      },
-
-      handleRedirectShop () {
+      handleNavigateToSearch () {
         wepy.navigateTo({
           url: '/pages/search/index'
         })
