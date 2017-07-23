@@ -11,10 +11,10 @@ export default {
    * @param {boolean} requiresAuth 是否需要传递 session
    * @returns {Promise}
    */
-  _request ({ method, path, data, requiresAuth = true }) {
+  _request ({method, path, data, requiresAuth = true}) {
     return new Promise((resolve, reject) => {
       if (requiresAuth) {
-        data = { ...data, signture: session.get() }
+        data = {...data, signture: session.get()}
       }
 
       wepy.request({
@@ -25,12 +25,12 @@ export default {
         },
         data,
         success (res) {
-          const { data } = res
+          const {data} = res
 
           if (data.code === 0) {
             resolve(data)
           } else {
-            const err = { errMsg: data.msg }
+            const err = {errMsg: data.msg}
             reject(err)
           }
         },
@@ -48,8 +48,8 @@ export default {
    * @param {boolean} requiresAuth 是否需要传递 session
    * @returns {Promise}
    */
-  GET ({ path, params, requiresAuth }) {
-    return this._request({ method: 'GET', path, data: params, requiresAuth })
+  GET ({path, params, requiresAuth}) {
+    return this._request({method: 'GET', path, data: params, requiresAuth})
   },
 
   /**
@@ -59,7 +59,7 @@ export default {
    * @param {boolean} requiresAuth 是否需要传递 session
    * @returns {Promise}
    */
-  POST ({ path, data, requiresAuth }) {
-    return this._request({ method: 'POST', path, data, requiresAuth })
+  POST ({path, data, requiresAuth}) {
+    return this._request({method: 'POST', path, data, requiresAuth})
   }
 }
