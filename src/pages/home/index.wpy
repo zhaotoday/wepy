@@ -11,9 +11,9 @@
     </view>
 
     <swiper class="home-swiper" interval="3000" duration="500" autoplay indicator-dots autoplay circular>
-      <repeat for="{{swiperImages}}" key="index">
+      <repeat for="{{ ads }}" key="index">
         <swiper-item>
-          <image src="{{item}}" @tap="handleTapImage"/>
+          <image src="https://77agri.cn{{ item.thumb }}"/>
         </swiper-item>
       </repeat>
     </swiper>
@@ -63,13 +63,6 @@
   import ShopItem from '../../components/shop-item/index'
   import request from '../../utils/request'
 
-  // swiper images
-  const swiperImages = [
-    'https://img.alicdn.com/simba/img/TB1TFMbRFXXXXa9aXXXSutbFXXX.jpg',
-    'https://img.alicdn.com/simba/img/TB1R3Y5RFXXXXc3XXXXSutbFXXX.jpg',
-    'https://img.alicdn.com/simba/img/TB11zTRRXXXXXb8aFXXSutbFXXX.jpg'
-  ]
-
   // commodity categories
   const commodityCategories = [{
     name: '农产品',
@@ -89,25 +82,6 @@
     image: 'https://img.alicdn.com/bao/uploaded/i3/1065305029063476850/TB2yzDfhSXlpuFjy0FeXXcJbFXa_!!0-saturn_solar.jpg_250x250.jpg'
   }]
 
-  // shops
-  const shops = [{
-    name: '右欧童装精品欧范',
-    url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i3/150072812/TB20hnVkVXXXXa9XXXXXXXXXXXX_!!150072812.jpg_250x250.jpg'
-  }, {
-    name: '露喜龙童装店 2至10岁精品',
-    url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i3/TB1DNUGPVXXXXbiXVXXXXXXXXXX_!!0-item_pic.jpg_250x250.jpg'
-  }, {
-    name: '贝壳童装打造宝宝的七彩童',
-    url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i1/1213306055053868018/TB2C9JGvrBmpuFjSZFuXXaG_XXa_!!0-saturn_solar.jpg_250x250.jpg'
-  }, {
-    name: '辰辰妈的婴童店',
-    url: '',
-    image: 'https://img.alicdn.com/bao/uploaded/i3/1065305029063476850/TB2yzDfhSXlpuFjy0FeXXcJbFXa_!!0-saturn_solar.jpg_250x250.jpg'
-  }]
-
   export default class extends wepy.page {
     config = {
       navigationBarTitleText: '首页'
@@ -120,8 +94,7 @@
     mixins = [globalMixin]
 
     data = {
-      num: 0,
-      swiperImages: [],
+      ads: [],
       commodityCategories: [],
       shops: []
     }
@@ -152,20 +125,21 @@
       }
     }
 
-    events = {
-      handleInput (e) {
-        console.log(e)
-      }
-    }
+    events = {}
 
-    onLoad () {
-      this.swiperImages = swiperImages
+    onShow () {
       this.commodityCategories = commodityCategories
 
       request.GET({
-        path: '/api/merchant/gets'
+        path: '/api/ads/gets'
       }).then((res) => {
-        this.shops = res.list
+        this.ads = res.list
+
+        request.GET({
+          path: '/api/merchant/gets'
+        }).then((res) => {
+          this.shops = res.list
+        })
       })
     }
   }
