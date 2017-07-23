@@ -58,8 +58,7 @@
       shop: {}
     }
 
-    computed = {
-    }
+    computed = {}
 
     methods = {
       handleCall () {
@@ -76,6 +75,7 @@
         path: `/api/merchant/get?id=${options.id}`
       }).then((res) => {
         this.shop = res.data
+        this.$apply()
       })
     }
   }

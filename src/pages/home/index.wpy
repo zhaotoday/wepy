@@ -12,9 +12,11 @@
 
     <swiper class="home-swiper" interval="3000" duration="500" autoplay indicator-dots autoplay circular>
       <repeat for="{{ ads }}" key="index">
-        <swiper-item>
-          <image src="https://77agri.cn{{ item.thumb }}"/>
-        </swiper-item>
+        <navigator url="/pages/shop/index?id={{ item.id }}">
+          <swiper-item>
+            <image src="https://77agri.cn{{ item.thumb }}"/>
+          </swiper-item>
+        </navigator>
       </repeat>
     </swiper>
 
@@ -118,11 +120,13 @@
         path: '/api/ads/gets'
       }).then((res) => {
         this.ads = res.list
+        this.$apply()
 
         request.GET({
           path: '/api/merchant/gets'
         }).then((res) => {
           this.shops = res.list
+          this.$apply()
         })
       })
     }
