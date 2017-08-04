@@ -64,6 +64,7 @@
   import globalMixin from '../../utils/mixins/global'
   import ShopItem from '../../components/shop-item/index'
   import request from '../../utils/request'
+  import apis from '../../utils/apis'
 
   // commodity categories
   const commodityCategories = [{
@@ -113,23 +114,23 @@
 
     events = {}
 
-    onShow () {
+    async onShow () {
+      await this.login()
+
       this.commodityCategories = commodityCategories
 
-      this.$nextTick(() => {
-        request.GET({
-          path: '/api/ads/gets'
-        }).then((res) => {
-          this.ads = res.list
-          this.$apply()
-        })
+      const adsRes = await apis.getAds()
+      const shopsRes = await apis.getShops()
 
-        request.GET({
-          path: '/api/merchant/gets'
-        }).then((res) => {
-          this.shops = res.list
-          this.$apply()
-        })
+      this.ads = adsRes.list
+      this.shops = shopsRes.list
+
+      this.$apply()
+    }
+
+    onLoad () {
+      wx.showShareMenu({
+        withShareTicket: true
       })
     }
   }

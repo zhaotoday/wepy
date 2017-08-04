@@ -1,5 +1,5 @@
-import wepy from 'wepy'
-import consts from './consts'
+import wx from './wx'
+import * as consts from './consts'
 import session from './session'
 
 export default {
@@ -17,7 +17,7 @@ export default {
         data = {...data, signture: session.get()}
       }
 
-      wepy.request({
+      wx.request({
         method,
         url: consts.REQUEST_URL + path,
         header: {
@@ -34,9 +34,7 @@ export default {
             reject(err)
           }
         },
-        fail (err) {
-          reject(err)
-        }
+        fail: reject
       })
     })
   },

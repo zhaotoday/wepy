@@ -43,7 +43,7 @@
 <script>
   import wepy from 'wepy'
   import globalMixin from '../../utils/mixins/global'
-  import request from '../../utils/request'
+  import apis from '../../utils/apis'
 
   export default class extends wepy.page {
     config = {
@@ -76,15 +76,13 @@
       this.$apply()
     }
 
-    onShow () {
-      this.$nextTick(() => {
-        request.GET({
-          path: `/api/merchant/get?id=${this.id}`
-        }).then((res) => {
-          this.shop = res.data
-          this.$apply()
-        })
+    async onShow () {
+      const shopRes = await apis.getShop({
+        params: {id: this.id}
       })
+
+      this.shop = shopRes.data
+      this.$apply()
     }
   }
 </script>

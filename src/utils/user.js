@@ -1,5 +1,4 @@
 import wepy from 'wepy'
-import request from './request'
 
 const KEY = 'user'
 
@@ -18,38 +17,5 @@ export default {
    */
   get () {
     return wepy.getStorageSync(KEY) || null
-  },
-
-  /**
-   * 保存至服务器
-   * @returns {Promise}
-   */
-  setToServer () {
-    return new Promise((resolve) => {
-      wepy.getUserInfo({
-        success (res) {
-          request.GET({
-            path: '/wx/user/save',
-            params: { encrypted: res.encryptedData, iv: res.iv }
-          }).then((res) => {
-            resolve(res)
-          })
-        }
-      })
-    })
-  },
-
-  /**
-   * 从服务器获取
-   * @returns {Promise}
-   */
-  getFromServer () {
-    return new Promise((resolve) => {
-      request.GET({
-        path: '/wx/user/get'
-      }).then((res) => {
-        resolve(res)
-      })
-    })
   }
 }

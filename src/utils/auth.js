@@ -1,6 +1,6 @@
-import wepy from 'wepy'
-import request from './request'
 import session from './session'
+import apis from './apis'
+import wepy from 'wepy'
 
 export default {
   /**
@@ -8,19 +8,17 @@ export default {
    * @returns {Promise}
    */
   login () {
-    return new Promise((resolve) => {
-      wepy.login({
-        success (res) {
-          request.GET({
-            path: '/wx/login',
-            params: { code: res.code },
-            requiresAuth: false
-          }).then((res) => {
-            session.set(res.signture)
-            resolve(res)
-          })
-        }
-      })
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = apis.login({
+          params: {code: (await wepy.login())['code']}
+        })
+
+        session.set(res.signture)
+        resolve(res)
+      } catch (err) {
+        reject(err)
+      }
     })
   },
 

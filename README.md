@@ -53,6 +53,16 @@ $ wepy build --watch
 ## WebStorm 代码高亮
 - File --> Settings --> File Types --> [Recognized File Types] Vue.js Templates --> 添加 *.wpy。
 
+## 在 app.wpy 中使 API promise 化，以便更好的支持 async/await
+```js
+export default class extends wepy.app {
+  constructor () {
+    super()
+    this.use('promisify')
+  }
+}
+```
+
 ## 贴士
 - [iconfont.cn](http://iconfont.cn/) 上有丰富的图标资源，下载时可编辑尺寸颜色，选择 PNG 下载，即可获得小程序可用的图标文件；
 - 解决用 WebStorm 开发小程序，格式化 CSS 时，数值和 rpx 之间被加了空格的 bug，请参考 [[链接](http://www.qianduan.org/post-471.html)]；
