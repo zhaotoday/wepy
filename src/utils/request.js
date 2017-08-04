@@ -1,6 +1,6 @@
 import wx from './wx'
 import * as consts from './consts'
-import session from './session'
+import storage from './storage'
 
 export default {
   /**
@@ -14,7 +14,7 @@ export default {
   _request ({method, path, data, requiresAuth = true}) {
     return new Promise((resolve, reject) => {
       if (requiresAuth) {
-        data = {...data, signture: session.get()}
+        data = {...data, signture: storage.session.get()}
       }
 
       wx.request({
