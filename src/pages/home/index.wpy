@@ -115,8 +115,6 @@
     events = {}
 
     async onShow () {
-      await this.login()
-
       this.commodityCategories = commodityCategories
 
       const adsRes = await apis.getAds()
@@ -129,7 +127,7 @@
     }
 
     onLoad () {
-      wx.showShareMenu({
+      wepy.showShareMenu({
         withShareTicket: true
       })
     }

@@ -27,9 +27,20 @@ class Storage {
   get () {
     return wepy.getStorageSync(this.key) || ''
   }
+
+  /**
+   * 移除 storage
+   * @returns {string}
+   */
+  remove () {
+    wepy.removeStorageSync(this.key)
+  }
 }
 
 export default {
+  clear () {
+    wepy.clearStorageSync()
+  },
   session: new Storage('third_session'),
   user: new Storage('user')
 }

@@ -17,23 +17,15 @@
 
     components = {}
 
-    mixins = [ globalMixin ]
+    mixins = [globalMixin]
 
     data = {
       num: 0
     }
 
-    computed = {
-      now () {
-        return +new Date()
-      }
-    }
+    computed = {}
 
-    methods = {
-      plus () {
-        this.num++
-      }
-    }
+    methods = {}
 
     events = {}
 

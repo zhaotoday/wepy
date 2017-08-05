@@ -8,11 +8,11 @@ export default {
    */
   login (options) {
     const {params} = options
-    console.log(params)
+
     return request.GET({
+      requiresAuth: false,
       path: consts.LOGIN_API,
-      params,
-      requiresAuth: false
+      params
     })
   },
 
@@ -20,7 +20,7 @@ export default {
    * 保存用户
    * @returns {Promise}
    */
-  async saveUser (options) {
+  saveUser (options) {
     const {params} = options
 
     return request.GET({
@@ -45,6 +45,7 @@ export default {
    */
   getAds () {
     return request.GET({
+      requiresAuth: false,
       path: consts.GET_ADS_API
     })
   },
@@ -55,6 +56,7 @@ export default {
    */
   getShops () {
     return request.GET({
+      requiresAuth: false,
       path: consts.GET_SHOPS_API
     })
   },
@@ -67,6 +69,7 @@ export default {
     const {params} = options
 
     return request.GET({
+      requiresAuth: false,
       path: consts.GET_SHOP_API,
       params
     })
