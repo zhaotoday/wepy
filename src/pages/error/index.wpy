@@ -18,8 +18,9 @@
 
 <script>
   import wepy from 'wepy'
-  import globalMixin from '../../utils/mixins/global'
   import wx from '../../utils/wx'
+  import message from '../../utils/message'
+  import globalMixin from '../../utils/mixins/global'
 
   export default class extends wepy.page {
     config = {
@@ -36,12 +37,14 @@
 
     methods = {
       handleTapAuthorize () {
-        wx.authorize({
-          scope: 'scope.userInfo',
-          success () {
-            wx.navigateTo({
-              url: '/pages/error/index'
-            })
+        wx.openSetting({
+          success: (res) => {
+            message.success('设置成功')
+            setTimeout(() => {
+              wx.switchTab({
+                url: '/pages/home/index'
+              })
+            }, 2000)
           }
         })
       }

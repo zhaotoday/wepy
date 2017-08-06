@@ -17,7 +17,7 @@ export default class extends wepy.mixin {
     // 未登录
     if (!storage.session.get()) {
       // 小程序登陆
-      const wxLoginRes = await wx.login()
+      const wxLoginRes = await wepy.login()
 
       // 服务端登录
       const serverLoginRes = await apis.login({
@@ -28,7 +28,7 @@ export default class extends wepy.mixin {
       storage.session.set(serverLoginRes.signture)
 
       // 获取用户信息
-      const userInfoRes = await wx.getUserInfo()
+      const userInfoRes = await wepy.getUserInfo()
 
       // 保存用户信息至服务端
       apis.saveUser({
@@ -40,13 +40,14 @@ export default class extends wepy.mixin {
 
       return (await apis.getUser()).user
     } else {
-      return storage.user.get() || (await apis.getUser())
+      return storage.user.get() || (await apis.getUser()).user
     }
   }
 
   async onShow () {
     try {
       const loginRes = await this.login()
+      console.log(loginRes)
 
       storage.user.set(loginRes)
       this.user = loginRes
