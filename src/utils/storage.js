@@ -1,4 +1,4 @@
-import wepy from 'wepy'
+import wx from 'wx'
 
 /**
  * 存储类
@@ -17,7 +17,7 @@ class Storage {
    * @param {string} value 值
    */
   set (value) {
-    wepy.setStorageSync(this.key, value)
+    wx.setStorageSync(this.key, value)
   }
 
   /**
@@ -25,7 +25,7 @@ class Storage {
    * @returns {string}
    */
   get () {
-    return wepy.getStorageSync(this.key) || ''
+    return wx.getStorageSync(this.key) || ''
   }
 
   /**
@@ -33,13 +33,13 @@ class Storage {
    * @returns {string}
    */
   remove () {
-    wepy.removeStorageSync(this.key)
+    wx.removeStorageSync(this.key)
   }
 }
 
 export default {
   clear () {
-    wepy.clearStorageSync()
+    wx.clearStorageSync()
   },
   session: new Storage('third_session'),
   user: new Storage('user')

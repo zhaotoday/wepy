@@ -42,6 +42,7 @@
 
 <script>
   import wepy from 'wepy'
+  import wx from '../../utils/wx'
   import globalMixin from '../../utils/mixins/global'
   import apis from '../../utils/apis'
 
@@ -63,7 +64,7 @@
 
     methods = {
       handleCall () {
-        wepy.makePhoneCall({
+        wx.makePhoneCall({
           phoneNumber: this.shop.mobile
         })
       }

@@ -61,9 +61,9 @@
 
 <script>
   import wepy from 'wepy'
+  import wx from '../../wx'
   import globalMixin from '../../utils/mixins/global'
   import ShopItem from '../../components/shop-item/index'
-  import request from '../../utils/request'
   import apis from '../../utils/apis'
 
   // commodity categories
@@ -106,7 +106,7 @@
 
     methods = {
       handleNavigateToSearch () {
-        wepy.navigateTo({
+        wx.navigateTo({
           url: '/pages/search/index'
         })
       }
@@ -127,7 +127,7 @@
     }
 
     onLoad () {
-      wepy.showShareMenu({
+      wx.showShareMenu({
         withShareTicket: true
       })
     }

@@ -8,6 +8,7 @@
 
 <script>
   import wepy from 'wepy'
+  import wx from '../../utils/wx'
   import globalMixin from '../../utils/mixins/global'
 
   export default class extends wepy.page {
@@ -27,7 +28,19 @@
 
     events = {}
 
-    onLoad () {
+    onShow () {
+      wx.chooseAddress({
+        success: function (res) {
+          console.log(res.userName)
+          console.log(res.postalCode)
+          console.log(res.provinceName)
+          console.log(res.cityName)
+          console.log(res.countyName)
+          console.log(res.detailInfo)
+          console.log(res.nationalCode)
+          console.log(res.telNumber)
+        }
+      })
     }
   }
 </script>

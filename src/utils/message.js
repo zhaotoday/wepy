@@ -1,34 +1,34 @@
-import wepy from 'wepy'
+import wx from './wx'
 
 const DURATION = 30000
 
 export default {
   success (title) {
-    wepy.showToast({
+    wx.showToast({
       title,
       image: '/images/icons/message/success.png'
     })
   },
   error (title) {
-    wepy.showToast({
+    wx.showToast({
       title,
       image: '/images/icons/message/error.png'
     })
   },
   warn (title) {
-    wepy.showToast({
+    wx.showToast({
       title,
       image: '/images/icons/message/warn.png'
     })
   },
   loading (title = '加载中...') {
-    wepy.showToast({
+    wx.showToast({
       title,
       icon: 'loading',
       duration: DURATION
     })
   },
   hide () {
-    wepy.hideToast()
+    wx.hideToast()
   }
 }

@@ -9,7 +9,7 @@
     </view>
     <view class="weui-msg__opr-area">
       <view class="weui-btn-area">
-        <button class="weui-btn" type="primary">重新授权</button>
+        <button class="weui-btn" type="primary" @tap="handleTapAuthorize">重新授权</button>
         <button class="weui-btn" type="default">返回首页</button>
       </view>
     </view>
@@ -19,6 +19,7 @@
 <script>
   import wepy from 'wepy'
   import globalMixin from '../../utils/mixins/global'
+  import wx from '../../utils/wx'
 
   export default class extends wepy.page {
     config = {
@@ -33,7 +34,18 @@
 
     computed = {}
 
-    methods = {}
+    methods = {
+      handleTapAuthorize () {
+        wx.authorize({
+          scope: 'scope.userInfo',
+          success () {
+            wx.navigateTo({
+              url: '/pages/error/index'
+            })
+          }
+        })
+      }
+    }
 
     events = {}
 
