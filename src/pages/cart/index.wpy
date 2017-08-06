@@ -1,6 +1,8 @@
 <template>
   <view>
-    购物车
+    <button class="weui-btn" type="primary" style="margin-left: 15px; margin-right: 15px;">
+      绑定手机号
+    </button>
   </view>
 </template>
 
@@ -29,18 +31,7 @@
     events = {}
 
     onShow () {
-      wx.chooseAddress({
-        success: function (res) {
-          console.log(res.userName)
-          console.log(res.postalCode)
-          console.log(res.provinceName)
-          console.log(res.cityName)
-          console.log(res.countyName)
-          console.log(res.detailInfo)
-          console.log(res.nationalCode)
-          console.log(res.telNumber)
-        }
-      })
+
     }
   }
 </script>

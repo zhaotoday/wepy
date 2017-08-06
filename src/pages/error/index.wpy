@@ -40,11 +40,12 @@
         wx.openSetting({
           success: (res) => {
             message.success('设置成功')
+
             setTimeout(() => {
               wx.switchTab({
                 url: '/pages/home/index'
               })
-            }, 2000)
+            }, 2500)
           }
         })
       }
