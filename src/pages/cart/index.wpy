@@ -19,9 +19,7 @@
 
     mixins = [globalMixin]
 
-    data = {
-      num: 0
-    }
+    data = {}
 
     computed = {}
 

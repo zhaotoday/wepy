@@ -32,7 +32,8 @@
         'pages/bind/index',
         'pages/search/index',
         'pages/demo/index',
-        'pages/shop/index'
+        'pages/shop/index',
+        'pages/error/index'
       ],
       window: {
         backgroundTextStyle: 'light',

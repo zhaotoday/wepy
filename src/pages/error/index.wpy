@@ -1,0 +1,43 @@
+<template>
+  <view class="weui-msg">
+    <view class="weui-msg__icon-area">
+      <icon type="warn" size="93"></icon>
+    </view>
+    <view class="weui-msg__text-area">
+      <view class="weui-msg__title">授权失败</view>
+      <view class="weui-msg__desc">拒绝授权将无法使用“我的宅铺”的某些功能！</view>
+    </view>
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary">重新授权</button>
+        <button class="weui-btn" type="default">返回首页</button>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import globalMixin from '../../utils/mixins/global'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '关于'
+    }
+
+    components = {}
+
+    mixins = [globalMixin]
+
+    data = {}
+
+    computed = {}
+
+    methods = {}
+
+    events = {}
+
+    onLoad () {
+    }
+  }
+</script>

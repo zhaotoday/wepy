@@ -46,12 +46,14 @@ export default class extends wepy.mixin {
   async onShow () {
     try {
       const loginRes = await this.login()
-
+      console.log(loginRes)
       storage.user.set(loginRes)
       this.user = loginRes
       this.$apply()
     } catch (err) {
-      console.log(222, err)
+      wepy.navigateTo({
+        url: '/pages/error/index'
+      })
     }
   }
 }
