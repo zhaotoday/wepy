@@ -1,5 +1,3 @@
-export const INCREMENT = 'INCREMENT'
-
-export const DECREMENT = 'DECREMENT'
-
-export const ASYNC_INCREMENT = 'ASYNC_INCREMENT'
+export const INCREASE = 'INCREASE'
+export const DECREASE = 'DECREASE'
+export const ASYNC_INCREASE = 'ASYNC_INCREASE'

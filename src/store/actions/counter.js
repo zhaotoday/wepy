@@ -1,7 +1,7 @@
-import { ASYNC_INCREMENT } from '../types/counter'
+import { ASYNC_INCREASE } from '../types/counter'
 import { createAction } from 'redux-actions'
 
-export const asyncInc = createAction(ASYNC_INCREMENT, () => {
+export const asyncIncrease = createAction(ASYNC_INCREASE, () => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(1)
