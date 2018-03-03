@@ -47,8 +47,11 @@ $ wepy build --watch
 ```
 
 ## 微信开发者工具的使用
-- 使用微信开发者工具新建项目，本地开发选择 dist 目录；
-- 微信开发者工具 --> 项目 --> 关闭 ES6 转 ES5。
+- 添加项目，项目目录请选择 dist 目录；
+- 项目-->关闭ES6转ES5；
+- 项目-->关闭上传代码时样式自动补全；
+- 项目-->关闭代码压缩上传；
+- 本地项目根目录运行wepy build --watch，开启实时编译。（注：如果同时在微信开发者工具-->设置-->编辑器中勾选了文件保存时自动编译小程序，将可以实时预览，非常方便。）
 
 ## WebStorm 代码高亮
 - File --> Settings --> File Types --> [Recognized File Types] Vue.js Templates --> 添加 *.wpy。
