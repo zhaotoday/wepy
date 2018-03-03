@@ -1,0 +1,51 @@
+<template>
+  <counter @index-emit.user="counterEmit"/>
+  <view>parent num: {{ num }}</view>
+  <view>parent async num: {{ asyncNum }}</view>
+  <view>parent sum num: {{ sumNum }}</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import Counter from '../components/counter'
+
+  @connect({
+    num (state) {
+      return state.counter.num
+    },
+    asyncNum (state) {
+      return state.counter.asyncNum
+    },
+    sumNum (state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'my page'
+    }
+
+    components = {
+      counter: Counter
+    }
+
+    mixins = []
+
+    data = {
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onLoad () {
+    }
+  }
+</script>
