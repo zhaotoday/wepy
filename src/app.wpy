@@ -22,7 +22,7 @@
   export default class extends wepy.app {
     config = {
       pages: [
-        'pages/index'
+        'pages/my-page/index'
       ],
       window: {
         backgroundTextStyle: 'light',

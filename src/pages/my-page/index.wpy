@@ -1,27 +1,17 @@
 <template>
-  <counter @index-emit.user="counterEmit"/>
-  <view>parent num: {{ num }}</view>
-  <view>parent async num: {{ asyncNum }}</view>
-  <view>parent sum num: {{ sumNum }}</view>
+  <view class="my-page">
+    <view>my page</view>
+    <image class="my-page__img" src="./images/my-image.png" mode="widthFix"></image>
+    <my-component></my-component>
+  </view>
 </template>
+
+<style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
-  import global from '../utils/mixins/global'
-  import { connect } from 'wepy-redux'
-  import Counter from '../components/counter'
-
-  @connect({
-    num (state) {
-      return state.counter.num
-    },
-    asyncNum (state) {
-      return state.counter.asyncNum
-    },
-    sumNum (state) {
-      return state.counter.num + state.counter.asyncNum
-    }
-  })
+  import global from '../../utils/mixins/global'
+  import MyComponent from '../../components/my-component/index'
 
   export default class Index extends wepy.page {
     config = {
@@ -29,7 +19,7 @@
     }
 
     components = {
-      counter: Counter
+      'my-component': MyComponent
     }
 
     mixins = [global]
