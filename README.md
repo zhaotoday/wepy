@@ -70,5 +70,3 @@ $ wepy build --watch
 - 在 JS 脚本中引用图片，请使用绝对路劲，如：/images/icons/message/warn.png；
 - 考虑到微信废弃接口的可能性，请将通过小程序接口获取到的用户信息保存到服务端；
 - 在 app.wpy 的 constructor 中添加 this.use('promisify')，使 API promise 化，以便更好的支持 async/await。
-
-## 未完待续
