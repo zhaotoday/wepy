@@ -1,0 +1,38 @@
+<template>
+  <view class="counter">
+    <button @tap="increase">increase</button>
+    <button @tap="decrease">decrease</button>
+    <button @tap="asyncIncrease">async increase</button>
+    <view>child num: {{ num }}</view>
+    <view>child async num: {{ asyncNum }}</view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import { INCREASE, DECREASE } from '../store/types/counter'
+  import { asyncIncrease } from '../store/actions'
+
+  @connect({
+    num (state) {
+      return state.counter.num
+    },
+    asyncNum (state) {
+      return state.counter.asyncNum
+    }
+  }, {
+    increase: INCREASE,
+    decrease: DECREASE,
+    asyncIncrease
+  })
+
+  export default class Counter extends wepy.component {
+    data = {}
+
+    events = {}
+
+    watch = {}
+
+    methods = {}
+  }
+</script>

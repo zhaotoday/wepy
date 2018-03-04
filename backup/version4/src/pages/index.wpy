@@ -1,0 +1,56 @@
+<template>
+  <counter @index-emit.user="counterEmit"/>
+  <view>parent num: {{ num }}</view>
+  <view>parent async num: {{ asyncNum }}</view>
+  <view>parent sum num: {{ sumNum }}</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../utils/mixins/global'
+  import { connect } from 'wepy-redux'
+  import Counter from '../components/counter'
+
+  @connect({
+    num (state) {
+      return state.counter.num
+    },
+    asyncNum (state) {
+      return state.counter.asyncNum
+    },
+    sumNum (state) {
+      return state.counter.num + state.counter.asyncNum
+    }
+  })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'my page'
+    }
+
+    components = {
+      counter: Counter
+    }
+
+    mixins = [global]
+
+    data = {}
+
+    computed = {}
+
+    methods = {}
+
+    events = {}
+
+    async onShow () {
+      try {
+        const getUserInfoRes = await this.getUserInfo()
+        console.log('index onLoad: ', getUserInfoRes)
+      } catch (err) {
+        if (err.errMsg && err.errMsg.indexOf(':fail auth deny') !== -1) {
+          this.openSetting()
+        }
+      }
+    }
+  }
+</script>
