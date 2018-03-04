@@ -6,11 +6,12 @@
 - [微信小程序简易教程](https://mp.weixin.qq.com/debug/wxadoc/dev/index.html)
 - [Wafer - 小程序开发全栈资源套件](https://github.com/tencentyun/wafer)
 - [WePY](https://github.com/wepyjs/wepy)
-- [小程序框架 WePY 文档](https://wepyjs.github.io/wepy)
+- [WePY 文档](https://wepyjs.github.io/wepy)
+- [WePY 开发资源汇总](https://github.com/aben1188/awesome-wepy)
 - [WeUI WXSS](https://github.com/weui/weui-wxss)
+- [WePY WeUI Demo](https://github.com/wepyjs/wepy-weui-demo)
 - [阿里巴巴 Icon Font](http://iconfont.cn/)
 - [腾讯云微信小程序 扶持计划](https://dnspod.qcloud.com/la/apply?from=solution)
-- [WePY WeUI Demo](https://github.com/wepyjs/wepy-weui-demo)
 
 ## 使用
 ```bash
