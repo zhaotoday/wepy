@@ -12,16 +12,23 @@
 - [WePY WeUI Demo](https://github.com/wepyjs/wepy-weui-demo)
 - [阿里巴巴 Icon Font](http://iconfont.cn/)
 - [腾讯云微信小程序 扶持计划](https://dnspod.qcloud.com/la/apply?from=solution)
+- [ZanUI in WePY](https://github.com/brucx/wepy-zanui-demo)
+- [zanui-weapp](https://github.com/youzan/zanui-weapp)
+- [wepy-X-minui](https://github.com/jimmyrogue/wepy-X-minui)
+- [minui](https://github.com/meili/minui)
 
 ## 使用
 ```bash
+# 安装 wepy-cli
+$ npm install wepy-cli -g
+
 # 下载代码
 $ git clone https://github.com/zhaotoday/wepy.git
 
-# 安装依赖
+# 安装依赖包
 $ npm install
 
-# 开发实时编译
+# 实时编译
 $ wepy build --watch
 ```
 
@@ -29,7 +36,7 @@ $ wepy build --watch
 ```
 ├── dist                     编译目录
 ├── src                      源码目录
-|   ├── components           通用组件
+|   ├── components           通用组件目录
 |   |   └── my-component     my-component 组件
 |   |       ├── index.wpy    my-component 业务
 |   |       ├── images       my-component 图片
