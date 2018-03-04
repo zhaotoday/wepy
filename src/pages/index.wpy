@@ -7,6 +7,7 @@
 
 <script>
   import wepy from 'wepy'
+  import global from '../utils/mixins/global'
   import { connect } from 'wepy-redux'
   import Counter from '../components/counter'
 
@@ -31,23 +32,25 @@
       counter: Counter
     }
 
-    mixins = []
+    mixins = [global]
 
-    data = {
-    }
+    data = {}
 
-    computed = {
-    }
+    computed = {}
 
-    methods = {
-    }
+    methods = {}
 
-    events = {
-    }
+    events = {}
 
-    async onLoad () {
-      const getUserInfoRes = await this.$parent.getUserInfo()
-      console.log(getUserInfoRes)
+    async onShow () {
+      try {
+        const getUserInfoRes = await this.getUserInfo()
+        console.log('index onLoad: ', getUserInfoRes)
+      } catch (err) {
+        if (err.errMsg && err.errMsg.indexOf(':fail auth deny') !== -1) {
+          this.openSetting()
+        }
+      }
     }
   }
 </script>

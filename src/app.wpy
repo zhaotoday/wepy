@@ -32,9 +32,7 @@
       }
     }
 
-    globalData = {
-      userInfo: null
-    }
+    globalData = {}
 
     constructor () {
       super()
@@ -45,16 +43,7 @@
     onLaunch () {
     }
 
-    async getUserInfo () {
-      console.log(this.globalData.userInfo, 33)
-      if (this.globalData.userInfo) {
-        return this.globalData.userInfo
-      } else {
-        const getUserInfoRes = await wepy.getUserInfo()
-        this.globalData.userInfo = getUserInfoRes.userInfo
-        console.log(this.globalData.userInfo, 22)
-        return getUserInfoRes.userInfo
-      }
+    onShow () {
     }
   }
 </script>
