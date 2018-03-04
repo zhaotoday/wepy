@@ -45,7 +45,9 @@
     events = {
     }
 
-    onLoad () {
+    async onLoad () {
+      const getUserInfoRes = await this.$parent.getUserInfo()
+      console.log(getUserInfoRes)
     }
   }
 </script>

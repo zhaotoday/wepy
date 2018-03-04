@@ -48,13 +48,13 @@ $ wepy build --watch
 
 ## 微信开发者工具的使用
 - 添加项目，项目目录请选择 dist 目录；
-- 项目-->关闭ES6转ES5；
-- 项目-->关闭上传代码时样式自动补全；
-- 项目-->关闭代码压缩上传；
-- 本地项目根目录运行wepy build --watch，开启实时编译。（注：如果同时在微信开发者工具-->设置-->编辑器中勾选了文件保存时自动编译小程序，将可以实时预览，非常方便。）
+- 项目 -> 关闭 ES6 转 ES5；
+- 项目 -> 关闭上传代码时样式自动补全；
+- 项目 -> 关闭代码压缩上传；
+- 本地项目根目录运行 wepy build --watch，开启实时编译。
 
 ## WebStorm 代码高亮
-- File --> Settings --> File Types --> [Recognized File Types] Vue.js Templates --> 添加 *.wpy。
+- File -> Settings -> File Types -> [Recognized File Types] Vue.js Templates -> 添加 *.wpy。
 
 ## 在 app.wpy 中使 API promise 化，以便更好的支持 async/await
 ```js
@@ -67,9 +67,9 @@ export default class extends wepy.app {
 ```
 
 ## 贴士
-- [iconfont.cn](http://iconfont.cn/) 上有丰富的图标资源，下载时可编辑尺寸颜色，选择 PNG 下载，即可获得小程序可用的图标文件；
-- 解决用 WebStorm 开发小程序，格式化 CSS 时，数值和 rpx 之间被加了空格的 bug，请参考 [[链接](http://www.qianduan.org/post-471.html)]；
-- 在 JS 脚本中引用图片，请使用绝对路劲，如：`/images/icons/message/warn.png`。
-- 请将通过小程序接口获取到的用户信息保存到服务端（考虑到微信废弃接口的可能性）。
+- IconFont 提供了丰富的图标资源，下载时可编辑尺寸颜色，选择 PNG 下载，即可获得小程序可用的图标文件；[[链接](http://iconfont.cn/) ]；
+- 用 Sass 函数解决 WebStorm 开发小程序，格式化 CSS 时，数值和 rpx 之间被加了空格的 bug；[[链接](http://www.qianduan.org/post-471.html)]；
+- 在 JS 脚本中引用图片，请使用绝对路劲，如：`/images/icons/message/warn.png`；
+- 考虑到微信废弃接口的可能性，请将通过小程序接口获取到的用户信息保存到服务端。
 
 ## 未完待续
