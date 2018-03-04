@@ -6,7 +6,7 @@
 - [微信小程序简易教程](https://mp.weixin.qq.com/debug/wxadoc/dev/index.html)
 - [Wafer - 小程序开发全栈资源套件](https://github.com/tencentyun/wafer)
 - [WePY](https://github.com/wepyjs/wepy)
-- [WePY 文档](https://wepyjs.github.io/wepy)
+- [WePY 文档](https://tencent.github.io/wepy/)
 - [WePY 开发资源汇总](https://github.com/aben1188/awesome-wepy)
 - [WeUI WXSS](https://github.com/weui/weui-wxss)
 - [WePY WeUI Demo](https://github.com/wepyjs/wepy-weui-demo)
@@ -29,17 +29,19 @@ $ wepy build --watch
 ```
 ├── dist                     编译目录
 ├── src                      源码目录
-|   ├── assets               引用的第三方资源（如：WeUI）
 |   ├── components           通用组件
 |   |   └── my-component     my-component 组件
 |   |       ├── index.wpy    my-component 业务
+|   |       ├── images       my-component 图片
 |   |       └── styles.scss  my-component 样式
-|   ├── images               图片
 |   ├── pages                页面目录
 |   |   └── my-page          my-page 页面
 |   |       ├── index.wpy    my-page 业务
+|   |       ├── images       my-page 图片
 |   |       └── styles.scss  my-page 样式
+|   ├── assets               引用的第三方资源（如：WeUI）
 |   ├── styles               Sass function、mixin 等
+|   ├── store                redux 状态管理
 |   ├── utils                JS 工具集合
 |   └── app.wpy              小程序配置项（全局样式配置、声明钩子等）
 └── package.json             package 配置
