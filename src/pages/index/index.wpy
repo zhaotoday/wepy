@@ -1,0 +1,86 @@
+<template>
+  <view class="container">
+    <view>
+      <image class="index__bg" src="./images/bg.jpg" mode="widthFix" animation="{{bg.animation}}"></image>
+    </view>
+    <image class="index__flower" src="./images/flower.png" mode="widthFix"></image>
+    <image class="index__camera" src="./images/camera.png" mode="widthFix" @tap="takePhoto"></image>
+    <view>预览</view>
+    <image mode="widthFix" src="{{src}}"></image>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../utils/mixins/global'
+  import MyComponent from '../../components/my-component/index'
+  import helpers from '../../utils/helpers'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'my page'
+    }
+
+    components = {
+      'my-component': MyComponent
+    }
+
+    mixins = [global]
+
+    data = {
+      bg: {
+        top: 0,
+        animation: {}
+      }
+    }
+
+    computed = {}
+
+    methods = {
+      takePhoto () {
+        wepy.chooseImage({
+          count: 1, // 默认9
+          sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+          sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
+          success: function (res) {
+            // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+            console.log(res)
+            // var tempFilePaths = res.tempFilePaths
+          }
+        })
+      }
+    }
+
+    events = {}
+
+    async onShow () {
+      try {
+        const getUserInfoRes = await this.getUserInfo()
+        console.log('index onLoad: ', getUserInfoRes)
+      } catch (err) {
+        if (err.errMsg && err.errMsg.indexOf(':fail auth deny') !== -1) {
+          this.openSetting()
+        }
+      }
+
+      helpers.sleep(1000)
+
+      const animation = wepy.createAnimation({
+        duration: 2500,
+        timingFunction: 'ease'
+      })
+
+      animation.top(this.bg.top).step()
+
+      if (this.bg.top === 0) {
+        this.bg.top = -100
+      } else {
+        this.bg.top = 0
+      }
+
+      this.bg.animation = animation.export()
+    }
+  }
+</script>
