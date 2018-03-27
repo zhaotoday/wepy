@@ -16,10 +16,21 @@
   }
 
   @include e(flower) {
-    top: px2rpx(170px);
+    top: px2rpx(200px);
   }
 
   @include e(camera) {
-    bottom: px2rpx(170px);
+    bottom: px2rpx(220px);
+  }
+
+  @include e(album) {
+    @include size(100px, 30px);
+    @include position--fixed(null, null, null, 50%);
+
+    line-height: 30px;
+    margin-left: -50px;
+    text-align: center;
+    bottom: px2rpx(100px);
+    color: white;
   }
 }
