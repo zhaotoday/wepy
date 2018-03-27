@@ -25,35 +25,6 @@
     computed = {}
 
     methods = {
-      async takePhoto () {
-        const chooseImageRes = await wepy.chooseImage({
-          count: 1,
-          sizeType: ['compressed'],
-          sourceType: ['camera']
-        })
-
-        console.log(chooseImageRes)
-      },
-
-      async openAlbum () {
-        const chooseImageRes = await wepy.chooseImage({
-          count: 1,
-          sizeType: ['compressed'],
-          sourceType: ['album']
-        })
-
-        wepy.showModal({
-          title: '提示',
-          content: JSON.stringify(chooseImageRes),
-          success: function (res) {
-            if (res.confirm) {
-              console.log('用户点击确定')
-            } else if (res.cancel) {
-              console.log('用户点击取消')
-            }
-          }
-        })
-      }
     }
 
     events = {}
