@@ -1,6 +1,24 @@
 <template>
   <view class="container">
-    <image src="{{chosenImage}}" mode="widthFix"></image>
+    <image class="result__image" src="{{imageURL}}" mode="aspectFill"></image>
+    <view class="result__details">
+      <view wx:if="{{!title}}">
+        <view class="result__loading">正在识别...</view>
+      </view>
+      <view wx:else>
+        <view class="result__head">
+          <image class="result__preview-image" src="{{imageURL}}" mode="aspectFill"></image>
+          <text>可信度 {{score}}</text>
+        </view>
+        <view class="result__body">
+          <view class="result__body-title">{{title}}</view>
+          <view class="result__body-content">
+            <text>{{content}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <image class="result__close" src="./images/close.png" mode="widthFix" @tap="back"></image>
   </view>
 </template>
 
@@ -8,6 +26,7 @@
 
 <script>
   import wepy from 'wepy'
+  import helpers from '../../utils/helpers'
 
   export default class Index extends wepy.page {
     config = {
@@ -19,21 +38,75 @@
     mixins = []
 
     data = {
-      chosenImage: ''
+      imageURL: '',
+      title: '',
+      score: '',
+      content: ''
     }
 
     computed = {}
 
     methods = {
+      back () {
+        wepy.navigateBack()
+      }
     }
 
     events = {}
 
+    onShareAppMessage (res) {
+      if (res.from === 'button') {
+        // 来自页面内转发按钮
+        console.log(res.target)
+      }
+      return {
+        title: '自定义转发标题',
+        path: '/page/user?id=123',
+        success: function (res) {
+          // 转发成功
+        },
+        fail: function (res) {
+          // 转发失败
+        }
+      }
+    }
+
     async onShow () {
     }
 
-    onLoad (query) {
-      this.chosenImage = query.chosenImage
+    async onLoad (query) {
+      this.imageURL = query.imageURL
+
+      try {
+        const uploadFileRes = await wepy.uploadFile({
+          url: 'https://www.xingxiaoban.com/weixin/plant',
+          filePath: this.imageURL,
+          name: 'image'
+        })
+
+        const uploadFileResItems = JSON.parse(uploadFileRes.data).data.result
+
+        if (Array.prototype.isPrototypeOf(uploadFileResItems)) {
+          this.title = uploadFileResItems[0].name
+          this.score = (uploadFileResItems[0].score * 100).toFixed(2) + '%'
+          this.content = ''
+        } else {
+          this.title = '对不起！'
+          this.score = (uploadFileResItems.score * 100).toFixed(2) + '%'
+          this.content = `小伙伴不能识别这张照片\n我猜是${uploadFileResItems.name}\n换个取景试试吧！`
+        }
+
+        this.$apply()
+      } catch (err) {
+        wepy.showToast({
+          title: '服务器错误',
+          icon: 'none',
+          duration: 2000
+        })
+
+        await helpers.sleep(2000)
+        wepy.navigateBack()
+      }
     }
   }
 </script>

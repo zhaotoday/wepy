@@ -32,9 +32,9 @@
 
     computed = {}
 
-    goResult (chosenImage) {
+    navigateToResult (imageURL) {
       wepy.navigateTo({
-        url: `/pages/result/index?chosenImage=${chosenImage}`
+        url: `/pages/result/index?imageURL=${imageURL}`
       })
     }
 
@@ -46,7 +46,7 @@
           sourceType: ['camera']
         })
 
-        this.goResult(chooseImageRes.tempFilePaths[0])
+        this.navigateToResult(chooseImageRes.tempFilePaths[0])
       },
 
       async openAlbum () {
@@ -56,7 +56,7 @@
           sourceType: ['album']
         })
 
-        this.goResult(chooseImageRes.tempFilePaths[0])
+        this.navigateToResult(chooseImageRes.tempFilePaths[0])
       }
     }
 
