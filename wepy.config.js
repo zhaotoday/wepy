@@ -17,7 +17,7 @@ module.exports = {
       counter: path.join(__dirname, 'src/components/counter'),
       '@': path.join(__dirname, 'src')
     },
-    aliasFields: ['wepy'],
+    aliasFields: ['wepy', 'weapp'],
     modules: ['node_modules']
   },
   compilers: {
@@ -28,7 +28,7 @@ module.exports = {
       outputStyle: 'compressed'
     },
     babel: {
-      sourceMap: !prod,
+      sourceMap: true,
       presets: [
         'env'
       ],
