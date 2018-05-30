@@ -85,7 +85,6 @@
   import wepy from 'wepy'
   import global from '../../utils/mixins/global'
   import TabBar from '../../components/tab-bar/index'
-  import Card from '../../components/card/index'
 
   export default class Index extends wepy.page {
     config = {
@@ -93,8 +92,7 @@
     }
 
     components = {
-      'tab-bar': TabBar,
-      card: Card
+      'tab-bar': TabBar
     }
 
     mixins = [global]
