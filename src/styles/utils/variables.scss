@@ -23,4 +23,5 @@ $colors: (
 );
 
 $font-size: map-get($font-sizes, s2);
-$image-base-url: "https://images.liruan.cn/"
+$image-base-url: "https://images.liruan.cn/";
+$mp-toolbar-height: px2rpx(160px);

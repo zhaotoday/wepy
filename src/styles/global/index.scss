@@ -17,7 +17,8 @@ page {
 }
 
 .has-tab-bar {
-  bottom: px2rpx(98px + 20px);
+  bottom: px2rpx(98px);
+  padding-bottom: px2rpx(20px);
 }
 
 @each $icon in refund, to-comment, to-pay, to-receive, to-send {
