@@ -1,0 +1,8 @@
+@import "../../styles/utils/index";
+
+@include b(c-card) {
+  width: px2rpx(690px);
+  min-height: px2rpx(100px);
+  border-radius: px2rpx(20px);
+  background-color: white;
+}

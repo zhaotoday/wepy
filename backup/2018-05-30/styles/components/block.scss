@@ -1,0 +1,7 @@
+@import "../utils/index";
+
+@include b(c-block) {
+  width: px2rpx(690px);
+  border-radius: px2rpx(20px);
+  background-color: white;
+}

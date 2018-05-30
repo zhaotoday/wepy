@@ -1,0 +1,33 @@
+@import "../../styles/utils/index";
+
+@include b(c-tab-bar) {
+  @include footer--sticky;
+
+  display: flex;
+  border-top: 1px solid #ebebeb;
+  background-color: white;
+
+  @include e(item) {
+    flex: 1;
+    box-sizing: border-box;
+    height: px2rpx(98px);
+    text-align: center;
+    font-size: map-get($font-sizes, s3);
+    padding-top: px2rpx(10px + 46px + 3px);
+
+    @each $icon in home, type, cart, my {
+      @include m(#{$icon}) {
+        background: {
+          image: image-url("components/tab-bar/#{$icon}.png");
+          size: px2rpx(46px) px2rpx(46px);
+          position: center px2rpx(10px);
+          repeat: no-repeat;
+        }
+
+        &.is-active {
+          background-image: image-url("components/tab-bar/#{$icon}-active.png");
+        }
+      }
+    }
+  }
+}

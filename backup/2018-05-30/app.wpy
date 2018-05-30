@@ -1,0 +1,44 @@
+<style lang="scss" src="./styles/global/index.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import 'wepy-async-function'
+
+  import { setStore } from 'wepy-redux'
+  import configStore from './store'
+
+  const store = configStore()
+  setStore(store)
+
+  export default class extends wepy.app {
+    config = {
+      pages: [
+        'pages/my/index',
+        'pages/calendar/index',
+        'pages/index/index',
+        'pages/result/index'
+      ],
+      window: {
+        navigationBarTextStyle: 'black',
+        navigationStyle: 'custom'
+      }
+    }
+
+    globalData = {}
+
+    constructor () {
+      super()
+      this.use('promisify')
+      this.use('requestfix')
+    }
+
+    onLaunch () {
+      wepy.showShareMenu({
+        withShareTicket: true
+      })
+    }
+
+    onShow () {
+    }
+  }
+</script>

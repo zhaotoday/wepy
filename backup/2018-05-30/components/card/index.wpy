@@ -1,0 +1,21 @@
+<template>
+  <view class="c-card">
+    <slot name="content">默认内容</slot>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    data = {}
+
+    events = {}
+
+    watch = {}
+
+    methods = {}
+  }
+</script>

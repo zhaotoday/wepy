@@ -1,0 +1,9 @@
+@import "../utils/index";
+
+@include b(c-cols) {
+  display: flex;
+
+  @include e(item) {
+    flex: 1;
+  }
+}

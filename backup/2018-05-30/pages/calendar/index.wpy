@@ -1,0 +1,87 @@
+<template>
+  <view class="calendar">
+    <tab-bar></tab-bar>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import Hashes from 'jshashes'
+  import TabBar from '../../components/tab-bar/index'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'my page'
+    }
+
+    components = {
+      'tab-bar': TabBar
+    }
+
+    data = {}
+
+    computed = {}
+
+    methods = {
+      async handleClick () {
+        const scanCodeRes = await wepy.scanCode({
+          onlyFromCamera: true
+        })
+
+        console.log(scanCodeRes)
+      }
+    }
+
+    events = {}
+
+    async onShow1 () {
+      // const deviceType = 'Android'
+      // const nonce = 'abcd123g'
+      // const sign = 'dc5625b47d75fb6f1054e6d34db6b2f4'
+      // const timestamp = 1524564918
+      // console.log(('~!@#$`1234qwert' + nonce + timestamp + 1))
+
+      const nonce = Math.random().toString(36).substr(6)
+      const timestamp = 1234567892
+      const deviceType = 1
+      const sign = new Hashes.MD5().hex('~!@#$`1234qwert' + nonce.toString() + timestamp.toString() + deviceType.toString())
+      console.log('~!@#$`1234qwert' + nonce + timestamp + deviceType)
+      const requestRes = await wepy.request({
+        url: 'http://apitest.shenbd.com/authinfo/takeAccess/',
+        method: 'POST',
+        data: {
+          data: {nonce, timestamp, deviceType, sign}
+        }
+      })
+      console.log(requestRes)
+    }
+
+    async onShow () {
+      const key = '~!@#$`1234qwert'
+      const deviceType = 5
+      const nonce = Math.random().toString(36).substr(6)
+      const timestamp = new Date().getTime()
+      const sign = new Hashes.MD5().hex(key + nonce + timestamp + deviceType)
+
+      /*
+      const nonce = 'abcdef'
+      const timestamp = '1234567891'
+      const sign = 'a866e06d987b48b8c3e567d395c22d26'
+      */
+
+      const res = await wepy.request({
+        url: `http://apitest.shenbd.com/authinfo/takeAccess/`,
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36'
+        },
+        data: `data[nonce]=${nonce}&data[timestamp]=${timestamp}&data[deviceType]=${deviceType}&sign=${sign}`
+      })
+
+      console.log(222, res)
+    }
+  }
+</script>

@@ -1,0 +1,65 @@
+@import "../../styles/utils/index";
+
+@include b(result) {
+  @include e(image) {
+    @include position--fixed(px2rpx(50px), null, null, 50%);
+    @include size(px2rpx(498px), px2rpx(498px));
+
+    margin-left: px2rpx(-250px);
+    border: px2rpx(1px) solid white;
+  }
+
+  @include e(details) {
+    @include position--fixed(null, null, px2rpx(250px), 50%);
+    @include size(px2rpx(700px), px2rpx(284px));
+
+    box-sizing: border-box;
+    margin-left: px2rpx(-350px);
+    padding: px2rpx(20px);
+    background-color: rgba(105, 105, 105, 0.2);
+    color: white;
+    line-height: 160%;
+  }
+
+  @include e(head) {
+    width: px2rpx(200px);
+    text-align: center;
+  }
+
+  @include e(preview-image) {
+    @include size(px2rpx(200px), px2rpx(200px));
+
+    box-sizing: border-box;
+    border: px2rpx(1px) solid white;
+  }
+
+  @include e(body) {
+    @include position--absolute(px2rpx(20px), px2rpx(20px), px2rpx(20px), px2rpx(240px))
+  }
+
+  @include e(body-title) {
+    font-size: 18px;
+  }
+
+  @include e(close) {
+    @include size(px2rpx(128px), px2rpx(128px));
+    @include position--fixed(null, null, px2rpx(70px), 50%);
+
+    margin-left: px2rpx(-64px);
+  }
+
+  @include e(loading) {
+    text-align: center;
+    line-height: px2rpx(244px);
+  }
+
+  @include e(share) {
+    @include size(px2rpx(40px), px2rpx(40px));
+    @include position--absolute(px2rpx(20px), px2rpx(20px));
+  }
+}
+
+.aa {
+  background-color: transparent;
+  border: 1px;
+}

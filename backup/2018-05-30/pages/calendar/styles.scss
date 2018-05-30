@@ -1,0 +1,6 @@
+@import "../../styles/utils/index";
+
+@include b(calendar) {
+  width: 101%;
+  height: 100%;
+}

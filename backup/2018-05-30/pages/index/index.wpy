@@ -1,0 +1,78 @@
+<template>
+  <view class="container">
+    <view>
+      <image class="index__bg" src="./images/bg.jpg" mode="widthFix" animation="{{bg.animation}}"></image>
+    </view>
+    <image class="index__flower" src="./images/flower.png" mode="widthFix"></image>
+    <image class="index__camera" src="./images/camera.png" mode="widthFix" @tap="takePhoto"></image>
+    <view class="index__album" @tap="openAlbum">从相册选图</view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '花帮主识花'
+    }
+
+    components = {}
+
+    mixins = []
+
+    data = {
+      bg: {
+        top: 0,
+        animation: {}
+      }
+    }
+
+    computed = {}
+
+    navigateToResult (imageURL) {
+      wepy.navigateTo({
+        url: `/pages/result/index?imageURL=${imageURL}`
+      })
+    }
+
+    methods = {
+      async takePhoto () {
+        const chooseImageRes = await wepy.chooseImage({
+          count: 1,
+          sizeType: ['compressed'],
+          sourceType: ['camera']
+        })
+
+        this.navigateToResult(chooseImageRes.tempFilePaths[0])
+      },
+
+      async openAlbum () {
+        const chooseImageRes = await wepy.chooseImage({
+          count: 1,
+          sizeType: ['compressed'],
+          sourceType: ['album']
+        })
+
+        this.navigateToResult(chooseImageRes.tempFilePaths[0])
+      }
+    }
+
+    events = {}
+
+    async onShow () {
+      const animation = wepy.createAnimation({
+        duration: 3500,
+        timingFunction: 'ease'
+      })
+
+      animation.top(this.bg.top).step()
+      this.bg.animation = animation.export()
+
+      this.bg.top = this.bg.top === 0 ? -100 : 0
+      this.$apply()
+    }
+  }
+</script>

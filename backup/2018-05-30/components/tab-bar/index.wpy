@@ -1,0 +1,24 @@
+<template>
+  <view class="c-tab-bar">
+    <view class="c-tab-bar__item c-tab-bar__item--home">首页</view>
+    <view class="c-tab-bar__item c-tab-bar__item--type">分类</view>
+    <view class="c-tab-bar__item c-tab-bar__item--cart">购物车</view>
+    <view class="c-tab-bar__item c-tab-bar__item--my is-active">我的</view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    data = {}
+
+    events = {}
+
+    watch = {}
+
+    methods = {}
+  }
+</script>

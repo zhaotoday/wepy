@@ -1,0 +1,11 @@
+@import "../utils/index";
+
+@include b(c-middle) {
+  position: relative;
+
+  @include e(item) {
+    @include position--relative(50%);
+
+    transform: translateY(-50%);
+  }
+}
