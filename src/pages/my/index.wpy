@@ -1,0 +1,121 @@
+<template>
+  <view class="container has-tab-bar p-my">
+    <view class="info">
+      <view class="c-block">
+        <view class="c-icon setup"></view>
+        <image class="info__avatar" src="./images/avatar.jpg"></image>
+        <view class="info__name">大叶子Girol</view>
+        <view class="c-cols">
+          <view class="c-cols__item c-middle">
+            <view class="c-middle__item">
+              <view class="c2 s2 is-first">23</view>
+              <text class="c2 s4">收藏夹</text>
+            </view>
+          </view>
+          <view class="c-cols__item c-middle">
+            <view class="c-middle__item">
+              <view class="c2 s2 is-first">32</view>
+              <text class="c2 s4">关注店铺</text>
+            </view>
+          </view>
+          <view class="c-cols__item c-middle">
+            <view class="c-middle__item">
+              <view class="c2 s2 is-first">115</view>
+              <text class="c2 s4">足迹</text>
+            </view>
+          </view>
+          <view class="c-cols__item c-middle c1 s3 is-last">
+            <view class="c-middle__item">
+              <view>我的</view>
+              <view>卡券</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="c-block order">
+      <view class="c-cells">
+        <view class="c-cells__item">
+          <view class="c-cells__item-body">我的订单</view>
+          <view class="c-cells__item-foot">查看更多订单</view>
+        </view>
+      </view>
+      <view class="c-cols">
+        <view class="c-cols__item order__item--to-pay c2 s4">待付款</view>
+        <view class="c-cols__item order__item--to-send c2 s4">待发货</view>
+        <view class="c-cols__item order__item--to-receive c2 s4">待收货</view>
+        <view class="c-cols__item order__item--to-comment c2 s4">
+          待评价
+          <text class="order__item-tip">12</text>
+        </view>
+        <view class="c-cols__item refund c2 s4">退款/售后</view>
+      </view>
+    </view>
+    <view class="c-block others">
+      <view class="c-cells">
+        <view class="c-cells__item">
+          <view class="c-cells__item-body address">地址管理</view>
+          <view class="c-cells__item-foot"></view>
+        </view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body comment">收到的评论</view>
+          <view class="c-cells__item-foot">添加/修改</view>
+        </view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body shopkeeper">我是店主</view>
+          <view class="c-cells__item-foot"></view>
+        </view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body carrier">我是配送员</view>
+          <view class="c-cells__item-foot"></view>
+        </view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body seller">我是销售</view>
+          <view class="c-cells__item-foot"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <tab-bar></tab-bar>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../utils/mixins/global'
+  import TabBar from '../../components/tab-bar/index'
+  import Card from '../../components/card/index'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'my page'
+    }
+
+    components = {
+      'tab-bar': TabBar,
+      card: Card
+    }
+
+    mixins = [global]
+
+    data = {}
+
+    computed = {}
+
+    methods = {}
+
+    events = {}
+
+    async onShow () {
+      try {
+        const getUserInfoRes = await this.getUserInfo()
+        console.log('index onLoad: ', getUserInfoRes)
+      } catch (err) {
+        if (err.errMsg && err.errMsg.indexOf(':fail auth deny') !== -1) {
+          this.openSetting()
+        }
+      }
+    }
+  }
+</script>
