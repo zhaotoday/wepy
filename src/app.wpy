@@ -13,9 +13,7 @@
   export default class extends wepy.app {
     config = {
       pages: [
-        'pages/calendar/index',
-        'pages/index/index',
-        'pages/result/index'
+        'pages/my/index'
       ],
       window: {
         navigationBarTextStyle: 'black',
