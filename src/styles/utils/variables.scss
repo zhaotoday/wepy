@@ -1,1 +1,26 @@
-$font-size: 14px;
+$font-sizes: (
+  sd: px2rpx(68px),
+  ss: px2rpx(46px),
+  s0: px2rpx(34px),
+  s1: px2rpx(30px),
+  s2: px2rpx(28px),
+  s3: px2rpx(26px),
+  s4: px2rpx(24px),
+  s5: px2rpx(22px),
+  s6: px2rpx(20px)
+);
+
+$colors: (
+  c1: #FF8519,
+  c2: #212121,
+  c3: #757575,
+  c4: #BBBBBB,
+  c5: #F8F8F8,
+  c6: #F5F5F5,
+  c7: #FFFFFF,
+  c8: #FAAB00,
+  c9: #0093FA,
+);
+
+$font-size: map-get($font-sizes, s2);
+$image-base-url: "https://images.liruan.cn/"

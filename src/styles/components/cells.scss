@@ -1,0 +1,48 @@
+@import "../utils/index";
+
+@include b(c-cells) {
+  @include e(item) {
+    @include padding(null, px2rpx(20px), null, px2rpx(20px));
+
+    display: flex;
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  @include e(item-body, item-foot) {
+    height: px2rpx(96px);
+    line-height: px2rpx(97px);
+    overflow: hidden;
+  }
+
+  @include e(item-body) {
+    flex: 1;
+    color: map-get($colors, c2);
+    font-size: map-get($font-sizes, s2);
+    background: {
+      size: px2rpx(34px) px2rpx(34px);
+      position: center left;
+      repeat: no-repeat;
+    }
+
+    @each $icon in address, carrier, comment, seller, shopkeeper {
+      @include m(#{$icon}) {
+        padding-left: px2rpx(34px + 20px);
+        background-image: image-url("components/cells/#{$icon}.png");
+      }
+    }
+  }
+
+  @include e(item-foot) {
+    flex: 1;
+    color: map-get($colors, c3);
+    font-size: map-get($font-sizes, s5);
+    text-align: right;
+    padding-right: px2rpx(12px + 10px);
+    background: {
+      image: image-url("components/cells/arrow.png");
+      size: px2rpx(10px) px2rpx(18px);
+      position: center right;
+      repeat: no-repeat;
+    }
+  }
+}
