@@ -78,8 +78,7 @@
   @include b(order) {
     @include b(c-cells) {
       @include e(item-body, item-foot) {
-        height: px2rpx(96px - 6px * 2);
-        line-height: px2rpx(99px - 6px * 2);
+        @include text--middle(px2rpx(96px - 6px * 2));
       }
     }
 
@@ -108,13 +107,11 @@
     @include e(item-tip) {
       @include position--absolute(px2rpx(18px), px2rpx(20px));
       @include padding(null, px2rpx(10px), null, px2rpx(10px));
+      @include text--middle(px2rpx(30px));
 
       color: white;
       display: inline-block;
       background-color: #ff0000;
-      height: px2rpx(30px);
-      line-height: px2rpx(33px);
-      overflow: hidden;
       font-size: map-get($font-sizes, s6);
       border-radius: px2rpx(20px);
     }

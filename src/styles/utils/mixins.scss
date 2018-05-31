@@ -1,0 +1,9 @@
+/**
+ * 文字垂直居中
+ * @param {string} $height 高度
+ */
+@mixin text--middle($height) {
+  height: $height;
+  line-height: $height + 3rpx;
+  overflow: hidden;
+}

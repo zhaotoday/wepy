@@ -9,9 +9,7 @@
   }
 
   @include e(item-body, item-foot) {
-    height: px2rpx(96px);
-    line-height: px2rpx(99px);
-    overflow: hidden;
+    @include text--middle(px2rpx(96px));
   }
 
   @include e(item-body) {
