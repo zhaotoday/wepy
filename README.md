@@ -54,6 +54,7 @@ $ wepy build --watch
 |   |       ├── functions    Sass 函数
 |   |       ├── mixins       Sass mixin
 |   |       └── variables    Sass 变量
+|   ├── static               静态资源，主要存放在 WXSS 里以 background-image 引用的一些图片
 |   ├── store                redux 状态管理
 |   ├── utils                JS 工具集合
 |   └── app.wpy              小程序配置项（全局样式配置、声明钩子等）
