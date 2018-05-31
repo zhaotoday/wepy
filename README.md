@@ -47,7 +47,13 @@ $ wepy build --watch
 |   |       ├── images       my-page 图片
 |   |       └── styles.scss  my-page 样式
 |   ├── assets               引用的第三方资源（如：WeUI）
-|   ├── styles               Sass function、mixin 等
+|   ├── styles               样式
+|   |   ├── components       组件样式
+|   |   ├── global           全局样式
+|   |   └── utils            Sass 工具
+|   |       ├── functions    Sass 函数
+|   |       ├── mixins       Sass mixin
+|   |       └── variables    Sass 变量
 |   ├── store                redux 状态管理
 |   ├── utils                JS 工具集合
 |   └── app.wpy              小程序配置项（全局样式配置、声明钩子等）
