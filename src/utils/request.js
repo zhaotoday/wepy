@@ -29,8 +29,8 @@ export default async (
     header: {
       'content-type': 'application/x-www-form-urlencoded;'
     },
-    data: Object.keys(data).map(key => {
-      return `data[${key}]=${data[key]}`
-    }).join('&') + `&sign=${sign}`
+    data: Object.keys(data)
+      .map(key => `data[${key}]=${data[key]}`)
+      .join('&') + `&sign=${sign}`
   })
 }
