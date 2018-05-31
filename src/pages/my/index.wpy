@@ -54,23 +54,23 @@
     <view class="c-block others">
       <view class="c-cells">
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item--address">地址管理</view>
+          <view class="c-cells__item-body c-cells__item-body--address">地址管理</view>
           <view class="c-cells__item-foot"></view>
         </view>
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item--comment">收到的评论</view>
+          <view class="c-cells__item-body c-cells__item-body--comment">收到的评论</view>
           <view class="c-cells__item-foot">添加/修改</view>
         </view>
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item--shopkeeper">我是店主</view>
+          <view class="c-cells__item-body c-cells__item-body--shopkeeper">我是店主</view>
           <view class="c-cells__item-foot"></view>
         </view>
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item--carrier">我是配送员</view>
+          <view class="c-cells__item-body c-cells__item-body--carrier">我是配送员</view>
           <view class="c-cells__item-foot"></view>
         </view>
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item--seller">我是销售</view>
+          <view class="c-cells__item-body c-cells__item-body--seller">我是销售</view>
           <view class="c-cells__item-foot"></view>
         </view>
       </view>
@@ -84,6 +84,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../../utils/mixins/global'
+  import request from '../../utils/request'
   import TabBar from '../../components/tab-bar/index'
 
   export default class Index extends wepy.page {
@@ -106,6 +107,12 @@
     events = {}
 
     async onShow () {
+      const takeAccessRes = await request({
+        url: '/authinfo/takeAccess',
+        method: 'POST'
+      })
+
+      console.log(takeAccessRes)
     }
   }
 </script>
