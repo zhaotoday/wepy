@@ -24,17 +24,8 @@
       height: px2rpx(250px);
     }
 
-    .message,
-    .setup {
-      @include position--absolute(px2rpx(-(58px + 50px)));
-    }
-
-    .message {
-      right: px2rpx(10px + 58px);
-    }
-
-    .setup {
-      left: 0;
+    .c-icon--setup {
+      @include position--absolute(px2rpx(-(58px + 50px)), null, null, 0);
     }
 
     @include e(avatar) {
