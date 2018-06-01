@@ -14,4 +14,10 @@
   @include m(setup) {
     background-image: image-url("components/icon/setup.png");
   }
+
+  @include m(mp-login) {
+    @include size(px2rpx(350px), px2rpx(350px));
+
+    background-image: image-url("components/icon/mp-login.png");
+  }
 }
