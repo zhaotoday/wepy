@@ -17,12 +17,17 @@
 
   text-align: center;
   color: #63ac48;
-  font-size: map-get($font-sizes, s0);
 }
 
 // login-btn
 @include b(login-btn) {
   @include block--center;
+
+  button {
+    @include size(px2rpx(350px), px2rpx(350px));
+
+    opacity: 0;
+  }
 }
 
 // login-protocol

@@ -1,10 +1,12 @@
 <template>
   <view class="login container">
-    <view class="login-title">请先登录账号</view>
-    <view class="login-btn c-icon c-icon--mp-login"></view>
-    <view class="login-tip">
+    <view class="login-title s0">请先登录账号</view>
+    <view class="login-btn c-icon c-icon--mp-login">
+      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="handleGetUserInfo">获取用户信息</button>
+    </view>
+    <view class="login-tip c3 s4">
       登录即代表您已同意
-      <text class="login-tip__protocol">《身边店服务协议》</text>
+      <text class="login-tip__protocol" @tap="handleTapProtocal">《身边店服务协议》</text>
     </view>
   </view>
 </template>
@@ -14,16 +16,13 @@
 <script>
   import wepy from 'wepy'
   import global from '../../utils/mixins/global'
-  import MyComponent from '../../components/my-component/index'
 
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: 'my page'
     }
 
-    components = {
-      'my-component': MyComponent
-    }
+    components = {}
 
     mixins = [global]
 
@@ -31,19 +30,30 @@
 
     computed = {}
 
-    methods = {}
+    methods = {
+      handleTapProtocal () {
+        console.log('protocal')
+      },
+
+      async handleGetUserInfo (e) {
+        const getSettingRes = await wepy.getSetting()
+        if (!getSettingRes.authSetting['scope.userInfo']) {
+          wepy.showToast({
+            title: '请通过授权，以便为您提供更好的服务！',
+            icon: 'none',
+            mask: true
+          })
+        } else {
+          const loginRes = await wepy.login()
+          console.log(loginRes)
+          console.log(e.detail.userInfo)
+        }
+      }
+    }
 
     events = {}
 
     async onShow () {
-      try {
-        const getUserInfoRes = await this.getUserInfo()
-        console.log('index onLoad: ', getUserInfoRes)
-      } catch (err) {
-        if (err.errMsg && err.errMsg.indexOf(':fail auth deny') !== -1) {
-          this.openSetting()
-        }
-      }
     }
   }
 </script>

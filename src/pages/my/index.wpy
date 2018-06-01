@@ -54,7 +54,8 @@
         <view class="c-cols__item c-cols__item--refund c2 s4">退款/售后</view>
       </view>
     </view>
-    <!-- /my-others -->
+    <!-- /my-order -->
+    <!-- my-others --->
     <view class="my-others c-block">
       <view class="c-cells">
         <view class="c-cells__item">
