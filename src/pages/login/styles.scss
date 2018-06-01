@@ -1,0 +1,36 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/icon";
+
+// login
+@include b(login) {
+  background: {
+    image: image-url('pages/login/bg.png');
+    repeat: no-repeat;
+    position: 0 bottom;
+    size: 100% px2rpx(394px);
+  }
+}
+
+// login-title
+@include b(login-title) {
+  @include padding(px2rpx(186px), null, px2rpx(60px));
+
+  text-align: center;
+  color: #63ac48;
+  font-size: map-get($font-sizes, s0);
+}
+
+// login-btn
+@include b(login-btn) {
+  @include block--center;
+}
+
+// login-protocol
+@include b(login-tip) {
+  padding-top: px2rpx(310px);
+  text-align: center;
+
+  @include e(protocol) {
+    text-decoration: underline;
+  }
+}

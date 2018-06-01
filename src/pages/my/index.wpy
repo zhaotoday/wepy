@@ -1,10 +1,11 @@
 <template>
-  <view class="container has-tab-bar p-my">
-    <view class="info">
+  <view class="my container has-tab-bar">
+    <!-- my-info -->
+    <view class="my-info">
       <view class="c-block">
         <view class="c-icon c-icon--setup"></view>
-        <image class="info__avatar" src="./images/avatar.jpg"></image>
-        <view class="info__name">大叶子Girol</view>
+        <image class="my-info__avatar" src="./images/avatar.jpg"></image>
+        <view class="my-info__name">大叶子Girol</view>
         <view class="c-cols">
           <view class="c-cols__item c-middle">
             <view class="c-middle__item">
@@ -33,7 +34,9 @@
         </view>
       </view>
     </view>
-    <view class="c-block order">
+    <!-- /my-info -->
+    <!-- my-order -->
+    <view class="my-order c-block">
       <view class="c-cells">
         <view class="c-cells__item">
           <view class="c-cells__item-body">我的订单</view>
@@ -41,17 +44,18 @@
         </view>
       </view>
       <view class="c-cols">
-        <view class="c-cols__item order__item--to-pay c2 s4">待付款</view>
-        <view class="c-cols__item order__item--to-send c2 s4">待发货</view>
-        <view class="c-cols__item order__item--to-receive c2 s4">待收货</view>
-        <view class="c-cols__item order__item--to-comment c2 s4">
+        <view class="c-cols__item c-cols__item--to-pay c2 s4">待付款</view>
+        <view class="c-cols__item c-cols__item--to-send c2 s4">待发货</view>
+        <view class="c-cols__item c-cols__item--to-receive c2 s4">待收货</view>
+        <view class="c-cols__item c-cols__item--to-comment c2 s4">
           待评价
           <text class="order__item-tip">12</text>
         </view>
-        <view class="c-cols__item order__item--refund c2 s4">退款/售后</view>
+        <view class="c-cols__item c-cols__item--refund c2 s4">退款/售后</view>
       </view>
     </view>
-    <view class="c-block others">
+    <!-- /my-others -->
+    <view class="my-others c-block">
       <view class="c-cells">
         <view class="c-cells__item">
           <view class="c-cells__item-body c-cells__item-body--address">地址管理</view>
@@ -75,6 +79,7 @@
         </view>
       </view>
     </view>
+    <!-- /my-others -->
   </view>
   <tab-bar></tab-bar>
 </template>
