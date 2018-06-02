@@ -93,9 +93,9 @@
   import request from '../../utils/request'
   import TabBar from '../../components/tab-bar/index'
 
-  export default class Index extends wepy.page {
+  export default class extends wepy.page {
     config = {
-      navigationBarTitleText: 'my page'
+      navigationBarTitleText: ''
     }
 
     components = {

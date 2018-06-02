@@ -13,9 +13,9 @@
   import global from '../../utils/mixins/global'
   import MyComponent from '../../components/my-component/index'
 
-  export default class Index extends wepy.page {
+  export default class extends wepy.page {
     config = {
-      navigationBarTitleText: 'my page'
+      navigationBarTitleText: ''
     }
 
     components = {

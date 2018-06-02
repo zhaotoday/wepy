@@ -2,4 +2,20 @@
 
 @include b(content) {
   background-color: white;
+  padding: px2rpx(35px);
+
+  .h2 {
+    font-size: map-get($font-sizes, s2);
+    color: map-get($colors, c2);
+    font-weight: normal;
+    padding-bottom: px2rpx(35px);
+    text-align: center;
+  }
+
+  .p {
+    font-size: map-get($font-sizes, s4);
+    color: map-get($colors, c3);
+    margin-bottom: px2rpx(110px);
+    line-height: 160%;
+  }
 }
