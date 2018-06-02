@@ -1,0 +1,41 @@
+<template>
+  <nav-bar @tap-back.user="handleTapBack" title="服务协议"></nav-bar>
+  <view class="content container has-nav-bar">
+    <rich-text nodes="<h1>abc</h1><p>def</p>"></rich-text>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../utils/mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar
+    }
+
+    mixins = [global]
+
+    data = {}
+
+    computed = {}
+
+    methods = {
+      handleTapBack () {
+        wepy.navigateBack()
+      }
+    }
+
+    events = {}
+
+    async onShow () {
+    }
+  }
+</script>

@@ -4,7 +4,8 @@
 // login
 @include b(login) {
   background: {
-    image: image-url('pages/login/bg.png');
+    image: image-url("pages/login/bg.png");
+    color: white;
     repeat: no-repeat;
     position: 0 bottom;
     size: 100% px2rpx(394px);

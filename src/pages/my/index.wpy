@@ -55,7 +55,7 @@
       </view>
     </view>
     <!-- /my-order -->
-    <!-- my-others --->
+    <!-- my-others -->
     <view class="my-others c-block">
       <view class="c-cells">
         <view class="c-cells__item">
