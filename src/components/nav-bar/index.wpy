@@ -1,0 +1,30 @@
+<template>
+  <view class="c-nav-bar c2 s0">
+    <view class="c-icon c-icon--back" @tap="handleTapBack"></view>
+    {{ title }}
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      title: String
+    }
+
+    data = {}
+
+    events = {}
+
+    watch = {}
+
+    methods = {
+      handleTapBack () {
+        this.$emit('tap-back')
+      }
+    }
+  }
+</script>

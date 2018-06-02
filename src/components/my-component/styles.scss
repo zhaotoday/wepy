@@ -1,8 +1,9 @@
-.c-my-component {
-  font-size: 14px;
+@import "../../styles/utils/index";
+
+@include b(c-my-component) {
   color: #3CC51F;
 
-  &__img {
+  @include e(img) {
     width: 100px;
   }
 }
