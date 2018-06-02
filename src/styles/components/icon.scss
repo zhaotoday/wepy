@@ -20,4 +20,10 @@
 
     background-image: image-url("components/icon/mp-login.png");
   }
+
+  @include m(back) {
+    @include size(px2rpx(60px), px2rpx(60px));
+
+    background-image: image-url("components/icon/back.png");
+  }
 }

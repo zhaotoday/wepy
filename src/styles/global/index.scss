@@ -21,6 +21,10 @@ page {
   padding-bottom: px2rpx(20px);
 }
 
+.has-nav-bar {
+  top: 30px + 32px + 10px;
+}
+
 @each $key, $value in $font-sizes {
   .#{$key} {
     font-size: $value;
