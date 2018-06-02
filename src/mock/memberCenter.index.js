@@ -12,7 +12,7 @@ module.exports = {
   },
   'responseContent': {
     'memberName': 'zzz',
-    'memberAvatar': 'http://qm.22ca.com/data/upload/1.jpg',
+    'memberAvatar': 'https://images.liruan.cn/pages/my/info/avatar.jpg',
     'goodsCollection': 25,
     'storeCollection': 26,
     'footprint': 112,

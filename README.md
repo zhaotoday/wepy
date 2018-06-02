@@ -41,11 +41,14 @@ $ wepy build --watch
 |   |       ├── index.wpy    my-component 业务
 |   |       ├── images       my-component 图片
 |   |       └── styles.scss  my-component 样式
+|   |
+|   ├── mock                 接口 mock
 |   ├── pages                页面目录
 |   |   └── my-page          my-page 页面
 |   |       ├── index.wpy    my-page 业务
 |   |       ├── images       my-page 图片
 |   |       └── styles.scss  my-page 样式
+|   |
 |   ├── assets               引用的第三方资源（如：WeUI）
 |   ├── styles               样式
 |   |   ├── components       组件样式
@@ -54,6 +57,7 @@ $ wepy build --watch
 |   |       ├── functions    Sass 函数
 |   |       ├── mixins       Sass mixin
 |   |       └── variables    Sass 变量
+|   |
 |   ├── static               静态资源，主要存放在 WXSS 里以 background-image 引用的一些图片
 |   ├── store                redux 状态管理
 |   ├── utils                JS 工具集合
