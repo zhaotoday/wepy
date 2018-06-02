@@ -33,6 +33,7 @@
     @include circle(px2rpx(142px));
 
     border: 2px solid white;
+    background-color: #F5F5F5;
   }
 
   @include e(name) {
@@ -92,17 +93,17 @@
         }
       }
     }
-  }
 
-  @include e(item-tip) {
-    @include position--absolute(px2rpx(18px), px2rpx(20px));
-    @include padding(null, px2rpx(10px), null, px2rpx(10px));
-    @include text--middle(px2rpx(30px));
+    @include e(item-tip) {
+      @include position--absolute(px2rpx(18px), px2rpx(20px));
+      @include padding(null, px2rpx(10px), null, px2rpx(10px));
+      @include text--middle(px2rpx(30px));
 
-    color: white;
-    display: inline-block;
-    background-color: #ff0000;
-    font-size: map-get($font-sizes, s6);
-    border-radius: px2rpx(20px);
+      color: white;
+      display: inline-block;
+      background-color: #ff0000;
+      font-size: map-get($font-sizes, s6);
+      border-radius: px2rpx(20px);
+    }
   }
 }

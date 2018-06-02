@@ -4,24 +4,24 @@
     <view class="my-info">
       <view class="c-block">
         <view class="c-icon c-icon--setup"></view>
-        <image class="my-info__avatar" src="./images/avatar.jpg"></image>
-        <view class="my-info__name">大叶子Girol</view>
+        <image class="my-info__avatar" src="{{avatar}}"></image>
+        <view class="my-info__name">{{username}}</view>
         <view class="c-cols">
           <view class="c-cols__item c-middle">
             <view class="c-middle__item">
-              <view class="c2 s2 is-first">23</view>
+              <view class="c2 s2 is-first">{{favorite_products}}</view>
               <text class="c2 s4">收藏夹</text>
             </view>
           </view>
           <view class="c-cols__item c-middle">
             <view class="c-middle__item">
-              <view class="c2 s2 is-first">32</view>
+              <view class="c2 s2 is-first">{{favorite_shops}}</view>
               <text class="c2 s4">关注店铺</text>
             </view>
           </view>
           <view class="c-cols__item c-middle">
             <view class="c-middle__item">
-              <view class="c2 s2 is-first">115</view>
+              <view class="c2 s2 is-first">{{footprint}}</view>
               <text class="c2 s4">足迹</text>
             </view>
           </view>
@@ -44,14 +44,26 @@
         </view>
       </view>
       <view class="c-cols">
-        <view class="c-cols__item c-cols__item--to-pay c2 s4">待付款</view>
-        <view class="c-cols__item c-cols__item--to-send c2 s4">待发货</view>
-        <view class="c-cols__item c-cols__item--to-receive c2 s4">待收货</view>
+        <view class="c-cols__item c-cols__item--to-pay c2 s4">
+          待付款
+          <text class="c-cols__item-tip" wx:if="{{to_pay}}">{{to_pay}}</text>
+        </view>
+        <view class="c-cols__item c-cols__item--to-send c2 s4">
+          待发货
+          <text class="c-cols__item-tip" wx:if="{{to_send}}">{{to_send}}</text>
+        </view>
+        <view class="c-cols__item c-cols__item--to-receive c2 s4">
+          待收货
+          <text class="c-cols__item-tip" wx:if="{{to_receive}}">{{to_receive}}</text>
+        </view>
         <view class="c-cols__item c-cols__item--to-comment c2 s4">
           待评价
-          <text class="order__item-tip">12</text>
+          <text class="c-cols__item-tip" wx:if="{{to_comment}}">{{to_comment}}</text>
         </view>
-        <view class="c-cols__item c-cols__item--refund c2 s4">退款/售后</view>
+        <view class="c-cols__item c-cols__item--refund c2 s4">
+          退款/售后
+          <text class="c-cols__item-tip" wx:if="{{refund}}">{{refund}}</text>
+        </view>
       </view>
     </view>
     <!-- /my-order -->
@@ -66,15 +78,15 @@
           <view class="c-cells__item-body c-cells__item-body--comment">收到的评论</view>
           <view class="c-cells__item-foot">添加/修改</view>
         </view>
-        <view class="c-cells__item">
+        <view class="c-cells__item" wx:if="{{is_seller}}">
           <view class="c-cells__item-body c-cells__item-body--shopkeeper">我是店主</view>
           <view class="c-cells__item-foot"></view>
         </view>
-        <view class="c-cells__item">
+        <view class="c-cells__item" wx:if="{{is_deliveryman}}">
           <view class="c-cells__item-body c-cells__item-body--carrier">我是配送员</view>
           <view class="c-cells__item-foot"></view>
         </view>
-        <view class="c-cells__item">
+        <view class="c-cells__item" wx:if="{{is_salesman}}">
           <view class="c-cells__item-body c-cells__item-body--seller">我是销售</view>
           <view class="c-cells__item-foot"></view>
         </view>
@@ -104,7 +116,24 @@
 
     mixins = [global]
 
-    data = {}
+    data = {
+      username: '',
+      avatar: '',
+
+      favorite_products: 0,
+      favorite_shops: 0,
+      footprint: 0,
+
+      to_pay: 0,
+      to_send: 0,
+      to_receive: 0,
+      to_comment: 0,
+      refund: 0,
+
+      is_seller: 0,
+      is_deliveryman: 0,
+      is_salesman: 0
+    }
 
     computed = {}
 
@@ -112,13 +141,38 @@
 
     events = {}
 
-    async onShow () {
-      const takeAccessRes = await request({
-        url: '/authinfo/takeAccess',
-        method: 'POST'
+    async onShow () {}
+
+    async onLoad () {
+      const memberCenterRes = await request({
+        mock: true,
+        url: 'memberCenter/index',
+        method: 'POST',
+        data: {
+          key: ''
+        }
       })
 
-      console.log(takeAccessRes)
+      console.log(memberCenterRes)
+
+      this.username = memberCenterRes.memberName
+      this.avatar = memberCenterRes.memberAvatar
+
+      this.goodsCollection = memberCenterRes.favorite_products
+      this.storeCollection = memberCenterRes.favorite_shops
+      this.footprint = memberCenterRes.footprint
+
+      this.to_pay = memberCenterRes.waitPay
+      this.to_send = memberCenterRes.waitShipments
+      this.to_receive = memberCenterRes.waitReceiving
+      this.to_comment = memberCenterRes.waitEvaluate
+      this.refund = memberCenterRes.refund
+
+      this.is_seller = memberCenterRes.isSeller
+      this.is_deliveryman = memberCenterRes.isDeliveryman
+      this.is_salesman = memberCenterRes.isSalesman
+
+      this.$apply()
     }
   }
 </script>
