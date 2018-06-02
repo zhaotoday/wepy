@@ -13,8 +13,8 @@
   export default class extends wepy.app {
     config = {
       pages: [
-        'pages/login/index',
         'pages/my/index',
+        'pages/login/index',
         'pages/content/index'
       ],
       window: {
