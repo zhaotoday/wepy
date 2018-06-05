@@ -29,8 +29,8 @@
 
     methods = {
       async handleTap () {
-        const loginRes = await this.checkLogin()
-        console.log(loginRes)
+        await this.checkLogin()
+        console.log('navigate')
       },
       handleTapBack () {}
     }

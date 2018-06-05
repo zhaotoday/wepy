@@ -16,6 +16,7 @@
 
 <script>
   import wepy from 'wepy'
+  import helpers from '../../utils/helpers'
   import global from '../../utils/mixins/global'
   import NavBar from '../../components/nav-bar/index'
 
@@ -46,20 +47,26 @@
       },
 
       async handleGetUserInfo (e) {
-        this.login()
-
         const getSettingRes = await wepy.getSetting()
 
         if (!getSettingRes.authSetting['scope.userInfo']) {
           wepy.showToast({
-            title: '请通过授权，以便为您提供更好的服务！',
+            title: '请登录并授权，以便为您提供更好的服务！',
             icon: 'none',
             mask: true
           })
         } else {
-          const loginRes = await wepy.login()
-          console.log(loginRes)
-          console.log(e.detail.userInfo)
+          await this.login({userInfo: e.detail.userInfo})
+
+          await wepy.showToast({
+            title: '登录并授权成功！',
+            icon: 'none',
+            mask: true
+          })
+
+          await helpers.sleep(2000)
+
+          wepy.navigateBack()
         }
       }
     }
