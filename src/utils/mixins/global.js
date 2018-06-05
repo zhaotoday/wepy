@@ -24,37 +24,41 @@ export default class extends wepy.mixin {
   }
 
   /**
-   * 是否已登录
-   * @returns {Promise}
-   */
-  async loggedIn () {
-    const wxCheckSessionRes = await wepy.checkSession()
-
-    // 未登录或登录失效
-    return wxLoginSession.get() && wxCheckSessionRes.errMsg === 'checkSession:ok'
-  }
-
-  /**
    * 检查登录状态，未登录则跳转到登录页面
    * @returns {Promise}
    */
   async checkLogin () {
-    const loggedIn = await this.loggedIn()
-
-    if (!loggedIn) {
+    // 跳转到登录页
+    const navigateToLogin = () => {
       wepy.navigateTo({url: '/pages/login/index'})
     }
+
+    return new Promise(async (resolve, reject) => {
+      if (wxLoginSession.get()) {
+        try {
+          await wepy.checkSession()
+          resolve()
+        } catch (e) {
+          navigateToLogin()
+          reject(e)
+        }
+      } else {
+        navigateToLogin()
+        reject({errMsg: 'wx login session is empty'})
+      }
+    })
   }
 
   /**
    * 登录
-   * @returns {Promise<void>}
+   * @returns {Promise}
    */
-  async login () {
+  async login ({userInfo = {}}) {
     const getAccessTokenRes = await this.getAccessToken()
     const wxLoginRes = await wepy.login()
+    const {nickName: nickname, avatarUrl: avatar, gender = ''} = userInfo
 
-    const loginRes = await request({
+    await request({
       url: 'thirdplatform/wechatAppAuth',
       method: 'POST',
       data: {
@@ -63,7 +67,16 @@ export default class extends wepy.mixin {
       }
     })
 
-    console.log(22, loginRes)
+    const loginRes = await request({
+      url: 'user/loginWithWechatInfo',
+      method: 'POST',
+      data: {
+        key: getAccessTokenRes.key,
+        userInfo: {nickname, avatar, gender}
+      }
+    })
+
+    wxLoginSession.set(loginRes.key)
   }
 
   onShow () {}

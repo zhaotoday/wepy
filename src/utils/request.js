@@ -40,7 +40,13 @@ export default async (
       method,
       header,
       data: Object.keys(data)
-        .map(key => `data[${key}]=${data[key]}`)
+        .map(key => {
+          if (typeof data[key] === 'object') {
+            return Object.keys(data[key]).map(innerKey => `data[${key}][${innerKey}]=${data[key][innerKey]}`).join('&')
+          } else {
+            return `data[${key}]=${data[key]}`
+          }
+        })
         .join('&') + `&encryptType=${encryptType}&sign=${sign}`
     })
 

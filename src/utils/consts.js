@@ -1,5 +1,5 @@
 // 接口地址
-const API_URL = 'http://apitest.shenbd.com'
+const API_URL = 'https://apiceshi.shenbd.com'
 
 // 签名密钥
 const SIGN_KEY = '~!@#$`1234qwert'
