@@ -20,11 +20,12 @@ export default async (
     .map(key => data[key])
     .join('')
   const sign = new Hashes.MD5().hex(text + key)
+  const encryptType = 3
 
   // mock 数据
   if (mock) {
-    const fileName = url.replace(/\//g, '.')
-    const mockData = require(`../mock/${fileName}`)
+    const mockFile = url.replace(/\//g, '.')
+    const mockData = require(`../mock/${mockFile}`)
 
     console.log(`mock request - url: ${url}, method: ${method}, data: ${JSON.stringify(data)}`)
 
@@ -34,22 +35,22 @@ export default async (
       }, 200)
     })
   } else {
-    const requestRes = await wepy.request({
+    const res = await wepy.request({
       url: `${consts.API_URL}/${url}`,
       method,
       header,
       data: Object.keys(data)
         .map(key => `data[${key}]=${data[key]}`)
-        .join('&') + `&sign=${sign}`
+        .join('&') + `&encryptType=${encryptType}&sign=${sign}`
     })
 
-    const {status, responseContent} = requestRes
+    const {status, responseContent} = res.data
 
     return new Promise((resolve, reject) => {
       if (status === 'success') {
         resolve(responseContent)
       } else {
-        reject({status})
+        reject(res)
       }
     })
   }
