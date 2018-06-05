@@ -42,11 +42,14 @@
       },
 
       handleTapBack () {
-        console.log('abc')
+        wepy.navigateBack()
       },
 
       async handleGetUserInfo (e) {
+        this.login()
+
         const getSettingRes = await wepy.getSetting()
+
         if (!getSettingRes.authSetting['scope.userInfo']) {
           wepy.showToast({
             title: '请通过授权，以便为您提供更好的服务！',

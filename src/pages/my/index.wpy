@@ -141,7 +141,20 @@
 
     events = {}
 
-    async onShow () {}
+    async onShow () {
+      const systemInfo = await wepy.getSystemInfo()
+      console.log(systemInfo)
+
+      /*
+      setTimeout(async () => {
+        const scanCodeRes = await wepy.scanCode({
+          onlyFromCamera: true
+        })
+
+        console.log(scanCodeRes)
+      }, 5000)
+      */
+    }
 
     async onLoad () {
       const memberCenterRes = await request({
