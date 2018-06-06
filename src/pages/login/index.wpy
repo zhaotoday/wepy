@@ -1,15 +1,18 @@
 <template>
-  <nav-bar @tap-back.user="handleTapBack" title="身边店"></nav-bar>
-  <view class="login container has-nav-bar">
-    <view class="login-title s0">请先登录账号</view>
-    <view class="login-btn c-icon c-icon--mp-login">
-      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="handleGetUserInfo">获取用户信息</button>
+  <nav-bar title="身边店"/>
+  <main :hasNavBar.sync="hasNavBar" class="login">
+    <view slot="content">
+      <view class="login-title s0">请先登录账号</view>
+      <view class="login-btn c-icon c-icon--mp-login">
+        <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="handleGetUserInfo">获取用户信息</button>
+      </view>
+      <view class="login-tip c3 s4">
+        登录即代表您已同意
+        <text class="login-tip__protocol" @tap="handleTapProtocal">《身边店服务协议》</text>
+      </view>
     </view>
-    <view class="login-tip c3 s4">
-      登录即代表您已同意
-      <text class="login-tip__protocol" @tap="handleTapProtocal">《身边店服务协议》</text>
-    </view>
-  </view>
+  </main>
+  <view class="login container has-nav-bar"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -20,6 +23,7 @@
   import global from '../../mixins/global'
   import auth from '../../utils/auth'
   import NavBar from '../../components/nav-bar/index'
+  import Main from '../../components/main/index'
 
   export default class extends wepy.page {
     config = {
@@ -27,12 +31,15 @@
     }
 
     components = {
-      'nav-bar': NavBar
+      'nav-bar': NavBar,
+      main: Main
     }
 
     mixins = [global]
 
-    data = {}
+    data = {
+      hasNavBar: true
+    }
 
     computed = {}
 
@@ -41,10 +48,6 @@
         wepy.navigateTo({
           url: '/pages/content/index'
         })
-      },
-
-      handleTapBack () {
-        wepy.navigateBack()
       },
 
       async handleGetUserInfo (e) {

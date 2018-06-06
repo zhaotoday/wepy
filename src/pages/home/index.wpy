@@ -1,9 +1,10 @@
 <template>
-  <nav-bar @tap-back.user="handleTapBack" title="服务协议"></nav-bar>
-  <view class="content container has-nav-bar">
-    <button @tap="handleTap">访问需要登录的页面</button>
-    <button @tap="handleTapScan">扫描</button>
-  </view>
+  <nav-bar :back.sync="back" title="服务协议"></nav-bar>
+  <main :hasNavBar.sync="hasNavBar" :hasTabBar.sync="hasTabBar">
+    <view slot="content">
+      abc
+    </view>
+  </main>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -12,6 +13,7 @@
   import wepy from 'wepy'
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
+  import Main from '../../components/main/index'
 
   export default class extends wepy.page {
     config = {
@@ -19,12 +21,17 @@
     }
 
     components = {
-      'nav-bar': NavBar
+      'nav-bar': NavBar,
+      main: Main
     }
 
     mixins = [global]
 
-    data = {}
+    data = {
+      back: false,
+      hasNavBar: true,
+      hasTabBar: true
+    }
 
     computed = {}
 
