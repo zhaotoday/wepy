@@ -1,9 +1,0 @@
-@import "../../styles/utils/index";
-
-@include b(c-my-component) {
-  color: #3CC51F;
-
-  @include e(img) {
-    width: 100px;
-  }
-}
