@@ -9,22 +9,6 @@ page {
   overflow: hidden;
 }
 
-.container {
-  @include position--absolute(0, 0, 0, 0);
-
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.has-tab-bar {
-  bottom: px2rpx(98px);
-  padding-bottom: px2rpx(20px);
-}
-
-.has-nav-bar {
-  top: 30px + 32px + 10px;
-}
-
 @each $key, $value in $font-sizes {
   .#{$key} {
     font-size: $value;

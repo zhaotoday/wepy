@@ -1,0 +1,38 @@
+@import "../utils/index";
+
+@include b(c-panel) {
+  background-color: white;
+
+  @include e(head) {
+    @include padding(px2rpx(30px), null, px2rpx(30px), px2rpx(8px + 22px));
+
+    position: relative;
+    border-bottom: 1px solid #f8f8f8;
+
+    &::before {
+      @include size(px2rpx(8px), px2rpx(26px));
+      @include position--absolute(50%, null, null, 0);
+
+      transform: translateY(-50%);
+      content: "";
+      display: block;
+      background-color: map-get($colors, c1);
+    }
+  }
+
+  @include e(head-addon) {
+    @include position--absolute(50%, px2rpx(20px), null, null);
+    @include padding(px2rpx(10px), px2rpx(10px), px2rpx(10px), px2rpx(50px));
+
+    transform: translateY(-50%);
+    background: {
+      image: image-url("components/panel/refresh.png");
+      size: px2rpx(44px) px2rpx(44px);
+      repeat: no-repeat;
+      position: left center;
+    }
+  }
+
+  @include e(body) {
+  }
+}
