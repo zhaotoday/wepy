@@ -1,12 +1,43 @@
 import wepy from 'wepy'
-import consts from '../consts'
-import request from '../request'
-import Storage from '../storage'
+import consts from './consts'
+import request from './request'
+import Storage from './storage'
 
 // third session
-const wxLoginSession = new Storage('wx_login_session')
+const wxLoginSession = new Storage('wxLoginSession')
+const userInfo = new Storage('userInfo')
 
-export default class extends wepy.mixin {
+export default {
+  /**
+   * 获取 session
+   * @returns {string}
+   */
+  getSession () {
+    return wxLoginSession.get()
+  },
+
+  /**
+   * 设置 session
+   */
+  setSession (value) {
+    wxLoginSession.set(value)
+  },
+
+  /**
+   * 获取用户信息
+   * @returns {Object}
+   */
+  getUserInfo () {
+    return userInfo.get()
+  },
+
+  /**
+   * 设置用户信息
+   */
+  setUserInfo (value) {
+    userInfo.set(value)
+  },
+
   /**
    * 获取授权相关信息
    * @returns {Promise}
@@ -21,42 +52,34 @@ export default class extends wepy.mixin {
         timestamp: new Date().getTime()
       }
     })
-  }
+  },
 
   /**
    * 检查登录状态，未登录则跳转到登录页面
    * @returns {Promise}
    */
   async checkLogin () {
-    // 跳转到登录页
-    const navigateToLogin = () => {
+    // 已授权获取用户信息
+    if (this.getUserInfo()) {
+      try {
+        await wepy.checkSession()
+      } catch (e) {
+        // session 失效则重新登录
+        this.login()
+      }
+    } else {
       wepy.navigateTo({url: '/pages/login/index'})
     }
-
-    return new Promise(async (resolve, reject) => {
-      if (wxLoginSession.get()) {
-        try {
-          await wepy.checkSession()
-          resolve()
-        } catch (e) {
-          navigateToLogin()
-          reject(e)
-        }
-      } else {
-        navigateToLogin()
-        reject({errMsg: 'wx login session is empty'})
-      }
-    })
-  }
+  },
 
   /**
    * 登录
    * @returns {Promise}
    */
-  async login ({userInfo = {}}) {
+  async login () {
     const getAccessTokenRes = await this.getAccessToken()
     const wxLoginRes = await wepy.login()
-    const {nickName: nickname, avatarUrl: avatar, gender = ''} = userInfo
+    const {nickName: nickname, avatarUrl: avatar, gender = ''} = this.getUserInfo()
 
     await request({
       url: 'thirdplatform/wechatAppAuth',
@@ -67,7 +90,7 @@ export default class extends wepy.mixin {
       }
     })
 
-    const loginRes = await request({
+    return await request({
       url: 'user/loginWithWechatInfo',
       method: 'POST',
       data: {
@@ -75,9 +98,5 @@ export default class extends wepy.mixin {
         userInfo: {nickname, avatar, gender}
       }
     })
-
-    wxLoginSession.set(loginRes.key)
   }
-
-  onShow () {}
 }
