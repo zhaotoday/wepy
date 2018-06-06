@@ -1,6 +1,6 @@
 <template>
   <view class="c-nav-bar c2 s0" style="border-top: {{borderTopHeight}}px solid #f5f5f5;">
-    <view class="c-icon c-icon--back" @tap="handleTapBack"></view>
+    <view class="c-icon c-icon--back" @tap="handleTapBack" wx:if="{{back}}"></view>
     {{title}}
   </view>
 </template>
@@ -13,7 +13,11 @@
 
   export default class extends wepy.component {
     props = {
-      title: String
+      title: String,
+      back: {
+        type: Boolean,
+        default: true
+      }
     }
 
     data = {}
@@ -30,11 +34,8 @@
 
     methods = {
       handleTapBack () {
-        this.$emit('tap-back')
+        wepy.navigateBack()
       }
-    }
-
-    onShow () {
     }
   }
 </script>

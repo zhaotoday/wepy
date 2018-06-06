@@ -1,0 +1,8 @@
+@import "../../styles/utils/index";
+
+@include b(c-main) {
+  @include position--absolute(0, 0, 0, 0);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
