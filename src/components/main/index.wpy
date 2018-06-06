@@ -1,6 +1,6 @@
 <template>
   <view class="c-main" style="{{style}}">
-    <slot name="content"></slot>
+    <slot name="content"/>
   </view>
 </template>
 

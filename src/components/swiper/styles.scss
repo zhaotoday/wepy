@@ -1,0 +1,13 @@
+@import "../../styles/utils/index";
+
+@include b(c-swiper) {
+  swiper {
+    width: px2rpx(750px);
+    height: px2rpx(465px);
+  }
+
+  image {
+    width: px2rpx(750px);
+    height: px2rpx(465px);
+  }
+}
