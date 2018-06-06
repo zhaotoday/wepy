@@ -1,6 +1,6 @@
 <template>
   <nav-bar title="身边店"/>
-  <main :hasNavBar.sync="hasNavBar" class="login">
+  <main class="login" :hasNavBar.sync="hasNavBar">
     <view slot="content">
       <view class="login-title s0">请先登录账号</view>
       <view class="login-btn c-icon c-icon--mp-login">
@@ -12,7 +12,6 @@
       </view>
     </view>
   </main>
-  <view class="login container has-nav-bar"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -52,6 +51,8 @@
 
       async handleGetUserInfo (e) {
         const getSettingRes = await wepy.getSetting()
+        const getLocationRes = await wepy.getLocation()
+        console.log(getLocationRes)
 
         if (!getSettingRes.authSetting['scope.userInfo']) {
           wepy.showToast({

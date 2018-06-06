@@ -1,5 +1,49 @@
 @import "../../styles/utils/index";
+@import "../../styles/components/cols";
+@import "../../styles/components/panel";
 
 @include b(home) {
+  background-color: #f5f5f5;
+}
 
+@include b(home-swiper) {
+
+}
+
+@include b(home-shops) {
+  margin-top: px2rpx(20px);
+}
+
+@include b(home-product-classes) {
+  @include clearfix;
+
+  background-color: white;
+  padding-bottom: px2rpx(30px);
+
+  image {
+    @include circle(px2rpx(88px));
+    @include margin(px2rpx(30px), auto, px2rpx(20px), auto);
+
+    display: block;
+  }
+
+  .home-product-classes__item {
+    text-align: center;
+    width: 20%;
+    overflow: hidden;
+    float: left;
+  }
+}
+
+@include b(home-slogan) {
+  @include padding(px2rpx(30px), null, px2rpx(30px));
+
+  border-top: 1px solid #f8f8f8;
+  text-align: center;
+  background-color: white;
+
+  image {
+    @include size(px2rpx(18px), px2rpx(18px));
+    @include margin(null, px2rpx(6px), null, px2rpx(6px));
+  }
 }
