@@ -1,5 +1,5 @@
 <template>
-  <view class="c-nav-bar c2 s0" style="border-top: {{borderTopHeight}}px solid #f5f5f5;">
+  <view class="c-nav-bar c2 s0">
     <view class="c-icon c-icon--back" @tap="handleTapBack" wx:if="{{back}}"></view>
     {{title}}
   </view>
@@ -9,7 +9,6 @@
 
 <script>
   import wepy from 'wepy'
-  import Storage from '../../utils/storage'
 
   export default class extends wepy.component {
     props = {
@@ -19,18 +18,6 @@
         default: true
       }
     }
-
-    data = {}
-
-    computed = {
-      borderTopHeight () {
-        return new Storage('systemInfo').get().statusBarHeight + 10
-      }
-    }
-
-    events = {}
-
-    watch = {}
 
     methods = {
       handleTapBack () {

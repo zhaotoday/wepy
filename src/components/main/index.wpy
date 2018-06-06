@@ -1,5 +1,5 @@
 <template>
-  <view class="c-main" style="{{style}}">
+  <view class="c-main{{hasNavBar ? ' c-main--has-nav-bar' : ''}}">
     <slot name="content"/>
   </view>
 </template>
@@ -30,14 +30,22 @@
 
         if (this.hasNavBar) {
           styles.push(`top:${statusBarHeight + 10 + 32 + 10}px;`)
+        } else {
+          styles.push(`top:0;`)
         }
 
         if (this.hasTabBar) {
           styles.push(`bottom:98rpx;`)
+        } else {
+          styles.push(`bottom:0;`)
         }
 
         return styles.join('')
       }
+    }
+
+    onLoad () {
+      console.log(22, this.$parent.$parent.globalData.systemInfo.statusBarHeight)
     }
   }
 </script>
