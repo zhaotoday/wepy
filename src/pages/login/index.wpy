@@ -1,17 +1,15 @@
 <template>
   <nav-bar title="身边店"/>
-  <main class="login" :hasNavBar.sync="hasNavBar">
-    <view slot="content">
-      <view class="login-title s0">请先登录账号</view>
-      <view class="login-btn c-icon c-icon--mp-login">
-        <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="handleGetUserInfo">获取用户信息</button>
-      </view>
-      <view class="login-tip c3 s4">
-        登录即代表您已同意
-        <text class="login-tip__protocol" @tap="handleTapProtocal">《身边店服务协议》</text>
-      </view>
+  <view class="login c-main c-main--has-nav-bar">
+    <view class="login-title s0">请先登录账号</view>
+    <view class="login-btn c-icon c-icon--mp-login">
+      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="handleGetUserInfo">获取用户信息</button>
     </view>
-  </main>
+    <view class="login-tip c3 s4">
+      登录即代表您已同意
+      <text class="login-tip__protocol" @tap="handleTapProtocal">《身边店服务协议》</text>
+    </view>
+  </view>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -22,7 +20,6 @@
   import global from '../../mixins/global'
   import auth from '../../utils/auth'
   import NavBar from '../../components/nav-bar/index'
-  import Main from '../../components/main/index'
 
   export default class extends wepy.page {
     config = {
@@ -30,8 +27,7 @@
     }
 
     components = {
-      'nav-bar': NavBar,
-      main: Main
+      'nav-bar': NavBar
     }
 
     mixins = [global]

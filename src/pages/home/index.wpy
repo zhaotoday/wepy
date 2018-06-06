@@ -1,35 +1,33 @@
 <template>
   <nav-bar title="身边店"/>
-  <main class="home" :hasNavBar.sync="hasNavBar" :hasTabBar.sync="hasTabBar">
-    <view slot="content">
-      <view class="home-swiper">
-        <c-swiper></c-swiper>
-      </view>
-      <view class="home-product-classes">
-        <repeat for="{{productCategoryImages}}" item="item">
-          <view class="home-product-classes__item c2 s4">
-            <image
-              src="https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg"/>
-            珠宝首饰
-          </view>
-        </repeat>
-      </view>
-      <view class="home-slogan c1 s4">
-        您身边的品牌
-        <image src="./images/dot.png"/>
-        服务品牌的你
-      </view>
-      <view class="home-shops c-panel">
-        <view class="c-panel__head c2 s1">
-          身边店
-          <view class="c-panel__head-addon c3 s5">换一批</view>
+  <view class="home c-main c-main--has-nav-bar c-main--has-tab-bar">
+    <view class="home-swiper">
+      <c-swiper></c-swiper>
+    </view>
+    <view class="home-product-classes">
+      <repeat for="{{productCategoryImages}}" item="item">
+        <view class="home-product-classes__item c2 s4">
+          <image
+            src="https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg"/>
+          珠宝首饰
         </view>
-        <view class="c-panel__body">
-          abcd
-        </view>
+      </repeat>
+    </view>
+    <view class="home-slogan c1 s4">
+      您身边的品牌
+      <image src="./images/dot.png"/>
+      服务品牌的你
+    </view>
+    <view class="home-shops c-panel">
+      <view class="c-panel__head c2 s1">
+        身边店
+        <view class="c-panel__head-addon c3 s5">换一批</view>
+      </view>
+      <view class="c-panel__body">
+        abcd
       </view>
     </view>
-  </main>
+  </view>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -38,7 +36,6 @@
   import wepy from 'wepy'
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
-  import Main from '../../components/main/index'
   import Swiper from '../../components/swiper/index'
 
   export default class extends wepy.page {
@@ -48,7 +45,6 @@
 
     components = {
       'nav-bar': NavBar,
-      main: Main,
       'c-swiper': Swiper
     }
 
