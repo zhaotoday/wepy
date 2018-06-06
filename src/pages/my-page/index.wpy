@@ -10,7 +10,7 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../utils/mixins/global'
+  import global from '../../mixins/global'
   import MyComponent from '../../components/my-component/index'
 
   export default class extends wepy.page {

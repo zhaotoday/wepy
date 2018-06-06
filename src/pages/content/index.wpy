@@ -9,7 +9,7 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../utils/mixins/global'
+  import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
 
   export default class extends wepy.page {

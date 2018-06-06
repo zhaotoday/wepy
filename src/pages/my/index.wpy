@@ -101,7 +101,7 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../utils/mixins/global'
+  import global from '../../mixins/global'
   import request from '../../utils/request'
   import TabBar from '../../components/tab-bar/index'
 
@@ -142,28 +142,11 @@
     events = {}
 
     async onShow () {
-      const systemInfo = await wepy.getSystemInfo()
-      console.log(systemInfo)
-
-      /*
-      setTimeout(async () => {
-        const scanCodeRes = await wepy.scanCode({
-          onlyFromCamera: true
-        })
-
-        console.log(scanCodeRes)
-      }, 5000)
-      */
-    }
-
-    async onLoad () {
       const memberCenterRes = await request({
-        mock: true,
+        // mock: true,
+        requiresAuth: true,
         url: 'memberCenter/index',
-        method: 'POST',
-        data: {
-          key: ''
-        }
+        method: 'POST'
       })
 
       console.log(memberCenterRes)

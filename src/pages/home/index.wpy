@@ -2,6 +2,7 @@
   <nav-bar @tap-back.user="handleTapBack" title="服务协议"></nav-bar>
   <view class="content container has-nav-bar">
     <button @tap="handleTap">访问需要登录的页面</button>
+    <button @tap="handleTapScan">扫描</button>
   </view>
 </template>
 
@@ -9,7 +10,7 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../utils/mixins/global'
+  import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
 
   export default class extends wepy.page {
@@ -29,10 +30,20 @@
 
     methods = {
       async handleTap () {
-        await this.checkLogin()
         console.log('navigate')
       },
-      handleTapBack () {}
+      handleTapBack () {},
+      async handleTapScan () {
+        // 只允许从相机扫码
+        const scanCode = await wepy.scanCode({
+          onlyFromCamera: true,
+          success: (res) => {
+            console.log(res)
+          }
+        })
+
+        console.log(scanCode)
+      }
     }
 
     events = {}

@@ -17,7 +17,8 @@
 <script>
   import wepy from 'wepy'
   import helpers from '../../utils/helpers'
-  import global from '../../utils/mixins/global'
+  import global from '../../mixins/global'
+  import auth from '../../utils/auth'
   import NavBar from '../../components/nav-bar/index'
 
   export default class extends wepy.page {
@@ -56,7 +57,13 @@
             mask: true
           })
         } else {
-          await this.login({userInfo: e.detail.userInfo})
+          const userInfo = e.detail.userInfo
+
+          auth.setUserInfo(userInfo)
+
+          const loginRes = await auth.login()
+
+          auth.setSession(loginRes.key)
 
           await wepy.showToast({
             title: '登录并授权成功！',
