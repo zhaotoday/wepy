@@ -36,12 +36,13 @@
       circular: true,
       autoplay: true,
       interval: 2500,
-      current: 0,
-      length: 0
+      current: 0
     }
 
-    onLoad () {
-      this.length = this.images.length
+    computed = {
+      length () {
+        return this.images.length
+      }
     }
 
     methods = {
