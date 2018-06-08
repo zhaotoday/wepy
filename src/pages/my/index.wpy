@@ -1,5 +1,5 @@
 <template>
-  <view class="my container has-tab-bar">
+  <view class="my">
     <!-- my-info -->
     <view class="my-info">
       <view class="c-block">
@@ -94,7 +94,7 @@
     </view>
     <!-- /my-others -->
   </view>
-  <tab-bar></tab-bar>
+  <tab-bar selected="my"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>

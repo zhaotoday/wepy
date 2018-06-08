@@ -1,9 +1,12 @@
 <template>
   <nav-bar title="身边店"/>
   <view class="home c-main c-main--has-nav-bar c-main--has-tab-bar">
+    <!-- home-swiper -->
     <view class="home-swiper">
       <c-swiper></c-swiper>
     </view>
+    <!-- /home-swiper -->
+    <!-- home-product-classes -->
     <view class="home-product-classes">
       <repeat for="{{productCategoryImages}}" item="item">
         <view class="home-product-classes__item c2 s4">
@@ -13,21 +16,122 @@
         </view>
       </repeat>
     </view>
+    <!-- /home-product-classes -->
+    <!-- home-slogan -->
     <view class="home-slogan c1 s4">
       您身边的品牌
       <image src="./images/dot.png"/>
       服务品牌的你
     </view>
-    <view class="home-shops c-panel">
+    <!-- /home-slogan -->
+    <!-- home-shops -->
+    <view class="home-shops c-panel home-margin-top">
       <view class="c-panel__head c2 s1">
         身边店
         <view class="c-panel__head-addon c3 s5">换一批</view>
       </view>
       <view class="c-panel__body">
-        abcd
+        <view class="l-list">
+          <view class="l-list__item">
+            <view class="c-media">
+              <image src="./images/shop.png"/>
+              <view class="c-media__body">
+                <view class="c-media__body-title c2 s2">山水</view>
+                <view class="c-media__body-content c3 s4">
+                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="l-list__item">
+            <view class="c-media">
+              <image src="./images/shop.png"/>
+              <view class="c-media__body">
+                <view class="c-media__body-title c2 s2">山水</view>
+                <view class="c-media__body-content c3 s4">
+                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="l-list__item">
+            <view class="c-media">
+              <image src="./images/shop.png"/>
+              <view class="c-media__body">
+                <view class="c-media__body-title c2 s2">山水</view>
+                <view class="c-media__body-content c3 s4">
+                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
+                </view>
+              </view>
+            </view>
+            <view class="c-tag c-tag--address c3 s6">1.3km</view>
+          </view>
+          <view class="l-list__item">
+            <view class="c-media">
+              <image src="./images/shop.png"/>
+              <view class="c-media__body">
+                <view class="c-media__body-title c2 s2">山水</view>
+                <view class="c-media__body-content c3 s4">
+                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
+                </view>
+              </view>
+            </view>
+            <view class="c-tag c-tag--address c3 s6">1.3km</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- /home-shops -->
+    <!-- home-inserted-ad -->
+    <image class="home-inserted-ad home-margin-top" src="./images/ad.jpg"/>
+    <!-- /home-inserted-ad -->
+    <view class="home-hot c-panel home-margin-top">
+      <view class="c-panel__head c2 s1">
+        热品推荐
+        <view class="c-panel__head-addon c3 s5">换一批</view>
+      </view>
+      <view class="c-panel__body">
+        <view class="l-cols">
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+          <view class="l-cols__item">
+            <image class="home-hot__image" src="./images/product.jpg"/>
+            <view class="home-hot__title c2 s2">毛泽东传</view>
+            <rate :value.sync="rate"/>
+          </view>
+        </view>
       </view>
     </view>
   </view>
+  <tab-bar selected="home"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -36,7 +140,9 @@
   import wepy from 'wepy'
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
+  import TabBar from '../../components/tab-bar/index'
   import Swiper from '../../components/swiper/index'
+  import Rate from '../../components/rate/index'
 
   export default class extends wepy.page {
     config = {
@@ -45,12 +151,15 @@
 
     components = {
       'nav-bar': NavBar,
-      'c-swiper': Swiper
+      'tab-bar': TabBar,
+      'c-swiper': Swiper,
+      rate: Rate
     }
 
     mixins = [global]
 
     data = {
+      rate: 8.1,
       back: false,
       hasNavBar: true,
       hasTabBar: true,
@@ -91,6 +200,7 @@
     events = {}
 
     async onShow () {
+      wepy.request({url: 'http://192.168.0.105:3002/apis/v1/articles'})
       const getLocationRes = await wepy.getLocation()
 
       console.log(getLocationRes)
