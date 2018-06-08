@@ -1,12 +1,12 @@
 @import "../../styles/utils/index";
 
 @include b(c-rate) {
-  display: inline-block;
-  margin: px2rpx(5px);
   line-height: 100%;
 
   image {
     @include size(px2rpx(14px), px2rpx(14px));
     @include margin(null, px2rpx(5px), null, px2rpx(5px));
+
+    display: inline-block;
   }
 }

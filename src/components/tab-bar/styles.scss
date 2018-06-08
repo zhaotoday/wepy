@@ -12,10 +12,11 @@
     box-sizing: border-box;
     height: px2rpx(98px);
     text-align: center;
-    font-size: map-get($font-sizes, s3);
+    color: #757575;
+    font-size: map-get($font-sizes, s4);
     padding-top: px2rpx(10px + 46px + 3px);
 
-    @each $icon in home, type, cart, my {
+    @each $icon in home, category, cart, my {
       @include m(#{$icon}) {
         background: {
           image: image-url("components/tab-bar/#{$icon}.png");
@@ -26,6 +27,7 @@
 
         &.is-active {
           background-image: image-url("components/tab-bar/#{$icon}-active.png");
+          color: #1c1c20;
         }
       }
     }

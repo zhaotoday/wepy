@@ -3,8 +3,8 @@
     <view class="c-tab-bar__item c-tab-bar__item--home{{selected === 'home' ? ' is-active' : ''}}"
           @tap="handleTap('home')">首页
     </view>
-    <view class="c-tab-bar__item c-tab-bar__item--type{{selected === 'type' ? ' is-active' : ''}}"
-          @tap="handleTap('type')">分类
+    <view class="c-tab-bar__item c-tab-bar__item--category{{selected === 'category' ? ' is-active' : ''}}"
+          @tap="handleTap('category')">分类
     </view>
     <view class="c-tab-bar__item c-tab-bar__item--cart{{selected === 'cart' ? ' is-active' : ''}}"
           @tap="handleTap('cart')">购物车
@@ -36,7 +36,8 @@
               wepy.redirectTo({url: '/pages/home/index'})
               break
 
-            case 'type':
+            case 'category':
+              wepy.redirectTo({url: '/pages/category/index'})
               break
 
             case 'cart':

@@ -1,0 +1,28 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/icon";
+
+@include b(c-search-bar) {
+  @include padding(px2rpx(16px), px2rpx(32px), px2rpx(16px), px2rpx(32px));
+
+  background-color: #ff8519;
+
+  @include e(wrap) {
+    height: px2rpx(56px);
+    border-radius: px2rpx(56px);
+    background: {
+      image: image-url("components/search-bar/search.png");
+      size: px2rpx(24px) px2rpx(24px);
+      repeat: no-repeat;
+      position: px2rpx(15px) center;
+      color: #ffb675;
+    }
+  }
+
+  input {
+    @include text--middle(px2rpx(56px));
+    @include margin(0, px2rpx(50px), 0, px2rpx(50px));
+
+    color: map-get($colors, c7);
+    font-size: map-get($font-sizes, s4);
+  }
+}

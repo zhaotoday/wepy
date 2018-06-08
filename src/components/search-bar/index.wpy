@@ -1,0 +1,29 @@
+<template>
+  <view class="c-search-bar">
+    <view class="c-search-bar__wrap">
+      <input placeholder="这是一个可以自动聚焦的input" placeholder-style="color: #fff;"/>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      title: String,
+      back: {
+        type: Boolean,
+        default: true
+      }
+    }
+
+    methods = {
+      handleTapBack () {
+        wepy.navigateBack()
+      }
+    }
+  }
+</script>
