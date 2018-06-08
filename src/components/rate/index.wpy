@@ -1,0 +1,29 @@
+<template>
+  <view class="c-rate c2 s6">
+    <repeat for="{{[1, 2, 3, 4, 5]}}" item="item">
+      <image src="./images/star{{rate >= item ? '-active' : ''}}.png"/>
+    </repeat>
+    ({{value}})
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      value: {
+        type: Number,
+        default: 0
+      }
+    }
+
+    computed = {
+      rate () {
+        return (this.value / 2).toFixed(0)
+      }
+    }
+  }
+</script>
