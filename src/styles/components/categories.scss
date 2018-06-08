@@ -1,0 +1,22 @@
+@import "../utils/index";
+
+@include b(c-categories) {
+  @include clearfix;
+
+  background-color: white;
+  padding-bottom: px2rpx(30px);
+
+  image {
+    @include circle(px2rpx(88px));
+    @include margin(px2rpx(30px), auto, px2rpx(20px), auto);
+
+    display: block;
+  }
+
+  @include e(item) {
+    text-align: center;
+    width: 20%;
+    overflow: hidden;
+    float: left;
+  }
+}
