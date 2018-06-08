@@ -1,0 +1,32 @@
+@import "../utils/index";
+
+@include b(c-media) {
+  width: px2rpx(690px);
+  border-radius: px2rpx(20px);
+  background-color: white;
+  display: flex;
+  align-items: flex-start;
+
+  image {
+    @include size(px2rpx(162px), px2rpx(132px));
+
+    display: block;
+    align-self: flex-start;
+    margin-right: px2rpx(26px);
+  }
+
+  @include e(body) {
+    flex: 1;
+  }
+
+  @include e(body-title) {
+    line-height: 1;
+  }
+
+  @include e(body-content) {
+    @include text--overflow(2);
+
+    line-height: px2rpx(32px);
+    padding-top: px2rpx(20px);
+  }
+}

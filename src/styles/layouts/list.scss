@@ -1,0 +1,8 @@
+@import "../utils/index";
+
+@include b(l-list) {
+  @include e(item) {
+    padding: px2rpx(30px);
+    border-bottom: 1px solid #f8f8f8;
+  }
+}

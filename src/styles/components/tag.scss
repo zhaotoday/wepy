@@ -1,0 +1,13 @@
+@import "../utils/index";
+
+@include b(c-tag) {
+  @include m(address) {
+    background: {
+      image: image-url("components/tag/address.png");
+      size: px2rpx(12px) px2rpx(16px);
+      position: 0 center;
+      repeat: no-repeat;
+    }
+    padding: px2rpx(10px) px2rpx(20px);
+  }
+}

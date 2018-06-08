@@ -1,0 +1,16 @@
+@import "../utils/index";
+
+@include b(l-cols) {
+  @include clearfix;
+
+  background-color: white;
+  padding-bottom: px2rpx(30px);
+
+  @include e(item) {
+    @include padding(px2rpx(30px), null, px2rpx(20px));
+
+    text-align: center;
+    width: 33.33%;
+    float: left;
+  }
+}
