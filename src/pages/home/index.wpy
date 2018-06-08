@@ -3,20 +3,20 @@
   <view class="home c-main c-main--has-nav-bar c-main--has-tab-bar">
     <!-- home-swiper -->
     <view class="home-swiper">
-      <c-swiper></c-swiper>
+      <c-swiper :images.sync="swiperImages" width="100%" height="465rpx"/>
     </view>
     <!-- /home-swiper -->
-    <!-- home-product-classes -->
-    <view class="home-product-classes">
-      <repeat for="{{productCategoryImages}}" item="item">
-        <view class="home-product-classes__item c2 s4">
+    <!-- home-product-categories -->
+    <view class="home-product-categories c-categories">
+      <repeat for="{{productCategories}}" item="item">
+        <view class="c-categories__item c2 s4">
           <image
             src="https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg"/>
           珠宝首饰
         </view>
       </repeat>
     </view>
-    <!-- /home-product-classes -->
+    <!-- /home-product-categories -->
     <!-- home-slogan -->
     <view class="home-slogan c1 s4">
       您身边的品牌
@@ -139,6 +139,8 @@
 <script>
   import wepy from 'wepy'
   import global from '../../mixins/global'
+  import auth from '../../utils/auth'
+  import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
   import TabBar from '../../components/tab-bar/index'
   import Swiper from '../../components/swiper/index'
@@ -159,11 +161,16 @@
     mixins = [global]
 
     data = {
+      swiperImages: [
+        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+      ],
       rate: 8.1,
       back: false,
       hasNavBar: true,
       hasTabBar: true,
-      productCategoryImages: [
+      productCategories: [
         'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
         'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
         'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
@@ -200,10 +207,17 @@
     events = {}
 
     async onShow () {
-      wepy.request({url: 'http://192.168.0.105:3002/apis/v1/articles'})
-      const getLocationRes = await wepy.getLocation()
+      const {longitude: lng, latitude: lat} = await wepy.getLocation()
+      const {key} = await auth.getAccessToken()
+      const cityCode = '350100'
 
-      console.log(getLocationRes)
+      const homeIndexRes = await request({
+        url: 'home/index',
+        method: 'POST',
+        data: {key, lng, lat, cityCode}
+      })
+
+      console.log(homeIndexRes)
     }
   }
 </script>

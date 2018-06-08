@@ -6,6 +6,7 @@
 @import "../../styles/layouts/cols";
 @import "../../styles/components/media";
 @import "../../styles/components/tag";
+@import "../../styles/components/categories";
 
 @include b(home) {
   background-color: #f5f5f5;
@@ -19,26 +20,8 @@
 @include b(home-swiper) {
 }
 
-// home-product-classes
-@include b(home-product-classes) {
-  @include clearfix;
-
-  background-color: white;
-  padding-bottom: px2rpx(30px);
-
-  image {
-    @include circle(px2rpx(88px));
-    @include margin(px2rpx(30px), auto, px2rpx(20px), auto);
-
-    display: block;
-  }
-
-  .home-product-classes__item {
-    text-align: center;
-    width: 20%;
-    overflow: hidden;
-    float: left;
-  }
+// home-product-categories
+@include b(home-product-categories) {
 }
 
 // home-slogan
