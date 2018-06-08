@@ -1,13 +1,14 @@
 <template>
   <view class="c-swiper">
-    <swiper indicator-dots="{{indicatorDots}}"
-            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <repeat for="{{imgUrls}}" item="item">
+    <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange"
+            style="width: {{width}}; height: {{height}};">
+      <repeat for="{{images}}" item="item">
         <swiper-item>
           <image src="{{item}}" class="slide-image"/>
         </swiper-item>
       </repeat>
     </swiper>
+    <indicator :current.sync="current" :length.sync="length"/>
   </view>
 </template>
 
@@ -15,24 +16,38 @@
 
 <script>
   import wepy from 'wepy'
+  import Indicator from './components/indicator/index'
 
   export default class extends wepy.component {
-    data = {
-      imgUrls: [
-        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      ],
-      indicatorDots: true,
-      autoplay: false,
-      interval: 5000,
-      duration: 1000
+    components = {
+      indicator: Indicator
     }
 
-    events = {}
+    props = {
+      images: {
+        type: Array,
+        default: []
+      },
+      width: String,
+      height: String
+    }
 
-    watch = {}
+    data = {
+      circular: true,
+      autoplay: true,
+      interval: 2500,
+      current: 0,
+      length: 0
+    }
 
-    methods = {}
+    onLoad () {
+      this.length = this.images.length
+    }
+
+    methods = {
+      handleChange (e) {
+        this.current = e.detail.current
+      }
+    }
   }
 </script>

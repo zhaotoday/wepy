@@ -1,0 +1,32 @@
+<template>
+  <view class="c-indicator">
+    <repeat for="{{items}}" item="item">
+      <text class="c-indicator__item{{item === current ? ' c-indicator__item--active' : ''}}"/>
+    </repeat>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      current: {
+        type: Number,
+        default: 0
+      },
+      length: {
+        type: Number,
+        default: 0
+      }
+    }
+
+    computed = {
+      items () {
+        return Array.from({length: this.length}, (v, k) => k)
+      }
+    }
+  }
+</script>
