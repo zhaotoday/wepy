@@ -16,12 +16,14 @@
   margin-top: px2rpx(20px);
 }
 
-// home-swiper
-@include b(home-swiper) {
+// home-top-ad
+@include b(home-top-ad) {
+  height: px2rpx(465px);
 }
 
-// home-product-categories
-@include b(home-product-categories) {
+// home-categories
+@include b(home-categories) {
+  height: px2rpx(170px * 2);
 }
 
 // home-slogan
@@ -57,7 +59,7 @@
 }
 
 // home-hot
-@include b(home-hot) {
+@include b(home-products) {
   @include e(image) {
     @include size(px2rpx(178px), px2rpx(252px));
     @include block--center;
@@ -67,8 +69,10 @@
 
   @include e(title) {
     @include padding(px2rpx(18px), null, px2rpx(16px));
+    @include block--center;
+    @include text--overflow;
 
+    width: 80%;
     line-height: 100%;
-
   }
 }

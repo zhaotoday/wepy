@@ -1,22 +1,23 @@
 <template>
   <nav-bar title="身边店"/>
   <view class="home c-main c-main--has-nav-bar c-main--has-tab-bar">
-    <!-- home-swiper -->
-    <view class="home-swiper">
-      <c-swiper :images.sync="swiperImages" width="100%" height="465rpx"/>
+    <!-- home-top-ad -->
+    <view class="home-top-ad">
+      <c-swiper :items.sync="topAds" width="100%" height="465rpx"/>
     </view>
-    <!-- /home-swiper -->
-    <!-- home-product-categories -->
-    <view class="home-product-categories c-categories">
-      <repeat for="{{productCategories}}" item="item">
-        <view class="c-categories__item c2 s4">
-          <image
-            src="https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg"/>
-          珠宝首饰
-        </view>
+    <!-- /home-top-ad -->
+    <!-- home-categories -->
+    <view class="home-categories c-categories">
+      <repeat for="{{categories}}" item="item">
+        <navigator url="/pages/category/index">
+          <view class="c-categories__item c2 s4">
+            <image src="{{item.image}}"/>
+            {{item.name}}
+          </view>
+        </navigator>
       </repeat>
     </view>
-    <!-- /home-product-categories -->
+    <!-- /home-categories -->
     <!-- home-slogan -->
     <view class="home-slogan c1 s4">
       您身边的品牌
@@ -32,52 +33,18 @@
       </view>
       <view class="c-panel__body">
         <view class="l-list">
-          <view class="l-list__item">
-            <view class="c-media">
-              <image src="./images/shop.png"/>
-              <view class="c-media__body">
-                <view class="c-media__body-title c2 s2">山水</view>
-                <view class="c-media__body-content c3 s4">
-                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
+          <repeat for="{{shops}}" item="item">
+            <view class="l-list__item">
+              <view class="c-media">
+                <image src="{{item.image}}"/>
+                <view class="c-media__body">
+                  <view class="c-media__body-title c2 s2">{{item.name}}</view>
+                  <view class="c-media__body-content c3 s4">{{item.introduction}}</view>
                 </view>
               </view>
+              <view class="c-tag c-tag--address c3 s6">{{item.distance}}km</view>
             </view>
-          </view>
-          <view class="l-list__item">
-            <view class="c-media">
-              <image src="./images/shop.png"/>
-              <view class="c-media__body">
-                <view class="c-media__body-title c2 s2">山水</view>
-                <view class="c-media__body-content c3 s4">
-                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
-                </view>
-              </view>
-            </view>
-          </view>
-          <view class="l-list__item">
-            <view class="c-media">
-              <image src="./images/shop.png"/>
-              <view class="c-media__body">
-                <view class="c-media__body-title c2 s2">山水</view>
-                <view class="c-media__body-content c3 s4">
-                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
-                </view>
-              </view>
-            </view>
-            <view class="c-tag c-tag--address c3 s6">1.3km</view>
-          </view>
-          <view class="l-list__item">
-            <view class="c-media">
-              <image src="./images/shop.png"/>
-              <view class="c-media__body">
-                <view class="c-media__body-title c2 s2">山水</view>
-                <view class="c-media__body-content c3 s4">
-                  !!啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444啊啊啊444
-                </view>
-              </view>
-            </view>
-            <view class="c-tag c-tag--address c3 s6">1.3km</view>
-          </view>
+          </repeat>
         </view>
       </view>
     </view>
@@ -85,48 +52,20 @@
     <!-- home-inserted-ad -->
     <image class="home-inserted-ad home-margin-top" src="./images/ad.jpg"/>
     <!-- /home-inserted-ad -->
-    <view class="home-hot c-panel home-margin-top">
+    <view class="home-products c-panel home-margin-top">
       <view class="c-panel__head c2 s1">
         热品推荐
         <view class="c-panel__head-addon c3 s5">换一批</view>
       </view>
       <view class="c-panel__body">
         <view class="l-cols">
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
-          <view class="l-cols__item">
-            <image class="home-hot__image" src="./images/product.jpg"/>
-            <view class="home-hot__title c2 s2">毛泽东传</view>
-            <rate :value.sync="rate"/>
-          </view>
+          <repeat for="{{products}}" key="index" index="index" item="item">
+            <view class="l-cols__item">
+              <image class="home-products__image" src="{{item.image}}"/>
+              <view class="home-products__title c2 s2">{{item.name}}</view>
+              <rate :item="item"/>
+            </view>
+          </repeat>
         </view>
       </view>
     </view>
@@ -139,7 +78,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../../mixins/global'
-  import auth from '../../utils/auth'
+  // import auth from '../../utils/auth'
   import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
   import TabBar from '../../components/tab-bar/index'
@@ -161,27 +100,13 @@
     mixins = [global]
 
     data = {
-      swiperImages: [
-        'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-        'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-      ],
-      rate: 8.1,
+      topAds: [],
+      categories: [],
+      shops: [],
+      products: [],
       back: false,
       hasNavBar: true,
-      hasTabBar: true,
-      productCategories: [
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg'
-      ]
+      hasTabBar: true
     }
 
     computed = {}
@@ -207,17 +132,54 @@
     events = {}
 
     async onShow () {
-      const {longitude: lng, latitude: lat} = await wepy.getLocation()
-      const {key} = await auth.getAccessToken()
-      const cityCode = '350100'
+      // const {longitude: lng, latitude: lat} = await wepy.getLocation()
+      // // const {key} = await auth.getAccessToken()
+      // const cityCode = '350100'
 
       const homeIndexRes = await request({
+        mock: true,
         url: 'home/index',
-        method: 'POST',
-        data: {key, lng, lat, cityCode}
+        method: 'POST'
+        // data: {key, lng, lat, cityCode}
       })
 
       console.log(homeIndexRes)
+      this.topAds = homeIndexRes.advs.topAdvs.map(item => {
+        return {
+          image: item.imageUrl,
+          url: item.href || ''
+        }
+      })
+
+      this.categories = homeIndexRes.recommendClasses.classes.map(item => {
+        return {
+          id: item.gcId,
+          name: item.gcName,
+          image: item.gcImage
+        }
+      })
+
+      this.shops = homeIndexRes.nearbyStores.stores.map(item => {
+        return {
+          id: item.storeId,
+          name: item.storeName,
+          image: item.storeLabel,
+          introduction: item.storeIntro,
+          distance: item.storeDistance
+        }
+      })
+
+      this.products = homeIndexRes.recommendGoods.goodsList.map(item => {
+        return {
+          id: item.goodsCommonId,
+          name: item.goodsName,
+          image: item.goodsImage,
+          score: item.evalScore,
+          rate: (item.evalScore / 2).toFixed(0)
+        }
+      })
+
+      this.$apply()
     }
   }
 </script>
