@@ -1,25 +1,28 @@
 <template>
   <nav-bar title="身边店"/>
   <view class="category c-main c-main--has-nav-bar">
-    <search-bar/>
-    <image class="category-ad" src="./images/ad.jpg"/>
-    <view class="category-no-data" style="display: none;">
+    <search-bar placeholder="输入你要搜索的分类" @confirm.user="handleSearchConfirm"/>
+    <view class="category-ad">
+      <c-swiper :items.sync="ads" width="100%" height="320rpx"/>
+    </view>
+    <!-- category-categories -->
+    <view wx:if="{{categories.length}}" class="category-categories c-categories">
+      <repeat for="{{categories}}" item="item">
+        <navigator url="/pages/category/index">
+          <view class="c-categories__item c2 s4">
+            <image src="{{item.image}}"/>
+            {{item.name}}
+          </view>
+        </navigator>
+      </repeat>
+    </view>
+    <!-- /category-categories -->
+    <!-- category-no-data -->
+    <view wx:else hidden="{{!loaded}}" class="category-no-data">
       <view class="category-no-data__image"></view>
       <view class="category-no-data__tip c1 s4">没有搜到你想要的分类</view>
     </view>
-
-    <!-- category-product-categories -->
-    <view class="category-product-categories c-categories">
-      <repeat for="{{productCategories}}" item="item">
-        <view class="c-categories__item c2 s4">
-          <image
-            src="https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg"/>
-          珠宝首饰
-        </view>
-      </repeat>
-    </view>
-    <!-- /category-product-categories -->
-
+    <!-- /category-no-data -->
   </view>
   <tab-bar selected="category"/>
 </template>
@@ -29,9 +32,13 @@
 <script>
   import wepy from 'wepy'
   import global from '../../mixins/global'
+  import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
   import TabBar from '../../components/tab-bar/index'
   import SearchBar from '../../components/search-bar/index'
+  import Swiper from '../../components/swiper/index'
+
+  let categories = []
 
   export default class extends wepy.page {
     config = {
@@ -41,39 +48,55 @@
     components = {
       'nav-bar': NavBar,
       'tab-bar': TabBar,
-      'search-bar': SearchBar
+      'search-bar': SearchBar,
+      'c-swiper': Swiper
     }
 
     mixins = [global]
 
     data = {
-      hasNavBar: true,
-      productCategories: [
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg',
-        'https://img11.360buyimg.com/babel/s340x360_jfs/t19228/192/2475606652/22871/c1965c4c/5af8422aN893f023a.jpg'
-      ]
+      loaded: false,
+      ads: [],
+      categories: [],
+      hasNavBar: true
     }
 
-    computed = {}
-
     methods = {
-      handleTapBack () {
-        wepy.navigateBack()
+      handleSearchConfirm (e) {
+        this.categories = categories.filter(item => item.name.indexOf(e.detail.value) !== -1)
       }
     }
 
-    events = {}
+    async onLoad () {
+      const homeGetAllClassesRes = await request({
+        mock: true,
+        url: 'home/getAllClasses',
+        method: 'POST',
+        data: {}
+      })
 
-    async onShow () {
-      console.log(this.$parent.globalData.systemInfo.statusBarHeight)
+      this.loaded = true
+
+      console.log(homeGetAllClassesRes)
+
+      this.ads = homeGetAllClassesRes.advs.map(item => {
+        return {
+          image: item.imageUrl,
+          url: item.href || ''
+        }
+      })
+
+      this.categories = homeGetAllClassesRes.recommendClasses.map(item => {
+        return {
+          id: item.gcId,
+          name: item.gcName,
+          image: item.gcImage
+        }
+      })
+
+      categories = Array.from(this.categories)
+
+      this.$apply()
     }
   }
 </script>
