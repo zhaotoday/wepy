@@ -2,9 +2,9 @@
   <view class="c-swiper">
     <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange"
             style="width: {{width}}; height: {{height}};">
-      <repeat for="{{images}}" item="item">
+      <repeat for="{{items}}" item="item">
         <swiper-item>
-          <image src="{{item}}" class="slide-image"/>
+          <image src="{{item.image}}" @tap="handleTap({{item.url}})"/>
         </swiper-item>
       </repeat>
     </swiper>
@@ -24,7 +24,7 @@
     }
 
     props = {
-      images: {
+      items: {
         type: Array,
         default: []
       },
@@ -41,11 +41,16 @@
 
     computed = {
       length () {
-        return this.images.length
+        return this.items.length
       }
     }
 
     methods = {
+      handleTap (url) {
+        if (url) {
+          wepy.navigateTo({url})
+        }
+      },
       handleChange (e) {
         this.current = e.detail.current
       }
