@@ -1,7 +1,7 @@
 <template>
   <nav-bar title="购物车" :back.sync="navBarBack"/>
   <view class="content c-main c-main--has-nav-bar">
-    
+
   </view>
 </template>
 
@@ -25,20 +25,6 @@
 
     data = {
       navBarBack: false
-    }
-
-    computed = {}
-
-    methods = {
-      handleTapBack () {
-        wepy.navigateBack()
-      }
-    }
-
-    events = {}
-
-    async onShow () {
-      console.log(this.$parent.globalData.systemInfo.statusBarHeight)
     }
   }
 </script>

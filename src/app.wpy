@@ -6,23 +6,51 @@
 
   import { setStore } from 'wepy-redux'
   import configStore from './store'
-  import Storage from './utils/storage'
 
   const store = configStore()
   setStore(store)
 
   export default class extends wepy.app {
     config = {
-      pages: [
-        'pages/my/index',
-        'pages/home/index',
-        'pages/login/index',
-        'pages/content/index'
-      ],
       window: {
         navigationBarTextStyle: 'black',
         navigationStyle: 'custom'
-      }
+      },
+      tabBar: {
+        color: '#757575',
+        selectedColor: '#1c1c20',
+        backgroundColor: '#fff',
+        borderStyle: 'black',
+        list: [{
+          pagePath: 'pages/home/index',
+          text: '首页',
+          iconPath: 'static/images/app/tab-bar/home.png',
+          selectedIconPath: 'static/images/app/tab-bar/home-active.png'
+        }, {
+          pagePath: 'pages/category/index',
+          text: '分类',
+          iconPath: 'static/images/app/tab-bar/category.png',
+          selectedIconPath: 'static/images/app/tab-bar/category-active.png'
+        }, {
+          pagePath: 'pages/cart/index',
+          text: '购物车',
+          iconPath: 'static/images/app/tab-bar/cart.png',
+          selectedIconPath: 'static/images/app/tab-bar/cart-active.png'
+        }, {
+          pagePath: 'pages/my/index',
+          text: '我的',
+          iconPath: 'static/images/app/tab-bar/my.png',
+          selectedIconPath: 'static/images/app/tab-bar/my-active.png'
+        }]
+      },
+      pages: [
+        'pages/category/index',
+        'pages/home/index',
+        'pages/cart/index',
+        'pages/my/index',
+        'pages/login/index',
+        'pages/content/index'
+      ]
     }
 
     globalData = {}
@@ -33,19 +61,10 @@
       this.use('requestfix')
     }
 
-    async onLaunch () {
+    onLaunch () {
       wepy.showShareMenu({
         withShareTicket: true
       })
-
-      // 保存 systemInfo
-      const getSystemInfoRes = await wepy.getSystemInfo()
-      const systemInfo = new Storage('systemInfo')
-
-      systemInfo.set(getSystemInfoRes)
-    }
-
-    onShow () {
     }
   }
 </script>
