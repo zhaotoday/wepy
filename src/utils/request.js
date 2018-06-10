@@ -39,7 +39,7 @@ export default async (
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(mockData.responseContent)
-      }, 200)
+      }, 100)
     })
   } else {
     const res = await wepy.request({

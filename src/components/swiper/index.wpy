@@ -1,5 +1,5 @@
 <template>
-  <view class="c-swiper">
+  <view class="c-swiper" wx:if="{{items.length > 1}}">
     <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange"
             style="width: {{width}}; height: {{height}};">
       <repeat for="{{items}}" item="item">
@@ -9,6 +9,9 @@
       </repeat>
     </swiper>
     <indicator :current.sync="current" :length.sync="length"/>
+  </view>
+  <view class="c-swiper" wx:elif="{{items.length === 1}}">
+    <image src="{{items[0].image}}" @tap="handleTap({items[0].url})"/>
   </view>
 </template>
 

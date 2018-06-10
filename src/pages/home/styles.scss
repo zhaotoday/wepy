@@ -16,8 +16,8 @@
   margin-top: px2rpx(20px);
 }
 
-// home-top-ad
-@include b(home-top-ad) {
+// home-top-ads
+@include b(home-top-ads) {
   height: px2rpx(465px);
 }
 
@@ -51,8 +51,8 @@
   }
 }
 
-// home-inserted-ad
-@include b(home-inserted-ad) {
+// home-inserted-ads
+@include b(home-inserted-ads) {
   @include size(100%, px2rpx(246px));
 
   display: block;
