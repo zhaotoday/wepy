@@ -1,5 +1,5 @@
 <template>
-  <nav-bar title="身边店"/>
+  <nav-bar title="分类" :back.user="navBarBack"/>
   <view class="category c-main c-main--has-nav-bar">
     <search-bar placeholder="输入你要搜索的分类" @confirm.user="handleSearchConfirm"/>
     <view class="category-ad">
@@ -18,13 +18,12 @@
     </view>
     <!-- /category-categories -->
     <!-- category-no-data -->
-    <view wx:else hidden="{{!loaded}}" class="category-no-data">
+    <view wx:else hidden="{{!pageLoaded}}" class="category-no-data">
       <view class="category-no-data__image"></view>
       <view class="category-no-data__tip c1 s4">没有搜到你想要的分类</view>
     </view>
     <!-- /category-no-data -->
   </view>
-  <tab-bar selected="category"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -34,7 +33,6 @@
   import global from '../../mixins/global'
   import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
-  import TabBar from '../../components/tab-bar/index'
   import SearchBar from '../../components/search-bar/index'
   import Swiper from '../../components/swiper/index'
 
@@ -47,7 +45,6 @@
 
     components = {
       'nav-bar': NavBar,
-      'tab-bar': TabBar,
       'search-bar': SearchBar,
       'c-swiper': Swiper
     }
@@ -55,7 +52,8 @@
     mixins = [global]
 
     data = {
-      loaded: false,
+      navBarBack: false,
+      pageLoaded: false,
       ads: [],
       categories: [],
       hasNavBar: true
@@ -75,7 +73,7 @@
         data: {}
       })
 
-      this.loaded = true
+      this.pageLoaded = true
 
       console.log(homeGetAllClassesRes)
 

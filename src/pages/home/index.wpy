@@ -1,6 +1,6 @@
 <template>
-  <nav-bar title="身边店"/>
-  <view class="home c-main c-main--has-nav-bar c-main--has-tab-bar">
+  <nav-bar title="身边店" :back.user="navBarBack"/>
+  <view class="home c-main c-main--has-nav-bar">
     <!-- home-top-ad -->
     <view class="home-top-ad">
       <c-swiper :items.sync="topAds" width="100%" height="465rpx"/>
@@ -70,7 +70,6 @@
       </view>
     </view>
   </view>
-  <tab-bar selected="home"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -81,7 +80,6 @@
   // import auth from '../../utils/auth'
   import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
-  import TabBar from '../../components/tab-bar/index'
   import Swiper from '../../components/swiper/index'
   import Rate from '../../components/rate/index'
 
@@ -92,7 +90,6 @@
 
     components = {
       'nav-bar': NavBar,
-      'tab-bar': TabBar,
       'c-swiper': Swiper,
       rate: Rate
     }
@@ -100,13 +97,11 @@
     mixins = [global]
 
     data = {
+      navBarBack: false,
       topAds: [],
       categories: [],
       shops: [],
-      products: [],
-      back: false,
-      hasNavBar: true,
-      hasTabBar: true
+      products: []
     }
 
     computed = {}
@@ -131,7 +126,7 @@
 
     events = {}
 
-    async onShow () {
+    async onLoad () {
       // const {longitude: lng, latitude: lat} = await wepy.getLocation()
       // // const {key} = await auth.getAccessToken()
       // const cityCode = '350100'

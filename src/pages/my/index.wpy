@@ -94,7 +94,6 @@
     </view>
     <!-- /my-others -->
   </view>
-  <tab-bar selected="my"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -103,16 +102,13 @@
   import wepy from 'wepy'
   import global from '../../mixins/global'
   import request from '../../utils/request'
-  import TabBar from '../../components/tab-bar/index'
 
   export default class extends wepy.page {
     config = {
       navigationBarTitleText: ''
     }
 
-    components = {
-      'tab-bar': TabBar
-    }
+    components = {}
 
     mixins = [global]
 

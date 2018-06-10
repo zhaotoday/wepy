@@ -1,0 +1,44 @@
+<template>
+  <nav-bar title="购物车" :back.sync="navBarBack"/>
+  <view class="content c-main c-main--has-nav-bar">
+    
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: false
+    }
+
+    computed = {}
+
+    methods = {
+      handleTapBack () {
+        wepy.navigateBack()
+      }
+    }
+
+    events = {}
+
+    async onShow () {
+      console.log(this.$parent.globalData.systemInfo.statusBarHeight)
+    }
+  }
+</script>
