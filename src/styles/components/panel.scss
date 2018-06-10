@@ -9,14 +9,16 @@
     position: relative;
     border-bottom: 1px solid #f8f8f8;
 
-    &::before {
-      @include size(px2rpx(8px), px2rpx(26px));
-      @include position--absolute(50%, null, null, 0);
+    @include m(has-fringe) {
+      &::before {
+        @include size(px2rpx(8px), px2rpx(26px));
+        @include position--absolute(50%, null, null, 0);
 
-      transform: translateY(-50%);
-      content: "";
-      display: block;
-      background-color: map-get($colors, c1);
+        transform: translateY(-50%);
+        content: "";
+        display: block;
+        background-color: map-get($colors, c1);
+      }
     }
   }
 

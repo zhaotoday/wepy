@@ -8,7 +8,7 @@
     <!-- category-categories -->
     <view wx:if="{{categories.length}}" class="category-categories c-categories">
       <repeat for="{{categories}}" item="item">
-        <navigator url="/pages/category/index">
+        <navigator url="/pages/recommended-shops/index">
           <view class="c-categories__item c2 s4">
             <image src="{{item.image}}"/>
             {{item.name}}

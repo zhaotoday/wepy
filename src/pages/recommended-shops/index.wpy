@@ -1,0 +1,82 @@
+<template>
+  <nav-bar :title.sync="navBarTitle" :back.sync="navBarBack"/>
+  <view class="recommended-shops c-main c-main--has-nav-bar">
+    <repeat for="{{childCategories}}" item="item">
+      <view class="recommended-shops-child-categories c-panel">
+        <view class="c-panel__head c2 s1">{{item.name}}</view>
+        <view class="c-panel__body">
+          <view class="l-list">
+            <repeat for="{{item.children}}" item="childItem">
+              <view class="l-list__item">
+                <view class="c-media">
+                  <image src="{{childItem.image}}"/>
+                  <view class="c-media__body">
+                    <view class="c-media__body-title c2 s2">{{childItem.name}}</view>
+                    <view class="c-media__body-content c3 s4">{{childItem.introduction}}</view>
+                  </view>
+                </view>
+                <view class="c-tag c-tag--address c3 s6">{{childItem.distance}}km</view>
+              </view>
+            </repeat>
+          </view>
+        </view>
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+  import request from '../../utils/request'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: true,
+      navBarTitle: '',
+      childCategories: []
+    }
+
+    async onLoad () {
+      this.navBarTitle = '美食店铺推荐'
+
+      const storeGetRecommendStoresRes = await request({
+        mock: true,
+        url: 'store/getRecommendStores',
+        method: 'POST'
+      })
+
+      this.childCategories = storeGetRecommendStoresRes.map(item => {
+        return {
+          name: item.gcName,
+          children: item.stores.map(childItem => {
+            return {
+              name: childItem.storeName,
+              image: childItem.storeLabel,
+              introduction: childItem.storeIntro,
+              distance: childItem.storeDistance,
+              isPurchased: childItem.isPurchased
+            }
+          })
+        }
+      })
+
+      this.$apply()
+
+      console.log(this.childCategories)
+    }
+  }
+</script>

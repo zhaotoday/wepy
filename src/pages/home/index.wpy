@@ -9,7 +9,7 @@
     <!-- home-categories -->
     <view class="home-categories c-categories">
       <repeat for="{{categories}}" item="item">
-        <navigator url="/pages/category/index">
+        <navigator url="/pages/recommended-shops/index">
           <view class="c-categories__item c2 s4">
             <image src="{{item.image}}"/>
             {{item.name}}
@@ -27,9 +27,9 @@
     <!-- /home-slogan -->
     <!-- home-shops -->
     <view class="home-shops c-panel home-margin-top">
-      <view class="c-panel__head c2 s1">
+      <view class="c-panel__head c-panel__head--has-fringe c2 s1">
         身边店
-        <view class="c-panel__head-addon c3 s5">换一批</view>
+        <view class="c-panel__head-addon c3 s5" @tap="handleTapAnotherBatch('shops')">换一批</view>
       </view>
       <view class="c-panel__body">
         <view class="l-list">
@@ -55,9 +55,9 @@
     </view>
     <!-- /home-inserted-ads -->
     <view class="home-products c-panel home-margin-top">
-      <view class="c-panel__head c2 s1">
+      <view class="c-panel__head c-panel__head--has-fringe c2 s1">
         热品推荐
-        <view class="c-panel__head-addon c3 s5">换一批</view>
+        <view class="c-panel__head-addon c3 s5" @tap="handleTapAnotherBatch('products')">换一批</view>
       </view>
       <view class="c-panel__body">
         <view class="l-cols">
@@ -125,6 +125,45 @@
         })
 
         console.log(scanCode)
+      },
+      async handleTapAnotherBatch (type) {
+        switch (type) {
+          case 'shops':
+            const homeGetOtherStoresRes = await request({
+              mock: true,
+              url: 'home/getOtherStores',
+              method: 'POST'
+            })
+            this.shops = homeGetOtherStoresRes.stores.map(item => {
+              return {
+                id: item.storeId,
+                name: item.storeName,
+                image: item.storeLabel,
+                introduction: item.storeIntro,
+                distance: item.storeDistance
+              }
+            })
+            this.$apply()
+            break
+
+          case 'products':
+            const homeGetOtherGoodsRes = await request({
+              mock: true,
+              url: 'home/getOtherGoods',
+              method: 'POST'
+            })
+            this.products = homeGetOtherGoodsRes.goodsList.map(item => {
+              return {
+                id: item.goodsCommonId,
+                name: item.goodsName,
+                image: item.goodsImage,
+                score: item.evalScore,
+                rate: (item.evalScore / 2).toFixed(0)
+              }
+            })
+            this.$apply()
+            break
+        }
       }
     }
 
@@ -132,7 +171,7 @@
 
     async onLoad () {
       // const {longitude: lng, latitude: lat} = await wepy.getLocation()
-      // // const {key} = await auth.getAccessToken()
+      // const {key} = await auth.getAccessToken()
       // const cityCode = '350100'
 
       const homeIndexRes = await request({

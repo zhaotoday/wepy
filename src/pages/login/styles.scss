@@ -25,6 +25,15 @@
 @include b(login-btn) {
   @include block--center;
 
+  position: relative;
+
+  @include e(text) {
+    @include position--absolute(px2rpx(205px), null, null,0);
+
+    width: 100%;
+    text-align: center;
+  }
+
   button {
     @include size(px2rpx(350px), px2rpx(350px));
 

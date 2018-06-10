@@ -1,0 +1,18 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+@import "../../styles/components/panel";
+@import "../../styles/layouts/list";
+@import "../../styles/components/media";
+@import "../../styles/components/tag";
+
+@include b(recommended-shops-child-categories) {
+  margin-bottom: px2rpx(20px);
+
+  .l-list__item {
+    position: relative;
+
+    .c-tag {
+      @include position--absolute(null, px2rpx(10px), px2rpx(10px));
+    }
+  }
+}

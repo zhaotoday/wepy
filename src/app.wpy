@@ -44,11 +44,12 @@
         }]
       },
       pages: [
-        'pages/category/index',
         'pages/home/index',
+        'pages/recommended-shops/index',
+        'pages/login/index',
+        'pages/category/index',
         'pages/cart/index',
         'pages/my/index',
-        'pages/login/index',
         'pages/content/index'
       ]
     }
