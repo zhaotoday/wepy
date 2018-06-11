@@ -8,7 +8,7 @@
     <!-- category-categories -->
     <view wx:if="{{categories.length}}" class="category-categories c-categories">
       <repeat for="{{categories}}" item="item">
-        <navigator url="/pages/recommended-shops/index">
+        <navigator url="/pages/recommended-shops/index?id={{item.id}}&name={{item.name}}">
           <view class="c-categories__item c2 s4">
             <image src="{{item.image}}"/>
             {{item.name}}
@@ -67,15 +67,12 @@
 
     async onLoad () {
       const homeGetAllClassesRes = await request({
-        mock: true,
         url: 'home/getAllClasses',
         method: 'POST',
         data: {}
       })
 
       this.pageLoaded = true
-
-      console.log(homeGetAllClassesRes)
 
       this.ads = homeGetAllClassesRes.advs.map(item => {
         return {

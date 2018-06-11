@@ -6,16 +6,20 @@
         <view class="c-panel__head c2 s1">{{item.name}}</view>
         <view class="c-panel__body">
           <view class="l-list">
-            <repeat for="{{item.children}}" item="childItem">
+            <repeat for="{{item.children}}" item="childItem" index="index">
               <view class="l-list__item">
                 <view class="c-media">
                   <image src="{{childItem.image}}"/>
                   <view class="c-media__body">
-                    <view class="c-media__body-title c2 s2">{{childItem.name}}</view>
+                    <view class="c-media__body-title c2 s2">
+                      {{childItem.name}}
+                      <text class="recommended-shops-child-categories__enter-shop" wx:if="{{index === 0}}">进店</text>
+                    </view>
                     <view class="c-media__body-content c3 s4">{{childItem.introduction}}</view>
                   </view>
                 </view>
-                <view class="c-tag c-tag--address c3 s6">{{childItem.distance}}km</view>
+                <view class="c-tag c-tag--address c3 s6">{{childItem.distance}}</view>
+                <view class="c-tag c-tag--fringe c7 s5" wx:if="{{index !== 0}}">您身边的品牌</view>
               </view>
             </repeat>
           </view>
@@ -32,6 +36,7 @@
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
   import request from '../../utils/request'
+  import filters from '../../utils/filters'
 
   export default class extends wepy.page {
     config = {
@@ -50,13 +55,15 @@
       childCategories: []
     }
 
-    async onLoad () {
-      this.navBarTitle = '美食店铺推荐'
+    async onLoad (query) {
+      this.navBarTitle = `${query.name}店铺推荐`
 
       const storeGetRecommendStoresRes = await request({
-        mock: true,
         url: 'store/getRecommendStores',
-        method: 'POST'
+        method: 'POST',
+        data: {
+          gcId: query.id
+        }
       })
 
       this.childCategories = storeGetRecommendStoresRes.map(item => {
@@ -67,7 +74,7 @@
               name: childItem.storeName,
               image: childItem.storeLabel,
               introduction: childItem.storeIntro,
-              distance: childItem.storeDistance,
+              distance: filters.distance(childItem.storeDistance),
               isPurchased: childItem.isPurchased
             }
           })
@@ -75,8 +82,6 @@
       })
 
       this.$apply()
-
-      console.log(this.childCategories)
     }
   }
 </script>
