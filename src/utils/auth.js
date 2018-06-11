@@ -6,6 +6,7 @@ import Storage from './storage'
 // third session
 const wxLoginSession = new Storage('wxLoginSession')
 const userInfo = new Storage('userInfo')
+const accessToken = new Storage('accessToken')
 
 export default {
   /**
@@ -42,16 +43,22 @@ export default {
    * 获取授权相关信息
    * @returns {Promise}
    */
-  getAccessToken () {
-    return request({
-      url: 'authinfo/takeAccess',
-      method: 'POST',
-      data: {
-        deviceType: consts.DEVICE_TYPE,
-        nonce: Math.random().toString(36).substr(7),
-        timestamp: new Date().getTime()
-      }
-    })
+  async getAccessToken () {
+    if (!accessToken.get()) {
+      const takeAccessRes = await request({
+        url: 'authInfo/takeAccess',
+        method: 'POST',
+        data: {
+          deviceType: consts.DEVICE_TYPE,
+          nonce: Math.random().toString(36).substr(7),
+          timestamp: new Date().getTime()
+        }
+      })
+
+      accessToken.set(takeAccessRes.key)
+    }
+
+    return accessToken.get()
   },
 
   /**
@@ -95,7 +102,9 @@ export default {
       method: 'POST',
       data: {
         key: getAccessTokenRes.key,
-        userInfo: {nickname, avatar, gender}
+        nickname,
+        avatar,
+        gender
       }
     })
   }

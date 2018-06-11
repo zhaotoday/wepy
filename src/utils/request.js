@@ -27,6 +27,8 @@ export default async (
     await auth.checkLogin()
 
     Object.assign(data, {key: auth.getSession()})
+  } else {
+    Object.assign(data, {key: await auth.getAccessToken()})
   }
 
   // mock 数据
