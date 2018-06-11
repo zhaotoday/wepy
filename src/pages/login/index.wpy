@@ -62,7 +62,7 @@
 
           const loginRes = await auth.login()
 
-          auth.setSession(loginRes.key)
+          auth.setLoginToken(loginRes.key)
 
           await wepy.showToast({
             title: '登录并授权成功！',

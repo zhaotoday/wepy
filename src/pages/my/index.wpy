@@ -139,8 +139,7 @@
 
     async onShow () {
       const memberCenterRes = await request({
-        // mock: true,
-        requiresAuth: true,
+        requiresLogin: true,
         url: 'memberCenter/index',
         method: 'POST'
       })

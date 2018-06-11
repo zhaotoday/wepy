@@ -164,15 +164,10 @@
     events = {}
 
     async onLoad () {
-      // const {longitude: lng, latitude: lat} = await wepy.getLocation()
-      const lat = 26.053183
-      const lng = 119.24174
-      const cityCode = '0591'
-
       const homeIndexRes = await request({
         url: 'home/index',
         method: 'POST',
-        data: {lng, lat, cityCode}
+        requiresLocation: true
       })
 
       this.topAds = homeIndexRes.advs.topAdvs.map(item => {
