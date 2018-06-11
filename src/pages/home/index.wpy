@@ -79,7 +79,6 @@
 <script>
   import wepy from 'wepy'
   import global from '../../mixins/global'
-  // import auth from '../../utils/auth'
   import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
   import Swiper from '../../components/swiper/index'
@@ -130,7 +129,7 @@
         switch (type) {
           case 'shops':
             const homeGetOtherStoresRes = await request({
-              mock: true,
+              // mock: true,
               url: 'home/getOtherStores',
               method: 'POST'
             })
@@ -148,7 +147,7 @@
 
           case 'products':
             const homeGetOtherGoodsRes = await request({
-              mock: true,
+              // mock: true,
               url: 'home/getOtherGoods',
               method: 'POST'
             })
@@ -171,14 +170,15 @@
 
     async onLoad () {
       // const {longitude: lng, latitude: lat} = await wepy.getLocation()
-      // const {key} = await auth.getAccessToken()
-      // const cityCode = '350100'
+      const lat = 26.053183
+      const lng = 119.24174
+      const cityCode = '0591'
 
       const homeIndexRes = await request({
-        mock: true,
+        // mock: true,
         url: 'home/index',
-        method: 'POST'
-        // data: {key, lng, lat, cityCode}
+        method: 'POST',
+        data: {lng, lat, cityCode}
       })
 
       console.log(homeIndexRes)
