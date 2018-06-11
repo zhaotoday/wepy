@@ -44,8 +44,9 @@ export default {
    * @returns {Promise}
    */
   async getAccessToken () {
-    if (!accessToken.get()) {
+    return accessToken.get() ? accessToken.get() : (async () => {
       const takeAccessRes = await request({
+        requiresAccess: false,
         url: 'authInfo/takeAccess',
         method: 'POST',
         data: {
@@ -56,9 +57,9 @@ export default {
       })
 
       accessToken.set(takeAccessRes.key)
-    }
 
-    return accessToken.get()
+      return takeAccessRes.key
+    })()
   },
 
   /**
@@ -84,7 +85,6 @@ export default {
    * @returns {Promise}
    */
   async login () {
-    const getAccessTokenRes = await this.getAccessToken()
     const wxLoginRes = await wepy.login()
     const {nickName: nickname, avatarUrl: avatar, gender = ''} = this.getUserInfo()
 
@@ -92,7 +92,6 @@ export default {
       url: 'thirdplatform/wechatAppAuth',
       method: 'POST',
       data: {
-        key: getAccessTokenRes.key,
         code: wxLoginRes.code
       }
     })
@@ -101,7 +100,6 @@ export default {
       url: 'user/loginWithWechatInfo',
       method: 'POST',
       data: {
-        key: getAccessTokenRes.key,
         nickname,
         avatar,
         gender

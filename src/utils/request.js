@@ -9,6 +9,7 @@ export default async (
     method = 'GET',
     data = {},
     requiresAuth = false,
+    requiresAccess = true,
     mock = false
   } = {}
 ) => {
@@ -27,7 +28,7 @@ export default async (
     await auth.checkLogin()
 
     Object.assign(data, {key: auth.getSession()})
-  } else {
+  } else if (requiresAccess) {
     Object.assign(data, {key: await auth.getAccessToken()})
   }
 
@@ -63,6 +64,7 @@ export default async (
 
     return new Promise((resolve, reject) => {
       if (status === 'success') {
+        console.log(url, responseContent)
         resolve(responseContent)
       } else {
         reject(res)
