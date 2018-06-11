@@ -3,63 +3,44 @@ import consts from './consts'
 import request from './request'
 import Storage from './storage'
 
-// third session
-const wxLoginSession = new Storage('wxLoginSession')
-const userInfo = new Storage('userInfo')
 const accessToken = new Storage('accessToken')
+const loginToken = new Storage('loginToken')
+const userInfo = new Storage('userInfo')
 
 export default {
-  /**
-   * 获取 session
-   * @returns {string}
-   */
-  getSession () {
-    return wxLoginSession.get()
+  async setAccessToken () {
+    const takeAccessRes = await request({
+      requiresAccess: false,
+      url: 'authInfo/takeAccess',
+      method: 'POST',
+      data: {
+        deviceType: consts.DEVICE_TYPE,
+        nonce: Math.random().toString(36).substr(7),
+        timestamp: new Date().getTime()
+      }
+    })
+
+    accessToken.set(takeAccessRes.key)
   },
 
-  /**
-   * 设置 session
-   */
-  setSession (value) {
-    wxLoginSession.set(value)
+  getAccessToken () {
+    return accessToken.get()
   },
 
-  /**
-   * 获取用户信息
-   * @returns {Object}
-   */
-  getUserInfo () {
-    return userInfo.get()
+  setLoginToken (value) {
+    loginToken.set(value)
   },
 
-  /**
-   * 设置用户信息
-   */
+  getLoginToken () {
+    return loginToken.get()
+  },
+
   setUserInfo (value) {
     userInfo.set(value)
   },
 
-  /**
-   * 获取授权相关信息
-   * @returns {Promise}
-   */
-  async getAccessToken () {
-    return accessToken.get() ? accessToken.get() : (async () => {
-      const takeAccessRes = await request({
-        requiresAccess: false,
-        url: 'authInfo/takeAccess',
-        method: 'POST',
-        data: {
-          deviceType: consts.DEVICE_TYPE,
-          nonce: Math.random().toString(36).substr(7),
-          timestamp: new Date().getTime()
-        }
-      })
-
-      accessToken.set(takeAccessRes.key)
-
-      return takeAccessRes.key
-    })()
+  getUserInfo () {
+    return userInfo.get()
   },
 
   /**

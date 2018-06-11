@@ -2,14 +2,16 @@ import wepy from 'wepy'
 import consts from './consts'
 import Hashes from 'jshashes'
 import auth from './auth'
+import location from './location'
 
 export default async (
   {
     url = '',
     method = 'GET',
     data = {},
-    requiresAuth = false,
     requiresAccess = true,
+    requiresLogin = false,
+    requiresLocation = false,
     mock = false
   } = {}
 ) => {
@@ -24,12 +26,24 @@ export default async (
   const sign = new Hashes.MD5().hex(text + key)
   const encryptType = 3
 
-  if (requiresAuth) {
-    await auth.checkLogin()
+  if (requiresAccess) {
+    if (requiresLogin) {
+      await auth.checkLogin()
+      Object.assign(data, {key: auth.getLoginToken()})
+    } else {
+      if (auth.getLoginToken()) {
+        Object.assign(data, {key: auth.getLoginToken()})
+      } else {
+        if (!auth.getAccessToken()) {
+          await auth.setAccessToken()
+        }
+        Object.assign(data, {key: auth.getAccessToken()})
+      }
+    }
+  }
 
-    Object.assign(data, {key: auth.getSession()})
-  } else if (requiresAccess) {
-    Object.assign(data, {key: await auth.getAccessToken()})
+  if (requiresLocation) {
+    Object.assign(data, location.get())
   }
 
   // mock 数据
