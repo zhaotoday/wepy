@@ -1,0 +1,41 @@
+@import "../utils/index";
+
+@include b(c-products) {
+  @include clearfix;
+
+  padding-left: px2rpx(10px);
+
+  @include e(item) {
+    @include margin(null, null, px2rpx(20px), px2rpx(20px));
+
+    width: px2rpx(333px);
+    border: 1px solid #e6e6e6;
+    float: left;
+
+    image {
+      @include size(px2rpx(333px), px2rpx(226px));
+      @include block--center;
+
+      display: block;
+    }
+  }
+
+  @include e(item-name, item-price) {
+    @include block--center;
+
+    width: px2rpx(333px - 20px * 2);
+  }
+
+  @include e(item-name) {
+    @include margin(px2rpx(15px), null, px2rpx(34px - 10px));
+    @include text--overflow(2);
+    @include block--center;
+
+    height: px2rpx(55px + 10px);
+    line-height: px2rpx(32px);
+  }
+
+  @include e(item-price) {
+    padding-bottom: px2rpx(20px);
+  }
+}

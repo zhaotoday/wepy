@@ -1,5 +1,5 @@
 <template>
-  <view class="c-swiper" wx:if="{{items.length > 1}}">
+  <view class="c-swiper" wx:if="{{items.length > 1}}" @tap="handleTapPreview">
     <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange"
             style="width: {{width}}; height: {{height}};">
       <repeat for="{{items}}" item="item">
@@ -8,7 +8,7 @@
         </swiper-item>
       </repeat>
     </swiper>
-    <indicator :current.sync="current" :length.sync="length"/>
+    <indicator :theme.sync="theme" :current.sync="current" :length.sync="length"/>
   </view>
   <view class="c-swiper" wx:elif="{{items.length === 1}}">
     <image src="{{items[0].image}}" @tap="handleTap({items[0].url})"/>
@@ -32,7 +32,15 @@
         default: []
       },
       width: String,
-      height: String
+      height: String,
+      theme: {
+        type: String,
+        default: 'primary'
+      },
+      preview: {
+        type: Boolean,
+        default: false
+      }
     }
 
     data = {
@@ -56,6 +64,12 @@
       },
       handleChange (e) {
         this.current = e.detail.current
+      },
+      handleTapPreview () {
+        const urls = this.items.map(item => item.image)
+        const current = urls[this.current]
+
+        wepy.previewImage({current, urls})
       }
     }
   }

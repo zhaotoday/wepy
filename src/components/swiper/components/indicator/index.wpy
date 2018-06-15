@@ -1,8 +1,16 @@
 <template>
-  <view class="c-indicator">
+  <view class="c-indicator c-indicator--primary" wx:if="{{theme === 'primary'}}">
     <repeat for="{{items}}" item="item">
-      <text class="c-indicator__item{{item === current ? ' c-indicator__item--active' : ''}}"/>
+      <text class="c-indicator--primary__item{{item === current ? ' c-indicator--primary__item--active' : ''}}"/>
     </repeat>
+  </view>
+  <view class="c-indicator c-indicator--third" wx:if="{{theme === 'third'}}">
+    <repeat for="{{items}}" item="item">
+      <text class="c-indicator--third__item c3 s5{{item === current ? ' c-indicator--third__item--active' : ''}}">{{item + 1}}</text>
+    </repeat>
+  </view>
+  <view class="c-indicator c-indicator--secondary c1 s6" wx:if="{{theme === 'secondary'}}">
+    {{current + 1}}/{{length}}
   </view>
 </template>
 
@@ -20,6 +28,10 @@
       length: {
         type: Number,
         default: 0
+      },
+      theme: {
+        type: String,
+        default: 'primary'
       }
     }
 

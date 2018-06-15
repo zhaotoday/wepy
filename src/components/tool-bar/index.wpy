@@ -1,0 +1,34 @@
+<template>
+  <view class="c-tool-bar">
+    <view class="c-tool-bar__shop c3 s5">店铺</view>
+    <view class="c-tool-bar__c-operations c-operations c7 s1" wx:if="{{status === 1}}">
+      <view class="c-operations__add-to-cart" @tap="handleTapAddToCart">加入购物车</view>
+      <view class="c-operations__buy" @tap="handleTapBuy">立即购买</view>
+    </view>
+    <view class="c-tool-bar__off-button c7 s1" wx:if="{{status === 0}}">商品已下架</view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      status: {
+        type: Number,
+        default: -1
+      }
+    }
+
+    methods = {
+      handleTapAddToCart (e) {
+        this.$emit('add-to-cart', e)
+      },
+      handleTapBuy (e) {
+        this.$emit('buy', e)
+      }
+    }
+  }
+</script>

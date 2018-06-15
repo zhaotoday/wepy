@@ -1,23 +1,60 @@
 @import "../../../../styles/utils/index";
 
 @include b(c-indicator) {
-  @include position--absolute(null, null, px2rpx(20px), 0);
+  @include m(primary) {
+    @include position--absolute(null, null, px2rpx(20px), 0);
 
-  text-align: center;
-  width: 100%;
-  line-height: 100%;
+    text-align: center;
+    width: 100%;
+    line-height: 100%;
 
-  @include e(item) {
-    @include circle(px2rpx(14px));
-    @include margin(0, px2rpx(8px), null, px2rpx(8px));
+    @include e(item) {
+      @include circle(px2rpx(14px));
+      @include margin(0, px2rpx(8px), null, px2rpx(8px));
 
-    display: inline-block;
+      display: inline-block;
+      background-color: map-get($colors, c7);
+      opacity: 0.5;
+
+      @include m(active) {
+        background-color: map-get($colors, c1);
+        opacity: 1;
+      }
+    }
+  }
+
+  @include m(secondary) {
+    @include position--absolute(null, px2rpx(50px), px2rpx(20px));
+    @include text--middle(px2rpx(28px));
+
+    width: px2rpx(50px);
+    text-align: center;
     background-color: map-get($colors, c7);
-    opacity: 0.5;
+    opacity: 0.3;
+    border: 1px solid map-get($colors, c1);
+    border-radius: 2px;
+  }
 
-    @include m(active) {
-      background-color: map-get($colors, c1);
-      opacity: 1;
+  @include m(third) {
+    @include position--absolute(null, px2rpx(42px), px2rpx(12px));
+
+    line-height: 100%;
+
+    @include e(item) {
+      @include margin(0, px2rpx(6px), null, px2rpx(6px));
+      @include text--middle(px2rpx(20px));
+
+      padding: px2rpx(3px);
+      width: px2rpx(20px);
+      text-align: center;
+      display: inline-block;
+      border: 1px solid map-get($colors, c3);
+      border-radius: 2px;
+      opacity: 0.3;
+
+      @include m(active) {
+        opacity: 1;
+      }
     }
   }
 }
