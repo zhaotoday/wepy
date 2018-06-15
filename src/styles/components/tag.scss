@@ -22,4 +22,51 @@
       size: 100% 100%;
     }
   }
+
+  @include m(new) {
+    @include size(px2rpx(60px), px2rpx(28px));
+
+    display: inline-block;
+    line-height: px2rpx(31px);
+    overflow: hidden;
+    font-weight: bold;
+    border: 1px solid map-get($colors, c9);
+    text-align: center;
+  }
+
+  @include m(heart) {
+    @include padding(px2rpx(8px), 0, px2rpx(8px), px2rpx(24px + 10px));
+
+    background: {
+      image: image-url("components/tag/heart.png");
+      repeat: no-repeat;
+      position: 0 center;
+      size: px2rpx(24px) px2rpx(22px);
+    }
+    display: inline-block;
+    height: map-get($font-sizes, s5);
+    line-height: map-get($font-sizes, s5);
+  }
+
+  @include m(coupon) {
+    @include size(px2rpx(141px), px2rpx(44px));
+
+    display: inline-block;
+    text-align: center;
+    border-radius: px2rpx(22px);
+    line-height: px2rpx(44px);
+    border: 1px solid map-get($colors, c1);
+  }
+
+  @include m(arrow) {
+    @include padding(px2rpx(8px), px2rpx(10px + 12px), px2rpx(8px));
+
+    display: inline-block;
+    background: {
+      image: image-url("components/tag/arrow.png");
+      size: px2rpx(12px) px2rpx(20px);
+      repeat: no-repeat;
+      position: right center;
+    }
+  }
 }

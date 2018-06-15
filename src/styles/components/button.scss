@@ -1,0 +1,20 @@
+@import "../../styles/utils/index";
+
+@include b(c-button) {
+  @include m(orange, orange-reverse){
+    @include text--middle(px2rpx(40px));
+
+    width: px2rpx(140px);
+    border-radius: px2rpx(40px);
+    border: 1px solid map-get($colors, c1);
+    text-align: center;
+  }
+
+  @include m(orange) {
+    background-color: map-get($colors, c1);
+  }
+
+  @include m(orange-reverse) {
+    background-color: map-get($colors, c7);
+  }
+}

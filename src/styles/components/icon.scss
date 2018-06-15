@@ -26,4 +26,10 @@
 
     background-image: image-url("components/icon/back.png");
   }
+
+  @include m(hot) {
+    @include size(px2rpx(112px), px2rpx(84px));
+
+    background-image: image-url("components/icon/hot.png");
+  }
 }

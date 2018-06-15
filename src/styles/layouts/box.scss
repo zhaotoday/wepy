@@ -1,0 +1,9 @@
+@import "../utils/index";
+
+@include b(l-box) {
+  background-color: white;
+
+  @include m(margin-bottom) {
+    margin-bottom: px2rpx(20px);
+  }
+}

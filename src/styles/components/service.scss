@@ -1,0 +1,24 @@
+@import "../utils/index";
+
+@include b(c-service) {
+  @include margin(px2rpx(4px), null, px2rpx(4px));
+
+  display: inline-block;
+
+  @include e(dot) {
+    @include size(px2rpx(30px), px2rpx(30px));
+
+    line-height: px2rpx(32px);
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+    border-radius: px2rpx(24px);
+    background-color: map-get($colors, c1);
+    position: relative;
+    top: px2rpx(4px);
+  }
+
+  @include e(body) {
+    @include padding(null, px2rpx(30px), null, px2rpx(10px));
+  }
+}

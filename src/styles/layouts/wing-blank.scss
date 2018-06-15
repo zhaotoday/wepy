@@ -1,0 +1,5 @@
+@import "../utils/index";
+
+@include b(l-wing-blank) {
+  @include margin(null, px2rpx(30px), null, px2rpx(30px));
+}
