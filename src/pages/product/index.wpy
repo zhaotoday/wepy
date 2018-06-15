@@ -1,9 +1,9 @@
 <template>
   <nav-bar title="详情页" :back.sync="navBarBack"/>
-  <view class="product c-main c-main--has-nav-bar">
+  <view class="product c-main c-main--has-nav-bar c-main--has-tool-bar">
     <!-- product-images -->
     <view class="product-images">
-      <c-swiper :items.sync="images" width="100%" height="578rpx"/>
+      <c-swiper theme="secondary" :items.sync="images" width="100%" height="578rpx"/>
       <view class="c-icon c-icon--hot"/>
     </view>
     <!-- /product-images -->
@@ -124,7 +124,9 @@
     </view>
 
     <view class="l-box l-box--margin-bottom">
-      html
+      <view class="product-html" style="width: {{htmlContent.width}}rpx; height: {{htmlContent.height}}rpx;">
+        html content
+      </view>
     </view>
 
     <view class="l-box l-box--margin-bottom">
@@ -133,12 +135,21 @@
           进店的还买了什么
         </view>
         <view class="c-panel__body">
-          啊
+          <view class="c-products">
+            <repeat for="{{recommendedProducts}}" item="item">
+              <view class="c-products__item">
+                <image src="{{item.image}}"/>
+                <view class="c-products__item-name c2 s4">{{item.name}}</view>
+                <view class="c-products__item-price c1 s1">¥ {{item.price}}</view>
+              </view>
+            </repeat>
+          </view>
         </view>
       </view>
     </view>
-
   </view>
+  <tool-bar :status.sync="status" shop-id="0" product-id="1" @add-to-cart.user="handleTapAddToCart"
+            @buy.user="handleTapBuy"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -149,6 +160,7 @@
   import request from '../../utils/request'
   import NavBar from '../../components/nav-bar/index'
   import Swiper from '../../components/swiper/index'
+  import ToolBar from '../../components/tool-bar/index'
   import dayjs from 'dayjs'
 
   export default class extends wepy.page {
@@ -158,7 +170,8 @@
 
     components = {
       'nav-bar': NavBar,
-      'c-swiper': Swiper
+      'c-swiper': Swiper,
+      'tool-bar': ToolBar
     }
 
     mixins = [global]
@@ -222,16 +235,32 @@
         image: '',
         productTotal: ''
       },
-      groups: []
+      groups: [],
+      htmlContent: {
+        width: 750,
+        height: 0,
+        url: ''
+      },
+      recommendedProducts: [],
+      status: 1
     }
 
-    async onLoad () {
+    methods = {
+      handleTapAddToCart () {
+        console.log('add to cart')
+      },
+      handleTapBuy () {
+        console.log('buy')
+      }
+    }
+
+    async onLoad (query) {
       const goodsGetRes = await request({
         requiresLogin: true,
         url: 'goods/get',
         method: 'POST',
         data: {
-          goodsCommonId: 101394
+          goodsCommonId: query.id
         }
       })
 
@@ -313,6 +342,19 @@
           end_at: dayjs(item.endTime * 1000).format('YYYY-MM-DD')
         }
       })
+
+      this.htmlContent = goodsGetRes.htmlContent
+
+      this.recommendedProducts = goodsGetRes.recomndGoods.map(item => {
+        return {
+          id: item.goodsCommonId,
+          name: item.goodsName,
+          image: item.goodsImage,
+          price: item.goodsPrice
+        }
+      })
+
+      this.status = goodsGetRes.goodsState
 
       this.$apply()
     }

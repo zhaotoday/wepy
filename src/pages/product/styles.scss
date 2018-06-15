@@ -9,6 +9,7 @@
 @import "../../styles/layouts/list";
 @import "../../styles/components/button";
 @import "../../styles/components/panel";
+@import "../../styles/components/products";
 
 @include b(product) {
 }
@@ -227,6 +228,13 @@
   }
 }
 
-@include b(recommended-products) {
+@include b(product-html) {
+  @include block--center;
+  @include padding(px2rpx(20px), null, px2rpx(20px));
+}
 
+@include b(product-recommended-products) {
+  .c-panel__head {
+    border-bottom: 0;
+  }
 }

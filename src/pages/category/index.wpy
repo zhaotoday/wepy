@@ -3,7 +3,7 @@
   <view class="category c-main c-main--has-nav-bar">
     <search-bar placeholder="输入你要搜索的分类" @confirm.user="handleSearchConfirm"/>
     <view class="category-ad">
-      <c-swiper :items.sync="ads" width="100%" height="320rpx"/>
+      <c-swiper theme="third" :items.sync="ads" width="100%" height="320rpx"/>
     </view>
     <!-- category-categories -->
     <view wx:if="{{categories.length}}" class="category-categories c-categories">

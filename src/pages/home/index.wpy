@@ -62,11 +62,13 @@
       <view class="c-panel__body">
         <view class="l-cols">
           <repeat for="{{products}}" key="index" index="index" item="item">
-            <view class="l-cols__item">
-              <image class="home-products__image" src="{{item.image}}"/>
-              <view class="home-products__title c2 s2">{{item.name}}</view>
-              <rate :item="item"/>
-            </view>
+            <navigator url="/pages/product/index?id={{item.id}}">
+              <view class="l-cols__item">
+                <image class="home-products__image" src="{{item.image}}"/>
+                <view class="home-products__title c2 s2">{{item.name}}</view>
+                <rate :item="item"/>
+              </view>
+            </navigator>
           </repeat>
         </view>
       </view>
