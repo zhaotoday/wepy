@@ -1,0 +1,320 @@
+<template>
+  <nav-bar title="详情页" :back.sync="navBarBack"/>
+  <view class="product c-main c-main--has-nav-bar">
+    <!-- product-images -->
+    <view class="product-images">
+      <c-swiper :items.sync="images" width="100%" height="578rpx"/>
+      <view class="c-icon c-icon--hot"/>
+    </view>
+    <!-- /product-images -->
+    <view class="l-box l-box--margin-bottom">
+      <view class="l-wing-blank">
+        <view class="product-price">
+          <text class="s2 c1">¥</text>
+          <text class="sd c1">{{price}}</text>
+          <view class="c-tag c-tag--new s6 c9">新品</view>
+          <view class="c-tag c-tag--heart c3 s5">关注</view>
+        </view>
+        <view class="product-original-price c1 s3">¥{{originalPrice}}</view>
+        <view class="product-introduction c2 s2">{{name}}</view>
+        <view class="product-addon c3 s4">
+          <view class="product-addon__item">满{{freeShippingPrice}}包邮</view>
+          <view class="product-addon__item is-second">销量{{sales}}</view>
+          <view class="product-addon__item is-last">{{address}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="l-box l-box--margin-bottom">
+      <view class="l-wing-blank">
+        <view class="product-params product-params--has-arrow s4">
+          <view class="product-params__label c3">领券</view>
+          <view class="product-params__body c2">
+            <repeat for="{{couponTitles}}" item="item">
+              <text class="c-tag c-tag--coupon c1 s5">{{item}}</text>
+            </repeat>
+          </view>
+        </view>
+        <view class="product-params s4">
+          <view class="product-params__label c3">服务</view>
+          <view class="product-params__body c2">
+            <repeat for="{{services}}" item="item" index="index">
+              <view class="c-service" wx:if="{{item.value === 1}}">
+                <text class="c-service__dot s6 c7">{{item.tag}}</text>
+                <text class="c-service__body">{{item.name}}</text>
+              </view>
+            </repeat>
+          </view>
+        </view>
+        <view class="product-params s4">
+          <view class="product-params__label c3">参数</view>
+          <view class="product-params__body c2">
+            <repeat for="{{productData}}" item="item">
+              {{item.attrName}}：{{item.attrValue}}；
+            </repeat>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="l-box l-box--margin-bottom">
+      <view class="l-wing-blank">
+        <view class="product-comment">
+          <view class="product-comment__title c2 s1">
+            商品评论
+            <text class="s4">({{comment.total}})</text>
+            <view class="c-tag c-tag--arrow c1 s5">查看全部评论</view>
+          </view>
+          <view class="product-comment__user">
+            <image src="{{comment.userAvatar ? comment.userAvatar : './images/avatar.jpg'}}"/>
+            <text>{{comment.username}}</text>
+          </view>
+          <view class="product-comment__content c2 s4">{{comment.content}}</view>
+          <view class="product-comment__foot c3 s6">
+            <text>{{comment.created_at}}</text>
+            <text>规格：{{comment.productAttr.name}}{{comment.productAttr.value}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="l-box l-box--margin-bottom">
+      <view class="product-shop l-list">
+        <view class="l-list__item">
+          <view class="c-media">
+            <image src="{{shop.image}}"/>
+            <view class="c-media__body">
+              <view class="c-media__body-title c2 s2">{{shop.name}}</view>
+              <view class="c-media__body-content c3 s4">
+                <text>全部商品</text>
+                <text class="product-shop__product-total">{{shop.productTotal}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="c-button c-button--orange-reverse c1 s5">查看分类</view>
+          <view class="c-button c-button--orange c7 s5">进店逛逛</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="l-box l-box--margin-bottom">
+      <view class="product-groups c-panel">
+        <view class="c-panel__head c2 s1">热品推荐</view>
+        <view class="c-panel__body">
+          <view class="l-list">
+            <repeat for="{{groups}}" item="item">
+              <view class="l-list__item">
+                <view class="c-media">
+                  <image src="{{item.image}}"/>
+                  <view class="c-media__body">
+                    <view class="c-media__body-title c2 s2">{{item.name}}</view>
+                  </view>
+                </view>
+                <view class="product-groups__total c1">
+                  <text class="s2">¥</text>
+                  <text class="s0">{{item.price}}</text>
+                </view>
+                <view class="product-groups__discount-price">
+                  <text class="c2 s5" style="margin-right: 5rpx;">最多可省</text>
+                  <text class="c1 s1">{{item.discountPrice}}</text>
+                </view>
+                <view class="product-groups__end-at c3 s6">{{item.end_at}}</view>
+              </view>
+            </repeat>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="l-box l-box--margin-bottom">
+      html
+    </view>
+
+    <view class="l-box l-box--margin-bottom">
+      <view class="product-recommended-products c-panel">
+        <view class="c-panel__head c2 s1">
+          进店的还买了什么
+        </view>
+        <view class="c-panel__body">
+          啊
+        </view>
+      </view>
+    </view>
+
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import request from '../../utils/request'
+  import NavBar from '../../components/nav-bar/index'
+  import Swiper from '../../components/swiper/index'
+  import dayjs from 'dayjs'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'c-swiper': Swiper
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: true,
+      images: [],
+      name: '',
+      freeShippingPrice: 0,
+      address: '',
+      sales: 0,
+      price: 0,
+      originalPrice: 0,
+      couponTitles: [],
+      isHot: 0,
+      isNew: 0,
+      isFree: 0,
+      isQuality: 0,
+      isVirtual: 0,
+      services: [{
+        key: 'isHot',
+        value: 0,
+        name: '热卖',
+        tag: '热'
+      }, {
+        key: 'isNew',
+        name: '新品',
+        value: 0,
+        tag: '新'
+      }, {
+        key: 'isFree',
+        name: '免服务费',
+        value: 0,
+        tag: '免'
+      }, {
+        key: 'isQuality',
+        name: '正品保证',
+        value: 0,
+        tag: '正'
+      }, {
+        key: 'isVirtual',
+        name: '虚拟商品',
+        value: 0,
+        tag: '虚'
+      }],
+      productData: [],
+      comment: {
+        total: 0,
+        username: '',
+        userAvatar: '',
+        content: '',
+        productAttr: {
+          name: '',
+          value: ''
+        },
+        created_at: ''
+      },
+      shop: {
+        id: 0,
+        name: '',
+        image: '',
+        productTotal: ''
+      },
+      groups: []
+    }
+
+    async onLoad () {
+      const goodsGetRes = await request({
+        requiresLogin: true,
+        url: 'goods/get',
+        method: 'POST',
+        data: {
+          goodsCommonId: 101394
+        }
+      })
+
+      this.images = goodsGetRes.images.map(item => {
+        return {
+          url: '',
+          image: item
+        }
+      })
+
+      this.price = goodsGetRes.goodsPrice
+
+      this.name = goodsGetRes.goodsName
+
+      this.freeShippingPrice = goodsGetRes.freeShippingPrice
+
+      this.address = goodsGetRes.address
+
+      this.sales = goodsGetRes.saleCount
+
+      this.originalPrice = goodsGetRes.goodsMarketPrice
+
+      this.couponTitles = goodsGetRes.couponsTitle
+
+      this.services[0].value = goodsGetRes.isHot
+      this.services[1].value = goodsGetRes.isNew
+      this.services[2].value = goodsGetRes.isFree
+      this.services[3].value = goodsGetRes.isQuality
+      this.services[4].value = goodsGetRes.isVirtual
+
+      this.productData = goodsGetRes.productData
+
+      this.comment = {
+        total: goodsGetRes.evaluation.totalCount,
+        username: goodsGetRes.evaluation.memberName,
+        userAvatar: goodsGetRes.evaluation.memberAvatar,
+        content: goodsGetRes.evaluation.gevalContent,
+        productAttr: {
+          name: goodsGetRes.evaluation.goodsAttr.attrName,
+          value: goodsGetRes.evaluation.goodsAttr.attrValue
+        },
+        created_at: dayjs(goodsGetRes.evaluation.gevalTime * 1000).format('YYYY-MM-DD')
+      }
+
+      this.shop = {
+        id: goodsGetRes.store.storeId,
+        name: goodsGetRes.store.storeName,
+        image: goodsGetRes.store.storeLabel,
+        productTotal: goodsGetRes.store.goodsTotal
+      }
+
+      const groups = [
+        {
+          'groupId': 22,
+          'storeId': 11,
+          'name': '图书8折活动',
+          'sumPrice': 180,
+          'discountPrice': 150,
+          'image': 'http://qmoss-01.oss-cn-hangzhou.aliyuncs.com/data/upload/mall/store/05741876347845520.jpeg',
+          'endTime': 1525067160
+        },
+        {
+          'groupId': 22,
+          'storeId': 11,
+          'name': '图书8折活动',
+          'sumPrice': 180,
+          'discountPrice': 150,
+          'image': 'http://qmoss-01.oss-cn-hangzhou.aliyuncs.com/data/upload/mall/store/05741876347845520.jpeg',
+          'endTime': 1525067160
+        }
+      ]
+
+      this.groups = groups.map(item => {
+        return {
+          name: item.name,
+          image: item.image,
+          price: item.sumPrice,
+          discountPrice: item.discountPrice,
+          end_at: dayjs(item.endTime * 1000).format('YYYY-MM-DD')
+        }
+      })
+
+      this.$apply()
+    }
+  }
+</script>
