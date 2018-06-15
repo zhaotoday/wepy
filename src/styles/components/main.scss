@@ -13,4 +13,8 @@
   @include m(has-tab-bar) {
     bottom: px2rpx(98px);
   }
+
+  @include m(has-tool-bar) {
+    bottom: px2rpx(146px);
+  }
 }
