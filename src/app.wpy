@@ -4,8 +4,12 @@
   import wepy from 'wepy'
   import 'wepy-async-function'
 
+  import { utils } from 'mp-client'
+
   import { setStore } from 'wepy-redux'
   import configStore from './store'
+
+  import location from './utils/location'
 
   const store = configStore()
   setStore(store)
@@ -45,6 +49,9 @@
       },
       pages: [
         'pages/home/index',
+        'pages/comments/index',
+        'pages/product/index',
+        'pages/web-view/index',
         'pages/recommended-shops/index',
         'pages/login/index',
         'pages/category/index',
@@ -54,7 +61,10 @@
       ]
     }
 
-    globalData = {}
+    globalData = {
+      // 记录页面是否停留一段时间
+      stopping: false
+    }
 
     constructor () {
       super()
@@ -65,6 +75,14 @@
     onLaunch () {
       wepy.showShareMenu({
         withShareTicket: true
+      })
+
+      utils.currentPages.clearPages()
+
+      location.set({
+        lat: 26.053183,
+        lng: 119.24174,
+        cityCode: '0591'
       })
     }
   }
