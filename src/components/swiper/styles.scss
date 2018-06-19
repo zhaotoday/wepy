@@ -3,6 +3,7 @@
 @include b(c-swiper) {
   position: relative;
 
+  swiper,
   image {
     @include size(100%, 100%);
   }

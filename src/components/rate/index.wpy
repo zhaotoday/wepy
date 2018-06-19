@@ -1,9 +1,18 @@
 <template>
-  <view class="c-rate c2 s6">
+  <view class="c-rate c2 s6" wx:if="{{theme === 'primary'}}">
     <repeat for="{{zeroToFour}}" index="index">
-      <image src="./images/star{{item.rate >= index + 1 ? '-active' : ''}}.png"/>
+      <image src="./images/star{{value.rate >= index + 1 ? '-active' : ''}}.png"/>
     </repeat>
-    ({{item.score}})
+    ({{value.score}})
+  </view>
+  <view class="c-rate c-rate--secondary" wx:if="{{theme === 'secondary'}}">
+    <view class="c2 s2" style="padding-right: 10rpx;">总评价：</view>
+    <view>
+      <repeat for="{{zeroToFour}}" index="index">
+        <image src="./images/star-secondary{{value.rate >= index + 1 ? '-active' : ''}}.png"/>
+      </repeat>
+    </view>
+    <view class="c1 s4" style="padding-left: 3rpx;">{{value.score}}分好评</view>
   </view>
 </template>
 
@@ -13,6 +22,20 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
+    props = {
+      theme: {
+        type: String,
+        default: 'primary'
+      },
+      value: {
+        type: Object,
+        default: {
+          score: 0,
+          rate: 0
+        }
+      }
+    }
+
     computed = {
       zeroToFour () {
         return Array.from({length: 5}, (v, k) => k)

@@ -1,0 +1,27 @@
+<template>
+  <view class="c-address-picker">
+    <view class="c-address-picker__detail c7 s1">福建省福州市闽侯区软件园 C 区动漫大楼</view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      title: String,
+      back: {
+        type: Boolean,
+        default: true
+      }
+    }
+
+    methods = {
+      handleTapBack () {
+        wepy.navigateBack()
+      }
+    }
+  }
+</script>

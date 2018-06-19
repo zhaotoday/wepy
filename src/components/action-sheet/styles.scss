@@ -1,0 +1,19 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/icon";
+
+@include b(c-nav-bar) {
+  @include position--absolute(0, null, null, 0);
+  @include size(100%, 32px);
+
+  line-height: 32px;
+  border-top: 20px + 10px solid #f5f5f5;
+  border-bottom: 10px solid #f5f5f5;
+  background-color: #f5f5f5;
+  text-align: center;
+
+  .c-icon {
+    @include position--absolute(50%, null, null, px2rpx(10px));
+
+    transform: translateY(-50%);
+  }
+}

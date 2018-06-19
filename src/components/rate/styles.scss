@@ -9,4 +9,18 @@
 
     display: inline-block;
   }
+
+  @include m(secondary) {
+    @include padding(px2rpx(30px), px2rpx(3px), px2rpx(30px));
+
+    view {
+      display: inline-block;
+    }
+
+    image {
+      @include size(px2rpx(24px), px2rpx(24px));
+
+      margin-right: px2rpx(17px);
+    }
+  }
 }

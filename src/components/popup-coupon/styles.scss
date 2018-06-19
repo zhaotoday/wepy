@@ -1,0 +1,76 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/icon";
+@import "../../styles/components/overlay";
+
+@include b(c-popup-coupon) {
+  @include size(100%, px2rpx(950px));
+  @include position--absolute(null, 0, 0, 0);
+
+  background-color: white;
+
+  .c-icon--close {
+    @include position--absolute(px2rpx(-100px), null, null, 50%);
+
+    transform: translateX(-50%);
+  }
+
+  @include e(title) {
+    @include padding(px2rpx(52px), null, px2rpx(30px));
+
+    line-height: 100%;
+    text-align: center;
+  }
+
+  @include e(wrap) {
+    @include size(100%, px2rpx(950px - 110px));
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  @include e(item) {
+    @include size(px2rpx(650px), px2rpx(200px));
+    @include block--center;
+
+    margin-bottom: px2rpx(20px);
+    display: flex;
+    background: {
+      image: image-url("components/popup-coupon/coupon.png");
+      size: 100% 100%;
+    }
+
+    @include m(active) {
+      background-image: image-url("components/popup-coupon/coupon-active.png");
+    }
+  }
+
+  .c-coupon-info {
+    width: px2rpx(472px);
+  }
+
+  .c-coupon-btn {
+
+  }
+}
+
+@include b(c-coupon-info) {
+  @include padding(px2rpx(34px - 5px), null, null, px2rpx(34px));
+
+  box-sizing: border-box;
+
+  @include e(price) {
+    padding-bottom: px2rpx(30px - 15px);
+  }
+
+  @include e(desc) {
+    line-height: 120%;
+  }
+}
+
+@include b(c-coupon-btn) {
+  flex: 1;
+  text-align: center;
+  box-sizing: border-box;
+  line-height: 120%;
+  padding-top: px2rpx(72px);
+}

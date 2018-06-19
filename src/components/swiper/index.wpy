@@ -1,17 +1,18 @@
 <template>
-  <view class="c-swiper" wx:if="{{items.length > 1}}" @tap="handleTapPreview">
-    <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange"
-            style="width: {{width}}; height: {{height}};">
-      <repeat for="{{items}}" item="item">
-        <swiper-item>
-          <image src="{{item.image}}" @tap="handleTap({{item.url}})"/>
-        </swiper-item>
-      </repeat>
-    </swiper>
-    <indicator :theme.sync="theme" :current.sync="current" :length.sync="length"/>
-  </view>
-  <view class="c-swiper" wx:elif="{{items.length === 1}}">
-    <image src="{{items[0].image}}" @tap="handleTap({items[0].url})"/>
+  <view class="c-swiper" style="width: {{width}}; height: {{height}};" @tap="handleTapPreview">
+    <block wx:if="{{items.length > 1}}">
+      <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange">
+        <repeat for="{{items}}" item="item">
+          <swiper-item>
+            <image mode="aspectFill" src="{{item.image}}" @tap="handleTap({{item.url}})"/>
+          </swiper-item>
+        </repeat>
+      </swiper>
+      <indicator :theme.sync="theme" :current.sync="current" :length.sync="length"/>
+    </block>
+    <block wx:elif="{{items.length === 1}}">
+      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})"/>
+    </block>
   </view>
 </template>
 
@@ -66,10 +67,12 @@
         this.current = e.detail.current
       },
       handleTapPreview () {
-        const urls = this.items.map(item => item.image)
-        const current = urls[this.current]
+        if (this.preview) {
+          const urls = this.items.map(item => item.image)
+          const current = urls[this.current]
 
-        wepy.previewImage({current, urls})
+          wepy.previewImage({current, urls})
+        }
       }
     }
   }

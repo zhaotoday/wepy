@@ -1,0 +1,28 @@
+@import "../../styles/utils/index";
+
+@include b(c-address-picker) {
+  @include text--middle(px2rpx(28px));
+
+  width: px2rpx(450px);
+
+  background: {
+    image: image-url("components/address-picker/dropdown.png");
+    size: px2rpx(24px) px2rpx(28px);
+    repeat: no-repeat;
+    position: right center;
+  }
+
+  @include e(detail) {
+    @include text--middle(px2rpx(28px));
+    @include text--overflow;
+
+    padding-left: px2rpx(40px);
+    width: px2rpx(370px);
+    background: {
+      image: image-url("components/address-picker/address.png");
+      size: px2rpx(24px) px2rpx(26px);
+      repeat: no-repeat;
+      position: 0 center;
+    }
+  }
+}

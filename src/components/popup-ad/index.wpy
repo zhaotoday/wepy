@@ -1,0 +1,45 @@
+<template>
+  <overlay :visible.sync="visible"/>
+  <view class="c-popup-ad" hidden="{{!visible}}">
+    <view class="c-popup-ad__c-icon--close c-icon c-icon--close" @tap="handleTapClose"/>
+    <image src="{{item.image}}" mode="widthFix" @tap="handleTapImage"/>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import { utils } from 'mp-client'
+  import Overlay from '../overlay/index'
+
+  export default class extends wepy.component {
+    props = {
+      item: {
+        type: Object,
+        default: {
+          url: '',
+          image: ''
+        }
+      }
+    }
+
+    components = {
+      overlay: Overlay
+    }
+
+    data = {
+      visible: true
+    }
+
+    methods = {
+      handleTapClose () {
+        this.visible = false
+      },
+      handleTapImage () {
+        const url = `/pages/web-view/index?src=${utils.url.encode('https://www.baidu.com/')}`
+        wepy.navigateTo({url})
+      }
+    }
+  }
+</script>
