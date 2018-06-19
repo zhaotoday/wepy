@@ -1,0 +1,64 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+@import "../../styles/components/icon";
+@import "../../styles/layouts/wing-blank";
+@import "../../styles/layouts/box";
+@import "../../styles/components/tag";
+@import "../../styles/components/service";
+@import "../../styles/components/media";
+@import "../../styles/layouts/list";
+@import "../../styles/components/button";
+@import "../../styles/components/panel";
+@import "../../styles/components/products";
+@import "../../styles/components/collect";
+
+@include b(comments) {
+}
+
+@include b(comments-rate) {
+}
+
+@include b(comments-total) {
+  padding-bottom: px2rpx(30px);
+
+  .is-first {
+    margin-right: px2rpx(20px);
+  }
+}
+
+@include b(comments-comment) {
+  @include padding(px2rpx(30px), null, px2rpx(20px));
+
+  @include e(time) {
+    @include position--absolute(50%, 0);
+
+    transform: translateY(-50%);
+  }
+
+  @include e(user) {
+    @include text--middle(px2rpx(48px));
+
+    position: relative;
+    display: flex;
+
+    image {
+      @include circle(px2rpx(48px));
+
+      margin-right: px2rpx(16px);
+    }
+
+    text {
+      flex: 1;
+    }
+  }
+
+  @include e(attr) {
+    @include padding(px2rpx(30px), null, px2rpx(20px));
+
+    line-height: 100%;
+  }
+
+  @include e(content) {
+    @include padding(null, null, px2rpx(20px));
+  }
+}

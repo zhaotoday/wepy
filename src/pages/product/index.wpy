@@ -3,7 +3,7 @@
   <view class="product c-main c-main--has-nav-bar c-main--has-tool-bar">
     <!-- product-images -->
     <view class="product-images">
-      <c-swiper theme="secondary" :items.sync="images" width="100%" height="578rpx"/>
+      <c-swiper theme="secondary" :preview.sync="previewImages" :items.sync="images" width="100%" height="578rpx"/>
       <view class="c-icon c-icon--hot"/>
     </view>
     <!-- /product-images -->
@@ -13,9 +13,9 @@
           <text class="s2 c1">¥</text>
           <text class="sd c1">{{price}}</text>
           <view class="c-tag c-tag--new s6 c9">新品</view>
-          <view class="c-tag c-tag--heart c3 s5">关注</view>
+          <view class="c-collect{{collected ? ' c-collect--active' : ''}} c3 s5" @tap="handleTapCollect">关注</view>
         </view>
-        <view class="product-original-price c1 s3">¥{{originalPrice}}</view>
+        <view class="product-original-price c1 s3" wx:if="{{price !== originalPrice}}">¥{{originalPrice}}</view>
         <view class="product-introduction c2 s2">{{name}}</view>
         <view class="product-addon c3 s4">
           <view class="product-addon__item">满{{freeShippingPrice}}包邮</view>
@@ -26,7 +26,7 @@
     </view>
     <view class="l-box l-box--margin-bottom">
       <view class="l-wing-blank">
-        <view class="product-params product-params--has-arrow s4">
+        <view class="product-params product-params--has-arrow s4" @tap="handleTapGetCoupon">
           <view class="product-params__label c3">领券</view>
           <view class="product-params__body c2">
             <repeat for="{{couponTitles}}" item="item">
@@ -59,9 +59,9 @@
       <view class="l-wing-blank">
         <view class="product-comment">
           <view class="product-comment__title c2 s1">
-            商品评论
+            商品评价
             <text class="s4">({{comment.total}})</text>
-            <view class="c-tag c-tag--arrow c1 s5">查看全部评论</view>
+            <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/comments/index?id={{id}}">查看全部评论</navigator>
           </view>
           <view class="product-comment__user">
             <image src="{{comment.userAvatar ? comment.userAvatar : './images/avatar.jpg'}}"/>
@@ -137,11 +137,11 @@
         <view class="c-panel__body">
           <view class="c-products">
             <repeat for="{{recommendedProducts}}" item="item">
-              <view class="c-products__item">
+              <navigator class="c-products__item" url="/pages/product/index?id={{item.id}}">
                 <image src="{{item.image}}"/>
                 <view class="c-products__item-name c2 s4">{{item.name}}</view>
                 <view class="c-products__item-price c1 s1">¥ {{item.price}}</view>
-              </view>
+              </navigator>
             </repeat>
           </view>
         </view>
@@ -150,6 +150,12 @@
   </view>
   <tool-bar :status.sync="status" shop-id="0" product-id="1" @add-to-cart.user="handleTapAddToCart"
             @buy.user="handleTapBuy"/>
+  <!--<action-sheet>
+    <view slot="content">
+      <text>新的内容</text>
+    </view>
+  </action-sheet>-->
+  <popup-coupon :visible.sync="popupCouponVisible"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -161,7 +167,9 @@
   import NavBar from '../../components/nav-bar/index'
   import Swiper from '../../components/swiper/index'
   import ToolBar from '../../components/tool-bar/index'
-  import dayjs from 'dayjs'
+  import ActionSheet from '../../components/action-sheet/index'
+  import PopupCoupon from '../../components/popup-coupon/index'
+  import { utils } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
@@ -171,15 +179,21 @@
     components = {
       'nav-bar': NavBar,
       'c-swiper': Swiper,
-      'tool-bar': ToolBar
+      'tool-bar': ToolBar,
+      'action-sheet': ActionSheet,
+      'popup-coupon': PopupCoupon
     }
 
     mixins = [global]
 
     data = {
       navBarBack: true,
+      previewImages: true,
+      popupCouponVisible: false,
       images: [],
+      id: 0,
       name: '',
+      collected: 0,
       freeShippingPrice: 0,
       address: '',
       sales: 0,
@@ -251,16 +265,51 @@
       },
       handleTapBuy () {
         console.log('buy')
+      },
+      async handleTapCollect () {
+        try {
+          if (this.collected === 1) {
+            await request({
+              requiresLogin: true,
+              url: 'collection/delGoods',
+              method: 'POST',
+              data: {
+                goodsCommonId: this.id
+              }
+            })
+          } else {
+            await request({
+              requiresLogin: true,
+              url: 'collection/collectGoods',
+              method: 'POST',
+              data: {
+                goodsCommonId: this.id
+              }
+            })
+          }
+
+          this.collected = !this.collected
+
+          this.$apply()
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      async handleTapGetCoupon () {
+        this.popupCouponVisible = true
+        this.$apply()
       }
     }
 
     async onLoad (query) {
+      this.id = query.id
+
       const goodsGetRes = await request({
-        requiresLogin: true,
+        // requiresLogin: true,
         url: 'goods/get',
         method: 'POST',
         data: {
-          goodsCommonId: query.id
+          goodsCommonId: this.id // query.id
         }
       })
 
@@ -274,6 +323,8 @@
       this.price = goodsGetRes.goodsPrice
 
       this.name = goodsGetRes.goodsName
+
+      this.collected = goodsGetRes.collectionState
 
       this.freeShippingPrice = goodsGetRes.freeShippingPrice
 
@@ -302,7 +353,7 @@
           name: goodsGetRes.evaluation.goodsAttr.attrName,
           value: goodsGetRes.evaluation.goodsAttr.attrValue
         },
-        created_at: dayjs(goodsGetRes.evaluation.gevalTime * 1000).format('YYYY-MM-DD')
+        created_at: utils.time.getDate(goodsGetRes.evaluation.gevalTime * 1000)
       }
 
       this.shop = {
@@ -312,34 +363,13 @@
         productTotal: goodsGetRes.store.goodsTotal
       }
 
-      const groups = [
-        {
-          'groupId': 22,
-          'storeId': 11,
-          'name': '图书8折活动',
-          'sumPrice': 180,
-          'discountPrice': 150,
-          'image': 'http://qmoss-01.oss-cn-hangzhou.aliyuncs.com/data/upload/mall/store/05741876347845520.jpeg',
-          'endTime': 1525067160
-        },
-        {
-          'groupId': 22,
-          'storeId': 11,
-          'name': '图书8折活动',
-          'sumPrice': 180,
-          'discountPrice': 150,
-          'image': 'http://qmoss-01.oss-cn-hangzhou.aliyuncs.com/data/upload/mall/store/05741876347845520.jpeg',
-          'endTime': 1525067160
-        }
-      ]
-
-      this.groups = groups.map(item => {
+      this.groups = goodsGetRes.groups.map(item => {
         return {
           name: item.name,
           image: item.image,
           price: item.sumPrice,
           discountPrice: item.discountPrice,
-          end_at: dayjs(item.endTime * 1000).format('YYYY-MM-DD')
+          end_at: utils.time.getDate(item.endTime * 1000)
         }
       })
 

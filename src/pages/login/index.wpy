@@ -1,5 +1,8 @@
 <template>
-  <nav-bar title="身边店"/>
+  <view class="c-nav-bar c2 s0">
+    <view class="c-icon c-icon--back" @tap="handleTapBack"></view>
+    身边店
+  </view>
   <view class="login c-main c-main--has-nav-bar">
     <view class="login-title s0">请先登录账号并授权</view>
     <view class="login-btn c-icon c-icon--mp-login">
@@ -17,10 +20,10 @@
 
 <script>
   import wepy from 'wepy'
-  import helpers from '../../utils/helpers'
   import global from '../../mixins/global'
   import auth from '../../utils/auth'
   import NavBar from '../../components/nav-bar/index'
+  import { utils, helpers } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
@@ -34,7 +37,8 @@
     mixins = [global]
 
     data = {
-      hasNavBar: true
+      hasNavBar: true,
+      page: ''
     }
 
     computed = {}
@@ -46,15 +50,15 @@
         })
       },
 
+      handleTapBack () {
+        this.goBack()
+      },
+
       async handleGetUserInfo (e) {
         const getSettingRes = await wepy.getSetting()
 
         if (!getSettingRes.authSetting['scope.userInfo']) {
-          wepy.showToast({
-            title: '请登录并授权，以便为您提供更好的服务！',
-            icon: 'none',
-            mask: true
-          })
+          this.goBack()
         } else {
           const userInfo = e.detail.userInfo
 
@@ -75,6 +79,30 @@
           wepy.navigateBack()
         }
       }
+    }
+
+    onLoad (query) {
+      this.page = query.page
+    }
+
+    async goBack () {
+      const stop = this.$parent.globalData.stop
+      const currentPages = utils.currentPages.getPages()
+      console.log(stop)
+      const page = stop
+        ? currentPages[currentPages.length - 1]
+        : currentPages[currentPages.length - 2]
+      const url = page.url
+
+      try {
+        await wepy.switchTab({url})
+      } catch (e) {
+        await wepy.navigateBack({delta: (stop ? 1 : 2)})
+      }
+    }
+
+    onShow () {
+      console.log(utils.currentPages.whiteList)
     }
   }
 </script>

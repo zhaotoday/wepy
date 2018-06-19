@@ -3,7 +3,11 @@
   <view class="home c-main c-main--has-nav-bar">
     <!-- home-top-ads -->
     <view class="home-top-ads">
-      <c-swiper-top-ads :items.sync="topAds" width="100%" height="465rpx"/>
+      <view>
+        <c-swiper-top-ads :items.sync="topAds" width="100%" height="465rpx"/>
+      </view>
+      <address-picker/>
+      <view class="c-icon c-icon--scan" @tap="handleTapScan"></view>
     </view>
     <!-- /home-top-ads -->
     <!-- home-categories -->
@@ -11,7 +15,7 @@
       <repeat for="{{categories}}" item="item">
         <navigator url="/pages/recommended-shops/index?id={{item.id}}&name={{item.name}}">
           <view class="c-categories__item c2 s4">
-            <image src="{{item.image}}"/>
+            <image mode="aspectFill" src="{{item.image}}"/>
             {{item.name}}
           </view>
         </navigator>
@@ -36,7 +40,7 @@
           <repeat for="{{shops}}" item="item">
             <view class="l-list__item">
               <view class="c-media">
-                <image src="{{item.image}}"/>
+                <image mode="aspectFill" src="{{item.image}}"/>
                 <view class="c-media__body">
                   <view class="c-media__body-title c2 s2">{{item.name}}</view>
                   <view class="c-media__body-content c3 s4">{{item.introduction}}</view>
@@ -64,9 +68,9 @@
           <repeat for="{{products}}" key="index" index="index" item="item">
             <navigator url="/pages/product/index?id={{item.id}}">
               <view class="l-cols__item">
-                <image class="home-products__image" src="{{item.image}}"/>
+                <image class="home-products__image" mode="aspectFill" src="{{item.image}}"/>
                 <view class="home-products__title c2 s2">{{item.name}}</view>
-                <rate :item="item"/>
+                <rate :value.sync="item"/>
               </view>
             </navigator>
           </repeat>
@@ -74,6 +78,7 @@
       </view>
     </view>
   </view>
+  <popup-ad :item.sync="popupAd"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -86,6 +91,8 @@
   import NavBar from '../../components/nav-bar/index'
   import Swiper from '../../components/swiper/index'
   import Rate from '../../components/rate/index'
+  import AddressPicker from '../../components/address-picker/index'
+  import PopupAd from '../../components/popup-ad/index'
 
   export default class extends wepy.page {
     config = {
@@ -96,7 +103,9 @@
       'nav-bar': NavBar,
       'c-swiper-top-ads': Swiper,
       'c-swiper-inserted-ads': Swiper,
-      rate: Rate
+      'address-picker': AddressPicker,
+      rate: Rate,
+      'popup-ad': PopupAd
     }
 
     mixins = [global]
@@ -107,7 +116,8 @@
       insertedAds: [],
       categories: [],
       shops: [],
-      products: []
+      products: [],
+      popupAd: {}
     }
 
     computed = {}
@@ -115,14 +125,11 @@
     methods = {
       async handleTapScan () {
         // 只允许从相机扫码
-        const scanCode = await wepy.scanCode({
-          onlyFromCamera: true,
-          success: (res) => {
-            console.log(res)
-          }
+        const scanCodeRes = await wepy.scanCode({
+          onlyFromCamera: true
         })
 
-        console.log(scanCode)
+        console.log(scanCodeRes)
       },
       async handleTapAnotherBatch (type) {
         switch (type) {
@@ -213,6 +220,11 @@
           rate: (item.evalScore / 2).toFixed(0)
         }
       })
+
+      this.popupAd = (item => ({
+        url: item.href || '',
+        image: item.imageUrl || ''
+      }))(homeIndexRes.advs.popUpAdv)
 
       this.$apply()
     }

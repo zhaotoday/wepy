@@ -1,0 +1,45 @@
+<template>
+  <view class="container has-tab-bar p-my">
+    <map1></map1>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import request from '../../utils/request'
+  import TabBar from '../../components/tab-bar/index'
+  import Map from '../../components/map/index'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'my page'
+    }
+
+    components = {
+      'tab-bar': TabBar,
+      map1: Map
+    }
+
+    mixins = [global]
+
+    data = {}
+
+    computed = {}
+
+    methods = {}
+
+    events = {}
+
+    async onShow () {
+      const takeAccessRes = await request({
+        url: '/authinfo/takeAccess',
+        method: 'POST'
+      })
+
+      console.log(takeAccessRes)
+    }
+  }
+</script>

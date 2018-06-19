@@ -1,0 +1,24 @@
+<template>
+  <web-view src="{{src}}"></web-view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import { utils } from 'mp-client'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    data = {
+      src: ''
+    }
+
+    onLoad (query) {
+      this.src = utils.url.decode(query.src)
+    }
+  }
+</script>

@@ -10,6 +10,7 @@
 @import "../../styles/components/button";
 @import "../../styles/components/panel";
 @import "../../styles/components/products";
+@import "../../styles/components/collect";
 
 @include b(product) {
 }
@@ -37,7 +38,7 @@
     margin-left: px2rpx(20px);
   }
 
-  .c-tag--heart {
+  .c-collect {
     @include position--absolute(50%, 0);
 
     transform: translateY(-50%);
