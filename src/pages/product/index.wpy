@@ -358,7 +358,7 @@
         name: item.storeName,
         image: item.storeLabel,
         productTotal: item.goodsTotal
-      }))()
+      }))(goodsGetRes.store)
 
       this.groups = goodsGetRes.groups.map(item => ({
         name: item.name,

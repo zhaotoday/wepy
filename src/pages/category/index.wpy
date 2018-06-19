@@ -36,7 +36,7 @@
   import SearchBar from '../../components/search-bar/index'
   import Swiper from '../../components/swiper/index'
 
-  let categories = []
+  let allCategories = []
 
   export default class extends wepy.page {
     config = {
@@ -53,7 +53,6 @@
 
     data = {
       navBarBack: false,
-      pageLoaded: false,
       ads: [],
       categories: [],
       hasNavBar: true
@@ -61,12 +60,13 @@
 
     methods = {
       handleSearchConfirm (e) {
-        this.categories = categories.filter(item => item.name.indexOf(e.detail.value) !== -1)
+        this.categories = allCategories.filter(item => item.name.indexOf(e.detail.value) !== -1)
       }
     }
 
-    async onLoad () {
-      this.pageLoaded = true
+    async onShow () {
+      console.log(this.pageLoaded)
+      // this.pageLoaded = true
 
       const homeGetAllClassesRes = await request({
         url: 'home/getAllClasses',
@@ -85,7 +85,7 @@
         image: item.gcImage
       }))
 
-      categories = Array.from(this.categories)
+      allCategories = Array.from(this.categories)
 
       this.$apply()
     }

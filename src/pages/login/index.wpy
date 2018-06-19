@@ -86,10 +86,10 @@
     }
 
     async goBack () {
-      const stop = this.$parent.globalData.stop
+      const stopping = this.$parent.globalData.stopping
       const currentPages = utils.currentPages.getPages()
-      console.log(stop)
-      const page = stop
+
+      const page = stopping
         ? currentPages[currentPages.length - 1]
         : currentPages[currentPages.length - 2]
       const url = page.url
@@ -97,12 +97,8 @@
       try {
         await wepy.switchTab({url})
       } catch (e) {
-        await wepy.navigateBack({delta: (stop ? 1 : 2)})
+        await wepy.navigateBack({delta: (stopping ? 1 : 2)})
       }
-    }
-
-    onShow () {
-      console.log(utils.currentPages.whiteList)
     }
   }
 </script>
