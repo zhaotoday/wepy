@@ -179,47 +179,37 @@
         requiresLocation: true
       })
 
-      this.topAds = homeIndexRes.advs.topAdvs.map(item => {
-        return {
-          image: item.imageUrl,
-          url: item.href || ''
-        }
-      })
+      this.topAds = homeIndexRes.advs.topAdvs.map(item => ({
+        image: item.imageUrl,
+        url: item.href || ''
+      }))
 
-      this.insertedAds = homeIndexRes.advs.middleAdvs.map(item => {
-        return {
-          image: item.imageUrl,
-          url: item.href || ''
-        }
-      })
+      this.insertedAds = homeIndexRes.advs.middleAdvs.map(item => ({
+        image: item.imageUrl,
+        url: item.href || ''
+      }))
 
-      this.categories = homeIndexRes.recommendClasses.classes.map(item => {
-        return {
-          id: item.gcId,
-          name: item.gcName,
-          image: item.gcImage
-        }
-      })
+      this.categories = homeIndexRes.recommendClasses.classes.map(item => ({
+        id: item.gcId,
+        name: item.gcName,
+        image: item.gcImage
+      }))
 
-      this.shops = homeIndexRes.nearbyStores.stores.map(item => {
-        return {
-          id: item.storeId,
-          name: item.storeName,
-          image: item.storeLabel,
-          introduction: item.storeIntro,
-          distance: filters.distance(item.storeDistance)
-        }
-      })
+      this.shops = homeIndexRes.nearbyStores.stores.map(item => ({
+        id: item.storeId,
+        name: item.storeName,
+        image: item.storeLabel,
+        introduction: item.storeIntro,
+        distance: filters.distance(item.storeDistance)
+      }))
 
-      this.products = homeIndexRes.recommendGoods.goodsList.map(item => {
-        return {
-          id: item.goodsCommonId,
-          name: item.goodsName,
-          image: item.goodsImage,
-          score: item.evalScore,
-          rate: (item.evalScore / 2).toFixed(0)
-        }
-      })
+      this.products = homeIndexRes.recommendGoods.goodsList.map(item => ({
+        id: item.goodsCommonId,
+        name: item.goodsName,
+        image: item.goodsImage,
+        score: item.evalScore,
+        rate: (item.evalScore / 2).toFixed(0)
+      }))
 
       this.popupAd = (item => ({
         url: item.href || '',

@@ -66,20 +66,16 @@
         }
       })
 
-      this.childCategories = storeGetRecommendStoresRes.map(item => {
-        return {
-          name: item.gcName,
-          children: item.stores.map(childItem => {
-            return {
-              name: childItem.storeName,
-              image: childItem.storeLabel,
-              introduction: childItem.storeIntro,
-              distance: filters.distance(childItem.storeDistance),
-              isPurchased: childItem.isPurchased
-            }
-          })
-        }
-      })
+      this.childCategories = storeGetRecommendStoresRes.map(item => ({
+        name: item.gcName,
+        children: item.stores.map(childItem => ({
+          name: childItem.storeName,
+          image: childItem.storeLabel,
+          introduction: childItem.storeIntro,
+          distance: filters.distance(childItem.storeDistance),
+          isPurchased: childItem.isPurchased
+        }))
+      }))
 
       this.$apply()
     }

@@ -305,20 +305,17 @@
       this.id = query.id
 
       const goodsGetRes = await request({
-        // requiresLogin: true,
         url: 'goods/get',
         method: 'POST',
         data: {
-          goodsCommonId: this.id // query.id
+          goodsCommonId: this.id
         }
       })
 
-      this.images = goodsGetRes.images.map(item => {
-        return {
-          url: '',
-          image: item
-        }
-      })
+      this.images = goodsGetRes.images.map(item => ({
+        url: '',
+        image: item
+      }))
 
       this.price = goodsGetRes.goodsPrice
 
@@ -344,45 +341,41 @@
 
       this.productData = goodsGetRes.productData
 
-      this.comment = {
-        total: goodsGetRes.evaluation.totalCount,
-        username: goodsGetRes.evaluation.memberName,
-        userAvatar: goodsGetRes.evaluation.memberAvatar,
-        content: goodsGetRes.evaluation.gevalContent,
+      this.comment = (item => ({
+        total: item.totalCount,
+        username: item.memberName,
+        userAvatar: item.memberAvatar,
+        content: item.gevalContent,
         productAttr: {
-          name: goodsGetRes.evaluation.goodsAttr.attrName,
-          value: goodsGetRes.evaluation.goodsAttr.attrValue
+          name: item.goodsAttr.attrName,
+          value: item.goodsAttr.attrValue
         },
-        created_at: utils.time.getDate(goodsGetRes.evaluation.gevalTime * 1000)
-      }
+        created_at: utils.time.getDate(item.gevalTime * 1000)
+      }))(goodsGetRes.evaluation)
 
-      this.shop = {
-        id: goodsGetRes.store.storeId,
-        name: goodsGetRes.store.storeName,
-        image: goodsGetRes.store.storeLabel,
-        productTotal: goodsGetRes.store.goodsTotal
-      }
+      this.shop = (item => ({
+        id: item.storeId,
+        name: item.storeName,
+        image: item.storeLabel,
+        productTotal: item.goodsTotal
+      }))()
 
-      this.groups = goodsGetRes.groups.map(item => {
-        return {
-          name: item.name,
-          image: item.image,
-          price: item.sumPrice,
-          discountPrice: item.discountPrice,
-          end_at: utils.time.getDate(item.endTime * 1000)
-        }
-      })
+      this.groups = goodsGetRes.groups.map(item => ({
+        name: item.name,
+        image: item.image,
+        price: item.sumPrice,
+        discountPrice: item.discountPrice,
+        end_at: utils.time.getDate(item.endTime * 1000)
+      }))
 
       this.htmlContent = goodsGetRes.htmlContent
 
-      this.recommendedProducts = goodsGetRes.recomndGoods.map(item => {
-        return {
-          id: item.goodsCommonId,
-          name: item.goodsName,
-          image: item.goodsImage,
-          price: item.goodsPrice
-        }
-      })
+      this.recommendedProducts = goodsGetRes.recomndGoods.map(item => ({
+        id: item.goodsCommonId,
+        name: item.goodsName,
+        image: item.goodsImage,
+        price: item.goodsPrice
+      }))
 
       this.status = goodsGetRes.goodsState
 

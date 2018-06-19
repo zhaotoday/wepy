@@ -66,28 +66,24 @@
     }
 
     async onLoad () {
+      this.pageLoaded = true
+
       const homeGetAllClassesRes = await request({
         url: 'home/getAllClasses',
         method: 'POST',
         requiresLocation: true
       })
 
-      this.pageLoaded = true
+      this.ads = homeGetAllClassesRes.advs.map(item => ({
+        image: item.imageUrl,
+        url: item.href || ''
+      }))
 
-      this.ads = homeGetAllClassesRes.advs.map(item => {
-        return {
-          image: item.imageUrl,
-          url: item.href || ''
-        }
-      })
-
-      this.categories = homeGetAllClassesRes.recommendClasses.map(item => {
-        return {
-          id: item.gcId,
-          name: item.gcName,
-          image: item.gcImage
-        }
-      })
+      this.categories = homeGetAllClassesRes.recommendClasses.map(item => ({
+        id: item.gcId,
+        name: item.gcName,
+        image: item.gcImage
+      }))
 
       categories = Array.from(this.categories)
 
