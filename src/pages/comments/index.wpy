@@ -114,7 +114,9 @@
 
     async onLoad (query) {
       this.id = query.id
+    }
 
+    async onShow () {
       this.get()
     }
   }

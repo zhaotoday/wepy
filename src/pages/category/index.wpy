@@ -18,7 +18,7 @@
     </view>
     <!-- /category-categories -->
     <!-- category-no-data -->
-    <view wx:else hidden="{{!pageLoaded}}" class="category-no-data">
+    <view wx:else hidden="{{!shown}}" class="category-no-data">
       <view class="category-no-data__image"></view>
       <view class="category-no-data__tip c1 s4">没有搜到你想要的分类</view>
     </view>
@@ -65,9 +65,6 @@
     }
 
     async onShow () {
-      console.log(this.pageLoaded)
-      // this.pageLoaded = true
-
       const homeGetAllClassesRes = await request({
         url: 'home/getAllClasses',
         method: 'POST',

@@ -50,19 +50,26 @@
     mixins = [global]
 
     data = {
+      id: 0,
+      name: '',
       navBarBack: true,
       navBarTitle: '',
       childCategories: []
     }
 
     async onLoad (query) {
-      this.navBarTitle = `${query.name}店铺推荐`
+      this.id = query.id
+      this.name = query.name
+    }
+
+    async onShow () {
+      this.navBarTitle = `${this.name}店铺推荐`
 
       const storeGetRecommendStoresRes = await request({
         url: 'store/getRecommendStores',
         method: 'POST',
         data: {
-          gcId: query.id
+          gcId: this.id
         }
       })
 

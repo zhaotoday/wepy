@@ -303,7 +303,9 @@
 
     async onLoad (query) {
       this.id = query.id
+    }
 
+    async onShow (query) {
       const goodsGetRes = await request({
         url: 'goods/get',
         method: 'POST',
