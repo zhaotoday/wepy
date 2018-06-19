@@ -1,6 +1,6 @@
-import Storage from './storage'
+import { utils } from 'mp-client'
 
-const location = new Storage('location')
+const location = new utils.Storage('location')
 
 module.exports = {
   set (value) {

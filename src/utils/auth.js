@@ -1,11 +1,11 @@
 import wepy from 'wepy'
+import { utils } from 'mp-client'
 import consts from './consts'
 import request from './request'
-import Storage from './storage'
 
-const accessToken = new Storage('accessToken')
-const loginToken = new Storage('loginToken')
-const userInfo = new Storage('userInfo')
+const accessToken = new utils.Storage('accessToken')
+const loginToken = new utils.Storage('loginToken')
+const userInfo = new utils.Storage('userInfo')
 
 export default {
   async setAccessToken () {
@@ -48,6 +48,11 @@ export default {
    * @returns {Promise}
    */
   async checkLogin () {
+    /* global getCurrentPages */
+    const pages = getCurrentPages()
+    const {route, options} = pages[pages.length - 1]
+    const currentURL = utils.page.toURL({route, options})
+
     // 已授权获取用户信息
     if (this.getUserInfo()) {
       try {
@@ -57,7 +62,7 @@ export default {
         this.login()
       }
     } else {
-      wepy.navigateTo({url: '/pages/login/index'})
+      wepy.navigateTo({url: `/pages/login/index?page=${utils.url.encode(currentURL)}`})
     }
   },
 
