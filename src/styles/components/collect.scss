@@ -1,0 +1,19 @@
+@import "../../styles/utils/index";
+
+@include b(c-collect) {
+  @include padding(px2rpx(8px), 0, px2rpx(8px), px2rpx(24px + 10px));
+
+  background: {
+    image: image-url("components/collect/collect.png");
+    repeat: no-repeat;
+    position: 0 center;
+    size: px2rpx(24px) px2rpx(22px);
+  }
+  display: inline-block;
+  height: map-get($font-sizes, s5);
+  line-height: map-get($font-sizes, s5);
+
+  @include m(active) {
+    background-image: image-url("components/collect/collect-active.png");
+  }
+}

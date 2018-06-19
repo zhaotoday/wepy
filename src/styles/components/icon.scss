@@ -32,4 +32,22 @@
 
     background-image: image-url("components/icon/hot.png");
   }
+
+  @include m(scan) {
+    @include size(px2rpx(68px), px2rpx(68px));
+
+    background-image: image-url("components/icon/scan.png")
+  }
+
+  @include m(close) {
+    @include size(px2rpx(68px), px2rpx(68px));
+
+    background-image: image-url("components/icon/close.png");
+  }
+
+  @include m(close-secondary) {
+    @include size(px2rpx(58px), px2rpx(58px));
+
+    background-image: image-url("components/icon/close-secondary.png");
+  }
 }

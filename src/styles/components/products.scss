@@ -8,12 +8,13 @@
   @include e(item) {
     @include margin(null, null, px2rpx(20px), px2rpx(20px));
 
-    width: px2rpx(333px);
+    display: block;
+    width: px2rpx(332px);
     border: 1px solid #e6e6e6;
     float: left;
 
     image {
-      @include size(px2rpx(333px), px2rpx(226px));
+      @include size(px2rpx(332px), px2rpx(226px));
       @include block--center;
 
       display: block;
@@ -23,7 +24,7 @@
   @include e(item-name, item-price) {
     @include block--center;
 
-    width: px2rpx(333px - 20px * 2);
+    width: px2rpx(332px - 20px * 2);
   }
 
   @include e(item-name) {
