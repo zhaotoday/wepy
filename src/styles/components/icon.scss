@@ -50,4 +50,10 @@
 
     background-image: image-url("components/icon/close-secondary.png");
   }
+
+  @include m(close-third) {
+    @include size(px2rpx(56px), px2rpx(56px));
+
+    background-image: image-url("components/icon/close-third.png");
+  }
 }

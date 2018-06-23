@@ -3,26 +3,34 @@
 @import "../../styles/components/overlay";
 
 @include b(c-popup-coupon) {
-  @include size(100%, px2rpx(950px));
+  @include size(100%, px2rpx(950px - 82px + 3px));
   @include position--absolute(null, 0, 0, 0);
 
   background-color: white;
 
-  .c-icon--close {
-    @include position--absolute(px2rpx(-100px), null, null, 50%);
+  .c-icon--close-third {
+    @include position--absolute(px2rpx(-127px), null, null, 50%);
 
     transform: translateX(-50%);
   }
 
   @include e(title) {
-    @include padding(px2rpx(52px), null, px2rpx(30px));
+    @include position--absolute(px2rpx(-82px + 3px));
+    @include size(100%, px2rpx(110px));
 
+    box-sizing: border-box;
+    padding-top: px2rpx(52px);
     line-height: 100%;
     text-align: center;
+    background: {
+      image: image-url("components/popup-coupon/title.png");
+      size: 100% px2rpx(82px);
+      repeat: no-repeat;
+    }
   }
 
   @include e(wrap) {
-    @include size(100%, px2rpx(950px - 110px));
+    @include position--absolute(px2rpx(30px), 0, 0, 0);
 
     overflow-x: hidden;
     overflow-y: auto;
@@ -47,10 +55,6 @@
   .c-coupon-info {
     width: px2rpx(472px);
   }
-
-  .c-coupon-btn {
-
-  }
 }
 
 @include b(c-coupon-info) {
@@ -69,8 +73,15 @@
 
 @include b(c-coupon-btn) {
   flex: 1;
-  text-align: center;
-  box-sizing: border-box;
-  line-height: 120%;
-  padding-top: px2rpx(72px);
+  position: relative;
+
+  text {
+    @include position--absolute(50%);
+
+    display: block;
+    transform: translateY(-50%);
+    text-align: center;
+    line-height: 120%;
+    width: 100%;
+  }
 }

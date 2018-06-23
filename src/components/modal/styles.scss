@@ -1,0 +1,14 @@
+@import "../../styles/utils/index";
+
+@include b(c-overlay) {
+  @include position--absolute(0, 0, 0, 0);
+
+  background-color: black;
+  opacity: 0.5;
+}
+
+@include b(c-modal) {
+  @include position--absolute(50%, null, null, 50%);
+
+  transform: translate(-50%, -50%);
+}

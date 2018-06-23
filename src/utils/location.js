@@ -1,12 +1,12 @@
 import { utils } from 'mp-client'
 
-const location = new utils.Storage('location')
+const locationStorage = new utils.Storage('location')
 
 module.exports = {
   set (value) {
-    location.set(value)
+    locationStorage.set(value)
   },
   get () {
-    return location.get()
+    return locationStorage.get()
   }
 }

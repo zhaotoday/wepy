@@ -1,7 +1,7 @@
 <template>
   <overlay :visible.sync="visible"/>
   <view class="c-popup-coupon" hidden="{{!visible}}">
-    <view class="c-icon c-icon--close" @tap="handleTapClose"></view>
+    <view class="c-icon c-icon--close-third" @tap="handleTapClose"></view>
     <view class="c-popup-coupon__title c2 s1">店铺优惠券</view>
     <view class="c-popup-coupon__wrap">
       <view class="c-popup-coupon__item c-popup-coupon__item--active">
@@ -15,9 +15,24 @@
             <view>有效期2018.12.13-2019.04.01</view>
           </view>
         </view>
-        <view class="c-coupon-btn c7 s2">
-          <view>立即</view>
-          <view>领取</view>
+        <view class="c-coupon-btn c7 s2" @tap="handleTap">
+          <text>立即\n领取</text>
+        </view>
+      </view>
+
+      <view class="c-popup-coupon__item">
+        <view class="c-coupon-info">
+          <view class="c-coupon-info__price c7">
+            <text class="s0">¥</text>
+            <text class="sd">240</text>
+          </view>
+          <view class="c-coupon-info__desc c7 s4">
+            <view>订单金额满199元使用</view>
+            <view>有效期2018.12.13-2019.04.01</view>
+          </view>
+        </view>
+        <view class="c-coupon-btn c7 s2" @tap="handleTap">
+          <text>已领取</text>
         </view>
       </view>
     </view>

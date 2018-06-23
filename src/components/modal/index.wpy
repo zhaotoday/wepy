@@ -1,0 +1,27 @@
+<template>
+  <view class="c-overlay" hidden="{{!visible}}" @tap="handleTapOverlay"/>
+  <view class="c-modal" hidden="{{!visible}}">
+    <slot name="content"/>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      visible: {
+        type: Boolean,
+        default: true
+      }
+    }
+
+    methods = {
+      handleTapOverlay () {
+        this.visible = false
+      }
+    }
+  }
+</script>

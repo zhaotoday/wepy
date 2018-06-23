@@ -1,0 +1,87 @@
+<template>
+  <modal :visible.sync="visible">
+    <view slot="content">
+      <view class="c-address-selector">
+        <view class="c-address-selector__c-icon--close c-icon c-icon--close" @tap="handleTapClose"></view>
+        <view class="c-address-selector__head">
+          <text class="c-address-selector__tip c1 s5">
+            温馨提示\n
+            当前的位置不是您常用的位置请选择
+          </text>
+        </view>
+        <view class="c-address-selector__body">
+          <view class="c-address-selector__wrap" wx:if="{{location || !!dataItem.currentAddress.addresses}}">
+            <view class="c-address-selector__item c2 s2" @tap="handleTapSetAddress({{location}})" wx:if="{{location}}">
+              <view class="c-address-selector__item-text">{{location.address}}</view>
+              <view class="c-address-selector__item-tag c1 s5">当前</view>
+            </view>
+            <view class="c-address-selector__item c2 s2"
+                  @tap="handleTapSetAddress({{dataItem.currentAddress.addresses}})"
+                  wx:if="{{!!dataItem.currentAddress.addresses}}">
+              <view class="c-address-selector__item-text">{{dataItem.currentAddress.addresses.address}}</view>
+              <view class="c-address-selector__item-tag c1 s5">家</view>
+            </view>
+          </view>
+          <view class="c-address-selector__btn c7 s0">修改收获地址</view>
+        </view>
+      </view>
+    </view>
+  </modal>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import Modal from '../modal/index'
+  import location from '../../utils/location'
+  import request from '../../utils/request'
+
+  export default class extends wepy.component {
+    components = {
+      modal: Modal
+    }
+
+    data = {
+      visible: true
+    }
+
+    props = {
+      dataItem: {
+        type: Object,
+        default: {}
+      }
+    }
+
+    computed = {
+      location () {
+        return location.get()
+      }
+    }
+
+    methods = {
+      handleTapClose () {
+        this.visible = false
+      },
+      async handleTapSetAddress (data) {
+        const {lng, lat, cityCode} = data
+
+        try {
+          await request({
+            url: 'common/setCurrentAddress',
+            method: 'POST',
+            data: {lng, lat, cityCode}
+          })
+
+          this.visible = false
+
+          this.$apply()
+
+          this.get({})
+        } catch (e) {
+
+        }
+      }
+    }
+  }
+</script>

@@ -1,6 +1,6 @@
 <template>
-  <view class="c-address-picker">
-    <view class="c-address-picker__detail c7 s1">福建省福州市闽侯区软件园 C 区动漫大楼</view>
+  <view class="c-address-picker" @tap="handleTapSelectAddress">
+    <view class="c-address-picker__detail c7 s1">{{address}}</view>
   </view>
 </template>
 
@@ -11,16 +11,12 @@
 
   export default class extends wepy.component {
     props = {
-      title: String,
-      back: {
-        type: Boolean,
-        default: true
-      }
+      address: String
     }
 
     methods = {
-      handleTapBack () {
-        wepy.navigateBack()
+      handleTapSelectAddress () {
+        console.log('22')
       }
     }
   }

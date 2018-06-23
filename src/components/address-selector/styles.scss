@@ -1,0 +1,84 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/icon";
+
+@include b(c-address-selector) {
+  width: px2rpx(540px);
+  position: relative;
+
+  @include e(head, body) {
+    width: px2rpx(540px);
+  }
+
+  @include e(head) {
+    background: {
+      image: image-url("components/address-popup/bg.png");
+      size: px2rpx(540px), px2rpx(542px);
+      position: 0 top;
+      repeat: no-repeat;
+    }
+    padding-bottom: px2rpx(3px);
+  }
+
+  @include e(body) {
+    position: relative;
+    top: px2rpx(-3px);
+    background: {
+      image: image-url("components/address-popup/bg.png");
+      size: px2rpx(540px), px2rpx(542px);
+      position: 0 bottom;
+      repeat: no-repeat;
+    }
+    padding-bottom: px2rpx(30px);
+  }
+
+  @include e(c-icon--close) {
+    @include position--absolute(px2rpx(-103px), px2rpx(-15px));
+  }
+
+  @include e(tip) {
+    @include padding(px2rpx(77px - 22px * 0.8), null, px2rpx(50px));
+
+    line-height: 80%;
+    display: block;
+    text-align: center;
+  }
+
+  @include e(wrap) {
+    padding-bottom: px2rpx(56px);
+  }
+
+  @include e(item) {
+    @include block--center;
+    @include text--middle(px2rpx(96px));
+
+    width: px2rpx(540px - 60px * 2);
+    position: relative;
+  }
+
+  @include e(item-text) {
+    @include text--overflow;
+
+    width: px2rpx(350px);
+  }
+
+  @include e(item-tag) {
+    @include position--absolute(50%, 0);
+    @include text--middle(px2rpx(30px));
+
+    border-radius: px2rpx(17px);
+    transform: translateY(-50%);
+    width: px2rpx(62px);
+    text-align: center;
+    border: 1px solid map-get($colors, c1);
+  }
+
+  @include e(btn) {
+    @include block--center;
+    @include text--middle(px2rpx(88px));
+
+    width: px2rpx(420px);
+    text-align: center;
+    background-color: map-get($colors, c1);
+    border-radius: px2rpx(44px);
+  }
+}

@@ -9,8 +9,6 @@
   import { setStore } from 'wepy-redux'
   import configStore from './store'
 
-  import location from './utils/location'
-
   const store = configStore()
   setStore(store)
 
@@ -49,8 +47,8 @@
       },
       pages: [
         'pages/home/index',
-        'pages/comments/index',
         'pages/product/index',
+        'pages/comments/index',
         'pages/web-view/index',
         'pages/recommended-shops/index',
         'pages/login/index',
@@ -78,12 +76,6 @@
       })
 
       utils.currentPages.clearPages()
-
-      location.set({
-        lat: 26.053183,
-        lng: 119.24174,
-        cityCode: '0591'
-      })
     }
   }
 </script>

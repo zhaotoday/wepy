@@ -6,7 +6,7 @@
       <view>
         <c-swiper-top-ads :items.sync="topAds" width="100%" height="465rpx"/>
       </view>
-      <address-picker/>
+      <address-picker :address.sync="address"/>
       <view class="c-icon c-icon--scan" @tap="handleTapScan"></view>
     </view>
     <!-- /home-top-ads -->
@@ -78,7 +78,10 @@
       </view>
     </view>
   </view>
-  <popup-ad :item.sync="popupAd"/>
+  <!--<popup-ad :item.sync="popupAd"/>-->
+  <block wx:if="{{!!currentAddress && currentAddress.choosedAddressFlag !== 1}}">
+    <address-selector :dataItem.sync="currentAddress"/>
+  </block>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -92,7 +95,9 @@
   import Swiper from '../../components/swiper/index'
   import Rate from '../../components/rate/index'
   import AddressPicker from '../../components/address-picker/index'
+  import AddressSelector from '../../components/address-selector/index'
   import PopupAd from '../../components/popup-ad/index'
+  import getLocation from '../../utils/getLocation'
 
   export default class extends wepy.page {
     config = {
@@ -104,6 +109,7 @@
       'c-swiper-top-ads': Swiper,
       'c-swiper-inserted-ads': Swiper,
       'address-picker': AddressPicker,
+      'address-selector': AddressSelector,
       rate: Rate,
       'popup-ad': PopupAd
     }
@@ -112,24 +118,23 @@
 
     data = {
       navBarBack: false,
+      address: '',
       topAds: [],
       insertedAds: [],
       categories: [],
       shops: [],
       products: [],
-      popupAd: {}
+      popupAd: {},
+      currentAddress: null
     }
 
     computed = {}
 
     methods = {
       async handleTapScan () {
-        // 只允许从相机扫码
-        const scanCodeRes = await wepy.scanCode({
+        await wepy.scanCode({
           onlyFromCamera: true
         })
-
-        console.log(scanCodeRes)
       },
       async handleTapAnotherBatch (type) {
         switch (type) {
@@ -173,11 +178,34 @@
     events = {}
 
     async onLoad () {
+      try {
+        const location = await getLocation()
+        this.get({requiresLocation: true, location})
+      } catch (e) {
+        this.get()
+      }
+    }
+
+    async get ({requiresLocation = false, location = {}} = {}) {
       const homeIndexRes = await request({
         url: 'home/index',
         method: 'POST',
-        requiresLocation: true
+        requiresLocation
       })
+
+      this.currentAddress = homeIndexRes.currentAddress
+
+      if (requiresLocation) {
+        if (homeIndexRes.currentAddress.choosedAddressFlag === 1) {} else {
+          console.log('弹窗')
+          if (!homeIndexRes.currentAddress.addresses) {
+            this.address = location.address || ''
+            console.log('选择地址')
+          }
+        }
+      } else {
+        this.address = '请选择收货地址'
+      }
 
       this.topAds = homeIndexRes.advs.topAdvs.map(item => ({
         image: item.imageUrl,

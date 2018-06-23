@@ -5,5 +5,4 @@
 @mixin text--middle($height) {
   height: $height;
   line-height: $height + 3rpx;
-  overflow: hidden;
 }

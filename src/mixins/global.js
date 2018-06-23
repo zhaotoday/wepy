@@ -1,5 +1,5 @@
 import wepy from 'wepy'
-import { utils } from 'mp-client'
+import { utils, helpers } from 'mp-client'
 
 let timer
 
@@ -9,9 +9,7 @@ export default class extends wepy.mixin {
     shown: false
   }
 
-  onShow () {
-    this.shown = true
-
+  async onShow () {
     const whiteList = ['pages/login/index', 'pages/content/index']
 
     utils.currentPages.addWhiteList(whiteList)
@@ -29,6 +27,10 @@ export default class extends wepy.mixin {
         this.$apply()
       }, 500)
     }
+
+    await helpers.sleep(100)
+
+    this.shown = true
   }
 
   onHide () {
