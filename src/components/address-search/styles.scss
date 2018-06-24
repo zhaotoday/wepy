@@ -1,0 +1,39 @@
+@import "../../styles/utils/index";
+@import "../../styles/layouts/box";
+
+@include b(c-address-search) {
+  @include size(100%, px2rpx(106px));
+
+  @include e(city, input) {
+    float: left;
+  }
+
+  @include e(city) {
+    @include text--middle(px2rpx(106px));
+
+    width: px2rpx(122px);
+    margin-left: px2rpx(30px);
+    background: {
+      image: image-url("components/address-search/arrow-down.png");
+      size: px2rpx(20px) px2rpx(10px);
+      position: center right;
+      repeat: no-repeat;
+    }
+  }
+
+  @include e(input) {
+    @include size(px2rpx(540px), px2rpx(66px));
+    @include padding(null, px2rpx(20px), null, px2rpx(20px));
+    @include margin(px2rpx(20px), null, null, px2rpx(26px));
+
+    box-sizing: border-box;
+    border: 1px solid map-get($colors, c4);
+    border-radius: px2rpx(32px);
+
+    input {
+      @include text--middle(px2rpx(64px));
+
+      display: block;
+    }
+  }
+}

@@ -8,15 +8,20 @@
 
 <script>
   import wepy from 'wepy'
+  import AddressSelector from '../address-selector/index'
 
   export default class extends wepy.component {
     props = {
       address: String
     }
 
+    components = {
+      'address-selector': AddressSelector
+    }
+
     methods = {
       handleTapSelectAddress () {
-        console.log('22')
+        this.$emit('select-address')
       }
     }
   }

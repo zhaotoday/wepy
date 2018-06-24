@@ -22,7 +22,7 @@
               <view class="c-address-selector__item-tag c1 s5">家</view>
             </view>
           </view>
-          <view class="c-address-selector__btn c7 s0">修改收获地址</view>
+          <view class="c-address-selector__btn c7 s0" @tap="handleTapModifyAddress">修改收获地址</view>
         </view>
       </view>
     </view>
@@ -43,7 +43,7 @@
     }
 
     data = {
-      visible: true
+      visible: false
     }
 
     props = {
@@ -77,10 +77,16 @@
 
           this.$apply()
 
-          this.get({})
+          this.$emit('get', {requiresLocation: true, location: data})
         } catch (e) {
-
+          console.log(e)
         }
+      },
+      show () {
+        this.visible = true
+      },
+      handleTapModifyAddress () {
+        wepy.navigateTo({url: '/pages/select-address/index'})
       }
     }
   }
