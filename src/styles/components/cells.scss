@@ -4,6 +4,7 @@
   @include e(item) {
     @include padding(null, px2rpx(20px), null, px2rpx(20px));
 
+    position: relative;
     display: flex;
     border-bottom: 1px solid #f2f2f2;
   }
@@ -13,9 +14,8 @@
   }
 
   @include e(item-body) {
+    position: relative;
     flex: 1;
-    color: map-get($colors, c2);
-    font-size: map-get($font-sizes, s2);
     background: {
       size: px2rpx(34px) px2rpx(34px);
       position: center left;

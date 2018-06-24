@@ -70,4 +70,13 @@
       color: map-get($colors, c1);
     }
   }
+
+  @include m(text-secondary) {
+    @include text--middle(px2rpx(50px));
+    @include padding(null, px2rpx(25px), null, px2rpx(25px));
+
+    border: 1px solid map-get($colors, c4);
+    border-radius: px2rpx(25px);
+    display: inline-block;
+  }
 }

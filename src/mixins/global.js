@@ -36,4 +36,21 @@ export default class extends wepy.mixin {
   onHide () {
     clearTimeout(timer)
   }
+
+  methods = {
+    handleImageError (e) {
+      const {type, object, index = -1, childobject, childindex, key = 'image'} = e.currentTarget.dataset
+      const url = `http://localhost:88/components/image/${type}.jpg`
+
+      if (childobject) {
+        this[object][index][childobject][childindex][key] = url
+      } else if (key === '') {
+        this[object] = url
+      } else if (index === -1) {
+        this[object][key] = url
+      } else {
+        this[object][index][key] = url
+      }
+    }
+  }
 }

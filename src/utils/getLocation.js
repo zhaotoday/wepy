@@ -3,9 +3,7 @@ import consts from './consts'
 import location from './location'
 
 export default async () => {
-  const locationValue = location.get()
-
-  if (!locationValue) {
+  if (!location.get()) {
     const getLocationRes = await wepy.getLocation()
     const regeoRes = await wepy.request({
       url: 'https://restapi.amap.com/v3/geocode/regeo',
@@ -23,5 +21,5 @@ export default async () => {
     })
   }
 
-  return locationValue
+  return location.get()
 }
