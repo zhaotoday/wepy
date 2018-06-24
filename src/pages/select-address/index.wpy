@@ -1,0 +1,61 @@
+<template>
+  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
+  <view class="select-address c-main c-main--has-nav-bar">
+    <address-search/>
+    <view class="select-address__c-block c-block">
+      <view class="c-cells">
+        <view class="c-cells__item">
+          <view class="c-cells__item-body">当前地址</view>
+          <view class="c-cells__item-body">
+            <view class="c-tag c-tag--text-secondary c2 s5">重新定位</view>
+          </view>
+        </view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body c3 s3">金牛山公园</view>
+        </view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body">收货地址</view>
+          <view class="c-cells__item-body">
+            <view class="c-tag c-tag--text-secondary c2 s5">添加收货地址</view>
+          </view>
+        </view>
+        <view class="select-address-no-address c1 s4">目前没有收货地址哦！</view>
+        <view class="c-cells__item">
+          <view class="c-cells__item-body">附近地址</view>
+          <view class="c-cells__item-body">
+            <view class="c-tag c-tag--text-secondary c2 s5">更多地址</view>
+          </view>
+        </view>
+      </view>
+      <view class="select-address-more-address">
+        <text class="c3 s3">台江万达\n学生街</text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+  import AddressSearch from '../../components/address-search/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'address-search': AddressSearch
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: true
+    }
+  }
+</script>

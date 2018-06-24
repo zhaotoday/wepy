@@ -7,10 +7,11 @@
     </view>
     <!-- category-categories -->
     <view wx:if="{{categories.length}}" class="category-categories c-categories">
-      <repeat for="{{categories}}" item="item">
+      <repeat for="{{categories}}" item="item" index="index">
         <navigator url="/pages/recommended-shops/index?id={{item.id}}&name={{item.name}}">
           <view class="c-categories__item c2 s4">
-            <image src="{{item.image}}"/>
+            <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product" data-object="categories"
+                   data-index="{{index}}"/>
             {{item.name}}
           </view>
         </navigator>

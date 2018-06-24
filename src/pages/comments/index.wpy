@@ -16,12 +16,13 @@
         </view>
       </view>
     </view>
-    <repeat for="{{resItems}}" item="item">
+    <repeat for="{{resItems}}" item="item" index="index">
       <view class="l-box l-box--margin-bottom">
         <view class="l-wing-blank">
           <view class="comments-comment">
             <view class="comments-comment__user">
-              <image src="{{item.userAvatar ? item.userAvatar : './images/avatar.jpg'}}"/>
+              <image src="{{item.userAvatar || 'error'}}" mode="aspectFill" @error="handleImageError" data-type="avatar"
+                     data-object="resItems" data-index="{{index}}"/>
               <text>{{item.username}}</text>
               <view class="comments-comment__time c3 s6">{{item.created_at}}</view>
             </view>

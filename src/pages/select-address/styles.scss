@@ -1,0 +1,37 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+@import "../../styles/components/tag";
+@import "../../styles/components/block";
+@import "../../styles/components/cells";
+
+@include b(select-address) {
+  @include e(c-block) {
+    @include block--center;
+  }
+
+  .c-tag--text-secondary {
+    @include position--absolute(50%, 0);
+
+    transform: translateY(-50%);
+  }
+}
+
+@include b(select-address-no-address) {
+  @include text--middle(px2rpx(54px * 2 + 154px));
+
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  padding-left: px2rpx(136px + 190px + 20px);
+  background: {
+    image: image-url("pages/select-address/no-address.png");
+    size: px2rpx(190px), px2rpx(154px);
+    position: px2rpx(136px);
+    repeat: no-repeat;
+  }
+}
+
+@include b(select-address-more-address) {
+  @include padding(px2rpx(8px), null, px2rpx(8px));
+  line-height: px2rpx(72px);
+  padding-left: px2rpx(20px);
+}

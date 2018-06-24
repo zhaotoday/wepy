@@ -64,7 +64,8 @@
             <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/comments/index?id={{id}}">查看全部评论</navigator>
           </view>
           <view class="product-comment__user">
-            <image src="{{comment.userAvatar ? comment.userAvatar : './images/avatar.jpg'}}"/>
+            <image src="{{comment.userAvatar || 'error'}}" mode="aspectFill"
+                   @error="handleImageError" data-type="avatar" data-object="comment" data-key="userAvatar"/>
             <text>{{comment.username}}</text>
           </view>
           <view class="product-comment__content c2 s4">{{comment.content}}</view>
@@ -79,7 +80,8 @@
       <view class="product-shop l-list">
         <view class="l-list__item">
           <view class="c-media">
-            <image src="{{shop.image}}"/>
+            <image src="{{shop.image}}" mode="aspectFill" @error="handleImageError" data-type="shop" data-object="shop"
+                  />
             <view class="c-media__body">
               <view class="c-media__body-title c2 s2">{{shop.name}}</view>
               <view class="c-media__body-content c3 s4">
@@ -99,10 +101,11 @@
         <view class="c-panel__head c2 s1">热品推荐</view>
         <view class="c-panel__body">
           <view class="l-list">
-            <repeat for="{{groups}}" item="item">
+            <repeat for="{{groups}}" item="item" index="index">
               <view class="l-list__item">
                 <view class="c-media">
-                  <image src="{{item.image}}"/>
+                  <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
+                         data-object="groups" data-index="{{index}}"/>
                   <view class="c-media__body">
                     <view class="c-media__body-title c2 s2">{{item.name}}</view>
                   </view>
@@ -125,7 +128,7 @@
 
     <view class="l-box l-box--margin-bottom">
       <view class="product-html" style="width: {{htmlContent.width}}rpx; height: {{htmlContent.height}}rpx;">
-        html content
+        {{htmlContent.url}}
       </view>
     </view>
 
@@ -136,9 +139,10 @@
         </view>
         <view class="c-panel__body">
           <view class="c-products">
-            <repeat for="{{recommendedProducts}}" item="item">
+            <repeat for="{{recommendedProducts}}" item="item" index="index">
               <navigator class="c-products__item" url="/pages/product/index?id={{item.id}}">
-                <image src="{{item.image}}"/>
+                <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
+                       data-object="recommendedProducts" data-index="{{index}}"/>
                 <view class="c-products__item-name c2 s4">{{item.name}}</view>
                 <view class="c-products__item-price c1 s1">¥ {{item.price}}</view>
               </navigator>

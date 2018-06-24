@@ -4,7 +4,7 @@
     <view class="my-info">
       <view class="c-block">
         <view class="c-icon c-icon--setup"></view>
-        <image class="my-info__avatar" src="{{avatar}}"></image>
+        <image class="my-info__avatar" src="{{avatar || 'error'}}" mode="aspectFill" data-type="avatar" data-object="avatar" data-key=""/>
         <view class="my-info__name">{{username}}</view>
         <view class="c-cols">
           <view class="c-cols__item c-middle">
@@ -39,7 +39,7 @@
     <view class="my-order c-block">
       <view class="c-cells">
         <view class="c-cells__item">
-          <view class="c-cells__item-body">我的订单</view>
+          <view class="c-cells__item-body c2 s2">我的订单</view>
           <view class="c-cells__item-foot">查看更多订单</view>
         </view>
       </view>
@@ -71,23 +71,23 @@
     <view class="my-others c-block">
       <view class="c-cells">
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item-body--address">地址管理</view>
+          <view class="c-cells__item-body c2 s2 c-cells__item-body--address">地址管理</view>
           <view class="c-cells__item-foot"></view>
         </view>
         <view class="c-cells__item">
-          <view class="c-cells__item-body c-cells__item-body--comment">收到的评论</view>
+          <view class="c-cells__item-body c2 s2 c-cells__item-body--comment">收到的评论</view>
           <view class="c-cells__item-foot">添加/修改</view>
         </view>
         <view class="c-cells__item" wx:if="{{is_seller}}">
-          <view class="c-cells__item-body c-cells__item-body--shopkeeper">我是店主</view>
+          <view class="c-cells__item-body c2 s2 c-cells__item-body--shopkeeper">我是店主</view>
           <view class="c-cells__item-foot"></view>
         </view>
         <view class="c-cells__item" wx:if="{{is_deliveryman}}">
-          <view class="c-cells__item-body c-cells__item-body--carrier">我是配送员</view>
+          <view class="c-cells__item-body c2 s2 c-cells__item-body--carrier">我是配送员</view>
           <view class="c-cells__item-foot"></view>
         </view>
         <view class="c-cells__item" wx:if="{{is_salesman}}">
-          <view class="c-cells__item-body c-cells__item-body--seller">我是销售</view>
+          <view class="c-cells__item-body c2 s2 c-cells__item-body--seller">我是销售</view>
           <view class="c-cells__item-foot"></view>
         </view>
       </view>
