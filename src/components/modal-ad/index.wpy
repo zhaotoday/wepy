@@ -1,17 +1,20 @@
 <template>
-  <overlay :visible.sync="visible"/>
-  <view class="c-popup-ad" hidden="{{!visible}}">
-    <view class="c-popup-ad__c-icon--close c-icon c-icon--close" @tap="handleTapClose"/>
-    <image src="{{item.image}}" mode="widthFix" @tap="handleTapImage"/>
-  </view>
+  <modal>
+    <view slot="content">
+      <view class="c-modal-ad">
+        <view class="c-icon c-icon--close" @tap="hide"/>
+        <image src="{{item.image}}" mode="widthFix" @tap="navigate"/>
+      </view>
+    </view>
+  </modal>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
+  import Modal from '../modal/index'
   import { utils } from 'mp-client'
-  import Overlay from '../overlay/index'
 
   export default class extends wepy.component {
     props = {
@@ -25,18 +28,17 @@
     }
 
     components = {
-      overlay: Overlay
-    }
-
-    data = {
-      visible: true
+      modal: Modal
     }
 
     methods = {
-      handleTapClose () {
-        this.visible = false
+      hide () {
+        this.$invoke('modal', 'hide')
       },
-      handleTapImage () {
+      show () {
+        this.$invoke('modal', 'show')
+      },
+      navigate () {
         const url = `/pages/web-view/index?src=${utils.url.encode('https://www.baidu.com/')}`
         wepy.navigateTo({url})
       }

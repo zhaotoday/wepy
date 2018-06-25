@@ -6,19 +6,23 @@ export default async () => {
   if (!location.get()) {
     const getLocationRes = await wepy.getLocation()
     const regeoRes = await wepy.request({
-      url: 'https://restapi.amap.com/v3/geocode/regeo',
+      url: `${consts.AMAP_WEB_SERVICE_BASE_URL}/geocode/regeo`,
       data: {
         key: consts.AMAP_WEB_SERVICE_KEY,
         location: `${getLocationRes.longitude},${getLocationRes.latitude}`
       }
     })
 
-    location.set({
-      lat: getLocationRes.latitude,
+    const locationValue = (address => ({
       lng: getLocationRes.longitude,
-      cityCode: regeoRes.data.regeocode.addressComponent.citycode,
-      address: regeoRes.data.regeocode.formatted_address
-    })
+      lat: getLocationRes.latitude,
+      province: address.province,
+      city: address.city,
+      cityCode: address.citycode,
+      address: address.district + address.township + address.streetNumber.street + address.streetNumber.number
+    }))(regeoRes.data.regeocode.addressComponent)
+
+    location.set(locationValue)
   }
 
   return location.get()

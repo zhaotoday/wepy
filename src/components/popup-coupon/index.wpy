@@ -1,5 +1,5 @@
 <template>
-  <overlay :visible.sync="visible"/>
+  <view class="c-overlay" hidden="{{!visible}}"/>
   <view class="c-popup-coupon" hidden="{{!visible}}">
     <view class="c-icon c-icon--close-third" @tap="handleTapClose"></view>
     <view class="c-popup-coupon__title c2 s1">店铺优惠券</view>
@@ -43,7 +43,6 @@
 
 <script>
   import wepy from 'wepy'
-  import Overlay from '../overlay/index'
 
   export default class extends wepy.component {
     props = {
@@ -52,10 +51,6 @@
         default: false,
         twoWay: true
       }
-    }
-
-    components = {
-      overlay: Overlay
     }
 
     methods = {

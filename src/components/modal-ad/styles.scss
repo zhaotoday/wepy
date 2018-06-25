@@ -2,7 +2,7 @@
 @import "../../styles/components/icon";
 @import "../../styles/components/overlay";
 
-@include b(c-popup-ad) {
+@include b(c-modal-ad) {
   @include position--absolute(50%, null, null, 50%);
 
   width: px2rpx(554px);

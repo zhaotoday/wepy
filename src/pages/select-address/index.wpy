@@ -7,11 +7,11 @@
         <view class="c-cells__item">
           <view class="c-cells__item-body">当前地址</view>
           <view class="c-cells__item-body">
-            <view class="c-tag c-tag--text-secondary c2 s5">重新定位</view>
+            <view class="c-tag c-tag--text-secondary c2 s5" @tap="getCurrentLocation">重新定位</view>
           </view>
         </view>
         <view class="c-cells__item">
-          <view class="c-cells__item-body c3 s3">金牛山公园</view>
+          <view class="c-cells__item-body c3 s3">{{currentLocation.address}}</view>
         </view>
         <view class="c-cells__item">
           <view class="c-cells__item-body">收货地址</view>
@@ -27,8 +27,10 @@
           </view>
         </view>
       </view>
-      <view class="select-address-more-address">
-        <text class="c3 s3">台江万达\n学生街</text>
+      <view class="select-address-more-address c3 s3">
+        <repeat for="{{nearbyLocations}}" item="item">
+          <view class="more-address__item">{{item.address}}</view>
+        </repeat>
       </view>
     </view>
   </view>
@@ -41,6 +43,7 @@
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
   import AddressSearch from '../../components/address-search/index'
+  import location from '../../utils/loc'
 
   export default class extends wepy.page {
     config = {
@@ -55,7 +58,39 @@
     mixins = [global]
 
     data = {
-      navBarBack: true
+      navBarBack: true,
+      currentLocation: {},
+      nearbyLocations: []
+    }
+
+    methods = {
+      async getCurrentLocation () {
+        const getSettingRes = await wepy.getSetting()
+
+        if (getSettingRes.authSetting['scope.userLocation']) {
+          location.remove()
+          this.renderLocations()
+        } else {
+          try {
+            await wepy.authorize({scope: 'scope.userLocation'})
+            location.remove()
+            this.renderLocations()
+          } catch (e) {
+            console.log(e)
+          }
+        }
+      }
+    }
+
+    async renderLocations () {
+      this.currentLocation = await location.getCurrentLocation()
+      this.nearbyLocations = await location.getNearbyLocations()
+
+      this.$apply()
+    }
+
+    async onShow () {
+      this.renderLocations()
     }
   }
 </script>

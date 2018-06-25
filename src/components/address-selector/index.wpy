@@ -34,7 +34,7 @@
 <script>
   import wepy from 'wepy'
   import Modal from '../modal/index'
-  import location from '../../utils/location'
+  import location from '../../utils/loc'
   import request from '../../utils/request'
 
   export default class extends wepy.component {

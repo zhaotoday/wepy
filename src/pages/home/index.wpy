@@ -81,7 +81,9 @@
       </view>
     </view>
   </view>
-  <!--<popup-ad :item.sync="popupAd"/>-->
+  <!--
+  <modal-ad :item.sync="modalAd"/>
+  -->
   <block wx:if="{{!!currentAddress}}">
     <address-selector :dataItem.sync="currentAddress" @get.user="get"/>
   </block>
@@ -99,8 +101,8 @@
   import Rate from '../../components/rate/index'
   import AddressPicker from '../../components/address-picker/index'
   import AddressSelector from '../../components/address-selector/index'
-  import PopupAd from '../../components/popup-ad/index'
-  import getLocation from '../../utils/getLocation'
+  import ModalAd from '../../components/modal-ad/index'
+  import location from '../../utils/loc'
 
   export default class extends wepy.page {
     config = {
@@ -114,7 +116,7 @@
       'address-picker': AddressPicker,
       'address-selector': AddressSelector,
       rate: Rate,
-      'popup-ad': PopupAd
+      'modal-ad': ModalAd
     }
 
     mixins = [global]
@@ -127,7 +129,7 @@
       categories: [],
       shops: [],
       products: [],
-      popupAd: {},
+      modalAd: {},
       currentAddress: null
     }
 
@@ -188,9 +190,11 @@
 
     async onLoad () {
       try {
-        const location = await getLocation()
-        this.get({requiresLocation: true, location})
-        console.log(location)
+        const getCurrentLocationRes = await location.getCurrentLocation()
+        this.get({
+          requiresLocation: true,
+          location: getCurrentLocationRes
+        })
       } catch (e) {
         this.get()
       }
@@ -255,7 +259,7 @@
         rate: (item.evalScore / 2).toFixed(0)
       }))
 
-      this.popupAd = (item => ({
+      this.modalAd = (item => ({
         url: item.href || '',
         image: item.imageUrl || ''
       }))(homeIndexRes.advs.popUpAdv)

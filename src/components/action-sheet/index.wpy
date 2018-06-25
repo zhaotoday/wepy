@@ -1,5 +1,5 @@
 <template>
-  <overlay :visible.sync="visible"/>
+  <view class="c-overlay" hidden="{{!visible}}"/>
   <view class="c-action-sheet">
     <slot name="content"></slot>
   </view>
@@ -9,13 +9,8 @@
 
 <script>
   import wepy from 'wepy'
-  import Overlay from '../overlay/index'
 
   export default class extends wepy.component {
-    components = {
-      overlay: Overlay
-    }
-
     data = {
       visible: true
     }
