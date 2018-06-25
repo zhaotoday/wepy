@@ -1,5 +1,5 @@
 <template>
-  <view class="c-overlay" hidden="{{!visible}}" @tap="handleTapOverlay"/>
+  <view class="c-overlay" hidden="{{!visible}}" @tap="hide"/>
   <view class="c-modal" hidden="{{!visible}}">
     <slot name="content"/>
   </view>
@@ -11,15 +11,15 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
-    props = {
-      visible: {
-        type: Boolean,
-        default: true
-      }
+    data = {
+      visible: true
     }
 
     methods = {
-      handleTapOverlay () {
+      show () {
+        this.visible = true
+      },
+      hide () {
         this.visible = false
       }
     }

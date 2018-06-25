@@ -1,8 +1,8 @@
 <template>
-  <modal :visible.sync="visible">
+  <modal>
     <view slot="content">
       <view class="c-address-selector">
-        <view class="c-address-selector__c-icon--close c-icon c-icon--close" @tap="handleTapClose"></view>
+        <view class="c-address-selector__c-icon--close c-icon c-icon--close" @tap="hide"/>
         <view class="c-address-selector__head">
           <text class="c-address-selector__tip c1 s5">
             温馨提示\n
@@ -11,12 +11,12 @@
         </view>
         <view class="c-address-selector__body">
           <view class="c-address-selector__wrap" wx:if="{{location || !!dataItem.currentAddress.addresses}}">
-            <view class="c-address-selector__item c2 s2" @tap="handleTapSetAddress({{location}})" wx:if="{{location}}">
+            <view class="c-address-selector__item c2 s2" @tap="setAddress({{location}})" wx:if="{{location}}">
               <view class="c-address-selector__item-text">{{location.address}}</view>
               <view class="c-address-selector__item-tag c1 s5">当前</view>
             </view>
             <view class="c-address-selector__item c2 s2"
-                  @tap="handleTapSetAddress({{dataItem.currentAddress.addresses}})"
+                  @tap="setAddress({{dataItem.currentAddress.addresses}})"
                   wx:if="{{!!dataItem.currentAddress.addresses}}">
               <view class="c-address-selector__item-text">{{dataItem.currentAddress.addresses.address}}</view>
               <view class="c-address-selector__item-tag c1 s5">家</view>
@@ -60,10 +60,13 @@
     }
 
     methods = {
-      handleTapClose () {
-        this.visible = false
+      hide () {
+        this.$invoke('modal', 'hide')
       },
-      async handleTapSetAddress (data) {
+      show () {
+        this.$invoke('modal', 'show')
+      },
+      async setAddress (data) {
         const {lng, lat, cityCode} = data
 
         try {
@@ -73,17 +76,11 @@
             data: {lng, lat, cityCode}
           })
 
-          this.visible = false
-
-          this.$apply()
-
+          this.$invoke('modal', 'hide')
           this.$emit('get', {requiresLocation: true, location: data})
         } catch (e) {
           console.log(e)
         }
-      },
-      show () {
-        this.visible = true
       },
       handleTapModifyAddress () {
         wepy.navigateTo({url: '/pages/select-address/index'})
