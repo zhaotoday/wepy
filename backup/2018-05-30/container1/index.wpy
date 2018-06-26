@@ -1,0 +1,32 @@
+<template>
+  <view class="l-container">
+    <view class="l-container__head">
+      <slot name="head"></slot>
+    </view>
+    <view class="l-container__body">
+      <slot name="body"></slot>
+    </view>
+    <view class="l-container__foot">
+      <slot name="foot"></slot>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      'has-nav-bar': {
+        type: Boolean,
+        default: false
+      },
+      'has-tab-bar': {
+        type: Boolean,
+        default: false
+      }
+    }
+  }
+</script>

@@ -1,0 +1,24 @@
+@import "../../styles/utils/index";
+
+@include b(l-container) {
+  @include position--absolute(0, 0, 0, 0);
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @include e(head, body, foot) {
+    @include position--absolute(null, 0, null, 0);
+  }
+
+  @include e(head) {
+    top: 0;
+  }
+
+  @include e(body) {
+    bottom: 0;
+  }
+
+  @include e(foot) {
+    bottom: 0;
+  }
+}

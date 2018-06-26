@@ -18,7 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "jshashes": "^1.0.7",
-    "mp-client": "0.0.18",
+    "lodash-decorators": "^6.0.0",
+    "mp-client": "0.0.20",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-promise": "^0.5.3",
