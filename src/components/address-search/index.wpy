@@ -1,6 +1,6 @@
 <template>
   <view class="c-address-search l-box l-box--margin-bottom">
-    <view class="c-address-search__city c2 s2">福州市</view>
+    <view class="c-address-search__city c2 s2" @tap="toggle">{{city}}</view>
     <view class="c-address-search__input">
       <input class="c2 s4" placeholder="请输入地址" placeholder-style="color: #bbb;"/>
     </view>
@@ -13,6 +13,17 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
+    props = {
+      city: {
+        type: String,
+        default: ''
+      }
+    }
 
+    methods = {
+      toggle () {
+        this.$emit('toggle', null)
+      }
+    }
   }
 </script>

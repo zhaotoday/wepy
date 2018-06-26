@@ -10,15 +10,15 @@
         </view>
       </view>
     </view>
-    <scroll-view id="scroll-view" scroll-y scroll-with-animation scroll-into-view="{{toView}}" @scroll="scroll">
+    <scroll-view scroll-y scroll-with-animation scroll-into-view="{{toView}}">
       <repeat for="{{cities}}" item="item">
-        <view class="c-city-selector__title c2 s3 js-initial" id="{{item.initial}}">
-          {{item.initial}}
+        <view class="c-city-selector__title c2 s3" id="{{item.letter}}">
+          {{item.letter}}
         </view>
         <view class="c-block">
           <view class="c-cells">
-            <repeat for="{{item.children}}" item="childItem">
-              <view class="c-cells__item" @tap="selectAddress({{childItem}})">
+            <repeat for="{{item.items}}" item="childItem">
+              <view class="c-cells__item" @tap="toggle({{childItem}})">
                 <view class="c-cells__item-body c2 s3">{{childItem}}</view>
               </view>
             </repeat>
@@ -38,102 +38,31 @@
 
 <script>
   import wepy from 'wepy'
-  import request from '../../utils/request'
-  import { debounce } from 'lodash-decorators'
+  import cities from '../../utils/cities'
 
   export default class extends wepy.component {
     data = {
       toView: '',
-      letters: [
-        '#',
-        'A', 'B', 'C', 'D', 'E', 'F', 'G',
-        'H', 'I', 'J', 'K', 'L', 'M', 'N',
-        'O', 'P', 'Q', 'R', 'S', 'T',
-        'U', 'V', 'W', 'X', 'Y', 'Z'
-      ],
-      // 接口返回的城市数据
-      citiesRes: [],
-      // 格式化后的城市数据
-      cities: [],
-      // scroll-view 组件 Rect
-      scrollViewRect: {},
-      // 当前大写子母 Rect
-      currentRect: {}
+      letters: [],
+      cities: []
     }
 
     methods = {
       scrollIntoView (letter) {
-        this.toView = letter
+        this.toView = letter === '#' ? 'A' : letter
       },
-      selectAddress (city) {
-        console.log(city)
-      },
-      async scroll (e) {
-        await this.debounceScroll()
+      toggle (city) {
+        this.$emit('toggle', city)
       }
     }
 
-    async onLoad () {
-      await this.renderCitiesRes()
-      await this.renderCities()
-      await this.renderScrollViewRect()
-      await this.renderCurrentRect()
-    }
+    onLoad () {
+      const letters = cities.map(item => item.letter)
 
-    @debounce(100)
-    async debounceScroll () {
-      await this.renderCurrentRect()
-      await this.renderCities()
-    }
-
-    async renderCitiesRes () {
-      const getCityListRes = await request({
-        url: 'city/getCityList',
-        method: 'POST'
-      })
-
-      this.citiesRes = getCityListRes.map(item => ({
-        initial: item.initial,
-        children: item.list
-      }))
+      this.letters = ['#', ...letters]
+      this.cities = cities
 
       this.$apply()
-    }
-
-    renderCities () {
-      this.cities = this.citiesRes.map(item => ({
-        initial: item.initial,
-        children: item.children.filter((value, index) => item.initial === this.currentRect.id || index < 15)
-      }))
-      this.$apply()
-    }
-
-    async renderScrollViewRect () {
-      this.scrollViewRect = await this.getScrollViewRect()
-      this.$apply()
-    }
-
-    async renderCurrentRect () {
-      this.currentRect = await this.getCurrentRect()
-      this.$apply()
-    }
-
-    getScrollViewRect () {
-      return new Promise(resolve => {
-        wepy.createSelectorQuery().select('#scroll-view').boundingClientRect(rect => {
-          resolve(rect)
-        }).exec()
-      })
-    }
-
-    getCurrentRect () {
-      return new Promise(resolve => {
-        wepy.createSelectorQuery().selectAll('.js-initial').boundingClientRect(rects => {
-          const currentRects = rects.filter(item => item.top <= this.scrollViewRect.top)
-
-          resolve(currentRects[currentRects.length - 1])
-        }).exec()
-      })
     }
   }
 </script>
