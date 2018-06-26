@@ -10,9 +10,9 @@
         </view>
       </view>
     </view>
-    <scroll-view scroll-y scroll-with-animation scroll-into-view="{{toView}}">
+    <scroll-view id="scroll-view" scroll-y scroll-with-animation scroll-into-view="{{toView}}" @scroll="scroll">
       <repeat for="{{cities}}" item="item">
-        <view class="c-city-selector__title c2 s3" id="{{item.initial}}">
+        <view class="c-city-selector__title c2 s3 js-initial" id="{{item.initial}}">
           {{item.initial}}
         </view>
         <view class="c-block">
@@ -39,6 +39,7 @@
 <script>
   import wepy from 'wepy'
   import request from '../../utils/request'
+  import { debounce } from 'lodash-decorators'
 
   export default class extends wepy.component {
     data = {
@@ -50,7 +51,14 @@
         'O', 'P', 'Q', 'R', 'S', 'T',
         'U', 'V', 'W', 'X', 'Y', 'Z'
       ],
-      cities: []
+      // 接口返回的城市数据
+      citiesRes: [],
+      // 格式化后的城市数据
+      cities: [],
+      // scroll-view 组件 Rect
+      scrollViewRect: {},
+      // 当前大写子母 Rect
+      currentRect: {}
     }
 
     methods = {
@@ -59,21 +67,73 @@
       },
       selectAddress (city) {
         console.log(city)
+      },
+      async scroll (e) {
+        await this.debounceScroll()
       }
     }
 
     async onLoad () {
+      await this.renderCitiesRes()
+      await this.renderCities()
+      await this.renderScrollViewRect()
+      await this.renderCurrentRect()
+    }
+
+    @debounce(100)
+    async debounceScroll () {
+      await this.renderCurrentRect()
+      await this.renderCities()
+    }
+
+    async renderCitiesRes () {
       const getCityListRes = await request({
         url: 'city/getCityList',
         method: 'POST'
       })
 
-      this.cities = getCityListRes.map(item => ({
+      this.citiesRes = getCityListRes.map(item => ({
         initial: item.initial,
-        children: item.list.filter((value, index) => index < 15)
+        children: item.list
       }))
 
       this.$apply()
+    }
+
+    renderCities () {
+      this.cities = this.citiesRes.map(item => ({
+        initial: item.initial,
+        children: item.children.filter((value, index) => item.initial === this.currentRect.id || index < 15)
+      }))
+      this.$apply()
+    }
+
+    async renderScrollViewRect () {
+      this.scrollViewRect = await this.getScrollViewRect()
+      this.$apply()
+    }
+
+    async renderCurrentRect () {
+      this.currentRect = await this.getCurrentRect()
+      this.$apply()
+    }
+
+    getScrollViewRect () {
+      return new Promise(resolve => {
+        wepy.createSelectorQuery().select('#scroll-view').boundingClientRect(rect => {
+          resolve(rect)
+        }).exec()
+      })
+    }
+
+    getCurrentRect () {
+      return new Promise(resolve => {
+        wepy.createSelectorQuery().selectAll('.js-initial').boundingClientRect(rects => {
+          const currentRects = rects.filter(item => item.top <= this.scrollViewRect.top)
+
+          resolve(currentRects[currentRects.length - 1])
+        }).exec()
+      })
     }
   }
 </script>
