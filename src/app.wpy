@@ -26,29 +26,29 @@
         list: [{
           pagePath: 'pages/home/index',
           text: '首页',
-          iconPath: 'static/images/app/tab-bar/home.png',
-          selectedIconPath: 'static/images/app/tab-bar/home-active.png'
+          iconPath: 'styles/images/tab-bar/home.png',
+          selectedIconPath: 'styles/images/tab-bar/home-active.png'
         }, {
           pagePath: 'pages/category/index',
           text: '分类',
-          iconPath: 'static/images/app/tab-bar/category.png',
-          selectedIconPath: 'static/images/app/tab-bar/category-active.png'
+          iconPath: 'styles/images/tab-bar/category.png',
+          selectedIconPath: 'styles/images/tab-bar/category-active.png'
         }, {
           pagePath: 'pages/cart/index',
           text: '购物车',
-          iconPath: 'static/images/app/tab-bar/cart.png',
-          selectedIconPath: 'static/images/app/tab-bar/cart-active.png'
+          iconPath: 'styles/images/tab-bar/cart.png',
+          selectedIconPath: 'styles/images/tab-bar/cart-active.png'
         }, {
           pagePath: 'pages/my/index',
           text: '我的',
-          iconPath: 'static/images/app/tab-bar/my.png',
-          selectedIconPath: 'static/images/app/tab-bar/my-active.png'
+          iconPath: 'styles/images/tab-bar/my.png',
+          selectedIconPath: 'styles/images/tab-bar/my-active.png'
         }]
       },
       pages: [
+        'pages/home/index',
         'pages/select-address/index',
         'pages/select-city/index',
-        'pages/home/index',
         'pages/product/index',
         'pages/comments/index',
         'pages/web-view/index',
