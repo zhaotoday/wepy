@@ -1,0 +1,79 @@
+<template>
+  <view class="c-city-selector">
+    <view class="c-city-selector__current c-block">
+      <view class="c-cells">
+        <view class="c-cells__item">
+          <view class="c-cells__item-body c2 s3">当前：福州</view>
+          <view class="c-cells__item-body">
+            <view class="c-tag c-tag--text-secondary c2 s5" @tap="getCurrentLocation">重新定位</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-y scroll-with-animation scroll-into-view="{{toView}}">
+      <repeat for="{{cities}}" item="item">
+        <view class="c-city-selector__title c2 s3" id="{{item.initial}}">
+          {{item.initial}}
+        </view>
+        <view class="c-block">
+          <view class="c-cells">
+            <repeat for="{{item.children}}" item="childItem">
+              <view class="c-cells__item" @tap="selectAddress({{childItem}})">
+                <view class="c-cells__item-body c2 s3">{{childItem}}</view>
+              </view>
+            </repeat>
+          </view>
+        </view>
+      </repeat>
+    </scroll-view>
+    <view class="c-city-selector__sidebar c1 s5">
+      <repeat for="{{letters}}" item="item">
+        <view class="c-city-selector__letter" @tap="scrollIntoView({{item}})">{{item}}</view>
+      </repeat>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import request from '../../utils/request'
+
+  export default class extends wepy.component {
+    data = {
+      toView: '',
+      letters: [
+        '#',
+        'A', 'B', 'C', 'D', 'E', 'F', 'G',
+        'H', 'I', 'J', 'K', 'L', 'M', 'N',
+        'O', 'P', 'Q', 'R', 'S', 'T',
+        'U', 'V', 'W', 'X', 'Y', 'Z'
+      ],
+      cities: []
+    }
+
+    methods = {
+      scrollIntoView (letter) {
+        this.toView = letter
+      },
+      selectAddress (city) {
+        console.log(city)
+      }
+    }
+
+    async onLoad () {
+      const getCityListRes = await request({
+        url: 'city/getCityList',
+        method: 'POST'
+      })
+
+      this.cities = getCityListRes.map(item => ({
+        initial: item.initial,
+        children: item.list.filter((value, index) => index < 15)
+      }))
+
+      this.$apply()
+    }
+  }
+</script>

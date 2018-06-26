@@ -43,7 +43,7 @@
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
   import AddressSearch from '../../components/address-search/index'
-  import location from '../../utils/loc'
+  import location from '../../utils/location'
 
   export default class extends wepy.page {
     config = {

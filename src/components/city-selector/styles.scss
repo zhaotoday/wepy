@@ -1,0 +1,51 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/block";
+@import "../../styles/components/cells";
+@import "../../styles/components/tag";
+
+@include b(c-city-selector) {
+  @include position--absolute(px2rpx(106px + 20px), 0, 0, 0);
+
+  .c-block {
+    @include block--center;
+  }
+
+  .c-cells__item-body {
+    @include text--middle(px2rpx(78px));
+  }
+
+  @include e(current) {
+    .c-cells__item-body {
+      @include text--middle(px2rpx(88px));
+    }
+
+    .c-tag--text-secondary {
+      right: px2rpx(35px) !important;
+    }
+  }
+
+  @include e(sidebar) {
+    @include position--absolute(0, 0, 0);
+
+    padding-top: px2rpx(42px - 36px / 2);
+
+    width: px2rpx(80px);
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  @include e(letter) {
+    @include text--middle(px2rpx(36px));
+
+    text-align: center;
+  }
+
+  @include e(title) {
+    @include padding(px2rpx(30px), null, px2rpx(20px), px2rpx(50px));
+
+    line-height: 100%;
+  }
+
+  scroll-view {
+    @include position--absolute(px2rpx(90px), 0, 0, 0);
+  }
+}

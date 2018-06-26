@@ -46,6 +46,7 @@
         }]
       },
       pages: [
+        'pages/select-city/index',
         'pages/select-address/index',
         'pages/home/index',
         'pages/product/index',

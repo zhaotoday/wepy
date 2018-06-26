@@ -102,7 +102,7 @@
   import AddressPicker from '../../components/address-picker/index'
   import AddressSelector from '../../components/address-selector/index'
   import ModalAd from '../../components/modal-ad/index'
-  import location from '../../utils/loc'
+  import location from '../../utils/location'
 
   export default class extends wepy.page {
     config = {

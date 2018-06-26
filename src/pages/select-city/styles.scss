@@ -1,0 +1,16 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+
+@include b(select-city) {
+  overflow: hidden !important;
+
+  .c-block {
+    @include block--center;
+  }
+
+  .c-tag {
+    @include position--absolute(50%, 0);
+
+    transform: translateY(-50%);
+  }
+}

@@ -2,7 +2,7 @@ import wepy from 'wepy'
 import consts from './consts'
 import Hashes from 'jshashes'
 import auth from './auth'
-import locationStorage from './location'
+import location from './location'
 
 export default async (
   {
@@ -43,7 +43,7 @@ export default async (
   }
 
   if (requiresLocation) {
-    Object.assign(data, locationStorage.get())
+    Object.assign(data, location.get())
   }
 
   // mock 数据

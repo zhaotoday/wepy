@@ -5,7 +5,7 @@
 @import "../../styles/components/cells";
 
 @include b(select-address) {
-  @include e(c-block) {
+  .c-block {
     @include block--center;
   }
 

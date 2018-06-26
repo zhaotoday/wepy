@@ -4,4 +4,8 @@
   width: px2rpx(690px);
   border-radius: px2rpx(20px);
   background-color: white;
+
+  @include m(margin-bottom) {
+    margin-bottom: px2rpx(20px);
+  }
 }
