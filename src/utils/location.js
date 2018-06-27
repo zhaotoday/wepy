@@ -65,5 +65,24 @@ export default {
           address: item.name
         }
       })
+  },
+
+  async secureClear () {
+    return new Promise(async (resolve, reject) => {
+      const getSettingRes = await wepy.getSetting()
+
+      if (getSettingRes.authSetting['scope.userLocation']) {
+        this.remove()
+        resolve()
+      } else {
+        try {
+          await wepy.authorize({scope: 'scope.userLocation'})
+          this.remove()
+          resolve()
+        } catch (e) {
+          reject(e)
+        }
+      }
+    })
   }
 }

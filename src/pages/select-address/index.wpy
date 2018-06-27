@@ -2,13 +2,13 @@
   <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
   <view class="select-address c-main c-main--has-nav-bar">
     <address-search :city.sync="city" @toggle.user="toggleCitySelector"/>
-    <city-selector wx:if="{{citySelectorVisible}}" @toggle.user="toggleCitySelector"/>
+    <city-selector @toggle.user="toggleCitySelector" wx:if="{{citySelectorVisible}}"/>
     <view class="select-address__c-block c-block" wx:else>
       <view class="c-cells">
         <view class="c-cells__item">
           <view class="c-cells__item-body">当前地址</view>
           <view class="c-cells__item-body">
-            <view class="c-tag c-tag--text-secondary c2 s5" @tap="getCurrentLocation">重新定位</view>
+            <view class="c-tag c-tag--text-secondary c2 s5" @tap="reloadLocation">重新定位</view>
           </view>
         </view>
         <view class="c-cells__item">
@@ -69,20 +69,12 @@
     }
 
     methods = {
-      async getCurrentLocation () {
-        const getSettingRes = await wepy.getSetting()
-
-        if (getSettingRes.authSetting['scope.userLocation']) {
-          location.remove()
+      async reloadLocation () {
+        try {
+          await location.secureClear()
           this.renderLocations()
-        } else {
-          try {
-            await wepy.authorize({scope: 'scope.userLocation'})
-            location.remove()
-            this.renderLocations()
-          } catch (e) {
-            console.log(e)
-          }
+        } catch (e) {
+          console.log(e)
         }
       },
       toggleCitySelector (city) {
@@ -96,11 +88,11 @@
     async renderLocations () {
       this.currentLocation = await location.getCurrentLocation()
       this.nearbyLocations = await location.getNearbyLocations()
+      this.$apply()
     }
 
-    async onShow () {
+    onShow () {
       this.renderLocations()
-      this.$apply()
     }
   }
 </script>

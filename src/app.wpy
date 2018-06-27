@@ -46,9 +46,8 @@
         }]
       },
       pages: [
-        'pages/home/index',
         'pages/select-address/index',
-        'pages/select-city/index',
+        'pages/home/index',
         'pages/product/index',
         'pages/comments/index',
         'pages/web-view/index',

@@ -2,10 +2,10 @@
   <view class="c-city-selector">
     <view class="c-city-selector__current c-block">
       <view class="c-cells">
-        <view class="c-cells__item">
-          <view class="c-cells__item-body c2 s3">当前：福州</view>
+        <view class="c-cells__item" @tap="toggle({{city}})">
+          <view class="c-cells__item-body c2 s3">当前：{{city}}</view>
           <view class="c-cells__item-body">
-            <view class="c-tag c-tag--text-secondary c2 s5" @tap="getCurrentLocation">重新定位</view>
+            <view class="c-tag c-tag--text-secondary c2 s5" @tap.stop="reloadLocation">重新定位</view>
           </view>
         </view>
       </view>
@@ -18,8 +18,8 @@
         <view class="c-block">
           <view class="c-cells">
             <repeat for="{{item.items}}" item="childItem">
-              <view class="c-cells__item" @tap="toggle({{childItem}})">
-                <view class="c-cells__item-body c2 s3">{{childItem}}</view>
+              <view class="c-cells__item" @tap="toggle({{childItem + '市'}})">
+                <view class="c-cells__item-body c2 s3">{{childItem + '市'}}</view>
               </view>
             </repeat>
           </view>
@@ -39,20 +39,28 @@
 <script>
   import wepy from 'wepy'
   import cities from '../../utils/cities'
+  import location from '../../utils/location'
 
   export default class extends wepy.component {
     data = {
+      city: location.get()['city'],
       toView: '',
       letters: [],
       cities: []
     }
 
     methods = {
+      async reloadLocation () {
+        await location.secureClear()
+        this.city = (await location.getCurrentLocation())['city']
+        this.$apply()
+      },
       scrollIntoView (letter) {
         this.toView = letter === '#' ? 'A' : letter
       },
       toggle (city) {
         this.$emit('toggle', city)
+        this.toView = ''
       }
     }
 

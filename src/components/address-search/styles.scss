@@ -33,7 +33,7 @@
     border-radius: px2rpx(32px);
 
     input {
-      @include text--middle(px2rpx(64px));
+      @include text--middle(px2rpx(60px));
 
       display: block;
     }

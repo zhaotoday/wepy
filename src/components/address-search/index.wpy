@@ -2,7 +2,8 @@
   <view class="c-address-search l-box l-box--margin-bottom">
     <view class="c-address-search__city c2 s2" @tap="toggle">{{city}}</view>
     <view class="c-address-search__input">
-      <input class="c2 s4" placeholder="请输入地址" placeholder-style="color: #bbb;"/>
+      <input class="c2 s4" placeholder="请输入地址" confirm-type="search" placeholder-style="color: #bbb;"
+             @confirm="search"/>
     </view>
   </view>
 </template>
@@ -23,6 +24,9 @@
     methods = {
       toggle () {
         this.$emit('toggle', null)
+      },
+      search (e) {
+        console.log(this.city + e.detail.value)
       }
     }
   }
