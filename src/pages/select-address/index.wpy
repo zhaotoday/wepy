@@ -1,9 +1,9 @@
 <template>
   <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
   <view class="select-address c-main c-main--has-nav-bar">
-    <address-search :city.sync="city" @toggle.user="toggleCitySelector"/>
-    <city-selector @toggle.user="toggleCitySelector" wx:if="{{citySelectorVisible}}"/>
-    <view class="select-address__c-block c-block" wx:else>
+    <address-search class="l-box l-box--margin-bottom" :city.sync="city" @toggle.user="toggleCitySelector"/>
+    <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}"/>
+    <view class="select-address__c-block c-block" hidden="{{citySelectorVisible}}">
       <view class="c-cells">
         <view class="c-cells__item">
           <view class="c-cells__item-body">当前地址</view>

@@ -1,0 +1,140 @@
+<template>
+  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
+  <view class="more-address c-main c-main--has-nav-bar">
+    <address-search modifier="secondary" :city.sync="city" @toggle.user="toggleCitySelector"/>
+    <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}"/>
+    <view hidden="{{citySelectorVisible}}">
+      <view class="map-wrap">
+        <map
+          id="map"
+          latitude="{{map.latitude}}"
+          longitude="{{map.longitude}}"
+          show-location
+          @regionchange="regionChange"
+        ></map>
+      </view>
+      <view class="results-wrap">
+        <view class="c-tabs c2 s2">
+          <repeat for="{{types}}" item="item">
+            <view class="c-tabs__item" @tap="getLocations({{item.code}})">
+              <view class="c-tabs__item-wrap{{currentType === item.code ? ' c-tabs__item-wrap--active' : ''}}">
+                {{item.name}}
+              </view>
+            </view>
+          </repeat>
+        </view>
+        <view class="c-results">
+          <repeat for="{{nearbyLocations}}" item="item">
+            <view class="c-results__item">
+              <view class="c-results__item-title c2 s3">{{item.name}}</view>
+              <view class="c-results__item-extra c3 s4">{{item.address}}</view>
+            </view>
+          </repeat>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+  import AddressSearch from '../../components/address-search/index'
+  import CitySelector from '../../components/city-selector/index'
+  import map from '../../utils/map'
+  import location from '../../utils/location'
+
+  const {lng: longitude, lat: latitude} = location.get()
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'address-search': AddressSearch,
+      'city-selector': CitySelector
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: true,
+      city: location.get()['city'] || '',
+      citySelectorVisible: false,
+      nearbyLocations: [],
+      currentType: '120201|120302|141200',
+      types: [{
+        name: '全部',
+        code: '120201|120302|141200'
+      }, {
+        name: '写字楼',
+        code: '120201'
+      }, {
+        name: '小区',
+        code: '120302'
+      }, {
+        name: '学校',
+        code: '141200'
+      }],
+      map: {
+        latitude,
+        longitude
+      },
+      location: {
+        latitude,
+        longitude
+      }
+    }
+
+    methods = {
+      toggleCitySelector (city) {
+        if (city) {
+          this.city = city
+        }
+        this.citySelectorVisible = !this.citySelectorVisible
+      },
+      moveToLocation: function () {
+        this.mapCtx.moveToLocation()
+      },
+      async getLocations (code) {
+        this.currentType = code
+        this.getNearbyLocations()
+      },
+      regionChange (e) {
+        if (e.type === 'end') {
+          this.getNearbyLocations()
+        }
+      }
+    }
+
+    getNearbyLocations () {
+      this.mapCtx.getCenterLocation({
+        success: async res => {
+          console.log(res)
+          const {lng, lat, cityCode} = await map.getLocation({
+            location: {lng: res.longitude, lat: res.latitude}
+          })
+          this.location = {
+            longitude: res.longitude,
+            latitude: res.latitude
+          }
+          this.nearbyLocations = await location.getNearbyLocations({
+            types: this.currentType,
+            location: {lng, lat, cityCode}
+          })
+          this.$apply()
+        }
+      })
+    }
+
+    async onLoad () {
+      this.mapCtx = wepy.createMapContext('map')
+      this.getNearbyLocations()
+    }
+  }
+</script>

@@ -46,6 +46,9 @@
         }]
       },
       pages: [
+        'pages/add-address/index',
+        'pages/search-address/index',
+        'pages/more-address/index',
         'pages/select-address/index',
         'pages/home/index',
         'pages/product/index',

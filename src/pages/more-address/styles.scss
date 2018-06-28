@@ -1,0 +1,26 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+@import "../../styles/components/tabs";
+@import "../../styles/components/results";
+
+@include b(more-address) {
+  @include b(map-wrap) {
+    map {
+      @include size(100%, px2rpx(430px));
+    }
+  }
+
+  @include b(results-wrap) {
+    @include position--absolute(px2rpx(88px + 430px), 0, 0, 0);
+
+    background-color: white;
+    overflow: hidden;
+
+    .c-results {
+      @include position--absolute(px2rpx(88px + 1px), 0, 0, 0);
+
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+}

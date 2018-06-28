@@ -1,0 +1,18 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+@import "../../styles/components/tabs";
+@import "../../styles/components/results";
+
+@include b(search-address) {
+  @include b(c-results) {
+    @include position--absolute(px2rpx(88px + 1px), 0, 0, 0);
+
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    @include e(item) {
+      padding-left: px2rpx(30px);
+    }
+  }
+}

@@ -19,6 +19,12 @@
       position: center right;
       repeat: no-repeat;
     }
+
+    view {
+      @include text--overflow;
+
+      width: px2rpx(120px);
+    }
   }
 
   @include e(input) {
@@ -33,9 +39,33 @@
     border-radius: px2rpx(32px);
 
     input {
-      @include text--middle(px2rpx(60px));
+      @include text--middle(px2rpx(50px));
+      @include position--relative(50%);
 
+      transform: translateY(-50%);
       display: block;
+    }
+  }
+
+  @include m(secondary) {
+    $height-secondary: 56px + 16px * 2;
+
+    height: px2rpx($height-secondary);
+
+    .c-address-search__city {
+      @include text--middle(px2rpx($height-secondary));
+
+      border-radius: px2rpx($height-secondary / 2);
+    }
+  }
+
+  @include m(no-city) {
+    .c-address-search__city {
+      display: none;
+    }
+
+    .c-address-search__input {
+      width: px2rpx(750px - 26px * 2) !important;
     }
   }
 }

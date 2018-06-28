@@ -1,0 +1,18 @@
+@import "../utils/index";
+
+@include b(c-results) {
+  @include e(item) {
+    @include size(100%, px2rpx(128px));
+
+    border-bottom: 1px solid #f2f2f2;
+    padding-left: px2rpx(68px);
+  }
+
+  @include e(item-title, item-extra) {
+    line-height: 100%;
+  }
+
+  @include e(item-title) {
+    @include padding(px2rpx(30px), null, px2rpx(20px));
+  }
+}

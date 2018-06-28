@@ -1,0 +1,50 @@
+<template>
+  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
+  <view class="add-address c-main c-main--has-nav-bar">
+    abc
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+  import AddressSearch from '../../components/address-search/index'
+  import location from '../../utils/location'
+
+  const {lng: longitude, lat: latitude} = location.get()
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'address-search': AddressSearch
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: true,
+      city: location.get()['city'] || '',
+      nearbyLocations: [],
+      location: {
+        latitude,
+        longitude
+      }
+    }
+
+    methods = {
+      async confirm (e) {
+        this.nearbyLocations = await location.getNearbyLocations({
+          keywords: e.detail.value
+        })
+        this.$apply()
+      }
+    }
+  }
+</script>

@@ -20,6 +20,9 @@
     }
 
     .c-tag--text-secondary {
+      @include position--absolute(50%);
+
+      transform: translateY(-50%);
       right: px2rpx(35px) !important;
     }
   }

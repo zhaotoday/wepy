@@ -1,9 +1,11 @@
 <template>
-  <view class="c-address-search l-box l-box--margin-bottom">
-    <view class="c-address-search__city c2 s2" @tap="toggle">{{city}}</view>
+  <view class="c-address-search{{modifierClass}}">
+    <view class="c-address-search__city c2 s2" @tap="toggle">
+      <view>{{city}}</view>
+    </view>
     <view class="c-address-search__input">
       <input class="c2 s4" placeholder="请输入地址" confirm-type="search" placeholder-style="color: #bbb;"
-             @confirm="search"/>
+             @confirm="confirm"/>
     </view>
   </view>
 </template>
@@ -18,6 +20,18 @@
       city: {
         type: String,
         default: ''
+      },
+      modifier: {
+        type: String,
+        default: ''
+      }
+    }
+
+    computed = {
+      modifierClass () {
+        return this.modifier
+          ? ' ' + this.modifier.split(',').map(item => `c-address-search--${item}`).join(' ')
+          : ''
       }
     }
 
@@ -25,8 +39,8 @@
       toggle () {
         this.$emit('toggle', null)
       },
-      search (e) {
-        console.log(this.city + e.detail.value)
+      confirm (e) {
+        this.$emit('confirm', e)
       }
     }
   }
