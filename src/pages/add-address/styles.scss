@@ -1,18 +1,60 @@
 @import "../../styles/utils/index";
 @import "../../styles/components/main";
-@import "../../styles/components/tabs";
-@import "../../styles/components/results";
+@import "../../styles/components/block";
+@import "../../styles/components/cells";
+@import "../../styles/components/tag";
+@import "../../styles/components/button";
 
-@include b(search-address) {
-  @include b(c-results) {
-    @include position--absolute(px2rpx(88px + 1px), 0, 0, 0);
+@include b(add-address) {
+  .c-block {
+    @include block--center;
 
-    background-color: white;
-    overflow-x: hidden;
-    overflow-y: auto;
+    margin-top: px2rpx(20px);
+  }
 
-    @include e(item) {
-      padding-left: px2rpx(30px);
+  .c-cells__item-body {
+    @include text--middle(px2rpx(86px));
+  }
+
+  .gender-tags {
+    @include position--absolute(50%, 0);
+
+    transform: translateY(-50%);
+
+    .c-tag {
+      margin-right: px2rpx(20px);
     }
+  }
+
+  .contact-list {
+    @include position--absolute(50%, 0);
+    @include text--middle(px2rpx(86px));
+
+    transform: translateY(-50%);
+    width: px2rpx(150px);
+    text-align: center;
+    border-left: 1px solid #f2f2f2;
+
+    button {
+      @include position--absolute(0, 0, 0, 0);
+
+      opacity: 0;
+    }
+  }
+
+  input {
+    width: px2rpx(320px);
+  }
+
+  .c-cells__item-input {
+    .c-tag {
+      margin-right: px2rpx(40px);
+    }
+  }
+
+  .c-button--orange-lg {
+    @include block--center;
+
+    margin-top: px2rpx(100px);
   }
 }

@@ -1,7 +1,52 @@
 <template>
   <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
   <view class="add-address c-main c-main--has-nav-bar">
-    abc
+    <view class="c-block c-cells">
+      <view class="c-cells__item">
+        <view class="c-cells__item-body">收货人</view>
+        <view class="c-cells__item-input">
+          <input class="c4 s4" placeholder="姓名" confirm-type="search" placeholder-style="color: #bbb;"
+                 @confirm="confirm"/>
+        </view>
+        <view class="gender-tags s5">
+          <view class="c-tag c-tag--text-third">先生</view>
+          <view class="c-tag c-tag--text-third active">女士</view>
+        </view>
+      </view>
+      <view class="c-cells__item">
+        <view class="c-cells__item-body">联系电话</view>
+        <view class="c-cells__item-input">
+          <input class="c4 s4" placeholder="收货人电话" confirm-type="search" placeholder-style="color: #bbb;"
+                 @confirm="confirm"/>
+        </view>
+        <view class="contact-list c2 s2">
+          +通讯录
+          <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">啊</button>
+        </view>
+      </view>
+      <view class="c-cells__item">
+        <view class="c-cells__item-body">收货地址</view>
+        <view class="c-cells__item-input">
+          <input class="c4 s4" placeholder="小区/写字楼" confirm-type="search" placeholder-style="color: #bbb;"
+                 @confirm="confirm"/>
+        </view>
+      </view>
+      <view class="c-cells__item">
+        <view class="c-cells__item-body">门牌号</view>
+        <view class="c-cells__item-input">
+          <input class="c4 s4" placeholder="例：1号楼101室" confirm-type="search" placeholder-style="color: #bbb;"
+                 @confirm="confirm"/>
+        </view>
+      </view>
+      <view class="c-cells__item">
+        <view class="c-cells__item-body">标签</view>
+        <view class="c-cells__item-input s5">
+          <view class="c-tag c-tag--text-third">先生</view>
+          <view class="c-tag c-tag--text-third active">女士</view>
+        </view>
+      </view>
+    </view>
+    <view class="c-button c-button--orange-lg c7 s0">提交</view>
   </view>
 </template>
 
@@ -44,6 +89,12 @@
           keywords: e.detail.value
         })
         this.$apply()
+      },
+
+      getPhoneNumber (e) {
+        console.log(e.detail.errMsg)
+        console.log(e.detail.iv)
+        console.log(e.detail.encryptedData)
       }
     }
   }

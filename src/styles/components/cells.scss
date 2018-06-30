@@ -30,6 +30,13 @@
     }
   }
 
+  @include e(item-input) {
+    @include position--absolute(50%, null, null, px2rpx(160px));
+
+    transform: translateY(-50%);
+    line-height: 100%;
+  }
+
   @include e(item-foot) {
     flex: 1;
     color: map-get($colors, c3);

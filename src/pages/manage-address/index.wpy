@@ -1,0 +1,76 @@
+<template>
+  <nav-bar title="收货地址" :back.sync="navBarBack"/>
+  <view class="manage-address c-main c-main--has-nav-bar">
+    <view class="c-block c-block--margin-bottom">
+      <view class="c-cells">
+        <view class="c-cells__item">
+          <view class="address-name c2 s1">是啊是啊是啊是啊</view>
+          <view class="address-extra c3 s3">是的地方防守打法</view>
+          <view class="address-tel c2 s3">13955555555</view>
+        </view>
+        <view class="c-cells__item address-operations">
+          <view class="c-tag c-tag--text-third">先生</view>
+          <view class="c-button c-button--operation c7 s3">编辑</view>
+          <view class="c-button c-button--operation-reverse c3 s3">编辑</view>
+        </view>
+      </view>
+    </view>
+    <view class="c-block c-block--margin-bottom">
+      <view class="c-cells">
+        <view class="c-cells__item">
+          <view class="address-name">是啊是啊是啊是啊</view>
+          <view class="address-tel">13955555555</view>
+          <view class="address-extra">是的地方防守打法</view>
+        </view>
+        <view class="c-cells__item address-operations">
+          <view class="c-button c-button--operation c7 s3">编辑</view>
+          <view class="c-button c-button--operation-reverse c3 s3">编辑</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../mixins/global'
+  import NavBar from '../../components/nav-bar/index'
+  import AddressSearch from '../../components/address-search/index'
+  import location from '../../utils/location'
+
+  const {lng: longitude, lat: latitude} = location.get()
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'address-search': AddressSearch
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: true,
+      city: location.get()['city'] || '',
+      nearbyLocations: [],
+      location: {
+        latitude,
+        longitude
+      }
+    }
+
+    methods = {
+      async confirm (e) {
+        this.nearbyLocations = await location.getNearbyLocations({
+          keywords: e.detail.value
+        })
+        this.$apply()
+      }
+    }
+  }
+</script>

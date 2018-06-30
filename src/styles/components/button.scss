@@ -1,7 +1,7 @@
 @import "../../styles/utils/index";
 
 @include b(c-button) {
-  @include m(orange, orange-reverse){
+  @include m(orange, orange-reverse) {
     @include text--middle(px2rpx(40px));
 
     width: px2rpx(140px);
@@ -16,5 +16,33 @@
 
   @include m(orange-reverse) {
     background-color: map-get($colors, c7);
+  }
+
+  @include m(orange-lg) {
+    @include text--middle(px2rpx(88px));
+
+    width: px2rpx(690px);
+    border-radius: px2rpx(44px);
+    background-color: map-get($colors, c1);
+    text-align: center;
+  }
+
+  @include m(operation, operation-reverse) {
+    @include text--middle(px2rpx(48px));
+
+    display: inline-block;
+    text-align: center;
+    width: px2rpx(128px);
+    border-radius: px2rpx(8px);
+  }
+
+  @include m(operation) {
+    background-color: map-get($colors, c1);
+    border: 1px solid map-get($colors, c1);
+  }
+
+  @include m(operation-reverse) {
+    background-color: white;
+    border: 1px solid map-get($colors, c3);
   }
 }

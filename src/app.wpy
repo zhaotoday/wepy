@@ -46,6 +46,7 @@
         }]
       },
       pages: [
+        'pages/manage-address/index',
         'pages/add-address/index',
         'pages/search-address/index',
         'pages/more-address/index',

@@ -79,4 +79,22 @@
     border-radius: px2rpx(25px);
     display: inline-block;
   }
+
+  @include m(text-third) {
+    @include text--middle(px2rpx(40px));
+    @include padding(null, px2rpx(15px), null, px2rpx(15px));
+
+    text-align: center;
+    display: inline-block;
+    border-radius: px2rpx(20px);
+    background-color: white;
+    color: map-get($colors, c4);
+    border: 1px solid map-get($colors, c4);
+
+    @include m(active) {
+      background-color: map-get($colors, c1);
+      color: white;
+      border: 1px solid map-get($colors, c1);
+    }
+  }
 }

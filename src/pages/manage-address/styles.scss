@@ -1,0 +1,46 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+@import "../../styles/components/block";
+@import "../../styles/components/cells";
+@import "../../styles/components/tag";
+@import "../../styles/components/button";
+
+@include b(manage-address) {
+  .c-block {
+    @include block--center;
+  }
+
+  .c-cells__item {
+    @include padding(px2rpx(30px), px2rpx(20px), px2rpx(30px), px2rpx(20px));
+
+    display: block;
+  }
+
+  .c-tag--text-third {
+    @include position--absolute(50%, null, null, px2rpx(20px));
+
+    transform: translateY(-50%);
+  }
+
+  .address-operations {
+    text-align: right;
+  }
+
+  .address-name,
+  .address-extra,
+  .address-tel {
+    line-height: 100%;
+  }
+
+  .address-name {
+    padding-bottom: px2rpx(20px);
+  }
+
+  .address-tel {
+    @include position--absolute(px2rpx(30px), px2rpx(20px));
+  }
+
+  .c-button {
+    margin-left: px2rpx(30px);
+  }
+}
