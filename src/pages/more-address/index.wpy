@@ -1,17 +1,19 @@
 <template>
   <nav-bar title="更多地址" :back.sync="navBarBack"/>
   <view class="more-address c-main c-main--has-nav-bar">
-    <address-search modifier="secondary" :city.sync="city" @toggle.user="toggleCitySelector"/>
+    <address-search modifier="secondary" :city.sync="city" @toggle.user="toggleCitySelector"
+                    @focus.user="navigateToSearchAddress"/>
     <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}"/>
     <view hidden="{{citySelectorVisible}}">
       <view class="map-wrap">
         <map
           id="map"
-          latitude="{{map.latitude}}"
-          longitude="{{map.longitude}}"
+          latitude="{{latitude}}"
+          longitude="{{longitude}}"
           show-location
           @regionchange="regionChange"
-        ></map>
+          wx:if="{{!!latitude}}"
+        />
       </view>
       <view class="results-wrap">
         <view class="c-tabs c2 s2">
@@ -47,8 +49,6 @@
   import map from '../../utils/map'
   import location from '../../utils/location'
 
-  const {lng: longitude, lat: latitude} = location.get()
-
   export default class extends wepy.page {
     config = {
       navigationBarTitleText: '更多地址'
@@ -64,7 +64,7 @@
 
     data = {
       navBarBack: true,
-      city: location.get()['city'] || '',
+      city: '',
       citySelectorVisible: false,
       nearbyLocations: [],
       currentType: '120201|120302|141200',
@@ -81,14 +81,8 @@
         name: '学校',
         code: '141200'
       }],
-      map: {
-        latitude,
-        longitude
-      },
-      location: {
-        latitude,
-        longitude
-      }
+      latitude: 0,
+      longitude: 0
     }
 
     methods = {
@@ -97,9 +91,6 @@
           this.city = city
         }
         this.citySelectorVisible = !this.citySelectorVisible
-      },
-      moveToLocation: function () {
-        this.mapCtx.moveToLocation()
       },
       async getLocations (code) {
         this.currentType = code
@@ -111,23 +102,20 @@
         }
       },
       selectLocation (location) {
-        console.log(location)
         this.$parent.globalData.selectedLocation = location
         wepy.navigateBack()
+      },
+      navigateToSearchAddress () {
+        wepy.navigateTo({url: '/pages/search-address/index'})
       }
     }
 
     getNearbyLocations () {
       this.mapCtx.getCenterLocation({
         success: async res => {
-          console.log(res)
           const {lng, lat, cityCode} = await map.getLocation({
             location: {lng: res.longitude, lat: res.latitude}
           })
-          this.location = {
-            longitude: res.longitude,
-            latitude: res.latitude
-          }
           this.nearbyLocations = await location.getNearbyLocations({
             types: this.currentType,
             location: {lng, lat, cityCode}
@@ -139,7 +127,24 @@
 
     async onLoad () {
       this.mapCtx = wepy.createMapContext('map')
+      const {lng, lat, city = ''} = location.get()
+      this.longitude = lng
+      this.latitude = lat
+      this.city = city
+      this.$apply()
       this.getNearbyLocations()
+    }
+
+    async onShow () {
+      const {selectedLocation} = this.$parent.globalData
+
+      if (selectedLocation) {
+        const {lng, lat} = selectedLocation
+        this.longitude = lng
+        this.latitude = lat
+        this.$apply()
+        this.getNearbyLocations()
+      }
     }
   }
 </script>

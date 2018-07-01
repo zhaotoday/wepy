@@ -1,6 +1,5 @@
 import { utils } from 'mp-client'
 import wepy from 'wepy'
-import consts from './consts'
 import map from './map'
 
 const locationStorage = new utils.Storage('location')

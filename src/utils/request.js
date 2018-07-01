@@ -3,11 +3,12 @@ import consts from './consts'
 import Hashes from 'jshashes'
 import auth from './auth'
 import location from './location'
+import addressId from './addressId'
 
 export default async (
   {
     url = '',
-    method = 'GET',
+    method = 'POST',
     data = {},
     requiresAccess = true,
     requiresLogin = false,
@@ -43,7 +44,13 @@ export default async (
   }
 
   if (requiresLocation) {
-    Object.assign(data, location.get())
+    if (addressId.get()) {
+      Object.assign(data, {
+        addressId: addressId.get()
+      })
+    } else {
+      Object.assign(data, location.get())
+    }
   }
 
   // mock 数据

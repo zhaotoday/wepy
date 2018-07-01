@@ -1,6 +1,9 @@
 // 接口地址
 const API_URL = 'https://apiceshi.shenbd.com'
 
+// 图片 CDN 地址
+const IMAGE_CDN_URL = 'https://images.liruan.cn'
+
 // 签名密钥
 const SIGN_KEY = '~!@#$`1234qwert'
 
@@ -18,6 +21,7 @@ const DEVICE_TYPE = 5
 
 export default {
   API_URL,
+  IMAGE_CDN_URL,
   SIGN_KEY,
   AMAP_WEB_SERVICE_BASE_URL,
   AMAP_MP_KEY,

@@ -69,7 +69,6 @@
 
       const storeGetRecommendStoresRes = await request({
         url: 'store/getRecommendStores',
-        method: 'POST',
         data: {
           gcId: this.id
         }

@@ -41,7 +41,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '分类'
     }
 
     components = {
@@ -68,7 +68,6 @@
     async onShow () {
       const homeGetAllClassesRes = await request({
         url: 'home/getAllClasses',
-        method: 'POST',
         requiresLocation: true
       })
 

@@ -276,7 +276,6 @@
             await request({
               requiresLogin: true,
               url: 'collection/delGoods',
-              method: 'POST',
               data: {
                 goodsCommonId: this.id
               }
@@ -285,7 +284,6 @@
             await request({
               requiresLogin: true,
               url: 'collection/collectGoods',
-              method: 'POST',
               data: {
                 goodsCommonId: this.id
               }
@@ -312,7 +310,6 @@
     async onShow (query) {
       const goodsGetRes = await request({
         url: 'goods/get',
-        method: 'POST',
         data: {
           goodsCommonId: this.id
         }

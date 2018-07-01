@@ -106,7 +106,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '身边店'
     }
 
     components = {
@@ -145,8 +145,7 @@
         switch (type) {
           case 'shops':
             const homeGetOtherStoresRes = await request({
-              url: 'home/getOtherStores',
-              method: 'POST'
+              url: 'home/getOtherStores'
             })
             this.shops = homeGetOtherStoresRes.stores.map(item => {
               return {
@@ -162,8 +161,7 @@
 
           case 'products':
             const homeGetOtherGoodsRes = await request({
-              url: 'home/getOtherGoods',
-              method: 'POST'
+              url: 'home/getOtherGoods'
             })
             this.products = homeGetOtherGoodsRes.goodsList.map(item => {
               return {
@@ -188,7 +186,7 @@
 
     events = {}
 
-    async onLoad () {
+    async onShow () {
       try {
         const getCurrentLocationRes = await location.getCurrentLocation()
         this.get({
@@ -201,13 +199,16 @@
     }
 
     showAddressSelector () {
-      this.$invoke('/address-selector', 'show')
+      this.$invoke('address-selector', 'show')
+    }
+
+    hideAddressSelector () {
+      this.$invoke('address-selector', 'hide')
     }
 
     async get ({requiresLocation = false, location = {}} = {}) {
       const homeIndexRes = await request({
         url: 'home/index',
-        method: 'POST',
         requiresLocation
       })
 
@@ -215,9 +216,13 @@
 
       if (requiresLocation) {
         if (homeIndexRes.currentAddress.choosedAddressFlag === 1) {
-          this.address = location.address
+          this.address = homeIndexRes.currentAddress.addresses
+            ? homeIndexRes.currentAddress.addresses[0].address
+            : location.address
+          this.hideAddressSelector()
         } else {
           this.showAddressSelector()
+
           if (!homeIndexRes.currentAddress.addresses) {
             this.address = location.address
           }

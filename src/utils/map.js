@@ -23,7 +23,7 @@ export default {
     }))(regeoRes.data.regeocode.addressComponent)
   },
 
-  async getNearbyLocations ({location, keywords, types = ''} = {}) {
+  async getNearbyLocations ({location, keywords, types = '120201|120302|141200'} = {}) {
     const {lng, lat, cityCode} = location
     const aroundRes = await wepy.request({
       url: `${consts.AMAP_WEB_SERVICE_BASE_URL}/place/around`,

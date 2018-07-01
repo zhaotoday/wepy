@@ -10,16 +10,26 @@
           </text>
         </view>
         <view class="c-address-selector__body">
-          <view class="c-address-selector__wrap" wx:if="{{location || !!dataItem.currentAddress.addresses}}">
+          <view class="c-address-selector__wrap" wx:if="{{location || !!dataItem.addresses}}">
             <view class="c-address-selector__item c2 s2" @tap="setAddress({{location}})" wx:if="{{location}}">
               <view class="c-address-selector__item-text">{{location.address}}</view>
               <view class="c-address-selector__item-tag c1 s5">当前</view>
             </view>
             <view class="c-address-selector__item c2 s2"
-                  @tap="setAddress({{dataItem.currentAddress.addresses}})"
-                  wx:if="{{!!dataItem.currentAddress.addresses}}">
-              <view class="c-address-selector__item-text">{{dataItem.currentAddress.addresses.address}}</view>
-              <view class="c-address-selector__item-tag c1 s5">家</view>
+                  @tap="setAddress({{dataItem.addresses[0]}})"
+                  wx:if="{{!!dataItem.addresses}}">
+              <view class="c-address-selector__item-text">{{dataItem.addresses[0].address}}</view>
+              <view class="c-address-selector__item-tag c1 s5">
+                {{
+                dataItem.addresses[0].tagType === 1
+                ? '家'
+                : dataItem.addresses[0].tagType === 2
+                ? '公司'
+                : dataItem.addresses[0].tagType === 3
+                ? '学校'
+                : '其他'
+                }}
+              </view>
             </view>
           </view>
           <view class="c-address-selector__btn c7 s0" @tap="handleTapModifyAddress">修改收获地址</view>
@@ -35,15 +45,12 @@
   import wepy from 'wepy'
   import Modal from '../modal/index'
   import location from '../../utils/location'
+  import addressId from '../../utils/addressId'
   import request from '../../utils/request'
 
   export default class extends wepy.component {
     components = {
       modal: Modal
-    }
-
-    data = {
-      visible: false
     }
 
     props = {
@@ -67,13 +74,20 @@
         this.$invoke('modal', 'show')
       },
       async setAddress (data) {
-        const {lng, lat, cityCode} = data
+        let formData = {}
+
+        if (data.addressId) {
+          addressId.set(data.addressId)
+          formData = {addressId: data.addressId}
+        } else {
+          const {lng, lat, cityCode} = data
+          formData = {lng, lat, cityCode}
+        }
 
         try {
           await request({
             url: 'common/setCurrentAddress',
-            method: 'POST',
-            data: {lng, lat, cityCode}
+            data: formData
           })
 
           this.$invoke('modal', 'hide')

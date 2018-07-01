@@ -48,6 +48,7 @@
   import AddressSearch from '../../components/address-search/index'
   import CitySelector from '../../components/city-selector/index'
   import location from '../../utils/location'
+  import request from '../../utils/request'
 
   export default class extends wepy.page {
     config = {
@@ -97,6 +98,14 @@
       this.currentLocation = await location.getCurrentLocation()
       this.nearbyLocations = (await location.getNearbyLocations()).filter((item, index) => index < 3)
       this.$apply()
+    }
+
+    async onLoad () {
+      const getMyAddresses = await request({
+        url: 'address/getMyAddresses'
+      })
+
+      console.log(getMyAddresses)
     }
 
     onShow () {

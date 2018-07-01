@@ -47,12 +47,12 @@
         }]
       },
       pages: [
+        'pages/home/index',
         'pages/select-address/index',
+        'pages/more-address/index',
         'pages/add-address/index',
         'pages/manage-address/index',
         'pages/search-address/index',
-        'pages/more-address/index',
-        'pages/home/index',
         'pages/product/index',
         'pages/comments/index',
         'pages/web-view/index',

@@ -1,4 +1,5 @@
 import wepy from 'wepy'
+import consts from '../utils/consts'
 import { utils, helpers } from 'mp-client'
 
 let timer
@@ -40,7 +41,7 @@ export default class extends wepy.mixin {
   methods = {
     handleImageError (e) {
       const {type, object, index = -1, childobject, childindex, key = 'image'} = e.currentTarget.dataset
-      const url = `http://localhost:88/components/image/${type}.jpg`
+      const url = `${consts.IMAGE_CDN_URL}/components/image/${type}.jpg`
 
       if (childobject) {
         this[object][index][childobject][childindex][key] = url

@@ -5,7 +5,7 @@
     <view hidden="{{citySelectorVisible}}">
       <view class="c-results">
         <repeat for="{{nearbyLocations}}" item="item">
-          <view class="c-results__item">
+          <view class="c-results__item" @tap="selectLocation({{item}})">
             <view class="c-results__item-title c2 s3">{{item.name}}</view>
             <view class="c-results__item-extra c3 s4">{{item.address}}</view>
           </view>
@@ -28,7 +28,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '搜索'
     }
 
     components = {
@@ -54,6 +54,10 @@
           keywords: e.detail.value
         })
         this.$apply()
+      },
+      selectLocation (location) {
+        this.$parent.globalData.selectedLocation = location
+        wepy.navigateBack()
       }
     }
   }

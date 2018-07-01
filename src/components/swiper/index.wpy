@@ -2,9 +2,12 @@
   <view class="c-swiper" style="width: {{width}}; height: {{height}};" @tap="handleTapPreview">
     <block wx:if="{{items.length > 1}}">
       <swiper circular="{{circular}}" autoplay="{{autoplay}}" interval="{{interval}}" @change="handleChange">
-        <repeat for="{{items}}" item="item">
+        <repeat for="{{items}}" item="item" index="index">
           <swiper-item>
-            <image mode="aspectFill" src="{{item.image}}" @tap="handleTap({{item.url}})"/>
+            <image mode="aspectFill" src="{{item.image}}" @tap="handleTap({{item.url}})"
+                   @error="handleImageError"
+                   data-type="ad"
+                   data-object="items" data-index="{{index}}"/>
           </swiper-item>
         </repeat>
       </swiper>
@@ -21,8 +24,11 @@
 <script>
   import wepy from 'wepy'
   import Indicator from './components/indicator/index'
+  import global from '../../mixins/global'
 
   export default class extends wepy.component {
+    mixins = [global]
+
     components = {
       indicator: Indicator
     }
@@ -74,6 +80,10 @@
           wepy.previewImage({current, urls})
         }
       }
+    }
+
+    onLoad () {
+      console.log(this.items)
     }
   }
 </script>

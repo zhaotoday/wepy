@@ -5,7 +5,7 @@
     </view>
     <view class="c-address-search__input">
       <input class="c2 s4" placeholder="请输入地址" confirm-type="search" placeholder-style="color: #bbb;"
-             @confirm="confirm"/>
+             @confirm="confirm" @focus="focus"/>
     </view>
   </view>
 </template>
@@ -41,6 +41,9 @@
       },
       confirm (e) {
         this.$emit('confirm', e)
+      },
+      focus () {
+        this.$emit('focus')
       }
     }
   }

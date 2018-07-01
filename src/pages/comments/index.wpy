@@ -83,7 +83,6 @@
     async get (commentType = 1) {
       const getEvaluationsRes = await request({
         url: 'evaluation/getEvaluations',
-        method: 'POST',
         data: {
           goodsCommonId: this.id,
           pageIndex: 0,

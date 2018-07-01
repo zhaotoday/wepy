@@ -20,7 +20,7 @@
     }
 
     data = {
-      visible: true
+      visible: false
     }
 
     computed = {

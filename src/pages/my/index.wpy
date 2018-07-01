@@ -105,7 +105,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '我的'
     }
 
     components = {}
@@ -140,8 +140,7 @@
     async onShow () {
       const memberCenterRes = await request({
         requiresLogin: true,
-        url: 'memberCenter/index',
-        method: 'POST'
+        url: 'memberCenter/index'
       })
 
       console.log(memberCenterRes)

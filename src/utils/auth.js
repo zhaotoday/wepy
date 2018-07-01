@@ -12,7 +12,6 @@ export default {
     const takeAccessRes = await request({
       requiresAccess: false,
       url: 'authInfo/takeAccess',
-      method: 'POST',
       data: {
         deviceType: consts.DEVICE_TYPE,
         nonce: Math.random().toString(36).substr(7),
@@ -76,7 +75,6 @@ export default {
 
     await request({
       url: 'thirdplatform/wechatAppAuth',
-      method: 'POST',
       data: {
         code: wxLoginRes.code
       }
@@ -84,7 +82,6 @@ export default {
 
     return await request({
       url: 'user/loginWithWechatInfo',
-      method: 'POST',
       data: {
         nickname,
         avatar,
