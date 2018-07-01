@@ -1,6 +1,6 @@
 <template>
   <view class="c-overlay" hidden="{{!visible}}" @tap="hide"/>
-  <view class="c-modal" hidden="{{!visible}}">
+  <view class="{{modifiersClass}}" hidden="{{!visible}}">
     <slot name="content"/>
   </view>
 </template>
@@ -9,10 +9,28 @@
 
 <script>
   import wepy from 'wepy'
+  import { utils } from 'mp-client'
 
   export default class extends wepy.component {
+    props = {
+      modifiers: {
+        type: String,
+        default: 'default'
+      }
+    }
+
     data = {
       visible: true
+    }
+
+    computed = {
+      modifiersClass () {
+        return utils.component.getModifiersClass({
+          block: 'c-modal',
+          defaultModifier: 'default',
+          modifiers: this.modifiers
+        })
+      }
     }
 
     methods = {

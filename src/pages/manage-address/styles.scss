@@ -6,6 +6,8 @@
 @import "../../styles/components/button";
 
 @include b(manage-address) {
+  padding-top: px2rpx(20px);
+
   .c-block {
     @include block--center;
   }

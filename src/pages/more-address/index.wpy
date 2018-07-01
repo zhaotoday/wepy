@@ -1,5 +1,5 @@
 <template>
-  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
+  <nav-bar title="更多地址" :back.sync="navBarBack"/>
   <view class="more-address c-main c-main--has-nav-bar">
     <address-search modifier="secondary" :city.sync="city" @toggle.user="toggleCitySelector"/>
     <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}"/>
@@ -25,7 +25,7 @@
         </view>
         <view class="c-results">
           <repeat for="{{nearbyLocations}}" item="item">
-            <view class="c-results__item">
+            <view class="c-results__item" @tap="selectLocation({{item}})">
               <view class="c-results__item-title c2 s3">{{item.name}}</view>
               <view class="c-results__item-extra c3 s4">{{item.address}}</view>
             </view>
@@ -51,7 +51,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '更多地址'
     }
 
     components = {
@@ -109,6 +109,11 @@
         if (e.type === 'end') {
           this.getNearbyLocations()
         }
+      },
+      selectLocation (location) {
+        console.log(location)
+        this.$parent.globalData.selectedLocation = location
+        wepy.navigateBack()
       }
     }
 

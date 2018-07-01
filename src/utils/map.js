@@ -12,13 +12,14 @@ export default {
       }
     })
 
-    return (address => ({
+    return (item => ({
       lng,
       lat,
-      province: address.province,
-      city: address.city,
-      cityCode: address.citycode,
-      address: address.district + address.township + address.streetNumber.street + address.streetNumber.number
+      province: item.province,
+      district: item.district,
+      city: item.city,
+      cityCode: item.citycode,
+      address: item.district + item.township + item.streetNumber.street + item.streetNumber.number
     }))(regeoRes.data.regeocode.addressComponent)
   },
 
@@ -45,6 +46,7 @@ export default {
           province: item.pname,
           city: item.cityname,
           cityCode,
+          district: item.adname,
           name: item.name,
           address: item.address
         }

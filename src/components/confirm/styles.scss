@@ -1,0 +1,33 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/overlay";
+
+@include b(c-confirm) {
+  background-color: white;
+  width: px2rpx(540px);
+  border-radius: px2rpx(20px);
+
+  @include e(body) {
+    @include padding(px2rpx(44px), null, px2rpx(44px));
+
+    text-align: center;
+    line-height: 100%;
+  }
+
+  @include e(foot) {
+    display: flex;
+
+    border-top: 1px solid rgba(map-get($colors, c4), .5);
+  }
+
+  @include e(cancel, ok) {
+    @include padding(px2rpx(33px), null, px2rpx(33px));
+
+    flex: 1;
+    text-align: center;
+    line-height: 100%;
+  }
+
+  @include e(cancel) {
+    border-right: 1px solid rgba(map-get($colors, c4), .5);
+  }
+}

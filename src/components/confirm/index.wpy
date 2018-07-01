@@ -1,0 +1,44 @@
+<template>
+  <modal :modifiers.sync="modifiers">
+    <view slot="content">
+      <view class="c-confirm">
+        <view class="c-confirm__body c2 s3">{{content}}</view>
+        <view class="c-confirm__foot">
+          <view class="c-confirm__cancel c3 s3" @tap="hide">取消</view>
+          <view class="c-confirm__ok c1 s3" @tap="ok">确认</view>
+        </view>
+      </view>
+    </view>
+  </modal>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import Modal from '../modal/index'
+
+  export default class extends wepy.component {
+    props = {
+      modifiers: String,
+      content: String
+    }
+
+    components = {
+      modal: Modal
+    }
+
+    methods = {
+      hide () {
+        this.$invoke('modal', 'hide')
+      },
+      show () {
+        this.$invoke('modal', 'show')
+      },
+      ok () {
+        this.$emit('ok')
+        this.$invoke('modal', 'hide')
+      }
+    }
+  }
+</script>

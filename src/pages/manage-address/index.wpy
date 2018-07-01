@@ -15,20 +15,8 @@
         </view>
       </view>
     </view>
-    <view class="c-block c-block--margin-bottom">
-      <view class="c-cells">
-        <view class="c-cells__item">
-          <view class="address-name">是啊是啊是啊是啊</view>
-          <view class="address-tel">13955555555</view>
-          <view class="address-extra">是的地方防守打法</view>
-        </view>
-        <view class="c-cells__item address-operations">
-          <view class="c-button c-button--operation c7 s3">编辑</view>
-          <view class="c-button c-button--operation-reverse c3 s3">编辑</view>
-        </view>
-      </view>
-    </view>
   </view>
+  <confirm modifiers="top-320" content="确认删除吗？" @ok.user="delOk"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -38,18 +26,20 @@
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
   import AddressSearch from '../../components/address-search/index'
+  import Confirm from '../../components/confirm/index'
   import location from '../../utils/location'
 
   const {lng: longitude, lat: latitude} = location.get()
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '收货地址'
     }
 
     components = {
       'nav-bar': NavBar,
-      'address-search': AddressSearch
+      'address-search': AddressSearch,
+      'confirm': Confirm
     }
 
     mixins = [global]
@@ -70,6 +60,9 @@
           keywords: e.detail.value
         })
         this.$apply()
+      },
+      delOk () {
+        console.log(222)
       }
     }
   }

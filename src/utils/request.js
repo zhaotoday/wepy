@@ -78,7 +78,6 @@ export default async (
 
     return new Promise((resolve, reject) => {
       if (status === 'success') {
-        console.log(url, responseContent)
         resolve(responseContent)
       } else {
         reject(res)

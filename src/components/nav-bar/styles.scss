@@ -5,6 +5,7 @@
   @include position--absolute(0, null, null, 0);
   @include size(100%, 32px);
 
+  display: none;
   line-height: 32px;
   border-top: 20px + 10px solid #f5f5f5;
   border-bottom: 10px solid #f5f5f5;

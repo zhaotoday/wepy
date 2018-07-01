@@ -6,10 +6,10 @@
 @import "../../styles/components/button";
 
 @include b(add-address) {
+  padding-top: px2rpx(20px);
+
   .c-block {
     @include block--center;
-
-    margin-top: px2rpx(20px);
   }
 
   .c-cells__item-body {

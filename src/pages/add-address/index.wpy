@@ -1,52 +1,70 @@
 <template>
-  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
+  <nav-bar title="添加收货地址" :back.sync="navBarBack"/>
   <view class="add-address c-main c-main--has-nav-bar">
     <view class="c-block c-cells">
       <view class="c-cells__item">
         <view class="c-cells__item-body">收货人</view>
         <view class="c-cells__item-input">
-          <input class="c4 s4" placeholder="姓名" confirm-type="search" placeholder-style="color: #bbb;"
-                 @confirm="confirm"/>
+          <input class="s4" placeholder="姓名" confirm-type="done" placeholder-style="color: #bbb;"
+                 @input="input('trueName')"/>
         </view>
         <view class="gender-tags s5">
-          <view class="c-tag c-tag--text-third">先生</view>
-          <view class="c-tag c-tag--text-third active">女士</view>
+          <view class="c-tag c-tag--text-third{{formData.gender === 1 ? ' active' : ''}}" @tap="select('gender', 1)">
+            先生
+          </view>
+          <view class="c-tag c-tag--text-third{{formData.gender === 0 ? ' active' : ''}}" @tap="select('gender', 0)">
+            女士
+          </view>
         </view>
       </view>
       <view class="c-cells__item">
         <view class="c-cells__item-body">联系电话</view>
         <view class="c-cells__item-input">
-          <input class="c4 s4" placeholder="收货人电话" confirm-type="search" placeholder-style="color: #bbb;"
-                 @confirm="confirm"/>
+          <input class="s4" placeholder="收货人电话" confirm-type="done" placeholder-style="color: #bbb;"
+                 type="number"
+                 @input="input('mobPhone')"/>
         </view>
+        <!--
         <view class="contact-list c2 s2">
           +通讯录
           <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">啊</button>
         </view>
+        -->
       </view>
       <view class="c-cells__item">
         <view class="c-cells__item-body">收货地址</view>
         <view class="c-cells__item-input">
-          <input class="c4 s4" placeholder="小区/写字楼" confirm-type="search" placeholder-style="color: #bbb;"
-                 @confirm="confirm"/>
+          <input class="s4" placeholder="小区/写字楼" confirm-type="search" placeholder-style="color: #bbb;"
+                 value="{{formData.address}}"
+                 @focus="navigateToSearchAddress"/>
         </view>
       </view>
       <view class="c-cells__item">
         <view class="c-cells__item-body">门牌号</view>
         <view class="c-cells__item-input">
-          <input class="c4 s4" placeholder="例：1号楼101室" confirm-type="search" placeholder-style="color: #bbb;"
-                 @confirm="confirm"/>
+          <input class="s4" placeholder="例：1号楼101室" confirm-type="search" placeholder-style="color: #bbb;"
+                 @input="input('subAddress')"/>
         </view>
       </view>
       <view class="c-cells__item">
         <view class="c-cells__item-body">标签</view>
         <view class="c-cells__item-input s5">
-          <view class="c-tag c-tag--text-third">先生</view>
-          <view class="c-tag c-tag--text-third active">女士</view>
+          <view class="c-tag c-tag--text-third{{formData.tagType === 1 ? ' active' : ''}}" @tap="select('tagType', 1)">
+            家
+          </view>
+          <view class="c-tag c-tag--text-third{{formData.tagType === 2 ? ' active' : ''}}" @tap="select('tagType', 2)">
+            公司
+          </view>
+          <view class="c-tag c-tag--text-third{{formData.tagType === 3 ? ' active' : ''}}" @tap="select('tagType', 3)">
+            学校
+          </view>
+          <view class="c-tag c-tag--text-third{{formData.tagType === 4 ? ' active' : ''}}" @tap="select('tagType', 4)">
+            其他
+          </view>
         </view>
       </view>
     </view>
-    <view class="c-button c-button--orange-lg c7 s0">提交</view>
+    <view class="c-button c-button--orange-lg c7 s0" @tap="submit">提交</view>
   </view>
 </template>
 
@@ -56,45 +74,137 @@
   import wepy from 'wepy'
   import global from '../../mixins/global'
   import NavBar from '../../components/nav-bar/index'
-  import AddressSearch from '../../components/address-search/index'
-  import location from '../../utils/location'
-
-  const {lng: longitude, lat: latitude} = location.get()
+  import request from '../../utils/request'
+  import { helpers } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '添加收货地址'
     }
 
     components = {
-      'nav-bar': NavBar,
-      'address-search': AddressSearch
+      'nav-bar': NavBar
     }
 
     mixins = [global]
 
     data = {
       navBarBack: true,
-      city: location.get()['city'] || '',
-      nearbyLocations: [],
-      location: {
-        latitude,
-        longitude
+      formData: {
+        gender: 0,
+        mobPhone: '',
+        province: '',
+        city: '',
+        district: '',
+        tagType: undefined,
+        subAddress: '',
+        address: '',
+        lng: '',
+        lat: '',
+        trueName: '',
+        cityCode: ''
       }
     }
 
-    methods = {
-      async confirm (e) {
-        this.nearbyLocations = await location.getNearbyLocations({
-          keywords: e.detail.value
-        })
-        this.$apply()
-      },
+    async validate () {
+      const {trueName, mobPhone, address, subAddress} = this.formData
 
+      if (!trueName) {
+        await wepy.showToast({
+          icon: 'none',
+          title: '收货人不能为空'
+        })
+
+        return false
+      }
+
+      if (!mobPhone) {
+        await wepy.showToast({
+          icon: 'none',
+          title: '联系电话不能为空'
+        })
+
+        return false
+      }
+
+      if (!address) {
+        await wepy.showToast({
+          icon: 'none',
+          title: '收货地址不能为空'
+        })
+
+        return false
+      }
+
+      if (!subAddress) {
+        await wepy.showToast({
+          icon: 'none',
+          title: '门牌号不能为空'
+        })
+
+        return false
+      }
+
+      return true
+    }
+
+    methods = {
+      input (field, e) {
+        this.formData[field] = e.detail.value
+      },
+      select (field, value) {
+        this.formData[field] = +value
+      },
+      async submit () {
+        const validateRes = await this.validate()
+
+        if (!validateRes) return
+
+        try {
+          await request({
+            requiresLogin: true,
+            url: 'address/saveAddress',
+            method: 'POST',
+            data: this.formData
+          })
+
+          await wepy.showToast({
+            icon: 'none',
+            title: '新增成功'
+          })
+
+          await helpers.sleep(2000)
+
+          wepy.navigateBack()
+        } catch (e) {
+          wepy.showToast({
+            icon: 'none',
+            title: e.data.longMessage
+          })
+        }
+      },
       getPhoneNumber (e) {
         console.log(e.detail.errMsg)
         console.log(e.detail.iv)
         console.log(e.detail.encryptedData)
+      },
+      navigateToSearchAddress () {
+        wepy.navigateTo({url: '/pages/more-address/index'})
+      }
+    }
+
+    onShow () {
+      if (this.$parent.globalData.selectedLocation) {
+        const {lng, lat, province, city, district, address, cityCode} = this.$parent.globalData.selectedLocation
+
+        this.formData.lng = lng
+        this.formData.lat = lat
+        this.formData.province = province
+        this.formData.city = city
+        this.formData.district = district
+        this.formData.address = address
+        this.formData.cityCode = cityCode
+        this.$apply()
       }
     }
   }

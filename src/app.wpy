@@ -15,8 +15,9 @@
   export default class extends wepy.app {
     config = {
       window: {
-        navigationBarTextStyle: 'black',
-        navigationStyle: 'custom'
+        navigationBarBackgroundColor: '#f2f2f2',
+        navigationBarTextStyle: 'black'
+        // navigationStyle: 'custom'
       },
       tabBar: {
         color: '#757575',
@@ -46,11 +47,11 @@
         }]
       },
       pages: [
-        'pages/manage-address/index',
+        'pages/select-address/index',
         'pages/add-address/index',
+        'pages/manage-address/index',
         'pages/search-address/index',
         'pages/more-address/index',
-        'pages/select-address/index',
         'pages/home/index',
         'pages/product/index',
         'pages/comments/index',
@@ -66,7 +67,9 @@
 
     globalData = {
       // 记录页面是否停留一段时间
-      stopping: false
+      stopping: false,
+      // 选中位置
+      selectedLocation: null
     }
 
     constructor () {

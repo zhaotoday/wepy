@@ -2,7 +2,16 @@
 @import "../../styles/components/overlay";
 
 @include b(c-modal) {
-  @include position--absolute(50%, null, null, 50%);
+  @include m(default) {
 
-  transform: translate(-50%, -50%);
+    @include position--absolute(50%, null, null, 50%);
+
+    transform: translate(-50%, -50%);
+  }
+
+  @include m(top-320) {
+    @include position--absolute(px2rpx(320px), null, null, 50%);
+
+    transform: translateX(-50%);
+  }
 }
