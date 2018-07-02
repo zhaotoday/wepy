@@ -1,0 +1,53 @@
+<template>
+  <nav-bar title="购物车" :back.sync="navBarBack"/>
+  <view class="shops-home c-main c-main--has-nav-bar">
+    <product-search/>
+    <image class="shop-banner" mode="aspectFill" src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg"/>
+    <view class="shop-summary">
+      <image class="shop-avatar" mode="aspectFill" src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg"/>
+      <view class="shop-name c7 s0">发生大幅度发</view>
+      <view class="shop-followers c7">
+        <text class="s6" style="margin-right: 10rpx;">粉丝数</text>
+        <text class="s4">55.6万</text>
+      </view>
+      <view class="star"></view>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+  import NavBar from '../../../components/nav-bar/index'
+  import ProductSearch from '../../../components/product-search/index'
+  import request from '../../../utils/request'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '店铺首页'
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'product-search': ProductSearch
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: false
+    }
+
+    onShow () {
+      request({
+        url: 'store/getStoreInfo',
+        requiresLocation: true,
+        data: {
+          storeId: 12
+        }
+      })
+    }
+  }
+</script>

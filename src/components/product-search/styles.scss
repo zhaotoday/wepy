@@ -1,0 +1,59 @@
+@import "../../styles/utils/index";
+@import "../../styles/layouts/box";
+
+@include b(c-product-search) {
+  @include position--absolute(px2rpx(20px), null, null, 0);
+  @include size(100%, px2rpx(60px));
+
+  @include e(input, category, more) {
+    float: left;
+  }
+
+  @include e(input) {
+    @include size(px2rpx(750px - 30px - 20px - 60px * 2 - 10px - 30px), px2rpx(56px));
+    @include padding(null, px2rpx(56px), null, px2rpx(56px));
+    @include position--relative(50%);
+
+    box-sizing: border-box;
+    transform: translateY(-50%);
+    margin-left: px2rpx(26px);
+    border-radius: px2rpx(28px);
+    background: {
+      color: white;
+      image: image-url("components/product-search/search.png");
+      size: px2rpx(24px) px2rpx(24px);
+      position: px2rpx(20px) center;
+      repeat: no-repeat;
+    }
+
+    input {
+      @include text--middle(px2rpx(50px));
+      @include position--relative(50%);
+
+      transform: translateY(-50%);
+      display: block;
+    }
+  }
+
+  @include e(category, more) {
+    @include size(px2rpx(60px), px2rpx(60px));
+
+    background: {
+      size: 100% 100%;
+    }
+  }
+
+  @include e(category) {
+    margin-left: px2rpx(20px);
+    background: {
+      image: image-url("components/product-search/category.png");
+    }
+  }
+
+  @include e(more) {
+    margin-left: 10px;
+    background: {
+      image: image-url("components/product-search/more.png");
+    }
+  }
+}

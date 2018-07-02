@@ -1,0 +1,41 @@
+<template>
+  <view class="{{modifiersClass}}">
+    <view class="c-product-search__input">
+      <input class="c2 s4" placeholder="输入你要搜索的商品名称" confirm-type="search" placeholder-style="color: #bbb;"
+             @confirm="confirm"/>
+    </view>
+    <view class="c-product-search__category"/>
+    <view class="c-product-search__more"/>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import { utils } from 'mp-client'
+
+  export default class extends wepy.component {
+    props = {
+      modifiers: {
+        type: String,
+        default: ''
+      }
+    }
+
+    computed = {
+      modifiersClass () {
+        return utils.component.getModifiersClass({
+          block: 'c-product-search',
+          modifiers: this.modifiers
+        })
+      }
+    }
+
+    methods = {
+      confirm (e) {
+        this.$emit('confirm', e)
+      }
+    }
+  }
+</script>
