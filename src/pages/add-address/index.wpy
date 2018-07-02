@@ -6,7 +6,7 @@
         <view class="c-cells__item-body">收货人</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="姓名" confirm-type="done" placeholder-style="color: #bbb;"
-                 @input="input('trueName')"/>
+                 value="{{formData.trueName}}" @input="input('trueName')"/>
         </view>
         <view class="gender-tags s5">
           <view class="c-tag c-tag--text-third{{formData.gender === 1 ? ' active' : ''}}" @tap="select('gender', 1)">
@@ -22,7 +22,7 @@
         <view class="c-cells__item-input">
           <input class="s4" placeholder="收货人电话" confirm-type="done" placeholder-style="color: #bbb;"
                  type="number"
-                 @input="input('mobPhone')"/>
+                 value="{{formData.mobPhone}}" @input="input('mobPhone')"/>
         </view>
         <!--
         <view class="contact-list c2 s2">
@@ -34,7 +34,7 @@
       <view class="c-cells__item">
         <view class="c-cells__item-body">收货地址</view>
         <view class="c-cells__item-input">
-          <input class="s4" placeholder="小区/写字楼" confirm-type="search" placeholder-style="color: #bbb;"
+          <input class="s4" placeholder="小区/写字楼" confirm-type="done" placeholder-style="color: #bbb;"
                  value="{{formData.address}}"
                  @focus="navigateToSearchAddress"/>
         </view>
@@ -42,8 +42,8 @@
       <view class="c-cells__item">
         <view class="c-cells__item-body">门牌号</view>
         <view class="c-cells__item-input">
-          <input class="s4" placeholder="例：1号楼101室" confirm-type="search" placeholder-style="color: #bbb;"
-                 @input="input('subAddress')"/>
+          <input class="s4" placeholder="例：1号楼101室" confirm-type="done" placeholder-style="color: #bbb;"
+                 value="{{formData.subAddress}}" @input="input('subAddress')"/>
         </view>
       </view>
       <view class="c-cells__item">
@@ -57,9 +57,6 @@
           </view>
           <view class="c-tag c-tag--text-third{{formData.tagType === 3 ? ' active' : ''}}" @tap="select('tagType', 3)">
             学校
-          </view>
-          <view class="c-tag c-tag--text-third{{formData.tagType === 4 ? ' active' : ''}}" @tap="select('tagType', 4)">
-            其他
           </view>
         </view>
       </view>
@@ -79,7 +76,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: '添加收货地址'
+      navigationBarTitleText: ''
     }
 
     components = {
@@ -103,6 +100,10 @@
         lat: '',
         trueName: '',
         cityCode: ''
+      },
+      query: {
+        from: '',
+        id: ''
       }
     }
 
@@ -164,17 +165,23 @@
           await request({
             requiresLogin: true,
             url: 'address/saveAddress',
-            data: this.formData
+            data: this.query.id
+              ? Object.assign(this.formData, {addressId: this.query.id})
+              : this.formData
           })
 
           await wepy.showToast({
             icon: 'none',
-            title: '新增成功'
+            title: this.query.id ? '编辑成功' : '新增成功'
           })
 
           await helpers.sleep(2000)
 
-          wepy.navigateBack()
+          if (this.query.from === 'select-address') {
+            wepy.navigateTo({url: '/pages/select-address/index'})
+          } else {
+            wepy.navigateBack()
+          }
         } catch (e) {
           wepy.showToast({
             icon: 'none',
@@ -192,6 +199,46 @@
       }
     }
 
+    async onLoad (query) {
+      this.query.from = query.from
+      this.query.id = query.id
+
+      this.$apply()
+
+      wepy.setNavigationBarTitle({
+        title: query.id ? '编辑收货地址' : '添加收货地址'
+      })
+
+      // 编辑状态
+      if (query.id) {
+        const {
+          lng, lat, province, city, cityCode, district,
+          trueName, gender, mobPhone, address, subAddress, tagType
+        } = await request({
+          url: 'address/getAddress',
+          data: {
+            addressId: query.id
+          }
+        })
+
+        this.formData.lng = lng
+        this.formData.lat = lat
+        this.formData.province = province
+        this.formData.city = city
+        this.formData.cityCode = cityCode
+        this.formData.district = district
+
+        this.formData.trueName = trueName
+        this.formData.gender = gender
+        this.formData.mobPhone = mobPhone
+        this.formData.address = address
+        this.formData.subAddress = subAddress
+        this.formData.tagType = tagType
+
+        this.$apply()
+      }
+    }
+
     onShow () {
       if (this.$parent.globalData.selectedLocation) {
         const {lng, lat, province, city, district, address, cityCode} = this.$parent.globalData.selectedLocation
@@ -203,8 +250,25 @@
         this.formData.district = district
         this.formData.address = address
         this.formData.cityCode = cityCode
+
+        this.$apply()
+      } else {
+        console.log(22)
+        this.formData.lng = ''
+        this.formData.lat = ''
+        this.formData.province = ''
+        this.formData.city = ''
+        this.formData.district = ''
+        this.formData.address = ''
+        this.formData.cityCode = ''
+
         this.$apply()
       }
+    }
+
+    onUnload () {
+      console.log(222)
+      this.$parent.globalData.selectedLocation = null
     }
   }
 </script>

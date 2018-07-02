@@ -88,5 +88,9 @@ export default {
         gender
       }
     })
+  },
+
+  loggedIn () {
+    return !!userInfo.get()
   }
 }

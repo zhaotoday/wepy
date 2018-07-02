@@ -6,7 +6,12 @@
 @import "../../styles/components/button";
 
 @include b(manage-address) {
-  padding-top: px2rpx(20px);
+  .manage-address-wrap {
+    @include position--absolute(px2rpx(70px), 0, 0, 0);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
   .c-block {
     @include block--center;
@@ -44,5 +49,24 @@
 
   .c-button {
     margin-left: px2rpx(30px);
+  }
+
+  @include b(no-address) {
+    @include margin(px2rpx(188px), auto, null, auto);
+
+    width: px2rpx(326px + 100px);
+    text-align: center;
+    padding-top: px2rpx(236px + 30px);
+    line-height: 100%;
+    background: {
+      image: image-url("pages/manage-address/no-address.png");
+      size: px2rpx(326px), px2rpx(236px);
+      repeat: no-repeat;
+      position: center 0;
+    }
+
+    .c-button--orange-md {
+      @include margin(px2rpx(50px), auto, null, auto);
+    }
   }
 }

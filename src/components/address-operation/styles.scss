@@ -1,0 +1,15 @@
+@import "../../styles/utils/index";
+
+@include b(c-address-operation) {
+  @include clearfix;
+
+  padding-right: px2rpx(30px);
+
+  @include e(link) {
+    @include text--middle(px2rpx(30px + 20px * 2));
+
+    text-align: right;
+    float: right;
+    width: px2rpx(150px);
+  }
+}

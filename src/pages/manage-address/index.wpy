@@ -1,20 +1,33 @@
 <template>
   <nav-bar title="收货地址" :back.sync="navBarBack"/>
   <view class="manage-address c-main c-main--has-nav-bar">
-    <view class="c-block c-block--margin-bottom">
-      <view class="c-cells">
-        <view class="c-cells__item">
-          <view class="address-name c2 s1">是啊是啊是啊是啊</view>
-          <view class="address-extra c3 s3">是的地方防守打法</view>
-          <view class="address-tel c2 s3">13955555555</view>
-        </view>
-        <view class="c-cells__item address-operations">
-          <view class="c-tag c-tag--text-third">先生</view>
-          <view class="c-button c-button--operation c7 s3">编辑</view>
-          <view class="c-button c-button--operation-reverse c3 s3">编辑</view>
-        </view>
-      </view>
+    <view class="no-address c1 s4" wx:if="{{myAddresses && myAddresses.length === 0}}">
+      新增收货地址，急速送货到家哦！
+      <view class="c-button c-button--orange-md c7 s0" @tap="navigateTo">添加收货地址</view>
     </view>
+    <block wx:if="{{myAddresses && myAddresses.length > 0}}">
+      <address-operation title="新增地址" url="/pages/add-address/index"/>
+      <view class="manage-address-wrap">
+        <repeat for="{{myAddresses}}" item="item">
+          <view class="c-block c-block--margin-bottom">
+            <view class="c-cells">
+              <view class="c-cells__item">
+                <view class="address-name c2 s1">{{item.trueName}}</view>
+                <view class="address-extra c3 s3">{{item.address}}</view>
+                <view class="address-tel c2 s3">{{item.mobPhone}}</view>
+              </view>
+              <view class="c-cells__item address-operations">
+                <view class="c-tag c-tag--text-third">
+                  {{item.gender === 0 ? '女士' : '先生'}}
+                </view>
+                <view class="c-button c-button--operation c7 s3" @tap="edit({{item.addressId}})">编辑</view>
+                <view class="c-button c-button--operation-reverse c3 s3" @tap="del({{item.addressId}})">删除</view>
+              </view>
+            </view>
+          </view>
+        </repeat>
+      </view>
+    </block>
   </view>
   <confirm modifiers="top-320" content="确认删除吗？" @ok.user="delOk"/>
 </template>
@@ -27,43 +40,101 @@
   import NavBar from '../../components/nav-bar/index'
   import AddressSearch from '../../components/address-search/index'
   import Confirm from '../../components/confirm/index'
+  import AddressOperation from '../../components/address-operation/index'
   import location from '../../utils/location'
-
-  const {lng: longitude, lat: latitude} = location.get()
+  import request from '../../utils/request'
+  import { helpers } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: '收货地址'
+      navigationBarTitleText: ''
     }
 
     components = {
       'nav-bar': NavBar,
       'address-search': AddressSearch,
-      'confirm': Confirm
+      'confirm': Confirm,
+      'address-operation': AddressOperation
     }
 
     mixins = [global]
 
     data = {
       navBarBack: true,
-      city: location.get()['city'] || '',
-      nearbyLocations: [],
-      location: {
-        latitude,
-        longitude
-      }
+      myAddresses: null,
+      delId: 0
     }
 
     methods = {
+      navigateTo () {
+        wepy.navigateTo({url: '/pages/add-address/index'})
+      },
       async confirm (e) {
         this.nearbyLocations = await location.getNearbyLocations({
           keywords: e.detail.value
         })
         this.$apply()
       },
-      delOk () {
-        console.log(222)
+      edit (id) {
+        wepy.navigateTo({url: '/pages/add-address/index?id=' + id})
+      },
+      del (id) {
+        this.delId = id
+        this.showConfirm()
+      },
+      async delOk () {
+        try {
+          request({
+            url: 'address/delAddress',
+            data: {
+              addressId: this.delId
+            }
+          })
+
+          wepy.showToast({
+            icon: 'none',
+            title: '删除成功'
+          })
+
+          await helpers.sleep(1000)
+
+          this.renderMyAddress()
+        } catch (e) {
+          wepy.showToast({
+            icon: 'none',
+            title: '删除失败'
+          })
+        }
       }
+    }
+
+    showConfirm () {
+      this.$invoke('confirm', 'show')
+    }
+
+    async renderMyAddress () {
+      const getMyAddresses = await request({
+        url: 'address/getMyAddresses'
+      })
+
+      this.myAddresses = getMyAddresses
+
+      if (this.myAddresses.length) {
+        wepy.setNavigationBarTitle({title: '收货地址'})
+      } else {
+        wepy.setNavigationBarTitle({title: '收货地址空'})
+      }
+
+      this.$apply()
+    }
+
+    async onShow () {
+      this.renderMyAddress()
+    }
+
+    onHide () {
+      this.myAddresses = null
+      this.$apply()
     }
   }
 </script>

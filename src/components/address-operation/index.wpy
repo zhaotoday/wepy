@@ -1,0 +1,26 @@
+<template>
+  <view class="c-address-operation">
+    <view class="c-address-operation__link c2 s2" @tap="navigateTo">
+      {{title}}
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      title: String,
+      url: String
+    }
+
+    methods = {
+      navigateTo () {
+        wepy.navigateTo({url: this.url})
+      }
+    }
+  }
+</script>

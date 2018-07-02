@@ -18,6 +18,15 @@
     background-color: map-get($colors, c7);
   }
 
+  @include m(orange-md) {
+    @include text--middle(px2rpx(88px));
+
+    width: px2rpx(300px);
+    border-radius: px2rpx(44px);
+    background-color: map-get($colors, c1);
+    text-align: center;
+  }
+
   @include m(orange-lg) {
     @include text--middle(px2rpx(88px));
 

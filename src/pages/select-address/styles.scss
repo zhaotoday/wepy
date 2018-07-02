@@ -3,6 +3,7 @@
 @import "../../styles/components/tag";
 @import "../../styles/components/block";
 @import "../../styles/components/cells";
+@import "../../styles/components/results";
 
 @include b(select-address) {
   .c-block {
@@ -14,12 +15,29 @@
 
     transform: translateY(-50%);
   }
+
+  .c-tag--text-third {
+    @include padding(null, px2rpx(8px), null, px2rpx(8px));
+    @include text--middle(px2rpx(30px));
+
+    position: relative;
+    top: -1px;
+    margin-right: px2rpx(20px);
+  }
+
+  .select-address__wrap {
+    @include position--absolute(px2rpx(70px + 106px + 20px), 0, 0, 0);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: px2rpx(20px);
+  }
 }
 
 @include b(select-address-no-address) {
   @include text--middle(px2rpx(54px * 2 + 154px));
 
-  border: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
   box-sizing: border-box;
   padding-left: px2rpx(136px + 190px + 20px);
   background: {

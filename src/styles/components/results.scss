@@ -15,4 +15,13 @@
   @include e(item-title) {
     @include padding(px2rpx(30px), null, px2rpx(20px));
   }
+
+  @include m(secondary) {
+    @include b(c-results) {
+      @include e(item) {
+        height: px2rpx(134px);
+        padding-left: px2rpx(20px);
+      }
+    }
+  }
 }

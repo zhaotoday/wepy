@@ -1,39 +1,65 @@
 <template>
   <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
   <view class="select-address c-main c-main--has-nav-bar">
+    <address-operation title="管理地址" url="/pages/manage-address/index"/>
     <address-search class="l-box l-box--margin-bottom" :city.sync="city" @toggle.user="toggleCitySelector"/>
     <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}"/>
-    <view class="select-address__c-block c-block" hidden="{{citySelectorVisible}}">
-      <view class="c-cells">
-        <view class="c-cells__item">
-          <view class="c-cells__item-body">当前地址</view>
-          <view class="c-cells__item-body">
-            <view class="c-tag c-tag--text-secondary c2 s5" @tap="reloadLocation">重新定位</view>
+    <view class="select-address__wrap" hidden="{{citySelectorVisible}}">
+      <view class="select-address__c-block c-block">
+        <view class="c-cells">
+          <view class="c-cells__item">
+            <view class="c-cells__item-body">当前地址</view>
+            <view class="c-cells__item-body">
+              <view class="c-tag c-tag--text-secondary c2 s5" @tap="reloadLocation">重新定位</view>
+            </view>
           </view>
-        </view>
-        <view class="c-cells__item">
-          <view class="c-cells__item-body c3 s3">{{currentLocation.address}}</view>
-        </view>
-        <view class="c-cells__item">
-          <view class="c-cells__item-body">收货地址</view>
-          <view class="c-cells__item-body">
-            <view class="c-tag c-tag--text-secondary c2 s5" @tap="navigateToAddAddress">
-              添加收货地址
+          <view class="c-cells__item">
+            <view class="c-cells__item-body c3 s3">{{currentLocation.address}}</view>
+          </view>
+          <block wx:if="{{loggedIn}}">
+            <view class="c-cells__item">
+              <view class="c-cells__item-body">收货地址</view>
+              <view class="c-cells__item-body">
+                <view class="c-tag c-tag--text-secondary c2 s5" @tap="navigateToAddAddress">
+                  添加收货地址
+                </view>
+              </view>
+            </view>
+            <view class="c-results c-results--secondary" wx:if="{{!!myAddresses.length}}">
+              <repeat for="{{myAddresses}}" item="item">
+                <view class="c-results__item c3 s3" @tap="selectLocation({{item}})">
+                  <view class="c-results__item-title">{{item.trueName}}　{{item.mobPhone}}</view>
+                  <view class="c-results__item-extra">
+                    <view class="c-tag c-tag--text-third c3 s6">
+                      {{
+                      item.tagType === 1
+                      ? '家'
+                      : item.tagType === 2
+                      ? '公司'
+                      : item.tagType === 3
+                      ? '学校'
+                      : '其他'
+                      }}
+                    </view>
+                    <text>{{item.address}}</text>
+                  </view>
+                </view>
+              </repeat>
+            </view>
+            <view class="select-address-no-address c1 s4" wx:else>目前没有收货地址哦！</view>
+          </block>
+          <view class="c-cells__item">
+            <view class="c-cells__item-body">附近地址</view>
+            <view class="c-cells__item-body">
+              <view class="c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址</view>
             </view>
           </view>
         </view>
-        <view class="select-address-no-address c1 s4">目前没有收货地址哦！</view>
-        <view class="c-cells__item">
-          <view class="c-cells__item-body">附近地址</view>
-          <view class="c-cells__item-body">
-            <view class="c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址</view>
-          </view>
+        <view class="select-address-more-address c3 s3">
+          <repeat for="{{nearbyLocations}}" item="item">
+            <view class="more-address__item">{{item.address}}</view>
+          </repeat>
         </view>
-      </view>
-      <view class="select-address-more-address c3 s3">
-        <repeat for="{{nearbyLocations}}" item="item">
-          <view class="more-address__item">{{item.address}}</view>
-        </repeat>
       </view>
     </view>
   </view>
@@ -47,8 +73,10 @@
   import NavBar from '../../components/nav-bar/index'
   import AddressSearch from '../../components/address-search/index'
   import CitySelector from '../../components/city-selector/index'
+  import AddressOperation from '../../components/address-operation/index'
   import location from '../../utils/location'
   import request from '../../utils/request'
+  import auth from '../../utils/auth'
 
   export default class extends wepy.page {
     config = {
@@ -58,17 +86,20 @@
     components = {
       'nav-bar': NavBar,
       'address-search': AddressSearch,
-      'city-selector': CitySelector
+      'city-selector': CitySelector,
+      'address-operation': AddressOperation
     }
 
     mixins = [global]
 
     data = {
       navBarBack: true,
-      city: location.get()['city'] || '',
+      city: '',
       citySelectorVisible: false,
       currentLocation: {},
-      nearbyLocations: []
+      nearbyLocations: [],
+      myAddresses: [],
+      loggedIn: false
     }
 
     methods = {
@@ -90,7 +121,7 @@
         wepy.navigateTo({url: '/pages/add-address/index'})
       },
       navigateToMoreAddress () {
-        wepy.navigateTo({url: '/pages/more-address/index'})
+        wepy.navigateTo({url: '/pages/more-address/index?from=select-address'})
       }
     }
 
@@ -100,16 +131,21 @@
       this.$apply()
     }
 
-    async onLoad () {
-      const getMyAddresses = await request({
-        url: 'address/getMyAddresses'
-      })
+    async onShow () {
+      this.city = location.get()['city'] || ''
+      this.loggedIn = auth.loggedIn()
 
-      console.log(getMyAddresses)
-    }
-
-    onShow () {
       this.renderLocations()
+
+      if (this.loggedIn) {
+        const getMyAddresses = await request({
+          url: 'address/getMyAddresses'
+        })
+
+        this.myAddresses = getMyAddresses
+      }
+
+      this.$apply()
     }
   }
 </script>

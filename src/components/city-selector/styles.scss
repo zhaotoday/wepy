@@ -4,7 +4,7 @@
 @import "../../styles/components/tag";
 
 @include b(c-city-selector) {
-  @include position--absolute(px2rpx(106px + 20px), 0, 0, 0);
+  @include position--absolute(px2rpx(70px + 106px + 20px), 0, 0, 0);
 
   .c-block {
     @include block--center;

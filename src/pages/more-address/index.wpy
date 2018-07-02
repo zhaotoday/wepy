@@ -82,7 +82,8 @@
         code: '141200'
       }],
       latitude: 0,
-      longitude: 0
+      longitude: 0,
+      from: ''
     }
 
     methods = {
@@ -103,7 +104,12 @@
       },
       selectLocation (location) {
         this.$parent.globalData.selectedLocation = location
-        wepy.navigateBack()
+
+        if (this.from) {
+          wepy.navigateTo({url: '/pages/add-address/index?from=select-address'})
+        } else {
+          wepy.navigateBack()
+        }
       },
       navigateToSearchAddress () {
         wepy.navigateTo({url: '/pages/search-address/index'})
@@ -125,7 +131,8 @@
       })
     }
 
-    async onLoad () {
+    async onLoad (query) {
+      this.from = query.from || ''
       this.mapCtx = wepy.createMapContext('map')
       const {lng, lat, city = ''} = location.get()
       this.longitude = lng
