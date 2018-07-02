@@ -13,6 +13,7 @@
       <view class="star"></view>
     </view>
   </view>
+  <shop-tab-bar selected="details"/>
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -22,6 +23,7 @@
   import global from '../../../mixins/global'
   import NavBar from '../../../components/nav-bar/index'
   import ProductSearch from '../../../components/product-search/index'
+  import ShopTabBar from '../../../components/shop-tab-bar/index'
   import request from '../../../utils/request'
 
   export default class extends wepy.page {
@@ -31,7 +33,8 @@
 
     components = {
       'nav-bar': NavBar,
-      'product-search': ProductSearch
+      'product-search': ProductSearch,
+      'shop-tab-bar': ShopTabBar
     }
 
     mixins = [global]

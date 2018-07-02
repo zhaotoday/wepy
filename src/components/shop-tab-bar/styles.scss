@@ -1,0 +1,36 @@
+@import "../../styles/utils/index";
+
+@include b(c-shop-tab-bar) {
+  @include footer--sticky;
+
+  display: flex;
+  border-top: 1px solid #f8f8f8;
+  background-color: white;
+
+  @include e(item) {
+    flex: 1;
+    box-sizing: border-box;
+    height: px2rpx(100px);
+    line-height: 100%;
+    text-align: center;
+    color: #757575;
+    font-weight: bold;
+    padding-top: px2rpx(12px + 40px + 10px);
+
+    @each $icon in details, categories, contact {
+      @include m(#{$icon}) {
+        background: {
+          image: image-url("components/shop-tab-bar/#{$icon}.png");
+          size: px2rpx(40px) px2rpx(40px);
+          position: center px2rpx(12px);
+          repeat: no-repeat;
+        }
+
+        &.is-active {
+          background-image: image-url("components/shop-tab-bar/#{$icon}-active.png");
+          color: map-get($colors, c3);
+        }
+      }
+    }
+  }
+}
