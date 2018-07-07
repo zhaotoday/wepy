@@ -1,18 +1,29 @@
 <template>
-  <view class="c-rate c2 s6" wx:if="{{theme === 'primary'}}">
-    <repeat for="{{zeroToFour}}" index="index">
-      <image src="./images/star{{value.rate >= index + 1 ? '-active' : ''}}.png"/>
+  <view class="c-rate c-rate--primary c2 s6" wx:if="{{format === 'primary'}}">
+    <repeat for="{{fromZeroToFour}}" index="index">
+      <image src="./images/primary/star{{dataItem.rate >= index + 1 ? '-active' : ''}}.png"/>
     </repeat>
-    ({{value.score}})
+    ({{dataItem.score}})
   </view>
-  <view class="c-rate c-rate--secondary" wx:if="{{theme === 'secondary'}}">
+
+  <view class="c-rate c-rate--secondary" wx:if="{{format === 'secondary'}}">
     <view class="c2 s2" style="padding-right: 10rpx;">总评价：</view>
     <view>
-      <repeat for="{{zeroToFour}}" index="index">
-        <image src="./images/star-secondary{{value.rate >= index + 1 ? '-active' : ''}}.png"/>
+      <repeat for="{{fromZeroToFour}}" index="index">
+        <image src="./images/secondary/star{{dataItem.rate >= index + 1 ? '-active' : ''}}.png"/>
       </repeat>
     </view>
-    <view class="c1 s4" style="padding-left: 3rpx;">{{value.score}}分好评</view>
+    <view class="c1 s4" style="padding-left: 3rpx;">{{dataItem.score}}分好评</view>
+  </view>
+
+  <view class="c-rate c-rate--third" wx:if="{{format === 'third'}}">
+    <view class="c2 s2" style="padding-right: 10rpx;">总评价：</view>
+    <view>
+      <repeat for="{{fromZeroToFour}}" index="index">
+        <image src="./images/third/star{{dataItem.rate >= index + 1 ? '-active' : ''}}.png"/>
+      </repeat>
+    </view>
+    <view style="padding-left: 4rpx;">评分：{{dataItem.score}}</view>
   </view>
 </template>
 
@@ -23,11 +34,11 @@
 
   export default class extends wepy.component {
     props = {
-      theme: {
+      format: {
         type: String,
         default: 'primary'
       },
-      value: {
+      dataItem: {
         type: Object,
         default: {
           score: 0,
@@ -37,7 +48,7 @@
     }
 
     computed = {
-      zeroToFour () {
+      fromZeroToFour () {
         return Array.from({length: 5}, (v, k) => k)
       }
     }

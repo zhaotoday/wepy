@@ -73,7 +73,7 @@
                 <image class="home-products__image" src="{{item.image}}" mode="aspectFill" @error="handleImageError"
                        data-type="product" data-object="products" data-index="{{index}}"/>
                 <view class="home-products__title c2 s2">{{item.name}}</view>
-                <rate :value.sync="item"/>
+                <rate :dataItem.sync="item"/>
               </view>
             </navigator>
           </repeat>

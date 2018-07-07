@@ -42,7 +42,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '推荐店铺'
     }
 
     components = {

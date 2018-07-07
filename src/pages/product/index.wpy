@@ -177,7 +177,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '详情页'
     }
 
     components = {

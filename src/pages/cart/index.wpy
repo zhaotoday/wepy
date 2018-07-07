@@ -13,7 +13,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '购物车'
     }
 
     components = {

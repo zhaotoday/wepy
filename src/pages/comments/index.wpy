@@ -4,7 +4,7 @@
     <view class="l-box" style="border-bottom: 1px solid #eeeeee;">
       <view class="l-wing-blank">
         <view class="comments-rate">
-          <rate theme="secondary" :value.sync="rateValue"/>
+          <rate format="secondary" :dataItem.sync="rateItem"/>
         </view>
         <view class="comments-total s5">
           <text class="c-tag c-tag--text{{totalTap === 'all' ? ' c-tag--text--active' : ''}} is-first"
@@ -68,7 +68,7 @@
       totalTap: 'all',
       hasImageTotal: 0,
       resItems: [],
-      rateValue: {},
+      rateItem: {},
       productStatus: 1
     }
 
@@ -91,7 +91,7 @@
         }
       })
 
-      this.rateValue = (score => ({
+      this.rateItem = (score => ({
         score,
         rate: (score / 2).toFixed(2)
       }))(getEvaluationsRes.grade)

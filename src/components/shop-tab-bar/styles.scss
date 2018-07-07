@@ -28,7 +28,7 @@
 
         &.is-active {
           background-image: image-url("components/shop-tab-bar/#{$icon}-active.png");
-          color: map-get($colors, c3);
+          color: #666666;
         }
       }
     }

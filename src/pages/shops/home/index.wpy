@@ -11,7 +11,63 @@
         <text class="s4">55.6万</text>
       </view>
       <view class="star"></view>
+      <view class="shop-params c7 s4">
+        <view class="shop-params__rate">
+          <rate format="third" :dataItem.sync="rateItem"/>
+        </view>
+        <view class="shop-params__distance">
+          <image src="./images/address.png"/>
+          <text>距离4.4km</text>
+        </view>
+        <view class="shop-params__sales">
+          月售 2000单
+        </view>
+      </view>
     </view>
+    <view class="shop-tip c7 s6">欢迎光临，购买请提前半个小时下单，线下配送约40分钟（满88包邮）</view>
+    <view class="c-tabs c-tabs--secondary c3 s1">
+      <view class="c-tabs__item">
+        <view class="c-tabs__item-wrap is-active">首页</view>
+      </view>
+      <view class="c-tabs__item">
+        <view class="c-tabs__item-wrap">商品</view>
+      </view>
+      <view class="c-tabs__item">
+        <view class="c-tabs__item-wrap">促销</view>
+      </view>
+    </view>
+    <view class="c-coupon-bar u-margin-bottom-20">
+      <view class="c-coupon-bar__tag"></view>
+      <view class="c-coupons-wrap">
+        <view class="c-coupons">
+          <view class="c-coupons__item">
+            <view class="c-coupons__money c2 sd">
+              15
+              <view class="c-coupons__money-unit s6">¥</view>
+              <view class="c-coupons__get"/>
+            </view>
+            <view class="c-coupons__condition c2 s6">无门槛</view>
+          </view>
+          <view class="c-coupons__item">
+            <view class="c-coupons__money c2 sd">
+              15
+              <view class="c-coupons__money-unit s6">¥</view>
+              <view class="c-coupons__get"/>
+            </view>
+            <view class="c-coupons__condition c2 s6">无门槛</view>
+          </view>
+          <view class="c-coupons__item">
+            <view class="c-coupons__money c2 sd">
+              15
+              <view class="c-coupons__money-unit s6">¥</view>
+              <view class="c-coupons__get"/>
+            </view>
+            <view class="c-coupons__condition c2 s6">无门槛</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <image class="middle-ad u-margin-bottom-20" mode="aspectFill" src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg"/>
   </view>
   <shop-tab-bar selected="details"/>
 </template>
@@ -24,6 +80,7 @@
   import NavBar from '../../../components/nav-bar/index'
   import ProductSearch from '../../../components/product-search/index'
   import ShopTabBar from '../../../components/shop-tab-bar/index'
+  import Rate from '../../../components/rate/index'
   import request from '../../../utils/request'
 
   export default class extends wepy.page {
@@ -34,13 +91,18 @@
     components = {
       'nav-bar': NavBar,
       'product-search': ProductSearch,
-      'shop-tab-bar': ShopTabBar
+      'shop-tab-bar': ShopTabBar,
+      'rate': Rate
     }
 
     mixins = [global]
 
     data = {
-      navBarBack: false
+      navBarBack: false,
+      rateItem: {
+        score: 2,
+        rate: 1
+      }
     }
 
     onShow () {

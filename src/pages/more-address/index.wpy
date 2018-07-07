@@ -16,10 +16,10 @@
         />
       </view>
       <view class="results-wrap">
-        <view class="c-tabs c2 s2">
+        <view class="c-tabs c-tabs--primary c2 s2">
           <repeat for="{{types}}" item="item">
             <view class="c-tabs__item" @tap="getLocations({{item.code}})">
-              <view class="c-tabs__item-wrap{{currentType === item.code ? ' c-tabs__item-wrap--active' : ''}}">
+              <view class="c-tabs__item-wrap{{currentType === item.code ? ' is-active' : ''}}">
                 {{item.name}}
               </view>
             </view>
