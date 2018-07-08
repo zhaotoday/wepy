@@ -30,7 +30,7 @@
           iconPath: 'styles/images/tab-bar/home.png',
           selectedIconPath: 'styles/images/tab-bar/home-active.png'
         }, {
-          pagePath: 'pages/category/index',
+          pagePath: 'pages/tab-bar/categories/index',
           text: '分类',
           iconPath: 'styles/images/tab-bar/category.png',
           selectedIconPath: 'styles/images/tab-bar/category-active.png'
@@ -47,11 +47,12 @@
         }]
       },
       pages: [
+        'pages/home/index',
+        'pages/tab-bar/categories/index',
         'pages/shops/promotions/index',
         'pages/shops/products/index',
         'pages/shops/home/index',
         'pages/products/details/index',
-        'pages/home/index',
         'pages/more-address/index',
         'pages/manage-address/index',
         'pages/select-address/index',
@@ -61,7 +62,6 @@
         'pages/web-view/index',
         'pages/recommended-shops/index',
         'pages/login/index',
-        'pages/category/index',
         'pages/cart/index',
         'pages/my/index',
         'pages/content/index'

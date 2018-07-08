@@ -18,7 +18,7 @@
     </view>
     <!-- /n-categories -->
     <!-- n-no-data -->
-    <view wx:else hidden="{{!shown}}" class="n-no-data">
+    <view wx:else hidden="{{!loaded}}" class="n-no-data">
       <view class="n-no-data__image"></view>
       <view class="n-no-data__tip c1 s4">没有搜到你想要的分类</view>
     </view>
@@ -84,6 +84,8 @@
       allCategories = Array.from(this.categories)
 
       this.$apply()
+
+      this.loaded = true
     }
   }
 </script>

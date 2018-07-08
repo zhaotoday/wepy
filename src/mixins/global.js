@@ -6,8 +6,7 @@ let timer
 
 export default class extends wepy.mixin {
   data = {
-    // 页面是否已显示
-    shown: false
+    loaded: false
   }
 
   async onShow () {
@@ -28,10 +27,6 @@ export default class extends wepy.mixin {
         this.$apply()
       }, 500)
     }
-
-    await helpers.sleep(100)
-
-    this.shown = true
   }
 
   onHide () {
@@ -40,7 +35,7 @@ export default class extends wepy.mixin {
 
   methods = {
     handleImageError (e) {
-      const {type, object, index = -1, childobject, childindex, key = 'image'} = e.currentTarget.dataset
+      const { type, object, index = -1, childobject, childindex, key = 'image' } = e.currentTarget.dataset
       const url = `${consts.IMAGE_CDN_URL}/components/image/${type}.jpg`
 
       if (childobject) {
