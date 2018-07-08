@@ -19,11 +19,11 @@
   "dependencies": {
     "jshashes": "^1.0.7",
     "lodash-decorators": "^6.0.0",
-    "mp-client": "0.0.20",
+    "mp-client": "0.0.24",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-promise": "^0.5.3",
-    "sass-utils": "^1.0.12",
+    "sass-utils": "^1.0.14",
     "wepy": "^1.6.0",
     "wepy-async-function": "^1.4.4",
     "wepy-com-toast": "^1.0.2",
