@@ -11,6 +11,10 @@
   @include e(item) {
     flex: 1;
     text-align: center;
+
+    @include m(width-fixed) {
+      flex: 0 1 auto;
+    }
   }
 
   @include e(item-wrap) {

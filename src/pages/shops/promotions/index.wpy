@@ -39,37 +39,31 @@
       </view>
     </view>
     <scroll-view id="" scroll-x style="width: 100%;">
-      <view class="c-tabs u-margin-bottom-20 c3 s1">
-        <view class="c-tabs__item">
+      <view class="c-tabs u-margin-bottom-20 c3 s1" style="width: 1200rpx;">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap is-active">组合优惠</view>
         </view>
-        <view class="c-tabs__item">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap">优惠一</view>
         </view>
-        <view class="c-tabs__item">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap">优惠二</view>
         </view>
-        <view class="c-tabs__item">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap">优惠三</view>
         </view>
-        <view class="c-tabs__item">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap">优惠四</view>
         </view>
-        <view class="c-tabs__item">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap">优惠五</view>
         </view>
-        <view class="c-tabs__item">
+        <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap">优惠六</view>
         </view>
       </view>
     </scroll-view>
     <view class="c-panel u-margin-bottom-20">
-      <view class="c-panel__head padding-30 border-bottom-1">
-        <view class="c-panel__head-title">
-          <image src="../_commons/images/recommended.png" />
-          <text class="c1 s1">精品推荐</text>
-        </view>
-      </view>
       <view class="c-panel__body c-products u-padding-top-20">
         <repeat for="{{[0, 1, 2, 3, 4, 5]}}" item="item" index="index">
           <navigator class="c-products__item" url="">
