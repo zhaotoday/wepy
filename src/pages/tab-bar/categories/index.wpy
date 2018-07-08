@@ -1,0 +1,89 @@
+<template>
+  <nav-bar title="分类" :back.user="navBarBack" />
+  <view class="p-categories c-main c-main--has-nav-bar">
+    <search-bar placeholder="输入你要搜索的分类" @confirm.user="handleSearchConfirm" />
+    <c-swiper theme="third" :items.sync="ads" width="100%" height="320rpx" />
+    <!-- n-categories -->
+    <view wx:if="{{categories.length}}" class="n-categories c-categories">
+      <repeat for="{{categories}}" item="item" index="index">
+        <navigator url="/pages/recommended-shops/index?id={{item.id}}&name={{item.name}}">
+          <view class="c-categories__item c2 s4">
+            <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
+                   data-object="categories"
+                   data-index="{{index}}" />
+            {{item.name}}
+          </view>
+        </navigator>
+      </repeat>
+    </view>
+    <!-- /n-categories -->
+    <!-- n-no-data -->
+    <view wx:else hidden="{{!shown}}" class="n-no-data">
+      <view class="n-no-data__image"></view>
+      <view class="n-no-data__tip c1 s4">没有搜到你想要的分类</view>
+    </view>
+    <!-- /n-no-data -->
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+  import request from '../../../utils/request'
+  import NavBar from '../../../components/nav-bar/index'
+  import SearchBar from '../../../components/search-bar/index'
+  import Swiper from '../../../components/swiper/index'
+
+  let allCategories = []
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '分类'
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'search-bar': SearchBar,
+      'c-swiper': Swiper
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: false,
+      ads: [],
+      categories: [],
+      hasNavBar: true
+    }
+
+    methods = {
+      handleSearchConfirm (e) {
+        this.categories = allCategories.filter(item => item.name.indexOf(e.detail.value) !== -1)
+      }
+    }
+
+    async onShow () {
+      const homeGetAllClassesRes = await request({
+        url: 'home/getAllClasses',
+        requiresLocation: true
+      })
+
+      this.ads = homeGetAllClassesRes.advs.map(item => ({
+        image: item.imageUrl,
+        url: item.href || ''
+      }))
+
+      this.categories = homeGetAllClassesRes.recommendClasses.map(item => ({
+        id: item.gcId,
+        name: item.gcName,
+        image: item.gcImage
+      }))
+
+      allCategories = Array.from(this.categories)
+
+      this.$apply()
+    }
+  }
+</script>
