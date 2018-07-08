@@ -1,36 +1,38 @@
 <template>
-  <nav-bar title="购物车" :back.sync="navBarBack"/>
-  <view class="shops-home c-main c-main--has-nav-bar">
-    <product-search/>
-    <image class="shop-banner" mode="aspectFill" src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg"/>
-    <view class="shop-summary">
-      <image class="shop-avatar" mode="aspectFill" src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg"/>
-      <view class="shop-name c7 s0">发生大幅度发</view>
-      <view class="shop-followers c7">
+  <nav-bar title="购物车" :back.sync="navBarBack" />
+  <view class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar">
+    <product-search />
+    <image class="n-shop-banner" mode="aspectFill"
+           src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
+    <view class="n-shop-summary">
+      <image class="n-shop-avatar" mode="aspectFill"
+             src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
+      <view class="n-shop-name c7 s0">发生大幅度发</view>
+      <view class="n-shop-followers c7">
         <text class="s6" style="margin-right: 10rpx;">粉丝数</text>
         <text class="s4">55.6万</text>
       </view>
-      <view class="star"></view>
-      <view class="shop-params c7 s4">
-        <view class="shop-params__rate">
-          <rate format="third" :dataItem.sync="rateItem"/>
+      <view class="n-star"></view>
+      <view class="n-shop-params c7 s4">
+        <view class="n-shop-params__rate">
+          <rate format="third" :dataItem.sync="rateItem" />
         </view>
-        <view class="shop-params__distance">
-          <image src="./images/address.png"/>
+        <view class="n-shop-params__distance">
+          <image src="./images/address.png" />
           <text>距离4.4km</text>
         </view>
-        <view class="shop-params__sales">
+        <view class="n-shop-params__sales">
           月售 2000单
         </view>
       </view>
     </view>
-    <view class="shop-tip c7 s6">欢迎光临，购买请提前半个小时下单，线下配送约40分钟（满88包邮）</view>
+    <view class="n-shop-tip c7 s6">欢迎光临，购买请提前半个小时下单，线下配送约40分钟（满88包邮）</view>
     <view class="c-tabs c-tabs--secondary c3 s1">
       <view class="c-tabs__item">
         <view class="c-tabs__item-wrap is-active">首页</view>
       </view>
       <view class="c-tabs__item">
-        <view class="c-tabs__item-wrap">商品</view>
+        <view class="c-tabs__item-wrap" @tap="navigateTo">商品</view>
       </view>
       <view class="c-tabs__item">
         <view class="c-tabs__item-wrap">促销</view>
@@ -44,7 +46,7 @@
             <view class="c-coupons__money c2 sd">
               15
               <view class="c-coupons__money-unit s6">¥</view>
-              <view class="c-coupons__get"/>
+              <view class="c-coupons__get" />
             </view>
             <view class="c-coupons__condition c2 s6">无门槛</view>
           </view>
@@ -52,7 +54,7 @@
             <view class="c-coupons__money c2 sd">
               15
               <view class="c-coupons__money-unit s6">¥</view>
-              <view class="c-coupons__get"/>
+              <view class="c-coupons__get" />
             </view>
             <view class="c-coupons__condition c2 s6">无门槛</view>
           </view>
@@ -60,16 +62,69 @@
             <view class="c-coupons__money c2 sd">
               15
               <view class="c-coupons__money-unit s6">¥</view>
-              <view class="c-coupons__get"/>
+              <view class="c-coupons__get" />
             </view>
             <view class="c-coupons__condition c2 s6">无门槛</view>
           </view>
         </view>
       </view>
     </view>
-    <image class="middle-ad u-margin-bottom-20" mode="aspectFill" src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg"/>
+    <image class="n-middle-ad u-margin-bottom-20" mode="aspectFill"
+           src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
+    <view class="c-panel u-margin-bottom-20">
+      <view class="c-panel__head padding-30 border-bottom-1">
+        <view class="c-panel__head-title">
+          <image src="./images/hot-sale.png" />
+          <text class="c1 s1">热销专区</text>
+        </view>
+        <view class="c-panel__head-addon right-30">
+          <text class="c3 s5">更多</text>
+          <view class="c-panel__head-more" />
+        </view>
+      </view>
+      <view class="c-panel__body">
+        <view class="n-hot-sale o-grid">
+          <view class="o-grid__cell o-grid__cell--width-fixed n-hot-sale__image--width-270">
+            <image src="./images/hot-sale-demo-1.png" />
+          </view>
+          <view class="o-grid__cell n-hot-sale__image--width-406">
+            <view class="o-grid o-grid--full">
+              <view class="o-grid__cell" style="margin-bottom: 14rpx;">
+                <image src="./images/hot-sale-demo-2.png" />
+              </view>
+              <view class="o-grid__cell">
+                <view class="c-hot-sale-no-data">
+                  <view class="u-block-middle">
+                    <view class="c-hot-sale-no-data__image u-vertical-middle" />
+                    <text class="c4 s4">期待新品哦！</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="c-panel u-margin-bottom-20">
+      <view class="c-panel__head padding-30 border-bottom-1">
+        <view class="c-panel__head-title">
+          <image src="./images/recommended.png" />
+          <text class="c1 s1">精品推荐</text>
+        </view>
+      </view>
+      <view class="c-panel__body c-products u-padding-top-20">
+        <repeat for="{{[0, 1, 2, 3, 4, 5]}}" item="item" index="index">
+          <navigator class="c-products__item" url="">
+            <image src="./images/product-demo.png" mode="aspectFill" @error="handleImageError" data-type="product"
+                   data-object="recommendedProducts" data-index="{{index}}" />
+            <view class="c-products__item-name c2 s4">女人受惠一生的口才课本女人受惠一生的口才课本</view>
+            <view class="c-products__item-price c1 s1">¥ 11</view>
+          </navigator>
+        </repeat>
+      </view>
+    </view>
   </view>
-  <shop-tab-bar selected="details"/>
+  <shop-tab-bar selected="details" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -102,6 +157,12 @@
       rateItem: {
         score: 2,
         rate: 1
+      }
+    }
+
+    methods = {
+      navigateTo () {
+        wepy.navigateTo({ url: '/pages/products/details/index' })
       }
     }
 

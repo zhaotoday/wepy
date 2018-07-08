@@ -1,16 +1,16 @@
-@import "../../styles/utils/index";
-@import "../../styles/components/main";
-@import "../../styles/components/icon";
-@import "../../styles/layouts/wing-blank";
-@import "../../styles/layouts/box";
-@import "../../styles/components/tag";
-@import "../../styles/components/service";
-@import "../../styles/components/media";
-@import "../../styles/layouts/list";
-@import "../../styles/components/button";
-@import "../../styles/components/panel";
-@import "../../styles/components/products";
-@import "../../styles/components/collect";
+@import "../../../styles/utils/index";
+@import "../../../styles/components/main";
+@import "../../../styles/components/icon";
+@import "../../../styles/layouts/wing-blank";
+@import "../../../styles/layouts/box";
+@import "../../../styles/components/tag";
+@import "../../../styles/components/service";
+@import "../../../styles/components/media";
+@import "../../../styles/layouts/list";
+@import "../../../styles/components/button";
+@import "../../../styles/bem/components/panel";
+@import "../../../styles/bem/components/products";
+@import "../../../styles/components/collect";
 
 @include b(product) {
 }

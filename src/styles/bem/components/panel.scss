@@ -1,0 +1,68 @@
+@import "../../utils/index";
+
+@include c(panel) {
+  background-color: white;
+
+  @include e(head) {
+    position: relative;
+
+    @include m(padding-30) {
+      padding: px2rpx(30px);
+    }
+
+    @include m(border-bottom-1) {
+      border-bottom: 1px solid #f8f8f8;
+    }
+
+    @include m(has-fringe) {
+      &::before {
+        @include size(px2rpx(8px), px2rpx(26px));
+        @include position--absolute(50%, null, null, 0);
+
+        transform: translateY(-50%);
+        content: "";
+        display: block;
+        background-color: map-get($colors, c1);
+      }
+    }
+  }
+
+  @include e(head-title) {
+    display: flex;
+    align-items: center;
+    line-height: 0;
+
+    image {
+      @include size(px2rpx(24px), px2rpx(24px));
+
+      margin-right: px2rpx(8px);
+    }
+  }
+
+  @include e(head-addon) {
+    @include position--absolute(50%);
+
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    transform: translateY(-50%);
+    padding: px2rpx(10px);
+    margin-right: px2rpx(-10px);
+
+    @include m(right-30) {
+      right: px2rpx(30px);
+    }
+  }
+
+  @include e(head-more) {
+    @include size(px2rpx(10px), px2rpx(20px));
+
+    display: inline-block;
+    margin-left: px2rpx(10px);
+    background: {
+      image: image-url("objects/panel/more.png");
+      size: 100% 100%;
+      repeat: no-repeat;
+    }
+  }
+}

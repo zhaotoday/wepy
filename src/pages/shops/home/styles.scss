@@ -2,22 +2,26 @@
 @import "../../../styles/components/main";
 @import "../../../styles/components/tabs";
 @import "../../../styles/components/coupon-bar";
+@import "../../../styles/bem/components/panel";
+@import "../../../styles/bem/objects/grid";
+@import "../../../styles/bem/utils/index";
+@import "../../../styles/bem/components/products";
 
-.shops-home {
-  @include b(shop-banner) {
+@include p(shops-home) {
+  @include n(shop-banner) {
     @include size(100%, px2rpx(20px + 56px + 200px));
 
     display: block;
   }
 
-  @include b(shop-summary) {
+  @include n(shop-summary) {
     @include size(100%, px2rpx(232px));
 
     background-color: #1b1b1b;
     position: relative;
   }
 
-  @include b(shop-avatar) {
+  @include n(shop-avatar) {
     @include position--absolute(px2rpx(20px), null, null, px2rpx(30px));
     @include circle(px2rpx(124px));
 
@@ -25,17 +29,17 @@
     border: 1px solid white;
   }
 
-  @include b(shop-name) {
+  @include n(shop-name) {
     @include position--absolute(px2rpx(42px), null, null, px2rpx(30px + 124px + 20px));
 
     line-height: 100%;
   }
 
-  @include b(shop-followers) {
+  @include n(shop-followers) {
     @include position--absolute(px2rpx(42px + 34px + 24px), null, null, px2rpx(30px + 124px + 20px));
   }
 
-  @include b(star) {
+  @include n(star) {
     @include position--absolute(px2rpx(42px), px2rpx(30px));
     @include size(px2rpx(84px), px2rpx(38px));
 
@@ -45,7 +49,7 @@
     }
   }
 
-  @include b(shop-params) {
+  @include n(shop-params) {
     @include position--absolute(null, px2rpx(30px), px2rpx(30px), px2rpx(30px));
 
     display: flex;
@@ -71,14 +75,57 @@
     }
   }
 
-  @include b(shop-tip) {
+  @include n(shop-tip) {
     @include text--middle(px2rpx(50px));
 
     text-align: center;
     background-color: map-get($colors, c1);
   }
 
-  @include b(middle-ad) {
+  @include n(middle-ad) {
     @include size(100%, px2rpx(220px));
+  }
+
+  @include n(hot-sale) {
+    padding: px2rpx(30px);
+
+    image {
+      display: block;
+    }
+
+    @include e(image) {
+      @include m(width-270) {
+        margin-right: px2rpx(14px);
+
+        image {
+          @include size(px2rpx(270px), px2rpx(409px));
+        }
+      }
+
+      @include m(width-406) {
+        image {
+          @include size(px2rpx(406px), px2rpx(198px));
+        }
+      }
+    }
+  }
+
+  @include c(hot-sale-no-data) {
+    @include size(px2rpx(406px), px2rpx(198px));
+
+    background-color: #f5f5f5;
+    position: relative;
+    text-align: center;
+
+    @include e(image) {
+      @include size(px2rpx(84px), px2rpx(78px));
+
+      background: {
+        image: image-url("pages/shops/home/hot-sale-no-data.png");
+        size: 100% 100%;
+      }
+      display: inline-block;
+      margin-right: px2rpx(14px);
+    }
   }
 }

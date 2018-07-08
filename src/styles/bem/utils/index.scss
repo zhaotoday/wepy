@@ -1,0 +1,25 @@
+@import "../../../styles/utils/index";
+
+.u-text-center {
+  text-align: center;
+}
+
+.u-vertical-middle {
+  vertical-align: middle;
+}
+
+// 块居中
+.u-block-middle {
+  @include position--absolute(50%, null, null, 0);
+
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.u-margin-bottom-20 {
+  margin-bottom: px2rpx(20px);
+}
+
+.u-padding-top-20 {
+  padding-top: px2rpx(20px);
+}

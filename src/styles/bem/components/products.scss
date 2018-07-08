@@ -1,4 +1,4 @@
-@import "../utils/index";
+@import "../../utils/index";
 
 @include b(c-products) {
   @include clearfix;

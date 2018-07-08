@@ -14,4 +14,8 @@
   @include m(has-tool-bar) {
     bottom: px2rpx(146px);
   }
+
+  @include m(has-shop-tab-bar) {
+    bottom: px2rpx(100px);
+  }
 }

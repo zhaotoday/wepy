@@ -1,10 +1,10 @@
 <template>
-  <nav-bar title="详情页" :back.sync="navBarBack"/>
+  <nav-bar title="详情页" :back.sync="navBarBack" />
   <view class="product c-main c-main--has-nav-bar c-main--has-tool-bar">
     <!-- product-images -->
     <view class="product-images">
-      <c-swiper theme="secondary" :preview.sync="previewImages" :items.sync="images" width="100%" height="578rpx"/>
-      <view class="c-icon c-icon--hot"/>
+      <c-swiper theme="secondary" :preview.sync="previewImages" :items.sync="images" width="100%" height="578rpx" />
+      <view class="c-icon c-icon--hot" />
     </view>
     <!-- /product-images -->
     <view class="l-box l-box--margin-bottom">
@@ -65,7 +65,7 @@
           </view>
           <view class="product-comment__user">
             <image src="{{comment.userAvatar || 'error'}}" mode="aspectFill"
-                   @error="handleImageError" data-type="avatar" data-object="comment" data-key="userAvatar"/>
+                   @error="handleImageError" data-type="avatar" data-object="comment" data-key="userAvatar" />
             <text>{{comment.username}}</text>
           </view>
           <view class="product-comment__content c2 s4">{{comment.content}}</view>
@@ -81,7 +81,7 @@
         <view class="l-list__item">
           <view class="c-media">
             <image src="{{shop.image}}" mode="aspectFill" @error="handleImageError" data-type="shop" data-object="shop"
-                  />
+            />
             <view class="c-media__body">
               <view class="c-media__body-title c2 s2">{{shop.name}}</view>
               <view class="c-media__body-content c3 s4">
@@ -105,7 +105,7 @@
               <view class="l-list__item">
                 <view class="c-media">
                   <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
-                         data-object="groups" data-index="{{index}}"/>
+                         data-object="groups" data-index="{{index}}" />
                   <view class="c-media__body">
                     <view class="c-media__body-title c2 s2">{{item.name}}</view>
                   </view>
@@ -132,17 +132,15 @@
       </view>
     </view>
 
-    <view class="l-box l-box--margin-bottom">
+    <view class="l-box u-margin-bottom-20">
       <view class="product-recommended-products c-panel">
-        <view class="c-panel__head c2 s1">
-          进店的还买了什么
-        </view>
+        <view class="c-panel__head padding-30 c2 s1">进店的还买了什么</view>
         <view class="c-panel__body">
           <view class="c-products">
             <repeat for="{{recommendedProducts}}" item="item" index="index">
               <navigator class="c-products__item" url="/pages/product/index?id={{item.id}}">
                 <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
-                       data-object="recommendedProducts" data-index="{{index}}"/>
+                       data-object="recommendedProducts" data-index="{{index}}" />
                 <view class="c-products__item-name c2 s4">{{item.name}}</view>
                 <view class="c-products__item-price c1 s1">¥ {{item.price}}</view>
               </navigator>
@@ -153,26 +151,26 @@
     </view>
   </view>
   <tool-bar :status.sync="status" shop-id="0" product-id="1" @add-to-cart.user="handleTapAddToCart"
-            @buy.user="handleTapBuy"/>
+            @buy.user="handleTapBuy" />
   <!--<action-sheet>
     <view slot="content">
       <text>新的内容</text>
     </view>
   </action-sheet>-->
-  <popup-coupon :visible.sync="popupCouponVisible"/>
+  <popup-coupon :visible.sync="popupCouponVisible" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
-  import global from '../../mixins/global'
-  import request from '../../utils/request'
-  import NavBar from '../../components/nav-bar/index'
-  import Swiper from '../../components/swiper/index'
-  import ToolBar from '../../components/tool-bar/index'
-  import ActionSheet from '../../components/action-sheet/index'
-  import PopupCoupon from '../../components/popup-coupon/index'
+  import global from '../../../mixins/global'
+  import request from '../../../utils/request'
+  import NavBar from '../../../components/nav-bar/index'
+  import Swiper from '../../../components/swiper/index'
+  import ToolBar from '../../../components/tool-bar/index'
+  import ActionSheet from '../../../components/action-sheet/index'
+  import PopupCoupon from '../../../components/popup-coupon/index'
   import { utils } from 'mp-client'
 
   export default class extends wepy.page {
