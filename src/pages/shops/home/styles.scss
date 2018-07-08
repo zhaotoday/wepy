@@ -6,82 +6,9 @@
 @import "../../../styles/bem/objects/grid";
 @import "../../../styles/bem/utils/index";
 @import "../../../styles/bem/components/products";
+@import "../_commons/styles";
 
 @include p(shops-home) {
-  @include n(shop-banner) {
-    @include size(100%, px2rpx(20px + 56px + 200px));
-
-    display: block;
-  }
-
-  @include n(shop-summary) {
-    @include size(100%, px2rpx(232px));
-
-    background-color: #1b1b1b;
-    position: relative;
-  }
-
-  @include n(shop-avatar) {
-    @include position--absolute(px2rpx(20px), null, null, px2rpx(30px));
-    @include circle(px2rpx(124px));
-
-    display: block;
-    border: 1px solid white;
-  }
-
-  @include n(shop-name) {
-    @include position--absolute(px2rpx(42px), null, null, px2rpx(30px + 124px + 20px));
-
-    line-height: 100%;
-  }
-
-  @include n(shop-followers) {
-    @include position--absolute(px2rpx(42px + 34px + 24px), null, null, px2rpx(30px + 124px + 20px));
-  }
-
-  @include n(star) {
-    @include position--absolute(px2rpx(42px), px2rpx(30px));
-    @include size(px2rpx(84px), px2rpx(38px));
-
-    background: {
-      image: image-url("pages/shops/home/star.png");
-      size: 100% 100%;
-    }
-  }
-
-  @include n(shop-params) {
-    @include position--absolute(null, px2rpx(30px), px2rpx(30px), px2rpx(30px));
-
-    display: flex;
-    align-items: flex-end;
-
-    view {
-      flex: 1;
-      line-height: 100%;
-    }
-
-    @include e(distance) {
-      text-align: right;
-
-      image {
-        @include size(px2rpx(16px), px2rpx(20px));
-
-        margin-right: px2rpx(10px);
-      }
-    }
-
-    @include e(sales) {
-      text-align: right;
-    }
-  }
-
-  @include n(shop-tip) {
-    @include text--middle(px2rpx(50px));
-
-    text-align: center;
-    background-color: map-get($colors, c1);
-  }
-
   @include n(middle-ad) {
     @include size(100%, px2rpx(220px));
   }
