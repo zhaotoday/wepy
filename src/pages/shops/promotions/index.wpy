@@ -38,8 +38,8 @@
         <view class="c-tabs__item-wrap is-active border-bottom-4">促销</view>
       </view>
     </view>
-    <scroll-view id="" scroll-x style="width: 100%;">
-      <view class="c-tabs u-margin-bottom-20 c3 s1" style="width: 1200rpx;">
+    <scroll-view class="u-margin-bottom-20" scroll-x style="width: 100%;">
+      <view class="c-tabs c3 s1" style="width: 1200rpx;">
         <view class="c-tabs__item width-fixed" style="width: 200rpx;">
           <view class="c-tabs__item-wrap is-active">组合优惠</view>
         </view>
@@ -67,7 +67,8 @@
       <view class="c-panel__body c-products u-padding-top-20">
         <repeat for="{{[0, 1, 2, 3, 4, 5]}}" item="item" index="index">
           <navigator class="c-products__item" url="">
-            <image src="../_commons/images/product-demo.png" mode="aspectFill" @error="handleImageError" data-type="product"
+            <image src="../_commons/images/product-demo.png" mode="aspectFill" @error="handleImageError"
+                   data-type="product"
                    data-object="recommendedProducts" data-index="{{index}}" />
             <view class="c-products__item-name c2 s4">女人受惠一生的口才课本女人受惠一生的口才课本</view>
             <view class="c-products__item-price c1 s1">¥ 11</view>
@@ -92,7 +93,7 @@
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: '店铺商品'
+      navigationBarTitleText: '店铺促销'
     }
 
     components = {
