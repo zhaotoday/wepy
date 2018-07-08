@@ -23,3 +23,7 @@
 .u-padding-top-20 {
   padding-top: px2rpx(20px);
 }
+
+.u-block-center {
+  @include block--center;
+}

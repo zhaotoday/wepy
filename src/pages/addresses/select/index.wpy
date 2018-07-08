@@ -1,16 +1,16 @@
 <template>
-  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
-  <view class="select-address c-main c-main--has-nav-bar">
-    <address-operation title="管理地址" url="/pages/manage-address/index"/>
-    <address-search class="l-box l-box--margin-bottom" :city.sync="city" @toggle.user="toggleCitySelector"/>
-    <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}"/>
-    <view class="select-address__wrap" hidden="{{citySelectorVisible}}">
-      <view class="select-address__c-block c-block">
+  <nav-bar title="选择收货地址" :back.sync="navBarBack" />
+  <view class="p-addresses-select c-main c-main--has-nav-bar">
+    <address-operation title="管理地址" url="/pages/manage-address/index" />
+    <address-search class="l-box l-box--margin-bottom" :city.sync="city" @toggle.user="toggleCitySelector" />
+    <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}" />
+    <view class="n-wrap" hidden="{{citySelectorVisible}}">
+      <view class="n-addresses c-block">
         <view class="c-cells">
           <view class="c-cells__item">
             <view class="c-cells__item-body">当前地址</view>
             <view class="c-cells__item-body">
-              <view class="c-tag c-tag--text-secondary c2 s5" @tap="reloadLocation">重新定位</view>
+              <view class="n-reload-address c-tag c-tag--text-secondary c2 s5" @tap="reloadLocation">重新定位</view>
             </view>
           </view>
           <view class="c-cells__item">
@@ -20,7 +20,7 @@
             <view class="c-cells__item">
               <view class="c-cells__item-body">收货地址</view>
               <view class="c-cells__item-body">
-                <view class="c-tag c-tag--text-secondary c2 s5" @tap="navigateToAddAddress">
+                <view class="n-add-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToAddAddress">
                   添加收货地址
                 </view>
               </view>
@@ -30,7 +30,7 @@
                 <view class="c-results__item c3 s3" @tap="selectLocation({{item}})">
                   <view class="c-results__item-title">{{item.trueName}}　{{item.mobPhone}}</view>
                   <view class="c-results__item-extra">
-                    <view class="c-tag c-tag--text-third c3 s6">
+                    <view class="n-tag c-tag c-tag--text-third c3 s6">
                       {{
                       item.tagType === 1
                       ? '家'
@@ -46,18 +46,18 @@
                 </view>
               </repeat>
             </view>
-            <view class="select-address-no-address c1 s4" wx:else>目前没有收货地址哦！</view>
+            <view class="n-no-data c1 s4" wx:else>目前没有收货地址哦！</view>
           </block>
           <view class="c-cells__item">
             <view class="c-cells__item-body">附近地址</view>
             <view class="c-cells__item-body">
-              <view class="c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址</view>
+              <view class="n-get-more-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址</view>
             </view>
           </view>
         </view>
-        <view class="select-address-more-address c3 s3">
+        <view class="n-more-address c3 s3">
           <repeat for="{{nearbyLocations}}" item="item">
-            <view class="more-address__item">{{item.address}}</view>
+            <view class="n-more-address__item">{{item.address}}</view>
           </repeat>
         </view>
       </view>
@@ -69,14 +69,14 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../mixins/global'
-  import NavBar from '../../components/nav-bar/index'
-  import AddressSearch from '../../components/address-search/index'
-  import CitySelector from '../../components/city-selector/index'
-  import AddressOperation from '../../components/address-operation/index'
-  import location from '../../utils/location'
-  import request from '../../utils/request'
-  import auth from '../../utils/auth'
+  import global from '../../../mixins/global'
+  import NavBar from '../../../components/nav-bar/index'
+  import AddressSearch from '../../../components/address-search/index'
+  import CitySelector from '../../../components/city-selector/index'
+  import AddressOperation from '../../../components/address-operation/index'
+  import location from '../../../utils/location'
+  import request from '../../../utils/request'
+  import auth from '../../../utils/auth'
 
   export default class extends wepy.page {
     config = {
@@ -118,10 +118,10 @@
         this.citySelectorVisible = !this.citySelectorVisible
       },
       navigateToAddAddress () {
-        wepy.navigateTo({url: '/pages/add-address/index'})
+        wepy.navigateTo({ url: '/pages/add-address/index' })
       },
       navigateToMoreAddress () {
-        wepy.navigateTo({url: '/pages/more-address/index?from=select-address'})
+        wepy.navigateTo({ url: '/pages/more-address/index?from=select-address' })
       }
     }
 

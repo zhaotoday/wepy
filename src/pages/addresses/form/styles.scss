@@ -1,22 +1,19 @@
-@import "../../styles/utils/index";
-@import "../../styles/components/main";
-@import "../../styles/components/block";
-@import "../../styles/components/cells";
-@import "../../styles/components/tag";
-@import "../../styles/components/button";
+@import "../../../styles/utils/index";
+@import "../../../styles/bem/utils/index";
+@import "../../../styles/components/main";
+@import "../../../styles/components/block";
+@import "../../../styles/components/cells";
+@import "../../../styles/components/tag";
+@import "../../../styles/components/button";
 
-@include b(add-address) {
+@include p(addresses-form) {
   padding-top: px2rpx(20px);
 
-  .c-block {
-    @include block--center;
-  }
-
-  .c-cells__item-body {
+  @include n(field-label) {
     @include text--middle(px2rpx(86px));
   }
 
-  .gender-tags {
+  @include n(gender-tags) {
     @include position--absolute(50%, 0);
 
     transform: translateY(-50%);
@@ -26,7 +23,7 @@
     }
   }
 
-  .contact-list {
+  @include n(contact-list) {
     @include position--absolute(50%, 0);
     @include text--middle(px2rpx(86px));
 
@@ -46,13 +43,13 @@
     width: px2rpx(320px);
   }
 
-  .c-cells__item-input {
+  @include n(tag) {
     .c-tag {
       margin-right: px2rpx(40px);
     }
   }
 
-  .c-button--orange-lg {
+  @include n(submit) {
     @include block--center;
 
     margin-top: px2rpx(100px);

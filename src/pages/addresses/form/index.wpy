@@ -1,14 +1,14 @@
 <template>
   <nav-bar title="添加收货地址" :back.sync="navBarBack"/>
-  <view class="add-address c-main c-main--has-nav-bar">
-    <view class="c-block c-cells">
+  <view class="p-addresses-form c-main c-main--has-nav-bar">
+    <view class="c-block c-cells u-block-center">
       <view class="c-cells__item">
-        <view class="c-cells__item-body">收货人</view>
+        <view class="n-field-label c-cells__item-body">收货人</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="姓名" confirm-type="done" placeholder-style="color: #bbb;"
                  value="{{formData.trueName}}" @input="input('trueName')"/>
         </view>
-        <view class="gender-tags s5">
+        <view class="n-gender-tags s5">
           <view class="c-tag c-tag--text-third{{formData.gender === 1 ? ' active' : ''}}" @tap="select('gender', 1)">
             先生
           </view>
@@ -18,21 +18,21 @@
         </view>
       </view>
       <view class="c-cells__item">
-        <view class="c-cells__item-body">联系电话</view>
+        <view class="n-field-label c-cells__item-body">联系电话</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="收货人电话" confirm-type="done" placeholder-style="color: #bbb;"
                  type="number"
                  value="{{formData.mobPhone}}" @input="input('mobPhone')"/>
         </view>
         <!--
-        <view class="contact-list c2 s2">
+        <view class="n-contact-list c2 s2">
           +通讯录
           <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber">啊</button>
         </view>
         -->
       </view>
       <view class="c-cells__item">
-        <view class="c-cells__item-body">收货地址</view>
+        <view class="n-field-label c-cells__item-body">收货地址</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="小区/写字楼" confirm-type="done" placeholder-style="color: #bbb;"
                  value="{{formData.address}}"
@@ -40,15 +40,15 @@
         </view>
       </view>
       <view class="c-cells__item">
-        <view class="c-cells__item-body">门牌号</view>
+        <view class="n-field-label c-cells__item-body">门牌号</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="例：1号楼101室" confirm-type="done" placeholder-style="color: #bbb;"
                  value="{{formData.subAddress}}" @input="input('subAddress')"/>
         </view>
       </view>
       <view class="c-cells__item">
-        <view class="c-cells__item-body">标签</view>
-        <view class="c-cells__item-input s5">
+        <view class="n-field-label c-cells__item-body">标签</view>
+        <view class="n-tag c-cells__item-input s5">
           <view class="c-tag c-tag--text-third{{formData.tagType === 1 ? ' active' : ''}}" @tap="select('tagType', 1)">
             家
           </view>
@@ -61,7 +61,7 @@
         </view>
       </view>
     </view>
-    <view class="c-button c-button--orange-lg c7 s0" @tap="submit">提交</view>
+    <view class="n-submit c-button c-button--orange-lg c7 s0" @tap="submit">提交</view>
   </view>
 </template>
 
@@ -69,9 +69,9 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../mixins/global'
-  import NavBar from '../../components/nav-bar/index'
-  import request from '../../utils/request'
+  import global from '../../../mixins/global'
+  import NavBar from '../../../components/nav-bar/index'
+  import request from '../../../utils/request'
   import { helpers } from 'mp-client'
 
   export default class extends wepy.page {
