@@ -7,235 +7,233 @@
 @import "../../../styles/components/service";
 @import "../../../styles/components/media";
 @import "../../../styles/layouts/list";
-@import "../../../styles/components/button";
+@import "../../../styles/bem/components/button";
 @import "../../../styles/bem/components/panel";
 @import "../../../styles/bem/components/products";
 @import "../../../styles/components/collect";
 
-@include b(product) {
-}
-
-@include b(product-images) {
-  @include size(100%, px2rpx(578px));
-
-  position: relative;
-
-  .c-icon--hot {
-    @include position--absolute(px2rpx(49px), null, null, px2rpx(68px));
-
-    display: none;
-  }
-}
-
-@include b(product-price) {
-  @include padding(px2rpx(20px), null, px2rpx(20px));
-
-  position: relative;
-  height: map-get($font-sizes, sd);
-  line-height: map-get($font-sizes, sd);
-
-  .c-tag--new {
-    margin-left: px2rpx(20px);
-  }
-
-  .c-collect {
-    @include position--absolute(50%, 0);
-
-    transform: translateY(-50%);
-  }
-}
-
-@include b(product-original-price) {
-  line-height: 100%;
-  text-decoration: line-through;
-}
-
-@include b(product-introduction) {
-  font-weight: bold;
-  padding-top: px2rpx(20px);
-}
-
-@include b(product-addon) {
-  @include padding(px2rpx(30px), null, px2rpx(30px));
-
-  display: flex;
-
-  @include e(item) {
-    flex: 1;
-
-    &.is-second {
-      text-align: center;
-    }
-
-    &.is-last {
-      text-align: right;
-    }
-  }
-}
-
-@include b(product-params) {
-  display: flex;
-  min-height: px2rpx(86px);
-
-  @include e(label) {
-    width: px2rpx(78px);
-    align-self: center;
-  }
-
-  @include e(body) {
-    flex: 1;
-    align-self: center;
-  }
-
-  @include m(has-arrow) {
-    background: {
-      image: image-url("pages/product/arrow.png");
-      repeat: no-repeat;
-      position: right center;
-      size: px2rpx(12px) px2rpx(20px);
-    }
-  }
-
-  .c-tag--coupon {
-    margin-right: px2rpx(19px);
-  }
-
-  .c-tag--dot {
-    margin-right: px2rpx(10px);
-    position: relative;
-    top: px2rpx(5px);
-  }
-
-  .has-margin-left {
-    margin-left: px2rpx(30px);
-  }
-}
-
-@include b(product-comment) {
-  @include e(title) {
-    @include padding(px2rpx(30px), null, px2rpx(30px));
+@include p(products-details) {
+  @include n(images) {
+    @include size(100%, px2rpx(578px));
 
     position: relative;
 
-    .c-tag--arrow {
+    .c-icon--hot {
+      @include position--absolute(px2rpx(49px), null, null, px2rpx(68px));
+
+      display: none;
+    }
+  }
+
+  @include n(price) {
+    @include padding(px2rpx(20px), null, px2rpx(20px));
+
+    position: relative;
+    height: map-get($font-sizes, sd);
+    line-height: map-get($font-sizes, sd);
+
+    .c-tag--new {
+      margin-left: px2rpx(20px);
+    }
+
+    .c-collect {
       @include position--absolute(50%, 0);
 
       transform: translateY(-50%);
     }
   }
 
-  @include e(user) {
-    @include text--middle(px2rpx(48px));
+  @include n(original-price) {
+    line-height: 100%;
+    text-decoration: line-through;
+  }
+
+  @include n(introduction) {
+    font-weight: bold;
+    padding-top: px2rpx(20px);
+  }
+
+  @include n(addon) {
+    @include padding(px2rpx(30px), null, px2rpx(30px));
 
     display: flex;
 
-    image {
-      @include circle(px2rpx(48px));
-
-      margin-right: px2rpx(16px);
-    }
-
-    text {
+    @include e(item) {
       flex: 1;
+
+      &.is-second {
+        text-align: center;
+      }
+
+      &.is-last {
+        text-align: right;
+      }
     }
   }
 
-  @include e(content) {
-    @include padding(px2rpx(30px), null, px2rpx(34px));
-  }
+  @include n(params) {
+    display: flex;
+    min-height: px2rpx(86px);
 
-  @include e(foot) {
-    text-align: right;
-    padding-bottom: px2rpx(30px);
+    @include e(label) {
+      width: px2rpx(78px);
+      align-self: center;
+    }
 
-    text {
-      display: inline-block;
-      width: 30%;
+    @include e(body) {
+      flex: 1;
+      align-self: center;
+    }
+
+    @include m(has-arrow) {
+      background: {
+        image: image-url("pages/product/arrow.png");
+        repeat: no-repeat;
+        position: right center;
+        size: px2rpx(12px) px2rpx(20px);
+      }
+    }
+
+    .c-tag--coupon {
+      margin-right: px2rpx(19px);
+    }
+
+    .c-tag--dot {
+      margin-right: px2rpx(10px);
+      position: relative;
+      top: px2rpx(5px);
+    }
+
+    .has-margin-left {
+      margin-left: px2rpx(30px);
     }
   }
-}
 
-@include b(product-shop) {
-  image {
-    @include size(px2rpx(100px), px2rpx(100px));
+  @include n(comment) {
+    @include e(title) {
+      @include padding(px2rpx(30px), null, px2rpx(30px));
 
-    border-radius: px2rpx(10px);
+      position: relative;
+
+      .c-tag--arrow {
+        @include position--absolute(50%, 0);
+
+        transform: translateY(-50%);
+      }
+    }
+
+    @include e(user) {
+      @include text--middle(px2rpx(48px));
+
+      display: flex;
+
+      image {
+        @include circle(px2rpx(48px));
+
+        margin-right: px2rpx(16px);
+      }
+
+      text {
+        flex: 1;
+      }
+    }
+
+    @include e(content) {
+      @include padding(px2rpx(30px), null, px2rpx(34px));
+    }
+
+    @include e(foot) {
+      text-align: right;
+      padding-bottom: px2rpx(30px);
+
+      text {
+        display: inline-block;
+        width: 30%;
+      }
+    }
   }
 
-  @include e(product-total) {
-    margin-left: px2rpx(52px);
+  @include n(shop) {
+    image {
+      @include size(px2rpx(100px), px2rpx(100px));
+
+      border-radius: px2rpx(10px);
+    }
+
+    @include e(product-total) {
+      margin-left: px2rpx(52px);
+    }
+
+    .c-media__body-content {
+      padding-top: px2rpx(43px);
+    }
+
+    .l-list__item {
+      position: relative;
+    }
+
+    @include e(go-categories, go-shop) {
+      @include position--absolute(null, px2rpx(30px));
+    }
+
+    @include e(go-categories) {
+      bottom: px2rpx(28px);
+    }
+
+    @include e(go-shop) {
+      top: px2rpx(28px);
+    }
   }
 
-  .c-media__body-content {
-    padding-top: px2rpx(43px);
+  @include n(groups) {
+    image {
+      @include size(px2rpx(182px), px2rpx(170px));
+
+      margin-right: px2rpx(30px);
+    }
+
+    .c-panel__head {
+      border-bottom: 0;
+    }
+
+    .l-list__item {
+      position: relative;
+      padding-bottom: px2rpx(80px);
+    }
+
+    .c-media__body-title {
+      line-height: 130%;
+    }
+
+    @include e(total, discount-price, end-at) {
+      position: absolute;
+      line-height: 100%;
+    }
+
+    @include e(total) {
+      left: px2rpx(182px + 30px + 30px);
+      bottom: px2rpx(80px);
+    }
+
+    @include e(discount-price) {
+      right: px2rpx(30px);
+      bottom: px2rpx(80px);
+    }
+
+    @include e(end-at) {
+      right: px2rpx(30px);
+      bottom: px2rpx(30px);
+    }
   }
 
-  .l-list__item {
-    position: relative;
+  @include n(html) {
+    @include block--center;
+    @include padding(px2rpx(20px), null, px2rpx(20px));
   }
 
-  .c-button--orange,
-  .c-button--orange-reverse {
-    @include position--absolute(null, px2rpx(30px));
-  }
-
-  .c-button--orange {
-    bottom: px2rpx(28px);
-  }
-
-  .c-button--orange-reverse {
-    top: px2rpx(28px);
-  }
-}
-
-@include b(product-groups) {
-  image {
-    @include size(px2rpx(182px), px2rpx(170px));
-
-    margin-right: px2rpx(30px);
-  }
-
-  .c-panel__head {
-    border-bottom: 0;
-  }
-
-  .l-list__item {
-    position: relative;
-    padding-bottom: px2rpx(80px);
-  }
-
-  .c-media__body-title {
-    line-height: 130%;
-  }
-
-  @include e(total, discount-price, end-at) {
-    position: absolute;
-    line-height: 100%;
-  }
-
-  @include e(total) {
-    left: px2rpx(182px + 30px + 30px);
-    bottom: px2rpx(80px);
-  }
-
-  @include e(discount-price) {
-    right: px2rpx(30px);
-    bottom: px2rpx(80px);
-  }
-
-  @include e(end-at) {
-    right: px2rpx(30px);
-    bottom: px2rpx(30px);
-  }
-}
-
-@include b(product-html) {
-  @include block--center;
-  @include padding(px2rpx(20px), null, px2rpx(20px));
-}
-
-@include b(product-recommended-products) {
-  .c-panel__head {
-    border-bottom: 0;
+  @include n(recommended-products) {
+    .c-panel__head {
+      border-bottom: 0;
+    }
   }
 }

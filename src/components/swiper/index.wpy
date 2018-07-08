@@ -7,14 +7,16 @@
             <image mode="aspectFill" src="{{item.image}}" @tap="handleTap({{item.url}})"
                    @error="handleImageError"
                    data-type="ad"
-                   data-object="items" data-index="{{index}}"/>
+                   data-object="items" data-index="{{index}}" />
           </swiper-item>
         </repeat>
       </swiper>
-      <indicator :theme.sync="theme" :current.sync="current" :length.sync="length"/>
+      <indicator :theme.sync="theme" :current.sync="current" :length.sync="length" />
     </block>
     <block wx:elif="{{items.length === 1}}">
-      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})"/>
+      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})" @error="handleImageError"
+             data-type="ad"
+             data-object="items" data-index="0" />
     </block>
   </view>
 </template>
@@ -66,7 +68,7 @@
     methods = {
       handleTap (url) {
         if (url) {
-          wepy.navigateTo({url})
+          wepy.navigateTo({ url })
         }
       },
       handleChange (e) {
@@ -77,7 +79,7 @@
           const urls = this.items.map(item => item.image)
           const current = urls[this.current]
 
-          wepy.previewImage({current, urls})
+          wepy.previewImage({ current, urls })
         }
       }
     }

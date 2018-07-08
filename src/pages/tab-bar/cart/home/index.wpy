@@ -1,0 +1,53 @@
+<template>
+  <nav-bar title="购物车" :back.sync="navBarBack" />
+  <view class="p-cart-home c-main c-main--has-nav-bar">
+    <c-swiper theme="third" :items.sync="ads" width="100%" height="320rpx" />
+    <view class="n-no-data">
+      <view class="n-no-data__image"></view>
+      <view class="n-no-data__tip c1 s4">还是空的，去挑选喜欢的商品吧！</view>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../../mixins/global'
+  import request from '../../../../utils/request'
+  import NavBar from '../../../../components/nav-bar/index'
+  import Swiper from '../../../../components/swiper/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '购物车'
+    }
+
+    components = {
+      'nav-bar': NavBar,
+      'c-swiper': Swiper
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: false,
+      ads: []
+    }
+
+    methods = {}
+
+    async onShow () {
+      const cartGetRes = await request({
+        url: 'cart/get'
+      })
+
+      this.ads = cartGetRes.advs.map(item => ({
+        image: item.imageUrl,
+        url: item.href || ''
+      }))
+
+      this.$apply()
+    }
+  }
+</script>

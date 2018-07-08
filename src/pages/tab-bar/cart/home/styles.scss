@@ -1,0 +1,24 @@
+@import "../../../../styles/utils/index";
+@import "../../../../styles/components/main";
+
+@include p(cart-home) {
+  background-color: white;
+
+  @include n(no-data) {
+    @include e(image) {
+      @include size(px2rpx(316px), px2rpx(196px));
+      @include block--center;
+
+      margin-top: px2rpx(138px);
+      background: {
+        image: image-url("pages/tab-bar/cart/home/no-data.png");
+        size: 100% 100%;
+      }
+    }
+
+    @include e(tip) {
+      text-align: center;
+      margin-top: px2rpx(30px);
+    }
+  }
+}

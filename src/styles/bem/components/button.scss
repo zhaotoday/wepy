@@ -1,0 +1,27 @@
+@import "../../utils/index";
+
+@include c(button) {
+  box-sizing: border-box;
+  text-align: center;
+
+  @include m(orange) {
+    background-color: map-get($colors, c1);
+  }
+
+  @include m(orange-ghost) {
+    border: 1px solid map-get($colors, c1);
+    background-color: map-get($colors, c7);
+  }
+
+  @include m(height-42) {
+    @include text--middle(px2rpx(42px));
+
+    border-radius: px2rpx(21px);
+  }
+
+  @include m(height-88) {
+    @include text--middle(px2rpx(88px));
+
+    border-radius: px2rpx(44px);
+  }
+}

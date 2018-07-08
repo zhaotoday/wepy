@@ -1,42 +1,42 @@
 <template>
   <nav-bar title="详情页" :back.sync="navBarBack" />
-  <view class="product c-main c-main--has-nav-bar c-main--has-tool-bar">
-    <!-- product-images -->
-    <view class="product-images">
+  <view class="p-products-details c-main c-main--has-nav-bar c-main--has-tool-bar">
+    <!-- n-images -->
+    <view class="n-images">
       <c-swiper theme="secondary" :preview.sync="previewImages" :items.sync="images" width="100%" height="578rpx" />
       <view class="c-icon c-icon--hot" />
     </view>
-    <!-- /product-images -->
+    <!-- /n-images -->
     <view class="l-box l-box--margin-bottom">
       <view class="l-wing-blank">
-        <view class="product-price">
+        <view class="n-price">
           <text class="s2 c1">¥</text>
           <text class="sd c1">{{price}}</text>
           <view class="c-tag c-tag--new s6 c9">新品</view>
           <view class="c-collect{{collected ? ' c-collect--active' : ''}} c3 s5" @tap="handleTapCollect">关注</view>
         </view>
-        <view class="product-original-price c1 s3" wx:if="{{price !== originalPrice}}">¥{{originalPrice}}</view>
-        <view class="product-introduction c2 s2">{{name}}</view>
-        <view class="product-addon c3 s4">
-          <view class="product-addon__item">满{{freeShippingPrice}}包邮</view>
-          <view class="product-addon__item is-second">销量{{sales}}</view>
-          <view class="product-addon__item is-last">{{address}}</view>
+        <view class="n-original-price c1 s3" wx:if="{{price !== originalPrice}}">¥{{originalPrice}}</view>
+        <view class="n-introduction c2 s2">{{name}}</view>
+        <view class="n-addon c3 s4">
+          <view class="n-addon__item">满{{freeShippingPrice}}包邮</view>
+          <view class="n-addon__item is-second">销量{{sales}}</view>
+          <view class="n-addon__item is-last">{{address}}</view>
         </view>
       </view>
     </view>
     <view class="l-box l-box--margin-bottom">
       <view class="l-wing-blank">
-        <view class="product-params product-params--has-arrow s4" @tap="handleTapGetCoupon">
-          <view class="product-params__label c3">领券</view>
-          <view class="product-params__body c2">
+        <view class="n-params product-params--has-arrow s4" @tap="handleTapGetCoupon">
+          <view class="n-params__label c3">领券</view>
+          <view class="n-params__body c2">
             <repeat for="{{couponTitles}}" item="item">
               <text class="c-tag c-tag--coupon c1 s5">{{item}}</text>
             </repeat>
           </view>
         </view>
-        <view class="product-params s4">
-          <view class="product-params__label c3">服务</view>
-          <view class="product-params__body c2">
+        <view class="n-params s4">
+          <view class="n-params__label c3">服务</view>
+          <view class="n-params__body c2">
             <repeat for="{{services}}" item="item" index="index">
               <view class="c-service" wx:if="{{item.value === 1}}">
                 <text class="c-service__dot s6 c7">{{item.tag}}</text>
@@ -45,9 +45,9 @@
             </repeat>
           </view>
         </view>
-        <view class="product-params s4">
-          <view class="product-params__label c3">参数</view>
-          <view class="product-params__body c2">
+        <view class="n-params s4">
+          <view class="n-params__label c3">参数</view>
+          <view class="n-params__body c2">
             <repeat for="{{productData}}" item="item">
               {{item.attrName}}：{{item.attrValue}}；
             </repeat>
@@ -57,19 +57,19 @@
     </view>
     <view class="l-box l-box--margin-bottom">
       <view class="l-wing-blank">
-        <view class="product-comment">
-          <view class="product-comment__title c2 s1">
+        <view class="n-comment">
+          <view class="n-comment__title c2 s1">
             商品评价
             <text class="s4">({{comment.total}})</text>
             <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/comments/index?id={{id}}">查看全部评论</navigator>
           </view>
-          <view class="product-comment__user">
+          <view class="n-comment__user">
             <image src="{{comment.userAvatar || 'error'}}" mode="aspectFill"
                    @error="handleImageError" data-type="avatar" data-object="comment" data-key="userAvatar" />
             <text>{{comment.username}}</text>
           </view>
-          <view class="product-comment__content c2 s4">{{comment.content}}</view>
-          <view class="product-comment__foot c3 s6">
+          <view class="n-comment__content c2 s4">{{comment.content}}</view>
+          <view class="n-comment__foot c3 s6">
             <text>{{comment.created_at}}</text>
             <text>规格：{{comment.productAttr.name}}{{comment.productAttr.value}}</text>
           </view>
@@ -77,7 +77,7 @@
       </view>
     </view>
     <view class="l-box l-box--margin-bottom">
-      <view class="product-shop l-list">
+      <view class="n-shop l-list">
         <view class="l-list__item">
           <view class="c-media">
             <image src="{{shop.image}}" mode="aspectFill" @error="handleImageError" data-type="shop" data-object="shop"
@@ -86,18 +86,18 @@
               <view class="c-media__body-title c2 s2">{{shop.name}}</view>
               <view class="c-media__body-content c3 s4">
                 <text>全部商品</text>
-                <text class="product-shop__product-total">{{shop.productTotal}}</text>
+                <text class="n-shop__product-total">{{shop.productTotal}}</text>
               </view>
             </view>
           </view>
-          <view class="c-button c-button--orange-reverse c1 s5">查看分类</view>
-          <view class="c-button c-button--orange c7 s5">进店逛逛</view>
+          <view class="n-shop__go-categories c-button orange-ghost height-42 c1 s5" style="width: 140rpx;">查看分类</view>
+          <view class="n-shop__go-shop c-button orange height-42 c7 s5" style="width: 140rpx;">进店逛逛</view>
         </view>
       </view>
     </view>
 
     <view class="l-box l-box--margin-bottom">
-      <view class="product-groups c-panel">
+      <view class="n-groups c-panel">
         <view class="c-panel__head c2 s1">热品推荐</view>
         <view class="c-panel__body">
           <view class="l-list">
@@ -110,15 +110,15 @@
                     <view class="c-media__body-title c2 s2">{{item.name}}</view>
                   </view>
                 </view>
-                <view class="product-groups__total c1">
+                <view class="n-groups__total c1">
                   <text class="s2">¥</text>
                   <text class="s0">{{item.price}}</text>
                 </view>
-                <view class="product-groups__discount-price">
+                <view class="n-groups__discount-price">
                   <text class="c2 s5" style="margin-right: 5rpx;">最多可省</text>
                   <text class="c1 s1">{{item.discountPrice}}</text>
                 </view>
-                <view class="product-groups__end-at c3 s6">{{item.end_at}}</view>
+                <view class="n-groups__end-at c3 s6">{{item.end_at}}</view>
               </view>
             </repeat>
           </view>
@@ -127,13 +127,13 @@
     </view>
 
     <view class="l-box l-box--margin-bottom">
-      <view class="product-html" style="width: {{htmlContent.width}}rpx; height: {{htmlContent.height}}rpx;">
+      <view class="n-html" style="width: {{htmlContent.width}}rpx; height: {{htmlContent.height}}rpx;">
         {{htmlContent.url}}
       </view>
     </view>
 
     <view class="l-box u-margin-bottom-20">
-      <view class="product-recommended-products c-panel">
+      <view class="n-recommended-products c-panel">
         <view class="c-panel__head padding-30 c2 s1">进店的还买了什么</view>
         <view class="c-panel__body">
           <view class="c-products">
@@ -302,7 +302,7 @@
     }
 
     async onLoad (query) {
-      this.id = query.id
+      this.id = 103082 // query.id
     }
 
     async onShow (query) {

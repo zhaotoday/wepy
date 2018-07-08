@@ -25,17 +25,17 @@
         backgroundColor: '#fff',
         borderStyle: 'black',
         list: [{
-          pagePath: 'pages/home/index',
+          pagePath: 'pages/tab-bar/home/index',
           text: '首页',
           iconPath: 'styles/images/tab-bar/home.png',
           selectedIconPath: 'styles/images/tab-bar/home-active.png'
         }, {
           pagePath: 'pages/tab-bar/categories/index',
           text: '分类',
-          iconPath: 'styles/images/tab-bar/category.png',
-          selectedIconPath: 'styles/images/tab-bar/category-active.png'
+          iconPath: 'styles/images/tab-bar/categories.png',
+          selectedIconPath: 'styles/images/tab-bar/categories-active.png'
         }, {
-          pagePath: 'pages/cart/index',
+          pagePath: 'pages/tab-bar/cart/home/index',
           text: '购物车',
           iconPath: 'styles/images/tab-bar/cart.png',
           selectedIconPath: 'styles/images/tab-bar/cart-active.png'
@@ -47,12 +47,13 @@
         }]
       },
       pages: [
-        'pages/home/index',
+        'pages/products/details/index',
+        'pages/tab-bar/cart/home/index',
+        'pages/tab-bar/home/index',
         'pages/tab-bar/categories/index',
         'pages/shops/promotions/index',
         'pages/shops/products/index',
         'pages/shops/home/index',
-        'pages/products/details/index',
         'pages/more-address/index',
         'pages/manage-address/index',
         'pages/select-address/index',
@@ -62,7 +63,6 @@
         'pages/web-view/index',
         'pages/recommended-shops/index',
         'pages/login/index',
-        'pages/cart/index',
         'pages/my/index',
         'pages/content/index'
       ]
