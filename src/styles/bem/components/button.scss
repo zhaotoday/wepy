@@ -8,8 +8,17 @@
     background-color: map-get($colors, c1);
   }
 
+  @include m(gray) {
+    background-color: map-get($colors, c3);
+  }
+
   @include m(orange-ghost) {
     border: 1px solid map-get($colors, c1);
+    background-color: map-get($colors, c7);
+  }
+
+  @include m(gray-ghost) {
+    border: 1px solid map-get($colors, c3);
     background-color: map-get($colors, c7);
   }
 
@@ -17,6 +26,12 @@
     @include text--middle(px2rpx(42px));
 
     border-radius: px2rpx(21px);
+  }
+
+  @include m(height-48) {
+    @include text--middle(px2rpx(48px));
+
+    border-radius: px2rpx(8px);
   }
 
   @include m(height-88) {

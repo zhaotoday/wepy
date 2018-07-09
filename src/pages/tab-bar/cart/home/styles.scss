@@ -20,5 +20,12 @@
       text-align: center;
       margin-top: px2rpx(30px);
     }
+
+    @include e(btn) {
+      @include block--center;
+
+      width: px2rpx(300px);
+      margin-top: px2rpx(50px);
+    }
   }
 }

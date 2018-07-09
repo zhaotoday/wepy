@@ -97,7 +97,7 @@
         }
       },
       handleTapModifyAddress () {
-        wepy.navigateTo({url: '/pages/select-address/index'})
+        wepy.navigateTo({url: '/pages/addresses/select/index'})
       }
     }
   }

@@ -1,6 +1,6 @@
 import wepy from 'wepy'
 import consts from '../utils/consts'
-import { utils, helpers } from 'mp-client'
+import { utils } from 'mp-client'
 
 let timer
 

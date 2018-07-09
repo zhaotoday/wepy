@@ -1,14 +1,5 @@
-@import "../../../styles/utils/index";
+@import "../../utils/index";
 
-.u-text-center {
-  text-align: center;
-}
-
-.u-vertical-middle {
-  vertical-align: middle;
-}
-
-// 块居中
 .u-block-middle {
   @include position--absolute(50%, null, null, 0);
 
@@ -26,4 +17,8 @@
 
 .u-block-center {
   @include block--center;
+}
+
+.u-display--inline-block {
+  display: inline-block;
 }

@@ -5,6 +5,7 @@
     <view class="n-no-data">
       <view class="n-no-data__image"></view>
       <view class="n-no-data__tip c1 s4">还是空的，去挑选喜欢的商品吧！</view>
+      <view class="n-no-data__btn c-button m-orange m-height-88 c7 s0">去逛逛</view>
     </view>
   </view>
 </template>

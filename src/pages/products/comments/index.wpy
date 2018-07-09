@@ -1,11 +1,9 @@
 <template>
-  <nav-bar title="评价" :back.sync="navBarBack"/>
-  <view class="comments c-main c-main--has-nav-bar c-main--has-tool-bar">
+  <nav-bar title="评价" :back.sync="navBarBack" />
+  <view class="p-products-comments c-main c-main--has-nav-bar c-main--has-tool-bar">
     <view class="l-box" style="border-bottom: 1px solid #eeeeee;">
       <view class="l-wing-blank">
-        <view class="comments-rate">
-          <rate format="secondary" :dataItem.sync="rateItem"/>
-        </view>
+        <rate format="secondary" :dataItem.sync="rateItem" />
         <view class="comments-total s5">
           <text class="c-tag c-tag--text{{totalTap === 'all' ? ' c-tag--text--active' : ''}} is-first"
                 @tap="handleTapGetTotal('all')">全部({{total}})
@@ -16,18 +14,18 @@
         </view>
       </view>
     </view>
-    <repeat for="{{resItems}}" item="item" index="index">
+    <repeat for="{{items}}" item="item" index="index">
       <view class="l-box l-box--margin-bottom">
         <view class="l-wing-blank">
           <view class="comments-comment">
             <view class="comments-comment__user">
               <image src="{{item.userAvatar || 'error'}}" mode="aspectFill" @error="handleImageError" data-type="avatar"
-                     data-object="resItems" data-index="{{index}}"/>
+                     data-object="items" data-key="userAvatar" data-index="{{index}}" />
               <text>{{item.username}}</text>
               <view class="comments-comment__time c3 s6">{{item.created_at}}</view>
             </view>
-            <view class="comments-comment__attr c3 s6">规格：</view>
-            <view class="comments-comment__content c2 s4">{{item.content}}</view>
+            <view class="comments-comment__attr c3 s6">规格：{{item.productAttrs}}</view>
+            <view class="comments-comment__content c2 s4">{{item.content || '无'}}</view>
           </view>
         </view>
       </view>
@@ -35,23 +33,23 @@
 
   </view>
   <tool-bar :status.sync="productStatus" shop-id="0" product-id="1" @add-to-cart.user="handleTapAddToCart"
-            @buy.user="handleTapBuy"/>
+            @buy.user="handleTapBuy" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
-  import global from '../../mixins/global'
-  import request from '../../utils/request'
-  import NavBar from '../../components/nav-bar/index'
-  import ToolBar from '../../components/tool-bar/index'
-  import Rate from '../../components/rate/index'
+  import global from '../../../mixins/global'
+  import request from '../../../utils/request'
+  import NavBar from '../../../components/nav-bar/index'
+  import ToolBar from '../../../components/tool-bar/index'
+  import Rate from '../../../components/rate/index'
   import { utils } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
+      navigationBarTitleText: '评价'
     }
 
     components = {
@@ -67,7 +65,7 @@
       total: 0,
       totalTap: 'all',
       hasImageTotal: 0,
-      resItems: [],
+      items: [],
       rateItem: {},
       productStatus: 1
     }
@@ -83,6 +81,7 @@
     async get (commentType = 1) {
       const getEvaluationsRes = await request({
         url: 'evaluation/getEvaluations',
+        mock: true,
         data: {
           goodsCommonId: this.id,
           pageIndex: 0,
@@ -96,10 +95,11 @@
         rate: (score / 2).toFixed(2)
       }))(getEvaluationsRes.grade)
 
-      this.resItems = getEvaluationsRes.evaluates.map(item => ({
+      this.items = getEvaluationsRes.evaluates.map(item => ({
         username: item.memberName,
         userAvatar: item.memberAvatar,
         content: item.gevalContent,
+        productAttrs: item.goodsAttr.map(item => `${item.attrName} ${item.attrValue}`).join('、'),
         created_at: utils.time.getDate(item.addTime * 1000)
       }))
 
@@ -107,13 +107,13 @@
 
       this.hasImageTotal = getEvaluationsRes.haveImgCount
 
-      console.log(this.resItems)
+      console.log(this.items)
 
       this.$apply()
     }
 
     async onLoad (query) {
-      this.id = query.id
+      this.id = query.id || 102073
     }
 
     async onShow () {

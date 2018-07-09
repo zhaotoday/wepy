@@ -55,7 +55,7 @@
         </view>
       </view>
     </view>
-    <view class="l-box l-box--margin-bottom">
+    <view class="l-box l-box--margin-bottom" wx:if="{{comment}}">
       <view class="l-wing-blank">
         <view class="n-comment">
           <view class="n-comment__title c2 s1">
@@ -91,7 +91,9 @@
             </view>
           </view>
           <view class="n-shop__go-categories c-button orange-ghost height-42 c1 s5" style="width: 140rpx;">查看分类</view>
-          <view class="n-shop__go-shop c-button orange height-42 c7 s5" style="width: 140rpx;">进店逛逛</view>
+          <view class="n-shop__go-shop c-button orange height-42 c7 s5" style="width: 140rpx;"
+                @tap="navigateTo({{'/pages/shops/home/index?id=' + shop.id}})">进店逛逛
+          </view>
         </view>
       </view>
     </view>
@@ -234,17 +236,7 @@
         tag: '虚'
       }],
       productData: [],
-      comment: {
-        total: 0,
-        username: '',
-        userAvatar: '',
-        content: '',
-        productAttr: {
-          name: '',
-          value: ''
-        },
-        created_at: ''
-      },
+      comment: null,
       shop: {
         id: 0,
         name: '',
@@ -262,6 +254,10 @@
     }
 
     methods = {
+      navigateTo (url) {
+        console.log(this.shop.id)
+        wepy.navigateTo({ url })
+      },
       handleTapAddToCart () {
         console.log('add to cart')
       },
@@ -342,17 +338,19 @@
 
       this.productData = goodsGetRes.productData
 
-      this.comment = (item => ({
-        total: item.totalCount,
-        username: item.memberName,
-        userAvatar: item.memberAvatar,
-        content: item.gevalContent,
-        productAttr: {
-          name: item.goodsAttr.attrName,
-          value: item.goodsAttr.attrValue
-        },
-        created_at: utils.time.getDate(item.gevalTime * 1000)
-      }))(goodsGetRes.evaluation)
+      if (Object.keys(goodsGetRes.evaluation).length) {
+        this.comment = (item => ({
+          total: item.totalCount,
+          username: item.memberName,
+          userAvatar: item.memberAvatar,
+          content: item.gevalContent,
+          productAttr: {
+            name: item.goodsAttr.attrName,
+            value: item.goodsAttr.attrValue
+          },
+          created_at: utils.time.getDate(item.gevalTime * 1000)
+        }))(goodsGetRes.evaluation)
+      }
 
       this.shop = (item => ({
         id: item.storeId,
