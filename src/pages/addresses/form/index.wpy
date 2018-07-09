@@ -178,7 +178,7 @@
           await helpers.sleep(2000)
 
           if (this.query.from === 'select-address') {
-            wepy.navigateTo({url: '/pages/select-address/index'})
+            wepy.navigateTo({url: '/pages/addresses/select/index'})
           } else {
             wepy.navigateBack()
           }
@@ -195,7 +195,7 @@
         console.log(e.detail.encryptedData)
       },
       navigateToSearchAddress () {
-        wepy.navigateTo({url: '/pages/more-address/index'})
+        wepy.navigateTo({url: '/pages/addresses/more/index'})
       }
     }
 

@@ -1,8 +1,8 @@
-@import "../../styles/utils/index";
-@import "../../styles/components/main";
-@import "../../styles/components/results";
+@import "../../../styles/utils/index";
+@import "../../../styles/components/main";
+@import "../../../styles/components/results";
 
-@include b(search-address) {
+@include p(addresses-search) {
   @include b(c-results) {
     @include position--absolute(px2rpx(88px + 1px), 0, 0, 0);
 

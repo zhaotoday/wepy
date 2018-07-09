@@ -1,6 +1,6 @@
 <template>
   <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
-  <view class="search-address c-main c-main--has-nav-bar">
+  <view class="p-addresses-search c-main c-main--has-nav-bar">
     <address-search modifier="secondary,no-city" :city.sync="city" @confirm.user="confirm"/>
     <view hidden="{{citySelectorVisible}}">
       <view class="c-results">
@@ -19,10 +19,10 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../mixins/global'
-  import NavBar from '../../components/nav-bar/index'
-  import AddressSearch from '../../components/address-search/index'
-  import location from '../../utils/location'
+  import global from '../../../mixins/global'
+  import NavBar from '../../../components/nav-bar/index'
+  import AddressSearch from '../../../components/address-search/index'
+  import location from '../../../utils/location'
 
   const {lng: longitude, lat: latitude} = location.get()
 

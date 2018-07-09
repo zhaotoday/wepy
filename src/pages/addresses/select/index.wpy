@@ -118,10 +118,10 @@
         this.citySelectorVisible = !this.citySelectorVisible
       },
       navigateToAddAddress () {
-        wepy.navigateTo({ url: '/pages/add-address/index' })
+        wepy.navigateTo({ url: '/pages/addresses/form/index' })
       },
       navigateToMoreAddress () {
-        wepy.navigateTo({ url: '/pages/more-address/index?from=select-address' })
+        wepy.navigateTo({ url: '/pages/addresses/more/index?from=select-address' })
       }
     }
 

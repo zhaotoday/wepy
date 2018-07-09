@@ -106,13 +106,13 @@
         this.$parent.globalData.selectedLocation = location
 
         if (this.from) {
-          wepy.navigateTo({ url: '/pages/add-address/index?from=select-address' })
+          wepy.navigateTo({ url: '/pages/addresses/form/index?from=select-address' })
         } else {
           wepy.navigateBack()
         }
       },
       navigateToSearchAddress () {
-        wepy.navigateTo({ url: '/pages/search-address/index' })
+        wepy.navigateTo({ url: '/pages/addresses/search/index' })
       }
     }
 

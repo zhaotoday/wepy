@@ -6,7 +6,7 @@
       <view class="c-button c-button--orange-md c7 s0" @tap="navigateTo">添加收货地址</view>
     </view>
     <block wx:if="{{myAddresses && myAddresses.length > 0}}">
-      <address-operation title="新增地址" url="/pages/addresses-form/index"/>
+      <address-operation title="新增地址" url="/pages/addresses/form/index"/>
       <view class="n-wrap">
         <repeat for="{{myAddresses}}" item="item">
           <view class="c-block u-block-center c-block--margin-bottom">
@@ -67,7 +67,7 @@
 
     methods = {
       navigateTo () {
-        wepy.navigateTo({url: '/pages/add-address/index'})
+        wepy.navigateTo({url: '/pages/addresses/form/index'})
       },
       async confirm (e) {
         this.nearbyLocations = await location.getNearbyLocations({
@@ -76,7 +76,7 @@
         this.$apply()
       },
       edit (id) {
-        wepy.navigateTo({url: '/pages/add-address/index?id=' + id})
+        wepy.navigateTo({url: '/pages/addresses/form/index?id=' + id})
       },
       del (id) {
         this.delId = id
