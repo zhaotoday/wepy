@@ -1,12 +1,12 @@
 <template>
-  <nav-bar title="添加收货地址" :back.sync="navBarBack"/>
+  <nav-bar title="添加收货地址" :back.sync="navBarBack" />
   <view class="p-addresses-form c-main c-main--has-nav-bar">
     <view class="c-block c-cells u-block-center">
       <view class="c-cells__item">
         <view class="n-field-label c-cells__item-body">收货人</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="姓名" confirm-type="done" placeholder-style="color: #bbb;"
-                 value="{{formData.trueName}}" @input="input('trueName')"/>
+                 value="{{formData.trueName}}" @input="input('trueName')" />
         </view>
         <view class="n-gender-tags s5">
           <view class="c-tag c-tag--text-third{{formData.gender === 1 ? ' active' : ''}}" @tap="select('gender', 1)">
@@ -22,7 +22,7 @@
         <view class="c-cells__item-input">
           <input class="s4" placeholder="收货人电话" confirm-type="done" placeholder-style="color: #bbb;"
                  type="number"
-                 value="{{formData.mobPhone}}" @input="input('mobPhone')"/>
+                 value="{{formData.mobPhone}}" @input="input('mobPhone')" />
         </view>
         <!--
         <view class="n-contact-list c2 s2">
@@ -36,14 +36,14 @@
         <view class="c-cells__item-input">
           <input class="s4" placeholder="小区/写字楼" confirm-type="done" placeholder-style="color: #bbb;"
                  value="{{formData.address}}"
-                 @focus="navigateToSearchAddress"/>
+                 @focus="navigateToSearchAddress" />
         </view>
       </view>
       <view class="c-cells__item">
         <view class="n-field-label c-cells__item-body">门牌号</view>
         <view class="c-cells__item-input">
           <input class="s4" placeholder="例：1号楼101室" confirm-type="done" placeholder-style="color: #bbb;"
-                 value="{{formData.subAddress}}" @input="input('subAddress')"/>
+                 value="{{formData.subAddress}}" @input="input('subAddress')" />
         </view>
       </view>
       <view class="c-cells__item">
@@ -61,7 +61,7 @@
         </view>
       </view>
     </view>
-    <view class="n-submit c-button c-button--orange-lg c7 s0" @tap="submit">提交</view>
+    <view class="c-button m-orange m-height-88 c7 s0" style="width: 690rpx;" @tap="submit">提交</view>
   </view>
 </template>
 
@@ -108,7 +108,7 @@
     }
 
     async validate () {
-      const {trueName, mobPhone, address, subAddress} = this.formData
+      const { trueName, mobPhone, address, subAddress } = this.formData
 
       if (!trueName) {
         await wepy.showToast({
@@ -166,7 +166,7 @@
             requiresLogin: true,
             url: 'address/saveAddress',
             data: this.query.id
-              ? Object.assign(this.formData, {addressId: this.query.id})
+              ? Object.assign(this.formData, { addressId: this.query.id })
               : this.formData
           })
 
@@ -178,7 +178,7 @@
           await helpers.sleep(2000)
 
           if (this.query.from === 'select-address') {
-            wepy.navigateTo({url: '/pages/addresses/select/index'})
+            wepy.navigateTo({ url: '/pages/addresses/select/index' })
           } else {
             wepy.navigateBack()
           }
@@ -195,7 +195,7 @@
         console.log(e.detail.encryptedData)
       },
       navigateToSearchAddress () {
-        wepy.navigateTo({url: '/pages/addresses/more/index'})
+        wepy.navigateTo({ url: '/pages/addresses/more/index' })
       }
     }
 
@@ -241,7 +241,7 @@
 
     onShow () {
       if (this.$parent.globalData.selectedLocation) {
-        const {lng, lat, province, city, district, address, cityCode} = this.$parent.globalData.selectedLocation
+        const { lng, lat, province, city, district, address, cityCode } = this.$parent.globalData.selectedLocation
 
         this.formData.lng = lng
         this.formData.lat = lat

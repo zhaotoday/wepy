@@ -1,0 +1,21 @@
+@import "../../utils/index";
+
+.text-align--center {
+  text-align: center;
+}
+
+.vertical-align--middle {
+  vertical-align: middle;
+}
+
+.display--inline-block {
+  display: inline-block;
+}
+
+.margin-bottom--20 {
+  margin-bottom: px2rpx(20px);
+}
+
+.padding-top--20 {
+  padding-top: px2rpx(20px);
+}

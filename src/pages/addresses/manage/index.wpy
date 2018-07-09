@@ -1,27 +1,31 @@
 <template>
-  <nav-bar title="收货地址" :back.sync="navBarBack"/>
+  <nav-bar title="收货地址" :back.sync="navBarBack" />
   <view class="p-addresses-manage c-main c-main--has-nav-bar">
     <view class="n-no-data c1 s4" wx:if="{{myAddresses && myAddresses.length === 0}}">
       新增收货地址，急速送货到家哦！
-      <view class="c-button c-button--orange-md c7 s0" @tap="navigateTo">添加收货地址</view>
+      <view class="c-button m-orange m-height-88 c7 s0" style="width: 300rpx;" @tap="navigateTo">添加收货地址</view>
     </view>
     <block wx:if="{{myAddresses && myAddresses.length > 0}}">
-      <address-operation title="新增地址" url="/pages/addresses/form/index"/>
+      <address-operation title="新增地址" url="/pages/addresses/form/index" />
       <view class="n-wrap">
         <repeat for="{{myAddresses}}" item="item">
           <view class="c-block u-block-center c-block--margin-bottom">
             <view class="c-cells">
               <view class="c-cells__item">
-                <view class="address-name c2 s1">{{item.trueName}}</view>
-                <view class="address-extra c3 s3">{{item.address}}</view>
-                <view class="address-tel c2 s3">{{item.mobPhone}}</view>
+                <view class="n-name c2 s1">{{item.trueName}}</view>
+                <view class="n-extra c3 s3">{{item.address}}</view>
+                <view class="n-tel c2 s3">{{item.mobPhone}}</view>
               </view>
-              <view class="c-cells__item address-operations">
+              <view class="c-cells__item n-operations">
                 <view class="c-tag c-tag--text-third">
                   {{item.gender === 0 ? '女士' : '先生'}}
                 </view>
-                <view class="c-button c-button--operation c7 s3" @tap="edit({{item.addressId}})">编辑</view>
-                <view class="c-button c-button--operation-reverse c3 s3" @tap="del({{item.addressId}})">删除</view>
+                <view class="c-button m-orange m-height-48 display--inline-block c7 s3" style="width: 128rpx;"
+                      @tap="edit({{item.addressId}})">编辑
+                </view>
+                <view class="c-button m-gray-ghost m-height-48 display--inline-block c3 s3" style="width: 128rpx;"
+                      @tap="del({{item.addressId}})">删除
+                </view>
               </view>
             </view>
           </view>
@@ -29,7 +33,7 @@
       </view>
     </block>
   </view>
-  <confirm modifiers="top-320" content="确认删除吗？" @ok.user="delOk"/>
+  <confirm modifiers="top-320" content="确认删除吗？" @ok.user="delOk" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -67,7 +71,7 @@
 
     methods = {
       navigateTo () {
-        wepy.navigateTo({url: '/pages/addresses/form/index'})
+        wepy.navigateTo({ url: '/pages/addresses/form/index' })
       },
       async confirm (e) {
         this.nearbyLocations = await location.getNearbyLocations({
@@ -76,7 +80,7 @@
         this.$apply()
       },
       edit (id) {
-        wepy.navigateTo({url: '/pages/addresses/form/index?id=' + id})
+        wepy.navigateTo({ url: '/pages/addresses/form/index?id=' + id })
       },
       del (id) {
         this.delId = id
@@ -120,9 +124,9 @@
       this.myAddresses = getMyAddresses
 
       if (this.myAddresses.length) {
-        wepy.setNavigationBarTitle({title: '收货地址'})
+        wepy.setNavigationBarTitle({ title: '收货地址' })
       } else {
-        wepy.setNavigationBarTitle({title: '收货地址空'})
+        wepy.setNavigationBarTitle({ title: '收货地址空' })
       }
 
       this.$apply()

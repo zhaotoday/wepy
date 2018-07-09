@@ -1,7 +1,7 @@
 <template>
   <nav-bar title="选择收货地址" :back.sync="navBarBack" />
   <view class="p-addresses-select c-main c-main--has-nav-bar">
-    <address-operation title="管理地址" url="/pages/manage-address/index" />
+    <address-operation title="管理地址" url="/pages/addresses/manage/index" />
     <address-search class="l-box l-box--margin-bottom" :city.sync="city" @toggle.user="toggleCitySelector" />
     <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}" />
     <view class="n-wrap" hidden="{{citySelectorVisible}}">
@@ -51,7 +51,8 @@
           <view class="c-cells__item">
             <view class="c-cells__item-body">附近地址</view>
             <view class="c-cells__item-body">
-              <view class="n-get-more-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址</view>
+              <view class="n-get-more-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址
+              </view>
             </view>
           </view>
         </view>

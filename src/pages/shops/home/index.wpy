@@ -95,7 +95,7 @@
               <view class="o-grid__cell">
                 <view class="c-hot-sale-no-data">
                   <view class="u-block-middle">
-                    <view class="c-hot-sale-no-data__image u-vertical-middle" />
+                    <view class="c-hot-sale-no-data__image vertical-align--middle" />
                     <text class="c4 s4">期待新品哦！</text>
                   </view>
                 </view>

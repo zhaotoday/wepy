@@ -1,10 +1,8 @@
 @import "../../../styles/utils/index";
-@import "../../../styles/bem/utils/index";
 @import "../../../styles/components/main";
 @import "../../../styles/components/block";
 @import "../../../styles/components/cells";
 @import "../../../styles/components/tag";
-@import "../../../styles/components/button";
 
 @include p(addresses-form) {
   padding-top: px2rpx(20px);
@@ -49,7 +47,7 @@
     }
   }
 
-  @include n(submit) {
+  .c-button {
     @include block--center;
 
     margin-top: px2rpx(100px);

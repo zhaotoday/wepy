@@ -51,7 +51,7 @@
       <view class="c-tabs__item">
         <view class="c-tabs__item-wrap">
           <text>价格</text>
-          <view class="c-tabs__item-sort u-vertical-middle" />
+          <view class="c-tabs__item-sort vertical-align--middle" />
         </view>
       </view>
       <view class="c-tabs__item">

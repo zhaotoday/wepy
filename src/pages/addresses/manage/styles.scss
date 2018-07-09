@@ -1,10 +1,8 @@
 @import "../../../styles/utils/index";
-@import "../../../styles/bem/utils/index";
 @import "../../../styles/components/main";
 @import "../../../styles/components/block";
 @import "../../../styles/components/cells";
 @import "../../../styles/components/tag";
-@import "../../../styles/components/button";
 
 @include p(addresses-manage) {
   @include n(wrap) {
@@ -20,27 +18,25 @@
     display: block;
   }
 
-  .c-tag--text-third {
+  .c-tag {
     @include position--absolute(50%, null, null, px2rpx(20px));
 
     transform: translateY(-50%);
   }
 
-  .address-operations {
+  @include n(operations) {
     text-align: right;
   }
 
-  .address-name,
-  .address-extra,
-  .address-tel {
+  @include n(name, extra, tel) {
     line-height: 100%;
   }
 
-  .address-name {
+  @include n(name) {
     padding-bottom: px2rpx(20px);
   }
 
-  .address-tel {
+  @include n(tel) {
     @include position--absolute(px2rpx(30px), px2rpx(20px));
   }
 
@@ -62,7 +58,7 @@
       position: center 0;
     }
 
-    .c-button--orange-md {
+    .c-button {
       @include margin(px2rpx(50px), auto, null, auto);
     }
   }

@@ -1,11 +1,6 @@
 @import "../../../styles/utils/index";
 @import "../../../styles/components/main";
-@import "../../../styles/bem/components/tabs";
 @import "../../../styles/components/coupon-bar";
-@import "../../../styles/bem/components/panel";
-@import "../../../styles/bem/objects/grid";
-@import "../../../styles/bem/utils/index";
-@import "../../../styles/bem/components/products";
 @import "../_commons/styles";
 
 @include p(shops-products) {
