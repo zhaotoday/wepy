@@ -1,20 +1,17 @@
-@import "../../styles/utils/index";
-@import "../../styles/components/main";
-@import "../../styles/components/block";
-@import "../../styles/components/cells";
-@import "../../styles/components/tag";
-@import "../../styles/components/button";
+@import "../../../styles/utils/index";
+@import "../../../styles/bem/utils/index";
+@import "../../../styles/components/main";
+@import "../../../styles/components/block";
+@import "../../../styles/components/cells";
+@import "../../../styles/components/tag";
+@import "../../../styles/components/button";
 
-@include b(manage-address) {
-  .manage-address-wrap {
+@include p(addresses-manage) {
+  @include n(wrap) {
     @include position--absolute(px2rpx(70px), 0, 0, 0);
 
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  .c-block {
-    @include block--center;
   }
 
   .c-cells__item {
@@ -51,7 +48,7 @@
     margin-left: px2rpx(30px);
   }
 
-  @include b(no-address) {
+  @include n(no-data) {
     @include margin(px2rpx(188px), auto, null, auto);
 
     width: px2rpx(326px + 100px);

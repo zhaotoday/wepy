@@ -1,15 +1,15 @@
 <template>
   <nav-bar title="收货地址" :back.sync="navBarBack"/>
-  <view class="manage-address c-main c-main--has-nav-bar">
-    <view class="no-address c1 s4" wx:if="{{myAddresses && myAddresses.length === 0}}">
+  <view class="p-addresses-manage c-main c-main--has-nav-bar">
+    <view class="n-no-data c1 s4" wx:if="{{myAddresses && myAddresses.length === 0}}">
       新增收货地址，急速送货到家哦！
       <view class="c-button c-button--orange-md c7 s0" @tap="navigateTo">添加收货地址</view>
     </view>
     <block wx:if="{{myAddresses && myAddresses.length > 0}}">
-      <address-operation title="新增地址" url="/pages/add-address/index"/>
-      <view class="manage-address-wrap">
+      <address-operation title="新增地址" url="/pages/addresses-form/index"/>
+      <view class="n-wrap">
         <repeat for="{{myAddresses}}" item="item">
-          <view class="c-block c-block--margin-bottom">
+          <view class="c-block u-block-center c-block--margin-bottom">
             <view class="c-cells">
               <view class="c-cells__item">
                 <view class="address-name c2 s1">{{item.trueName}}</view>
@@ -36,13 +36,13 @@
 
 <script>
   import wepy from 'wepy'
-  import global from '../../mixins/global'
-  import NavBar from '../../components/nav-bar/index'
-  import AddressSearch from '../../components/address-search/index'
-  import Confirm from '../../components/confirm/index'
-  import AddressOperation from '../../components/address-operation/index'
-  import location from '../../utils/location'
-  import request from '../../utils/request'
+  import global from '../../../mixins/global'
+  import NavBar from '../../../components/nav-bar/index'
+  import AddressSearch from '../../../components/address-search/index'
+  import Confirm from '../../../components/confirm/index'
+  import AddressOperation from '../../../components/address-operation/index'
+  import location from '../../../utils/location'
+  import request from '../../../utils/request'
   import { helpers } from 'mp-client'
 
   export default class extends wepy.page {

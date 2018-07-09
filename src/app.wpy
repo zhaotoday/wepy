@@ -47,6 +47,8 @@
         }]
       },
       pages: [
+        'pages/addresses/manage/index',
+        'pages/addresses/more/index',
         'pages/addresses/form/index',
         'pages/addresses/select/index',
         'pages/tab-bar/home/index',
@@ -56,8 +58,6 @@
         'pages/shops/promotions/index',
         'pages/shops/products/index',
         'pages/shops/home/index',
-        'pages/more-address/index',
-        'pages/manage-address/index',
         'pages/search-address/index',
         'pages/comments/index',
         'pages/web-view/index',
