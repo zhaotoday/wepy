@@ -1,5 +1,4 @@
 @import "../../styles/utils/index";
-@import "../../styles/components/icon";
 
 @include b(c-nav-bar) {
   @include position--absolute(0, null, null, 0);

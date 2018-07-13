@@ -4,5 +4,5 @@
  */
 @mixin text--middle($height) {
   height: $height;
-  line-height: $height + 3rpx;
+  line-height: $height + 2rpx;
 }

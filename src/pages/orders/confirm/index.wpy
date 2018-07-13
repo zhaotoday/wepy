@@ -1,0 +1,34 @@
+<template>
+  <nav-bar title="订单确认" :back.sync="navBarBack" />
+  <view class="p-orders-confirm c-main c-main--has-nav-bar">
+    <view class="n-no-address">
+      <view class="c-button m-height-66 m-border-c1 c1 s3" style="width: 240rpx;">请选择收货地址</view>
+    </view>
+    <view class="n-line margin-bottom--20" />
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+  import request from '../../../utils/request'
+  import NavBar from '../../../components/nav-bar/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '订单确认'
+    }
+
+    components = {
+      'nav-bar': NavBar
+    }
+
+    mixins = [global]
+
+    data = {
+      navBarBack: false
+    }
+  }
+</script>

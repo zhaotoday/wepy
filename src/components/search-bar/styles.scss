@@ -1,5 +1,4 @@
 @import "../../styles/utils/index";
-@import "../../styles/components/icon";
 
 @include b(c-search-bar) {
   @include padding(px2rpx(16px), px2rpx(32px), px2rpx(16px), px2rpx(32px));
