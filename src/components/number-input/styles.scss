@@ -1,0 +1,44 @@
+@import "../../styles/utils/index";
+
+@include c(number-input) {
+  @include size(px2rpx(138px), px2rpx(36px));
+
+  border: 1px solid #b7b7b7;
+  border-radius: 3px;
+  display: flex;
+
+  @include e(add, subtract) {
+    @include text--middle(px2rpx(36px));
+
+    background: {
+      position: center center;
+      size: px2rpx(26px) px2rpx(26px);
+      repeat: no-repeat;
+    }
+    text-align: center;
+    flex: 1;
+  }
+
+  @include e(add) {
+    background: {
+      image: image-url("components/number-input/add.png");
+    }
+  }
+
+  @include e(subtract) {
+    background: {
+      image: image-url("components/number-input/subtract.png");
+    }
+  }
+
+  @include e(input) {
+    @include text--middle(px2rpx(36px));
+
+    min-height: px2rpx(36px) !important;
+    text-align: center;
+    flex: 0 1 auto;
+    width: px2rpx(72px);
+    border-left: 1px solid #b7b7b7;
+    border-right: 1px solid #b7b7b7;
+  }
+}

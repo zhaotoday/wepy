@@ -10,6 +10,10 @@
       padding: px2rpx(30px);
     }
 
+    @include m(padding-36-30) {
+      padding: px2rpx(36px) px2rpx(30px);
+    }
+
     @include m(border-bottom-1) {
       border-bottom: 1px solid #f8f8f8;
     }

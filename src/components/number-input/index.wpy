@@ -1,0 +1,39 @@
+<template>
+  <view class="c-number-input">
+    <view class="c-number-input__subtract c3 s6" @tap="subtract" />
+    <input class="c-number-input__input c2 s4" type="number" value="{{value}}" @input="input" />
+    <view class="c-number-input__add c3 s6" @tap="add" />
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      value: {
+        type: Number,
+        twoWay: true,
+        default: 1
+      }
+    }
+
+    methods = {
+      add () {
+        this.value = ++this.value
+      },
+
+      subtract () {
+        if (this.value > 1) {
+          this.value = --this.value
+        }
+      },
+
+      input (e) {
+        this.value = e.detail.value
+      }
+    }
+  }
+</script>

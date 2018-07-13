@@ -47,7 +47,7 @@
         }]
       },
       pages: [
-        'pages/products/comments/index',
+        'pages/tab-bar/cart/home/index',
         'pages/tab-bar/home/index',
         'pages/addresses/manage/index',
         'pages/addresses/more/index',
@@ -55,7 +55,7 @@
         'pages/addresses/select/index',
         'pages/addresses/search/index',
         'pages/products/details/index',
-        'pages/tab-bar/cart/home/index',
+        'pages/products/comments/index',
         'pages/tab-bar/categories/index',
         'pages/shops/promotions/index',
         'pages/shops/products/index',

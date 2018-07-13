@@ -1,0 +1,10 @@
+@import "../../styles/utils/index";
+
+@include c(operation) {
+  text-align: right;
+
+  @include e(btn) {
+    display: inline-block;
+    padding: px2rpx(20px) px2rpx(30px);
+  }
+}

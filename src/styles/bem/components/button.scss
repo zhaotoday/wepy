@@ -39,4 +39,18 @@
 
     border-radius: px2rpx(44px);
   }
+
+  @include m(height-56) {
+    @include text--middle(px2rpx(56px));
+
+    border-radius: px2rpx(28px);
+  }
+
+  @include m(border-c8) {
+    border: 1px solid map-get($colors, c8);
+  }
+
+  @include m(border-c1) {
+    border: 1px solid map-get($colors, c1);
+  }
 }

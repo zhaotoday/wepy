@@ -1,13 +1,84 @@
 <template>
   <nav-bar title="购物车" :back.sync="navBarBack" />
   <view class="p-cart-home c-main c-main--has-nav-bar">
-    <c-swiper theme="third" :items.sync="ads" width="100%" height="320rpx" />
-    <view class="n-no-data">
-      <view class="n-no-data__image"></view>
-      <view class="n-no-data__tip c1 s4">还是空的，去挑选喜欢的商品吧！</view>
-      <view class="n-no-data__btn c-button m-orange m-height-88 c7 s0">去逛逛</view>
+    <view class="n-no-data-wrap" wx:if="{{false}}">
+      <c-swiper theme="third" :items.sync="ads" width="100%" height="320rpx" />
+      <view class="n-no-data">
+        <view class="n-no-data__image"></view>
+        <view class="n-no-data__tip c1 s4">还是空的，去挑选喜欢的商品吧！</view>
+        <view class="n-no-data__btn c-button m-orange m-height-88 c7 s0" @tap="switchTab('/pages/tab-bar/home/index')">
+          去逛逛
+        </view>
+      </view>
     </view>
+
+    <block wx:else>
+      <operation title="管理" url="/pages/tab-bar/home/index" />
+
+
+      <view class="c-panel u-margin-bottom-20">
+        <view class="c-panel__head padding-36-30">
+          <view class="c-panel__head-title">
+            <image src="./images/clean.png" style="margin-right: 20rpx;" />
+            <text class="c2 s2">清理</text>
+          </view>
+          <view class="n-to-collect c-button m-height-56 m-border-c8 c8 s3" style="width: 190rpx;">移入收藏夹</view>
+          <view class="n-delete c-button m-height-56 m-border-c1 c1 s3" style="width: 150rpx;">删除</view>
+        </view>
+      </view>
+
+      <view class="c-panel u-margin-bottom-20">
+        <view class="c-panel__head padding-30 border-bottom-1">
+          <view class="c-panel__head-title">
+            <text class="c-checkbox is-active" />
+            <text class="n-shop" />
+            <text class="c2 s2">肥西服装店</text>
+            <view class="c-panel__head-more" />
+          </view>
+        </view>
+        <view class="c-panel__body">
+          <movable-area class="o-cart-product">
+            <movable-view class="c-cart-product" x="184rpx" direction="horizontal" inertia friction="0.1"
+                          @touchstart="touchStart" @touchmove="touchMove">
+              <view class="c-checkbox" />
+              <view class="o-media">
+                <image class="o-media__image" src="./images/product.png" />
+                <view class="o-media__body">
+                  <view class="c-cart-product__title c2 s2">对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛1</view>
+                  <select value="插画纪念版" />
+                  <view class="c-cart-product__price c1 s2">¥ 22</view>
+                  <number-input :value.sync="numberInputValue" />
+                </view>
+                <view class="c-cart-product__collect" />
+                <view class="c-cart-product__delete" />
+              </view>
+            </movable-view>
+          </movable-area>
+          <movable-area class="o-cart-product">
+            <movable-view class="c-cart-product" x="184rpx" direction="horizontal" inertia friction="0.1"
+                          @touchstart="touchStart" @touchmove="touchMove">
+              <view class="c-checkbox" />
+              <view class="o-media">
+                <image class="o-media__image" src="./images/product.png" />
+                <view class="o-media__body">
+                  <view class="c-cart-product__title c2 s2">对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛1</view>
+                  <select value="插画纪念版" />
+                  <view class="c-cart-product__price c1 s2">¥ 22</view>
+                  <number-input :value.sync="numberInputValue" />
+                </view>
+                <view class="c-cart-product__collect" />
+                <view class="c-cart-product__delete" />
+              </view>
+            </movable-view>
+          </movable-area>
+        </view>
+      </view>
+    </block>
+
+    <view class="n-group-tip c1 s6">该组合与您添加到购物车时有更新</view>
+
   </view>
+  <settlement-bar />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -18,6 +89,10 @@
   import request from '../../../../utils/request'
   import NavBar from '../../../../components/nav-bar/index'
   import Swiper from '../../../../components/swiper/index'
+  import NumberInput from '../../../../components/number-input/index'
+  import Select from '../../../../components/select/index'
+  import SettlementBar from '../../../../components/settlement-bar/index'
+  import Operation from '../../../../components/operation/index'
 
   export default class extends wepy.page {
     config = {
@@ -26,17 +101,32 @@
 
     components = {
       'nav-bar': NavBar,
-      'c-swiper': Swiper
+      'c-swiper': Swiper,
+      'number-input': NumberInput,
+      'select': Select,
+      'settlement-bar': SettlementBar,
+      'operation': Operation
     }
 
     mixins = [global]
 
     data = {
       navBarBack: false,
-      ads: []
+      ads: [],
+      numberInputValue: 2
     }
 
-    methods = {}
+    methods = {
+      switchTab (url) {
+        wepy.switchTab({ url })
+      },
+      touchStart (e) {
+        console.log(e)
+      },
+      touchMove (e) {
+        console.log(e)
+      }
+    }
 
     async onShow () {
       const cartGetRes = await request({

@@ -1,0 +1,80 @@
+@import "../../utils/index";
+
+$operations-width: 92px * 2;
+$item-height: 30px * 2 + 184px;
+
+@include o(cart-product) {
+  @include size(px2rpx(750px + $operations-width), px2rpx($item-height));
+
+  margin-left: px2rpx(-$operations-width);
+  border-bottom: 1px solid #f8f8f8;
+}
+
+@include c(cart-product) {
+  @include size(px2rpx(750px), px2rpx($item-height));
+  @include padding(px2rpx(30px), px2rpx(30px), px2rpx(30px), px2rpx(30px + 32px + 20px));
+
+  box-sizing: border-box;
+  position: relative;
+
+  @include e(title) {
+    @include text--overflow(2);
+
+    line-height: px2rpx(36px);
+    margin-bottom: px2rpx(20px - 3px);
+  }
+
+  @include e(price) {
+    line-height: 100%;
+  }
+
+  @include e(collect, delete) {
+    @include position--absolute(0);
+    @include size(px2rpx(92px), px2rpx($item-height));
+
+    background: {
+      position: center center;
+      repeat: no-repeat;
+    }
+  }
+
+  @include e(collect) {
+    right: px2rpx(-92px - 1px);
+    background: {
+      color: #faab00;
+      image: image-url("components/cart-product/collect.png");
+      size: px2rpx(28px) px2rpx(28px);
+    }
+  }
+
+  @include e(delete) {
+    right: px2rpx(-92px * 2);
+    background: {
+      color: #ff8519;
+      image: image-url("components/cart-product/delete.png");
+      size: px2rpx(26px) px2rpx(26px);
+    }
+  }
+
+  @include c(select) {
+    margin-bottom: px2rpx(32px - 3px);
+  }
+
+  @include o(media) {
+    @include e(image) {
+      @include size(px2rpx(184px), px2rpx(184px));
+
+      margin-right: px2rpx(30px);
+    }
+  }
+
+  @include c(checkbox) {
+    @include position--absolute(50%, null, null, px2rpx(30px));
+
+    transform: translateY(-50%);
+  }
+
+  @include c(number-input) {
+    @include position--absolute(null, px2rpx(30px), px2rpx(30px));
+  }
+}

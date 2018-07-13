@@ -1,0 +1,20 @@
+<template>
+  <view class="c-select c3 s3">
+    {{value}}
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      value: {
+        type: String,
+        default: '请选择'
+      }
+    }
+  }
+</script>

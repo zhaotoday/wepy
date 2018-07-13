@@ -113,7 +113,7 @@
     }
 
     async onLoad (query) {
-      this.id = query.id || 102073
+      this.id = query.id
     }
 
     async onShow () {

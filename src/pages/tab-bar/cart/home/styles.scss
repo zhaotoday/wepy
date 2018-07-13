@@ -2,7 +2,11 @@
 @import "../../../../styles/components/main";
 
 @include p(cart-home) {
-  background-color: white;
+  @include n(no-data-wrap) {
+    @include position--absolute(0, 0, 0, 0);
+
+    background-color: white;
+  }
 
   @include n(no-data) {
     @include e(image) {
@@ -27,5 +31,49 @@
       width: px2rpx(300px);
       margin-top: px2rpx(50px);
     }
+  }
+
+  @include n(shop) {
+    @include size(px2rpx(26px), px2rpx(24px));
+
+    display: inline-block;
+    margin-right: px2rpx(20px);
+    background: {
+      image: image-url("pages/tab-bar/cart/home/shop.png");
+      size: 100% 100%;
+    }
+  }
+
+  .c-panel__head-more {
+    margin-left: px2rpx(20px);
+  }
+
+  @include n(products) {
+    @include e(item) {
+      @include padding(30px);
+
+    }
+  }
+
+  @include n(group-tip) {
+    @include text--middle(px2rpx(40px));
+
+    font-weight: bold;
+    background-color: rgba(map-get($colors, c1), .15);
+    text-align: center;
+  }
+
+  @include n(to-collect, delete) {
+    @include position--absolute(50%);
+
+    transform: translateY(-50%);
+  }
+
+  @include n(to-collect) {
+    right: px2rpx(20px + 150px + 30px);
+  }
+
+  @include n(delete) {
+    right: px2rpx(30px);
   }
 }

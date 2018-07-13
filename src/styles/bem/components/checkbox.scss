@@ -1,0 +1,18 @@
+@import "../../utils/index";
+
+@include c(checkbox) {
+  @include size(px2rpx(32px), px2rpx(32px));
+
+  display: inline-block;
+  margin-right: px2rpx(20px);
+  background: {
+    image: image-url("components/checkbox/checkbox.png");
+    size: 100% 100%;
+  }
+
+  @include m(is-active) {
+    background: {
+      image: image-url("components/checkbox/checkbox-on.png");
+    }
+  }
+}

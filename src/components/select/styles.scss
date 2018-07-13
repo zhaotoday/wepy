@@ -1,0 +1,17 @@
+@import "../../styles/utils/index";
+
+@include c(select) {
+  @include text--middle(px2rpx(50px));
+  @include padding(null, px2rpx(10px + 20px), null, px2rpx(10px));
+
+  border-right: px2rpx(10px) solid #F5F5F5;
+
+  background-color: #f5f5f5;
+  display: inline-block;
+  background: {
+    image: image-url("components/select/drop.png");
+    size: px2rpx(20px) px2rpx(10px);
+    repeat: no-repeat;
+    position: right center;
+  }
+}
