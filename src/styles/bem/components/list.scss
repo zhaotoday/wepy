@@ -1,0 +1,40 @@
+@import "../../utils/index";
+
+@include c(list) {
+  background-color: white;
+
+  @include e(item) {
+    line-height: 100%;
+    position: relative;
+
+    @include m(border-bottom-1) {
+      border-bottom: 1px solid #f8f8f8;
+    }
+
+    @include m(padding-30) {
+      padding: px2rpx(30px);
+
+      @include c(list) {
+        @include e(item-extra) {
+          right: px2rpx(66px);
+        }
+
+        @include e(item-arrow) {
+          right: px2rpx(30px);
+        }
+      }
+    }
+  }
+
+  @include e(item-extra, item-arrow) {
+    @include position--absolute(50%);
+
+    transform: translateY(-50%);
+    line-height: 100%;
+  }
+
+  @include e(item-extra) {
+    text-align: right;
+    line-height: 100%;
+  }
+}

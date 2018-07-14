@@ -1,0 +1,18 @@
+<template>
+  <view class="c-payment-types c-panel margin-bottom--20">
+    <view class="c-panel__head padding-30">支付方式</view>
+    <view class="c-payment-types__item c-panel__body">
+      <view class="c-icon m-wechat-payment" />
+      <text class="c2 s2" style="padding-left: 16rpx;">微信支付</text>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+  }
+</script>

@@ -18,4 +18,8 @@
   @include m(has-shop-tab-bar) {
     bottom: px2rpx(100px);
   }
+
+  @include m(has-settlement-bar) {
+    bottom: px2rpx(150px);
+  }
 }

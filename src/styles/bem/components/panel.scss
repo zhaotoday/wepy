@@ -34,7 +34,7 @@
   @include e(head-title) {
     display: flex;
     align-items: center;
-    line-height: 0;
+    line-height: 100%;
 
     image {
       @include size(px2rpx(24px), px2rpx(24px));

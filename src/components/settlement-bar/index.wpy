@@ -1,14 +1,11 @@
 <template>
-  <view class="c-settlement-bar o-grid">
-    <view class="c-settlement-bar__select o-grid__cell">
-      <view class="c-checkbox" />
-      <text class="c2 s3">全选</text>
+  <view class="c-settlement-bar">
+    <view class="c-settlement-bar__amount">
+      <text class="c2 s2">实际金额：</text>
+      <text class="c1 s2">¥22.22</text>
+      <view class="c-icon m-arrow-down" style="margin-left: 20rpx; margin-bottom: 5rpx;" />
     </view>
-    <view class="c-settlement-bar__total o-grid__cell">
-      <text class="c2 s3">合计：¥ 11</text>
-      <text></text>
-    </view>
-    <view class="c-settlement-bar__submit o-grid__cell c7 s0">结算</view>
+    <view class="c-button m-orange m-height-88 c7 s0" style="width: 260rpx;">结算</view>
   </view>
 </template>
 

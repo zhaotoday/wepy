@@ -1,29 +1,19 @@
 @import "../../styles/utils/index";
 
 @include c(settlement-bar) {
-  @include text--middle(px2rpx(86px));
   @include position--absolute(null, null, 0, 0);
+  @include text--middle(px2rpx(150px));
 
+  padding-left: px2rpx(30px);
+  z-index: 1;
+  border-top: 1px solid #F8F8F8;
+  box-sizing: border-box;
   width: 100%;
   background-color: white;
 
-  @include e(select) {
-    margin-left: px2rpx(30px);
-    position: relative;
+  @include c(button) {
+    @include position--absolute(50%, px2rpx(30px));
 
-    @include c(checkbox) {
-      @include position--absolute(50%);
-
-      transform: translateY(-50%);
-    }
-
-    text{
-      padding-left: px2rpx(32px + 20px);
-    }
-  }
-
-  @include e(submit) {
-    background-color: map-get($colors, c1);
-    text-align: center;
+    transform: translateY(-50%);
   }
 }

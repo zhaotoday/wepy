@@ -1,0 +1,29 @@
+@import "../../styles/utils/index";
+
+@include c(cart-settlement) {
+  @include text--middle(px2rpx(86px));
+  @include position--absolute(null, null, 0, 0);
+
+  width: 100%;
+  background-color: white;
+
+  @include e(select) {
+    margin-left: px2rpx(30px);
+    position: relative;
+
+    @include c(checkbox) {
+      @include position--absolute(50%);
+
+      transform: translateY(-50%);
+    }
+
+    text{
+      padding-left: px2rpx(32px + 20px);
+    }
+  }
+
+  @include e(submit) {
+    background-color: map-get($colors, c1);
+    text-align: center;
+  }
+}

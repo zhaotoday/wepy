@@ -1,0 +1,46 @@
+@import "../../utils/index";
+
+@include c(order-product) {
+  padding: px2rpx(30px);
+  position: relative;
+  border-bottom: 1px solid #f8f8f8;
+
+  @include e(image) {
+    @include size(px2rpx(148px), px2rpx(148px));
+
+    margin-right: px2rpx(30px);
+
+    @include m(bg) {
+      @include size(px2rpx(184px), px2rpx(184px));
+    }
+  }
+
+  @include e(title) {
+    @include size(px2rpx(400px), px2rpx(83px));
+    @include text--overflow(2);
+
+    line-height: px2rpx(36px);
+  }
+
+  @include e(specification) {
+  }
+
+  @include e(count) {
+    @include position--absolute(px2rpx(30px), px2rpx(30px));
+  }
+
+  @include e(price) {
+    @include position--absolute(px2rpx(120px), px2rpx(30px));
+  }
+
+  @include e(save) {
+    @include position--absolute(null, null, px2rpx(30px), px2rpx(30px + 184px + 30px));
+  }
+
+  @include e(delete) {
+    @include position--absolute(null, px2rpx(30px), px2rpx(30px));
+
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+}

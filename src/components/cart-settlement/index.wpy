@@ -1,0 +1,22 @@
+<template>
+  <view class="c-cart-settlement o-grid">
+    <view class="c-cart-settlement__select o-grid__cell">
+      <view class="c-checkbox" />
+      <text class="c2 s3">全选</text>
+    </view>
+    <view class="c-cart-settlement__total o-grid__cell">
+      <text class="c2 s3">合计：¥ 11</text>
+      <text></text>
+    </view>
+    <view class="c-cart-settlement__submit o-grid__cell c7 s0">结算</view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+  }
+</script>

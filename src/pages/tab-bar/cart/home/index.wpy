@@ -31,7 +31,7 @@
         <view class="c-panel__head padding-30 border-bottom-1">
           <view class="c-panel__head-title">
             <text class="c-checkbox is-active" />
-            <text class="n-shop" />
+            <text class="c-icon m-shop" style="margin-right: 20rpx;" />
             <text class="c2 s2">肥西服装店</text>
             <view class="c-panel__head-more" />
           </view>
@@ -78,7 +78,7 @@
     <view class="n-group-tip c1 s6">该组合与您添加到购物车时有更新</view>
 
   </view>
-  <settlement-bar />
+  <cart-settlement />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -91,7 +91,7 @@
   import Swiper from '../../../../components/swiper/index'
   import NumberInput from '../../../../components/number-input/index'
   import Select from '../../../../components/select/index'
-  import SettlementBar from '../../../../components/settlement-bar/index'
+  import CartSettlement from '../../../../components/cart-settlement/index'
   import Operation from '../../../../components/operation/index'
 
   export default class extends wepy.page {
@@ -104,7 +104,7 @@
       'c-swiper': Swiper,
       'number-input': NumberInput,
       'select': Select,
-      'settlement-bar': SettlementBar,
+      'cart-settlement': CartSettlement,
       'operation': Operation
     }
 

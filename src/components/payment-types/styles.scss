@@ -1,0 +1,10 @@
+@import "../../styles/utils/index";
+
+@include c(payment-types) {
+  @include e(item) {
+    @include padding(null, null, px2rpx(30px), px2rpx(30px));
+
+    display: flex;
+    align-items: center;
+  }
+}

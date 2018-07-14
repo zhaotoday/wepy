@@ -33,17 +33,6 @@
     }
   }
 
-  @include n(shop) {
-    @include size(px2rpx(26px), px2rpx(24px));
-
-    display: inline-block;
-    margin-right: px2rpx(20px);
-    background: {
-      image: image-url("pages/tab-bar/cart/home/shop.png");
-      size: 100% 100%;
-    }
-  }
-
   .c-panel__head-more {
     margin-left: px2rpx(20px);
   }

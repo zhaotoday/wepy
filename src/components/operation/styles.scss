@@ -4,7 +4,11 @@
   text-align: right;
 
   @include e(btn) {
+    @include text--middle(px2rpx(28px + 20px * 2));
+
+    min-width: 10px;
     display: inline-block;
-    padding: px2rpx(20px) px2rpx(30px);
+    padding: 0 px2rpx(30px);
+    overflow: hidden;
   }
 }
