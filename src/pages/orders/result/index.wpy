@@ -1,146 +1,22 @@
 <template>
-  <nav-bar title="订单确认" :back.sync="navBarBack" />
-  <view class="p-orders-confirm c-main c-main--has-nav-bar c-main--has-settlement-bar">
-    <view class="n-no-address">
-      <view class="c-button m-height-66 m-border-c1 c1 s3" style="width: 240rpx;">请选择收货地址</view>
+  <nav-bar title="下单成功" :back.sync="navBarBack" />
+  <view class="p-orders-result c-main">
+    <view class="n-wrap">
+      <view class="n-bg">
+        <view class="n-fail" />
+        <view class="n-result">
+          <view class="c7 s0" style="padding-bottom: 14rpx;">支付失败</view>
+          <view class="c7 s4">重新支付吧</view>
+        </view>
+      </view>
+
+      <view class="n-tip c3 s4">
+        该订单会为您保留30分钟，如果30分钟内还未支付，系统将自动取消该订单，如需帮助，请联系我们客服
+      </view>
+
+      <view class="c-button m-orange-ghost m-height-88 c1 s0" style="width: 690rpx;">重新支付</view>
     </view>
-    <view class="n-line margin-bottom--20" />
-
-    <view class="c-panel u-margin-bottom-20">
-      <view class="c-panel__head padding-30 border-bottom-1">
-        <view class="c-panel__head-title">
-          <text class="c-icon m-shop" style="margin-right: 20rpx;" />
-          <text class="c2 s2">肥西服装店</text>
-          <view class="c-panel__head-more" />
-        </view>
-      </view>
-      <view class="c-panel__body">
-        <view class="c-order-product">
-          <view class="o-media">
-            <image class="c-order-product__image o-media__image" src="./images/product.png" />
-            <view class="o-media__body">
-              <view class="c-order-product__title c2 s2">是非法的对方的发生大幅度是否</view>
-              <view class="c-order-product__specification c3 s4">第三方的手啊</view>
-              <view class="c-order-product__count c2 s3">x1</view>
-              <view class="c-order-product__price c1 s4">¥ 11</view>
-            </view>
-          </view>
-        </view>
-        <view class="c-order-product">
-          <view class="o-media">
-            <image class="c-order-product__image o-media__image" src="./images/product.png" />
-            <view class="o-media__body">
-              <view class="c-order-product__title c2 s2">是非法的对方的发生大幅度是否</view>
-              <view class="c-order-product__specification c3 s4">第三方的手啊</view>
-              <view class="c-order-product__count c2 s3">x1</view>
-              <view class="c-order-product__price c1 s4">¥ 11</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="c-list">
-      <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">店家优惠</view>
-        <view class="c-list__item-extra c1 s4">省20元：50减20元</view>
-        <view class="c-list__item-arrow c-icon m-arrow-right" />
-      </view>
-      <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">配送方式</view>
-        <view class="c-list__item-extra c2 s4">长途配送</view>
-        <view class="c-list__item-arrow c-icon m-arrow-right" />
-      </view>
-      <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">运费</view>
-        <view class="c-list__item-extra c2 s4">¥11.00</view>
-      </view>
-      <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">支付方式</view>
-        <view class="c-list__item-extra c2 s4">线上支付</view>
-        <view class="c-list__item-arrow c-icon m-arrow-right" />
-      </view>
-      <view class="c-list__item m-padding-30 m-border-bottom-1" style="padding-top: 20rpx; padding-bottom: 20rpx;">
-        <view class="c-list__item-body c3 s3">
-          <text style="vertical-align: middle;">买家留言：</text>
-          <input class="n-buyer-message" type="text" placeholder="填写已和卖家协商确认"
-                 placeholderStyle="font-size: 24rpx; color: #bbb;" />
-        </view>
-      </view>
-    </view>
-
-    <view class="n-total margin-bottom--20">
-      <text class="c2 s2" style="padding-right: 26rpx;">共2件商品</text>
-      <text class="c2 s2">合计：</text>
-      <text class="c1 s1" style="font-weight: bold;">¥11</text>
-    </view>
-
-    <view class="c-panel">
-      <view class="c-panel__head padding-30 border-bottom-1">
-        <view class="c-panel__head-title">
-          <text class="c-icon m-shop" style="margin-right: 20rpx;" />
-          <text class="c2 s2">肥西服装店</text>
-          <view class="c-panel__head-more" />
-        </view>
-      </view>
-      <view class="c-panel__body">
-        <view class="c-order-product">
-          <view class="o-media">
-            <image class="c-order-product__image m-bg o-media__image" src="./images/product.png" />
-            <view class="o-media__body">
-              <view class="c-order-product__title c2 s2">是非法的对方的发生大幅度是否</view>
-              <view class="c-order-product__specification c3 s4">第三方的手啊</view>
-              <view class="c-order-product__count c2 s3">x1</view>
-              <view class="c-order-product__save s4">
-                <text class="c1">¥ 11</text>
-                <text class="c2" style="padding-left: 30rpx; padding-right: 10rpx;">已省</text>
-                <text class="c1">¥ 11</text>
-              </view>
-            </view>
-          </view>
-        </view>
-        <view class="c-order-product">
-          <view class="o-media">
-            <image class="c-order-product__image o-media__image" src="./images/product.png" />
-            <view class="o-media__body">
-              <view class="c-order-product__title c2 s2">是非法的对方的发生大幅度是否</view>
-              <view class="c-order-product__specification c3 s4">第三方的手啊</view>
-              <view class="c-order-product__count c2 s3">x1</view>
-              <view class="c-order-product__price c1 s4">¥ 11</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-
-    <view class="c-panel u-margin-bottom-20">
-      <view class="c-panel__head padding-30 border-bottom-1">
-        <view class="c-panel__head-title">
-          <text class="c2 s2">搭配商品</text>
-        </view>
-      </view>
-      <view class="c-panel__body">
-
-        <view class="c-order-product">
-          <view class="o-media">
-            <image class="c-order-product__image o-media__image" src="./images/product.png" />
-            <view class="o-media__body">
-              <view class="c-order-product__title c2 s2">是非法的对方的发生大幅度是否</view>
-              <view class="c-order-product__specification c3 s4">第三方的手啊</view>
-              <view class="c-order-product__count c2 s3">x1</view>
-              <view class="c-order-product__delete c1 s4">¥11 x 1</view>
-            </view>
-          </view>
-        </view>
-
-      </view>
-    </view>
-
-    <payment-types />
-
   </view>
-  <settlement-bar />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -150,18 +26,14 @@
   import global from '../../../mixins/global'
   import request from '../../../utils/request'
   import NavBar from '../../../components/nav-bar/index'
-  import SettlementBar from '../../../components/settlement-bar/index'
-  import PaymentTypes from '../../../components/payment-types/index'
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: '订单确认'
+      navigationBarTitleText: '支付失败'
     }
 
     components = {
-      'nav-bar': NavBar,
-      'settlement-bar': SettlementBar,
-      'payment-types': PaymentTypes
+      'nav-bar': NavBar
     }
 
     mixins = [global]

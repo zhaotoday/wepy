@@ -1,44 +1,63 @@
 @import "../../../styles/utils/index";
 @import "../../../styles/components/main";
 
-@include p(orders-confirm) {
-  @include n(no-address) {
-    @include size(100%, px2rpx(180px));
+@include p(orders-result) {
+  @include n(wrap) {
+    background-color: white;
+    padding-bottom: px2rpx(100px);
+  }
 
-    position: relative;
+  @include n(bg) {
+    @include text--middle(px2rpx(200px));
 
+    width: 100%;
     background: {
-      image: image-url("pages/orders/confirm/no-address.png");
+      image: image-url("pages/orders/result/bg.png");
       size: 100% 100%;
     }
+    text-align: center;
+  }
 
-    @include c(button) {
-      @include position--absolute(50%, null, null, 50%);
+  @include n(success, fail) {
+    @include size(px2rpx(84px), px2rpx(84px));
 
-      transform: translate(-50%, -50%);
+    background: {
+      size: 100% 100%;
+    }
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: px2rpx(20px);
+  }
+
+  @include n(success) {
+    background: {
+      image: image-url("pages/orders/result/success.png");
     }
   }
 
-  @include n(line) {
-    @include size(px2rpx(750px / 2), px2rpx(4px));
-
-    background-color: #aad7f6;
-    border-right: px2rpx(750px / 2) solid #f6deaa;
+  @include n(fail) {
+    background: {
+      image: image-url("pages/orders/result/fail.png");
+    }
   }
 
-  @include n(buyer-message) {
-    @include text--middle(px2rpx(26px));
-
-    overflow: hidden;
+  @include n(result) {
     display: inline-block;
     vertical-align: middle;
+    text-align: left;
+
+    view {
+      line-height: 100%;
+    }
   }
 
-  @include n(total) {
-    padding: px2rpx(30px);
-    text-align: right;
-    border-bottom: 1px solid #f8f8f8;
-    line-height: 100%;
-    background-color: white;
+  @include n(tip) {
+    @include padding(px2rpx(100px), px2rpx(100px), px2rpx(130px), px2rpx(100px));
+
+    line-height: px2rpx(32px);
+  }
+
+  @include c(button) {
+    @include block--center;
   }
 }

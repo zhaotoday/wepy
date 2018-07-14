@@ -14,7 +14,6 @@
 
   @include m(orange-ghost) {
     border: 1px solid map-get($colors, c1);
-    background-color: map-get($colors, c7);
   }
 
   @include m(gray-ghost) {
