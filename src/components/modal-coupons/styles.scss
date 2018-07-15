@@ -1,6 +1,6 @@
 @import "../../styles/utils/index";
 
-@include b(c-popup-coupon) {
+@include b(c-modal-coupons) {
   @include size(100%, px2rpx(950px - 82px + 3px));
   @include position--absolute(null, 0, 0, 0);
 
@@ -21,7 +21,7 @@
     line-height: 100%;
     text-align: center;
     background: {
-      image: image-url("components/popup-coupon/title.png");
+      image: image-url("components/modal-coupons/title.png");
       size: 100% px2rpx(82px);
       repeat: no-repeat;
     }
@@ -41,12 +41,12 @@
     margin-bottom: px2rpx(20px);
     display: flex;
     background: {
-      image: image-url("components/popup-coupon/coupon.png");
+      image: image-url("components/modal-coupons/coupon.png");
       size: 100% 100%;
     }
 
     @include m(active) {
-      background-image: image-url("components/popup-coupon/coupon-active.png");
+      background-image: image-url("components/modal-coupons/coupon-active.png");
     }
   }
 

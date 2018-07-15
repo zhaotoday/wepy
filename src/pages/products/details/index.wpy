@@ -26,7 +26,7 @@
     </view>
     <view class="l-box l-box--margin-bottom">
       <view class="l-wing-blank">
-        <view class="n-params product-params--has-arrow s4" @tap="handleTapGetCoupon">
+        <view class="n-params product-params--has-arrow s4" @tap="getCoupons">
           <view class="n-params__label c3">领券</view>
           <view class="n-params__body c2">
             <repeat for="{{couponTitles}}" item="item">
@@ -159,7 +159,7 @@
       <text>新的内容</text>
     </view>
   </action-sheet>-->
-  <popup-coupon :visible.sync="popupCouponVisible" />
+  <modal-coupons :visible.sync="popupCouponVisible" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -172,7 +172,7 @@
   import Swiper from '../../../components/swiper/index'
   import ToolBar from '../../../components/tool-bar/index'
   import ActionSheet from '../../../components/action-sheet/index'
-  import PopupCoupon from '../../../components/popup-coupon/index'
+  import ModalCoupons from '../../../components/modal-coupons/index'
   import { utils } from 'mp-client'
 
   export default class extends wepy.page {
@@ -185,7 +185,7 @@
       'c-swiper': Swiper,
       'tool-bar': ToolBar,
       'action-sheet': ActionSheet,
-      'popup-coupon': PopupCoupon
+      'modal-coupons': ModalCoupons
     }
 
     mixins = [global]
@@ -193,7 +193,6 @@
     data = {
       navBarBack: true,
       previewImages: true,
-      popupCouponVisible: false,
       images: [],
       id: 0,
       name: '',
@@ -291,14 +290,13 @@
           console.log(e)
         }
       },
-      async handleTapGetCoupon () {
-        this.popupCouponVisible = true
-        this.$apply()
+      async getCoupons () {
+        this.$invoke('modal-coupons', 'show')
       }
     }
 
     async onLoad (query) {
-      this.id = 103082 // query.id
+      this.id = query.id || 103082
     }
 
     async onShow (query) {
