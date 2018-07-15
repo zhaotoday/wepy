@@ -1,0 +1,59 @@
+@import "../../styles/utils/index";
+
+// c-product-tool-bar
+@include b(c-product-tool-bar) {
+  @include position--absolute(null, 0, 0, 0);
+
+  height: px2rpx(146px);
+  background-color: white;
+  border-top: 1px solid #f2f2f2;
+
+  @include e(shop) {
+    @include position--absolute(50%);
+
+    transform: translateY(-50%);
+  }
+
+  @include e(shop, customer-service) {
+    @include position--absolute(50%);
+
+    transform: translateY(-50%);
+    width: px2rpx(38px + 10px);
+    line-height: 100%;
+    text-align: center;
+
+    @include c(icon) {
+      margin-bottom: px2rpx(14px);
+    }
+  }
+
+  @include e(shop) {
+    left: px2rpx(30px - 5px);
+  }
+
+  @include e(customer-service) {
+    left: px2rpx(30px + 38px + 60px - 5px);
+  }
+
+  @include e(buttons) {
+    @include position--absolute(50%);
+
+    transform: translateY(-50%);
+    right: px2rpx(30px);
+
+    &.c-button-group {
+      width: px2rpx(450px);
+    }
+  }
+
+  @include e(off-button) {
+    @include text--middle(px2rpx(88px));
+    @include position--absolute(50%, px2rpx(30px));
+
+    transform: translateY(-50%);
+    border-radius: px2rpx(44px);
+    width: px2rpx(420px);
+    background-color: #bbbbbb;
+    text-align: center;
+  }
+}

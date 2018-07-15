@@ -20,8 +20,9 @@
     text-align: center;
   }
 
-  @include e(new-price) {
-
+  @include e(old-price) {
+    text-decoration: line-through;
+    display: inline-block;
   }
 
   @include e(stocks, selected) {
@@ -56,9 +57,16 @@
   }
 
   @include e(wrap) {
-    @include size(100%, px2rpx(900px));
+    @include size(100%, px2rpx(800px));
 
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  @include e(number) {
+    @include padding(px2rpx(30px), null, px2rpx(30px));
+
+    display: flex;
+    align-items: flex-end;
   }
 }

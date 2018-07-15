@@ -26,7 +26,7 @@
     </view>
     <view class="l-box l-box--margin-bottom">
       <view class="l-wing-blank">
-        <view class="n-params product-params--has-arrow s4" @tap="getCoupons">
+        <view class="n-params product-params--has-arrow s4" @tap="showModalCoupons">
           <view class="n-params__label c3">领券</view>
           <view class="n-params__body c2">
             <repeat for="{{couponTitles}}" item="item">
@@ -47,10 +47,12 @@
         </view>
         <view class="n-params s4">
           <view class="n-params__label c3">参数</view>
-          <view class="n-params__body c2">
+          <view class="n-params__body c2" @tap="showModalSpecification">
+            选择
             <repeat for="{{productData}}" item="item">
-              {{item.attrName}}：{{item.attrValue}}；
+              {{item.attrName}}
             </repeat>
+            数量
           </view>
         </view>
       </view>
@@ -152,14 +154,10 @@
       </view>
     </view>
   </view>
-  <tool-bar :status.sync="status" shop-id="0" product-id="1" @add-to-cart.user="handleTapAddToCart"
-            @buy.user="handleTapBuy" />
-  <!--<action-sheet>
-    <view slot="content">
-      <text>新的内容</text>
-    </view>
-  </action-sheet>-->
-  <modal-coupons :visible.sync="popupCouponVisible" />
+  <product-tool-bar :details.sync="details" />
+  <modal-coupons :items.sync="coupons" @reload.user="reload" />
+  <modal-specification :details.sync="details" :formData.sync="formData" />
+  <modal-download />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -170,9 +168,10 @@
   import request from '../../../utils/request'
   import NavBar from '../../../components/nav-bar/index'
   import Swiper from '../../../components/swiper/index'
-  import ToolBar from '../../../components/tool-bar/index'
+  import ProductToolBar from '../../../components/product-tool-bar/index'
   import ActionSheet from '../../../components/action-sheet/index'
   import ModalCoupons from '../../../components/modal-coupons/index'
+  import ModalSpecification from '../../../components/modal-specification/index'
   import { utils } from 'mp-client'
 
   export default class extends wepy.page {
@@ -183,14 +182,17 @@
     components = {
       'nav-bar': NavBar,
       'c-swiper': Swiper,
-      'tool-bar': ToolBar,
+      'product-tool-bar': ProductToolBar,
       'action-sheet': ActionSheet,
-      'modal-coupons': ModalCoupons
+      'modal-coupons': ModalCoupons,
+      'modal-specification': ModalSpecification
     }
 
     mixins = [global]
 
     data = {
+      details: {},
+      formData: {},
       navBarBack: true,
       previewImages: true,
       images: [],
@@ -203,6 +205,7 @@
       price: 0,
       originalPrice: 0,
       couponTitles: [],
+      coupons: [],
       isHot: 0,
       isNew: 0,
       isFree: 0,
@@ -248,20 +251,13 @@
         height: 0,
         url: ''
       },
-      recommendedProducts: [],
-      status: 1
+      recommendedProducts: []
     }
 
     methods = {
       navigateTo (url) {
         console.log(this.shop.id)
         wepy.navigateTo({ url })
-      },
-      handleTapAddToCart () {
-        console.log('add to cart')
-      },
-      handleTapBuy () {
-        console.log('buy')
       },
       async handleTapCollect () {
         try {
@@ -290,8 +286,14 @@
           console.log(e)
         }
       },
-      async getCoupons () {
+      showModalCoupons () {
         this.$invoke('modal-coupons', 'show')
+      },
+      showModalSpecification () {
+        this.$invoke('modal-specification', 'show')
+      },
+      reload () {
+        this.get()
       }
     }
 
@@ -299,13 +301,19 @@
       this.id = query.id || 103082
     }
 
-    async onShow (query) {
+    onShow () {
+      this.get()
+    }
+
+    async get () {
       const goodsGetRes = await request({
         url: 'goods/get',
         data: {
           goodsCommonId: this.id
         }
       })
+
+      this.details = goodsGetRes
 
       this.images = goodsGetRes.images.map(item => ({
         url: '',
@@ -326,7 +334,16 @@
 
       this.originalPrice = goodsGetRes.goodsMarketPrice
 
-      this.couponTitles = goodsGetRes.couponsTitle
+      this.couponTitles = goodsGetRes.couponTitle
+
+      this.coupons = goodsGetRes.coupons.map(item => ({
+        id: item.couponId,
+        title: item.title,
+        subTitle: item.subTitle,
+        isGet: item.isGet,
+        startTime: utils.time.getDate(item.startTime * 1000),
+        endTime: utils.time.getDate(item.endTime * 1000)
+      }))
 
       this.services[0].value = goodsGetRes.isHot
       this.services[1].value = goodsGetRes.isNew
@@ -373,8 +390,6 @@
         image: item.goodsImage,
         price: item.goodsPrice
       }))
-
-      this.status = goodsGetRes.goodsState
 
       this.$apply()
     }

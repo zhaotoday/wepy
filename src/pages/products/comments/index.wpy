@@ -32,8 +32,7 @@
     </repeat>
 
   </view>
-  <tool-bar :status.sync="productStatus" shop-id="0" product-id="1" @add-to-cart.user="handleTapAddToCart"
-            @buy.user="handleTapBuy" />
+  <product-tool-bar :details.sync="productDetails" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -43,7 +42,7 @@
   import global from '../../../mixins/global'
   import request from '../../../utils/request'
   import NavBar from '../../../components/nav-bar/index'
-  import ToolBar from '../../../components/tool-bar/index'
+  import ProductToolBar from '../../../components/product-tool-bar/index'
   import Rate from '../../../components/rate/index'
   import { utils } from 'mp-client'
 
@@ -54,7 +53,7 @@
 
     components = {
       'nav-bar': NavBar,
-      'tool-bar': ToolBar,
+      'product-tool-bar': ProductToolBar,
       rate: Rate
     }
 
@@ -67,7 +66,7 @@
       hasImageTotal: 0,
       items: [],
       rateItem: {},
-      productStatus: 1
+      productDetails: {}
     }
 
     methods = {

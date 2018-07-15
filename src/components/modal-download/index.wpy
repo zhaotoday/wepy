@@ -1,0 +1,45 @@
+<template>
+  <modal>
+    <view slot="content">
+      <view class="c-modal-download">
+        <view class="c-modal-download__body c2 s3">
+          更多功能请到应用市场下载APP
+          享受平台提供的更多服务
+        </view>
+        <view class="c-modal-download__footer o-grid">
+          <view class="o-grid__cell bg-c1 c7 s2 is-first" @tap="redirectTo">前往下载</view>
+          <view class="o-grid__cell c1 s2" @tap="hide">关闭</view>
+        </view>
+      </view>
+    </view>
+  </modal>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import Modal from '../modal/index'
+
+  export default class extends wepy.component {
+    components = {
+      'modal': Modal
+    }
+
+    methods = {
+      hide () {
+        this.$invoke('modal', 'hide')
+      },
+      show () {
+        this.$invoke('modal', 'show')
+      },
+      redirectTo () {
+        this.$invoke('modal', 'hide')
+        wepy.showToast({
+          icon: 'none',
+          title: '功能待开发'
+        })
+      }
+    }
+  }
+</script>

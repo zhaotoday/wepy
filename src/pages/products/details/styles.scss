@@ -173,11 +173,11 @@
     }
 
     @include e(go-categories) {
-      bottom: px2rpx(28px);
+      top: px2rpx(28px);
     }
 
     @include e(go-shop) {
-      top: px2rpx(28px);
+      bottom: px2rpx(28px);
     }
   }
 

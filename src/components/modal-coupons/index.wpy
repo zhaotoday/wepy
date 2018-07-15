@@ -5,37 +5,26 @@
         <view class="c-icon c-icon--close-third" @tap="hide"></view>
         <view class="c-modal-coupons__title c2 s1">店铺优惠券</view>
         <view class="c-modal-coupons__wrap">
-          <view class="c-modal-coupons__item c-modal-coupons__item--active">
-            <view class="c-coupon-info">
-              <view class="c-coupon-info__price c7">
-                <text class="s0">¥</text>
-                <text class="sd">240</text>
+          <repeat for="{{items}}" item="item">
+            <view class="c-modal-coupons__item {{item.isGet ? '' : ' c-modal-coupons__item--active'}}">
+              <view class="c-coupon-info">
+                <view class="c-coupon-info__price c7">
+                  <text class="s0">¥</text>
+                  <text class="sd">{{item.title}}</text>
+                </view>
+                <view class="c-coupon-info__desc c7 s4">
+                  <view>{{item.subTitle}}</view>
+                  <view>有效期{{item.startTime}}-{{item.endTime}}</view>
+                </view>
               </view>
-              <view class="c-coupon-info__desc c7 s4">
-                <view>订单金额满199元使用</view>
-                <view>有效期2018.12.13-2019.04.01</view>
+              <view class="c-coupon-btn c7 s2" wx:if="{{item.isGet}}">
+                <text>已领取</text>
               </view>
-            </view>
-            <view class="c-coupon-btn c7 s2" @tap="handleTap">
-              <text>立即\n领取</text>
-            </view>
-          </view>
-
-          <view class="c-modal-coupons__item">
-            <view class="c-coupon-info">
-              <view class="c-coupon-info__price c7">
-                <text class="s0">¥</text>
-                <text class="sd">240</text>
-              </view>
-              <view class="c-coupon-info__desc c7 s4">
-                <view>订单金额满199元使用</view>
-                <view>有效期2018.12.13-2019.04.01</view>
+              <view class="c-coupon-btn c7 s2" @tap="get({{item.id}})" wx:else>
+                <text>立即\n领取</text>
               </view>
             </view>
-            <view class="c-coupon-btn c7 s2" @tap="handleTap">
-              <text>已领取</text>
-            </view>
-          </view>
+          </repeat>
         </view>
       </view>
     </view>
@@ -46,11 +35,19 @@
 
 <script>
   import wepy from 'wepy'
+  import request from '../../utils/request'
   import Modal from '../modal/index'
 
   export default class extends wepy.component {
     components = {
       modal: Modal
+    }
+
+    props = {
+      items: {
+        type: Array,
+        default: []
+      }
     }
 
     methods = {
@@ -59,6 +56,31 @@
       },
       show () {
         this.$invoke('modal', 'show')
+      },
+      async get (id) {
+        try {
+          await request({
+            url: 'coupon/receiveCoupon',
+            requiresLogin: true,
+            data: {
+              couponId: id
+            }
+          })
+
+          wepy.showToast({
+            icon: 'none',
+            title: '领取成功'
+          })
+
+          this.$emit('reload')
+        } catch (e) {
+          wepy.showToast({
+            icon: 'none',
+            title: e.data.longMessage
+          })
+        }
+
+        this.$invoke('modal', 'hide')
       }
     }
   }

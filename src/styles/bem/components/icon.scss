@@ -50,6 +50,18 @@
     background-image: image-url("components/icon/shop.png");
   }
 
+  @include m(shop-1) {
+    @include size(px2rpx(38px), px2rpx(38px));
+
+    background-image: image-url("components/icon/shop-1.png");
+  }
+
+  @include m(customer-service) {
+    @include size(px2rpx(38px), px2rpx(38px));
+
+    background-image: image-url("components/icon/customer-service.png");
+  }
+
   @include m(close) {
     @include size(px2rpx(68px), px2rpx(68px));
 

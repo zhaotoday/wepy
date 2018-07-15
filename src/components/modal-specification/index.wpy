@@ -3,28 +3,39 @@
     <view slot="content">
       <view class="c-modal-specification">
         <view class="c-modal-specification__wrap">
-          <image class="c-modal-specification__image" src="./images/product.png" />
+          <image class="c-modal-specification__image" src="{{details.images[0]}}" />
           <view class="c-modal-specification__prices">
             <text class="c-modal-specification__new-price c1" style="padding-right: 22rpx;">
               <text class="s3">¥</text>
-              <text class="ss">11</text>
+              <text class="ss">{{details.goodsPrice}}</text>
             </text>
-            <text class="c-modal-specification__old-price c1 s1">¥11</text>
+            <text class="c-modal-specification__old-price c1 s1"
+                  wx:if="{{details.goodsPrice !== details.goodsMarketPrice}}">
+              ¥{{details.goodsMarketPrice}}
+            </text>
           </view>
-          <view class="c-modal-specification__stocks c2 s3">库存2600件</view>
+          <view class="c-modal-specification__stocks c2 s3">库存{{details.goodsStorage}}件</view>
           <view class="c-modal-specification__selected c2 s4">已选：刺杀骑士团长</view>
-          <view class="c-modal-specification__title">系列</view>
-          <view class="c-modal-specification__body">
-            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
-            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
-          </view>
+          <repeat for="{{details.attr}}" item="item" index="index">
+            <view class="c-modal-specification__title">{{item.attrName}}</view>
+            <view class="c-modal-specification__body">
+              <repeat for="{{item.attrValue}}" item="childItem" index="childIndex">
+                <text class="c-tag m-height-68 s4 bg-c6 c2" @tap="render({{index}}, {{childIndex}})">{{childItem}}
+                </text>
+              </repeat>
+            </view>
+          </repeat>
           <view class="c-modal-specification__title">颜色分类</view>
-          <view class="c-modal-specification__body">
-            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
-            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
+          <view class="c-modal-specification__number c-modal-specification__body">
+            <number-input :value.sync="formData.numberInputValue" />
+            <text class="c3 s5" style="padding-left: 20rpx;">（最多购买数量45件）</text>
           </view>
         </view>
         <view class="c-modal-specification__buttons c-button-group" style="width: 690rpx;">
+          <view class="c-button m-height-88 bg-c8 c7 s1 is-first" @tap="addToCart">加入购物车</view>
+          <view class="c-button m-height-88 bg-c1 c7 s1 is-last">立即购买</view>
+        </view>
+        <view class="c-modal-specification__buttons c-button-group" style="display: none; width: 690rpx;">
           <view class="c-button m-height-88 bg-c8 c7 s1 is-first">确定</view>
           <view class="c-button m-height-88 bg-c1 c7 s1 is-last">查看详情</view>
         </view>
@@ -37,11 +48,26 @@
 
 <script>
   import wepy from 'wepy'
+  import request from '../../utils/request'
   import Modal from '../modal/index'
+  import NumberInput from '../number-input/index'
 
   export default class extends wepy.component {
     components = {
-      modal: Modal
+      'modal': Modal,
+      'number-input': NumberInput
+    }
+
+    props = {
+      details: {
+        type: Object,
+        default: {}
+      },
+      formData: {
+        type: Object,
+        default: {},
+        twoWay: true
+      }
     }
 
     methods = {
@@ -50,7 +76,40 @@
       },
       show () {
         this.$invoke('modal', 'show')
+      },
+      render (index, childIndex) {
+        console.log(index, childIndex)
+      },
+      async addToCart () {
+        try {
+          await request({
+            url: 'cart/add',
+            requiresLogin: true,
+            data: {
+              type: 1,
+              goodsId: this.details.goodsId,
+              goodsNum: 2
+            }
+          })
+
+          wepy.showToast({
+            icon: 'none',
+            title: '加入购物车成功'
+          })
+
+          this.$invoke('modal', 'hide')
+        } catch (e) {
+          console.log(e)
+        }
       }
+    }
+
+    async onLoad () {
+      console.log(this.details)
+
+      setTimeout(() => {
+        console.log(this.details)
+      }, 1000)
     }
   }
 </script>

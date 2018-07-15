@@ -1,0 +1,76 @@
+<template>
+  <view class="c-product-tool-bar">
+    <view class="c-product-tool-bar__shop c3 s5">
+      <view class="c-icon m-shop-1" />
+      店铺
+    </view>
+    <view class="c-product-tool-bar__customer-service c3 s5" @tap="showModalDownload">
+      <view class="c-icon m-customer-service" />
+      客服
+    </view>
+    <view class="c-product-tool-bar__buttons">
+      <view class="c-button-group" style="width: 450rpx;" wx:if="{{details.goodsState === 0}}">
+        <view class="c-button m-height-88 bg-c8 c7 s1 is-first" @tap="addToCart">加入购物车</view>
+        <view class="c-button m-height-88 bg-c1 c7 s1 is-last" @tap="buy">立即购买</view>
+      </view>
+      <view class="c-button m-height-88 bg-c4 c7 s1" style="width: 420rpx;" @tap="addToCart"
+            wx:if="{{details.goodsState === 1}}">
+        商品已下架
+      </view>
+    </view>
+  </view>
+  <modal-download />
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import request from '../../utils/request'
+  import ModalDownlaod from '../modal-download/index'
+
+  export default class extends wepy.component {
+    components = {
+      'modal-download': ModalDownlaod
+    }
+
+    props = {
+      details: {
+        type: Object,
+        default: {},
+        twoWay: true
+      }
+    }
+
+    methods = {
+      async addToCart () {
+        try {
+          await request({
+            url: 'cart/add',
+            requiresLogin: true,
+            data: {
+              type: 1,
+              goodsId: this.details.goodsId,
+              goodsNum: 2
+            }
+          })
+
+          wepy.showToast({
+            icon: 'none',
+            title: '加入购物车成功'
+          })
+
+          this.$invoke('modal', 'hide')
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      buy () {
+        console.log(1111)
+      },
+      showModalDownload () {
+        this.$invoke('modal-download', 'show')
+      }
+    }
+  }
+</script>
