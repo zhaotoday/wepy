@@ -1,0 +1,19 @@
+@import "../../utils/index";
+
+@include c(button-group) {
+  display: flex;
+
+  @include c(button) {
+    flex: 1;
+  }
+
+  .is-first {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+  .is-last {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}

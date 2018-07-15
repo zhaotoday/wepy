@@ -1,5 +1,4 @@
 @import "../../styles/utils/index";
-@import "../../styles/components/overlay";
 
 @include b(c-modal-ad) {
   @include position--absolute(50%, null, null, 50%);

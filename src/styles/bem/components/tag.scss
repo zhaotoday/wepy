@@ -1,0 +1,21 @@
+@import "../utils/index";
+
+@include c(tag) {
+  display: inline-block;
+  text-align: center;
+
+  @include m(orange) {
+    background-color: map-get($colors, c1);
+  }
+
+  @include m(gray) {
+    background-color: map-get($colors, c6);
+  }
+
+  @include m(height-68) {
+    @include text--middle(px2rpx(68px));
+    @include padding(null, px2rpx(34px), null, px2rpx(34px));
+
+    border-radius: px2rpx(34px);
+  }
+}

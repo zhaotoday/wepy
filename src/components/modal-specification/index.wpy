@@ -1,0 +1,56 @@
+<template>
+  <modal modifiers="bottom-0">
+    <view slot="content">
+      <view class="c-modal-specification">
+        <view class="c-modal-specification__wrap">
+          <image class="c-modal-specification__image" src="./images/product.png" />
+          <view class="c-modal-specification__prices">
+            <text class="c-modal-specification__new-price c1" style="padding-right: 22rpx;">
+              <text class="s3">¥</text>
+              <text class="ss">11</text>
+            </text>
+            <text class="c-modal-specification__old-price c1 s1">¥11</text>
+          </view>
+          <view class="c-modal-specification__stocks c2 s3">库存2600件</view>
+          <view class="c-modal-specification__selected c2 s4">已选：刺杀骑士团长</view>
+          <view class="c-modal-specification__title">系列</view>
+          <view class="c-modal-specification__body">
+            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
+            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
+          </view>
+          <view class="c-modal-specification__title">颜色分类</view>
+          <view class="c-modal-specification__body">
+            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
+            <text class="c-tag m-orange m-height-68 c7 s4">放水电费第三方</text>
+          </view>
+        </view>
+        <view class="c-modal-specification__buttons c-button-group" style="width: 690rpx;">
+          <view class="c-button m-height-88 bg-c8 c7 s1 is-first">确定</view>
+          <view class="c-button m-height-88 bg-c1 c7 s1 is-last">查看详情</view>
+        </view>
+      </view>
+    </view>
+  </modal>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import Modal from '../modal/index'
+
+  export default class extends wepy.component {
+    components = {
+      modal: Modal
+    }
+
+    methods = {
+      hide () {
+        this.$invoke('modal', 'hide')
+      },
+      show () {
+        this.$invoke('modal', 'show')
+      }
+    }
+  }
+</script>

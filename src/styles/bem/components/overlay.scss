@@ -1,8 +1,9 @@
-@import "../utils/index";
+@import "../../utils/index";
 
-@include b(c-overlay) {
+@include c(overlay) {
   @include position--absolute(0, 0, 0, 0);
 
   background-color: black;
+  z-index: 2;
   opacity: 0.5;
 }

@@ -20,6 +20,14 @@ page {
   .#{$key} {
     color: $value;
   }
+
+  .bg-#{$key} {
+    background-color: $value;
+  }
+
+  .bd-#{$key} {
+    background-color: $value;
+  }
 }
 
 .u-margin-bottom-20 {

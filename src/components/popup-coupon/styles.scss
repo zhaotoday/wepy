@@ -1,5 +1,4 @@
 @import "../../styles/utils/index";
-@import "../../styles/components/overlay";
 
 @include b(c-popup-coupon) {
   @include size(100%, px2rpx(950px - 82px + 3px));

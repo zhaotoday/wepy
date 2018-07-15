@@ -1,7 +1,8 @@
 @import "../../styles/utils/index";
-@import "../../styles/components/overlay";
 
 @include b(c-modal) {
+  z-index: 3;
+
   @include m(default) {
 
     @include position--absolute(50%, null, null, 50%);
@@ -13,5 +14,9 @@
     @include position--absolute(px2rpx(320px), null, null, 50%);
 
     transform: translateX(-50%);
+  }
+
+  @include m(bottom-0) {
+    @include position--absolute(null, 0, 0, 0);
   }
 }

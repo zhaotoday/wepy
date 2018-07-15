@@ -1,6 +1,6 @@
 <template>
   <view class="c-overlay" hidden="{{!visible}}" @tap="hide"/>
-  <view class="{{modifiersClass}}" hidden="{{!visible}}">
+  <view class="c-modal {{modifiersClass}}" hidden="{{!visible}}">
     <slot name="content"/>
   </view>
 </template>

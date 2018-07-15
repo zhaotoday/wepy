@@ -141,6 +141,7 @@
 
   </view>
   <settlement-bar />
+  <modal-specification />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -152,6 +153,7 @@
   import NavBar from '../../../components/nav-bar/index'
   import SettlementBar from '../../../components/settlement-bar/index'
   import PaymentTypes from '../../../components/payment-types/index'
+  import ModalSpecification from '../../../components/modal-specification/index'
 
   export default class extends wepy.page {
     config = {
@@ -161,13 +163,18 @@
     components = {
       'nav-bar': NavBar,
       'settlement-bar': SettlementBar,
-      'payment-types': PaymentTypes
+      'payment-types': PaymentTypes,
+      'modal-specification': ModalSpecification
     }
 
     mixins = [global]
 
     data = {
       navBarBack: false
+    }
+
+    onLoad () {
+      this.$invoke('modal-specification', 'show')
     }
   }
 </script>
