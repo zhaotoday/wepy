@@ -1,7 +1,15 @@
 @import "../../../styles/utils/index";
 
-@include n(shop-banner) {
+@include n(shop-banner-wrap) {
   @include size(100%, px2rpx(20px + 56px + 200px));
+
+  position: relative;
+  overflow: hidden;
+}
+
+@include n(shop-banner) {
+  @include position--absolute(0, null, null, 0);
+  @include size(100%, 100%);
 
   display: block;
 }

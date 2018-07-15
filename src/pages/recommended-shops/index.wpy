@@ -9,7 +9,7 @@
             <repeat for="{{item.children}}" item="childItem" index="childIndex">
               <view class="l-list__item">
                 <view class="c-media">
-                  <image src="{{childItem.image}}" mode="aspectFill" @error="handleImageError" data-type="shop"
+                  <image src="{{childItem.image}}" mode="aspectFill" @error="imageError" data-type="shop"
                          data-object="childCategories" data-index="{{index}}"
                          data-childObject="children" data-childIndex="{{childIndex}}"/>
                   <view class="c-media__body">

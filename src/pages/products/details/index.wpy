@@ -63,11 +63,11 @@
           <view class="n-comment__title c2 s1">
             商品评价
             <text class="s4">({{comment.total}})</text>
-            <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/comments/index?id={{id}}">查看全部评论</navigator>
+            <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/products/comments/index?id={{id}}">查看全部评论</navigator>
           </view>
           <view class="n-comment__user">
             <image src="{{comment.userAvatar || 'error'}}" mode="aspectFill"
-                   @error="handleImageError" data-type="avatar" data-object="comment" data-key="userAvatar" />
+                   @error="imageError" data-type="avatar" data-object="comment" data-key="userAvatar" />
             <text>{{comment.username}}</text>
           </view>
           <view class="n-comment__content c2 s4">{{comment.content}}</view>
@@ -82,7 +82,7 @@
       <view class="n-shop l-list">
         <view class="l-list__item">
           <view class="c-media">
-            <image src="{{shop.image}}" mode="aspectFill" @error="handleImageError" data-type="shop" data-object="shop"
+            <image src="{{shop.image}}" mode="aspectFill" @error="imageError" data-type="shop" data-object="shop"
             />
             <view class="c-media__body">
               <view class="c-media__body-title c2 s2">{{shop.name}}</view>
@@ -108,7 +108,7 @@
             <repeat for="{{groups}}" item="item" index="index">
               <view class="l-list__item">
                 <view class="c-media">
-                  <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
+                  <image src="{{item.image}}" mode="aspectFill" @error="imageError" data-type="product"
                          data-object="groups" data-index="{{index}}" />
                   <view class="c-media__body">
                     <view class="c-media__body-title c2 s2">{{item.name}}</view>
@@ -142,8 +142,8 @@
         <view class="c-panel__body">
           <view class="c-products">
             <repeat for="{{recommendedProducts}}" item="item" index="index">
-              <navigator class="c-products__item" url="/pages/product/index?id={{item.id}}">
-                <image src="{{item.image}}" mode="aspectFill" @error="handleImageError" data-type="product"
+              <navigator class="c-products__item" url="/pages/products/details/index?id={{item.id}}">
+                <image src="{{item.image}}" mode="aspectFill" @error="imageError" data-type="product"
                        data-object="recommendedProducts" data-index="{{index}}" />
                 <view class="c-products__item-name c2 s4">{{item.name}}</view>
                 <view class="c-products__item-price c1 s1">¥ {{item.price}}</view>
@@ -256,7 +256,6 @@
 
     methods = {
       navigateTo (url) {
-        console.log(this.shop.id)
         wepy.navigateTo({ url })
       },
       async handleTapCollect () {

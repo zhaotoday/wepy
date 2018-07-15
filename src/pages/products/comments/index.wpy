@@ -19,7 +19,7 @@
         <view class="l-wing-blank">
           <view class="comments-comment">
             <view class="comments-comment__user">
-              <image src="{{item.userAvatar || 'error'}}" mode="aspectFill" @error="handleImageError" data-type="avatar"
+              <image src="{{item.userAvatar || 'error'}}" mode="aspectFill" @error="imageError" data-type="avatar"
                      data-object="items" data-key="userAvatar" data-index="{{index}}" />
               <text>{{item.username}}</text>
               <view class="comments-comment__time c3 s6">{{item.created_at}}</view>
@@ -117,6 +117,15 @@
 
     async onShow () {
       this.get()
+
+      const goodsGetRes = await request({
+        url: 'goods/get',
+        data: {
+          goodsCommonId: this.id
+        }
+      })
+
+      this.productDetails = goodsGetRes
     }
   }
 </script>

@@ -5,7 +5,7 @@
         <repeat for="{{items}}" item="item" index="index">
           <swiper-item>
             <image mode="aspectFill" src="{{item.image}}" @tap="handleTap({{item.url}})"
-                   @error="handleImageError"
+                   @error="imageError"
                    data-type="ad"
                    data-object="items" data-index="{{index}}" />
           </swiper-item>
@@ -14,7 +14,7 @@
       <indicator :theme.sync="theme" :current.sync="current" :length.sync="length" />
     </block>
     <block wx:elif="{{items.length === 1}}">
-      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})" @error="handleImageError"
+      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})" @error="imageError"
              data-type="ad"
              data-object="items" data-index="0" />
     </block>

@@ -47,6 +47,7 @@
         }]
       },
       pages: [
+        'pages/shops/home/index',
         'pages/products/details/index',
         'pages/tab-bar/home/index',
         'pages/orders/confirm/index',
@@ -61,7 +62,6 @@
         'pages/tab-bar/categories/index',
         'pages/shops/promotions/index',
         'pages/shops/products/index',
-        'pages/shops/home/index',
         'pages/web-view/index',
         'pages/recommended-shops/index',
         'pages/login/index',

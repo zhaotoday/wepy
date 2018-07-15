@@ -45,15 +45,4 @@
       width: px2rpx(450px);
     }
   }
-
-  @include e(off-button) {
-    @include text--middle(px2rpx(88px));
-    @include position--absolute(50%, px2rpx(30px));
-
-    transform: translateY(-50%);
-    border-radius: px2rpx(44px);
-    width: px2rpx(420px);
-    background-color: #bbbbbb;
-    text-align: center;
-  }
 }

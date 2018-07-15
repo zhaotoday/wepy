@@ -9,12 +9,11 @@
       客服
     </view>
     <view class="c-product-tool-bar__buttons">
-      <view class="c-button-group" style="width: 450rpx;" wx:if="{{details.goodsState === 0}}">
+      <view class="c-button-group" style="width: 450rpx;" wx:if="{{details.goodsState === 1}}">
         <view class="c-button m-height-88 bg-c8 c7 s1 is-first" @tap="addToCart">加入购物车</view>
         <view class="c-button m-height-88 bg-c1 c7 s1 is-last" @tap="buy">立即购买</view>
       </view>
-      <view class="c-button m-height-88 bg-c4 c7 s1" style="width: 420rpx;" @tap="addToCart"
-            wx:if="{{details.goodsState === 1}}">
+      <view class="c-button m-height-88 bg-c4 c7 s1" style="width: 420rpx;" wx:if="{{details.goodsState === 0}}">
         商品已下架
       </view>
     </view>

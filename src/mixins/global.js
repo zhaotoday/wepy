@@ -34,7 +34,7 @@ export default class extends wepy.mixin {
   }
 
   methods = {
-    handleImageError (e) {
+    imageError (e) {
       const { type, object, index = -1, childobject, childindex, key = 'image' } = e.currentTarget.dataset
       const url = `${consts.IMAGE_CDN_URL}/components/image/${type}.jpg`
 

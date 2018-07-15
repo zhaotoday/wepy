@@ -1,6 +1,6 @@
 @import "../../styles/utils/index";
 
-@include b(c-shop-tab-bar) {
+@include c(c-shop-tab-bar) {
   @include footer--sticky;
 
   display: flex;

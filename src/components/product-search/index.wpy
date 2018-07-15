@@ -1,11 +1,11 @@
 <template>
-  <view class="{{modifiersClass}}">
+  <view class="c-product-search">
     <view class="c-product-search__input">
       <input class="c2 s4" placeholder="输入你要搜索的商品名称" confirm-type="search" placeholder-style="color: #bbb;"
-             @confirm="confirm"/>
+             @confirm="confirm" />
     </view>
-    <view class="c-product-search__category"/>
-    <view class="c-product-search__more"/>
+    <view class="c-product-search__category" />
+    <view class="c-product-search__more" />
   </view>
 </template>
 

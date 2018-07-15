@@ -1,9 +1,11 @@
 <template>
   <nav-bar title="购物车" :back.sync="navBarBack" />
   <view class="p-shops-products c-main c-main--has-nav-bar c-main--has-shop-tab-bar">
-    <product-search />
-    <image class="n-shop-banner" mode="aspectFill"
-           src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
+    <view class="n-shop-banner-wrap">
+      <image class="n-shop-banner" mode="aspectFill"
+             src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
+      <product-search />
+    </view>
     <view class="n-shop-summary">
       <image class="n-shop-avatar" mode="aspectFill"
              src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
@@ -28,13 +30,13 @@
     </view>
     <view class="n-shop-tip c7 s6">欢迎光临，购买请提前半个小时下单，线下配送约40分钟（满88包邮）</view>
     <view class="c-tabs border-bottom-1 c3 s1">
-      <view class="c-tabs__item" @tap="navigateTo('/pages/shops/home/index')">
+      <view class="c-tabs__item" @tap="redirectTo('/pages/shops/home/index')">
         <view class="c-tabs__item-wrap">首页</view>
       </view>
       <view class="c-tabs__item">
         <view class="c-tabs__item-wrap is-active border-bottom-4">商品</view>
       </view>
-      <view class="c-tabs__item" @tap="navigateTo('/pages/shops/promotions/index')">
+      <view class="c-tabs__item" @tap="redirectTo('/pages/shops/promotions/index')">
         <view class="c-tabs__item-wrap">促销</view>
       </view>
     </view>
@@ -62,7 +64,8 @@
       <view class="c-panel__body c-products u-padding-top-20">
         <repeat for="{{[0, 1, 2, 3, 4, 5]}}" item="item" index="index">
           <navigator class="c-products__item" url="">
-            <image src="../_commons/images/product-demo.png" mode="aspectFill" @error="handleImageError" data-type="product"
+            <image src="../_commons/images/product-demo.png" mode="aspectFill" @error="imageError"
+                   data-type="product"
                    data-object="recommendedProducts" data-index="{{index}}" />
             <view class="c-products__item-name c2 s4">女人受惠一生的口才课本女人受惠一生的口才课本</view>
             <view class="c-products__item-price c1 s1">¥ 11</view>
@@ -108,8 +111,8 @@
     }
 
     methods = {
-      navigateTo (url) {
-        wepy.navigateTo({ url })
+      redirectTo (url) {
+        wepy.redirectTo({ url })
       }
     }
 

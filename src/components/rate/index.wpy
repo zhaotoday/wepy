@@ -17,7 +17,6 @@
   </view>
 
   <view class="c-rate c-rate--third" wx:if="{{format === 'third'}}">
-    <view class="c2 s2" style="padding-right: 10rpx;">总评价：</view>
     <view>
       <repeat for="{{fromZeroToFour}}" index="index">
         <image src="./images/third/star{{dataItem.rate >= index + 1 ? '-active' : ''}}.png"/>
