@@ -42,26 +42,26 @@
 
     <view class="c-list">
       <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">店家优惠</view>
+        <view class="c-list__item-label c3 s3">店家优惠</view>
         <view class="c-list__item-extra c1 s4">省20元：50减20元</view>
         <view class="c-list__item-arrow c-icon m-arrow-right" />
       </view>
       <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">配送方式</view>
+        <view class="c-list__item-label c3 s3">配送方式</view>
         <view class="c-list__item-extra c2 s4">长途配送</view>
         <view class="c-list__item-arrow c-icon m-arrow-right" />
       </view>
       <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">运费</view>
+        <view class="c-list__item-label c3 s3">运费</view>
         <view class="c-list__item-extra c2 s4">¥11.00</view>
       </view>
       <view class="c-list__item m-padding-30">
-        <view class="c-list__item-body c3 s3">支付方式</view>
+        <view class="c-list__item-label c3 s3">支付方式</view>
         <view class="c-list__item-extra c2 s4">线上支付</view>
         <view class="c-list__item-arrow c-icon m-arrow-right" />
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1" style="padding-top: 20rpx; padding-bottom: 20rpx;">
-        <view class="c-list__item-body c3 s3">
+        <view class="c-list__item-label c3 s3">
           <text style="vertical-align: middle;">买家留言：</text>
           <input class="n-buyer-message" type="text" placeholder="填写已和卖家协商确认"
                  placeholderStyle="font-size: 24rpx; color: #bbb;" />

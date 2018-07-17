@@ -1,0 +1,46 @@
+@import "../../../styles/utils/index";
+@import "../../../styles/components/main";
+
+@include p(shops-details) {
+  background-color: white;
+
+  @include n(header) {
+    @include padding(px2rpx(30px), null, px2rpx(30px), px2rpx(30px));
+
+    background-color: white;
+
+    image {
+      @include size(px2rpx(118px), px2rpx(118px));
+
+      border-radius: px2rpx(59px);
+      display: block;
+      margin-right: px2rpx(20px);
+    }
+  }
+
+  @include n(name, follows) {
+    line-height: 100%;
+  }
+
+  @include n(name) {
+    @include padding(px2rpx(52px - 30px), null, px2rpx(20px));
+
+    font-weight: bold;
+  }
+
+  @include n(photos) {
+    image {
+      @include size(px2rpx(188px), px2rpx(148px));
+
+      display: inline-block;
+      margin-right: px2rpx(20px);
+    }
+  }
+
+  @include n(report) {
+    @include block--center;
+    @include margin(px2rpx(100px), null, px2rpx(80px));
+
+    width: px2rpx(690px);
+  }
+}

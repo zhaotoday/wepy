@@ -26,6 +26,12 @@
     }
   }
 
+  @include e(item-body) {
+    @include position--absolute(50%, px2rpx(30px), null, px2rpx(175px));
+
+    transform: translateY(-50%);
+  }
+
   @include e(item-extra, item-arrow) {
     @include position--absolute(50%);
 

@@ -1,0 +1,75 @@
+<template>
+  <view class="p-shops-details c-main c-main--has-nav-bar">
+    <view class="n-header o-media u-margin-bottom-20">
+      <image class="o-media__image" src="./images/shop.png" />
+      <view class="o-media__body">
+        <view class="n-name c2 s1">回声书店官方旗舰店</view>
+        <view class="n-follows c2 s4">
+          <text style="font-weight: bold;">22.2万</text>
+          <text style="padding-left: 10rpx;">粉丝</text>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="c-list">
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="c-list__item-label c2 s2">商家相关资质</view>
+      </view>
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="n-photos c-list__item-label">
+          <image src="./images/photo.png" />
+          <image src="./images/photo.png" />
+          <image src="./images/photo.png" />
+        </view>
+      </view>
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="c-list__item-label c2 s2">商家品类</view>
+        <view class="c-list__item-body c3 s4" style="text-align: right;">图书</view>
+      </view>
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="c-list__item-label c2 s2">商家地址</view>
+        <view class="c-list__item-body c3 s4">福州市仓山区金工路 28 号捷福创意产业园 4 号楼 6 层华邦集团</view>
+      </view>
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="c-list__item-label c2 s2">商家电话</view>
+        <view class="c-list__item-body c3 s4" style="text-align: right;">13950442340</view>
+      </view>
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="c-list__item-label c2 s2">营业时间</view>
+        <view class="c-list__item-body c3 s4" style="text-align: right;">09:00-22:00</view>
+      </view>
+      <view class="c-list__item m-padding-30 m-border-bottom-1">
+        <view class="c-list__item-label c2 s2">商家服务</view>
+        <view class="c-list__item-body c3 s4">商家公告地方</view>
+        <view class="c-list__item-arrow c-icon m-arrow-right" />
+      </view>
+    </view>
+
+    <view class="n-report c-button m-height-88 bd-c1 c1 s0">举报商家</view>
+
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '商家信息'
+    }
+
+    components = {}
+
+    mixins = [global]
+
+    methods = {}
+
+    onShow () {
+
+    }
+  }
+</script>
