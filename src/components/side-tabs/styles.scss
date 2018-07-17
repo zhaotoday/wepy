@@ -1,0 +1,34 @@
+@import "../../styles/utils/index";
+@import "../../styles/components/main";
+
+@include c(side-tabs) {
+  @include position--absolute(px2rpx(56px + 18px * 2), null, 0, 0);
+
+  width: px2rpx(30px + 166px);
+  border-right: 1px solid #F8F8F8;
+
+  @include e(item) {
+    @include padding(px2rpx(32px), null, px2rpx(32px), px2rpx(8px + 54px));
+    @include text--overflow;
+
+    position: relative;
+    color: map-get($colors, c2);
+    box-sizing: content-box;
+    padding-left: px2rpx(8px + 54px);
+    line-height: 100%;
+
+    @include m(is-active) {
+      color: map-get($colors, c1);
+
+      &::before {
+        @include size(px2rpx(8px), px2rpx(24px));
+        @include position--absolute(50%, null, null, 0);
+
+        transform: translateY(-50%);
+        background-color: map-get($colors, c1);
+        display: block;
+        content: "";
+      }
+    }
+  }
+}

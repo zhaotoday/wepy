@@ -1,0 +1,18 @@
+<template>
+  <view class="c-side-tabs s3">
+    <view class="c-side-tabs__item is-active">潮流女装</view>
+    <view class="c-side-tabs__item">潮流女装</view>
+    <view class="c-side-tabs__item">潮流女装</view>
+    <view class="c-side-tabs__item">潮流女装</view>
+    <view class="c-side-tabs__item">潮流女装</view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+  }
+</script>

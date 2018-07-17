@@ -9,8 +9,8 @@
     background-color: white;
     border-radius: px2rpx(30px);
 
-    @include c(panel){
-      @include e(body){
+    @include c(panel) {
+      @include e(body) {
         @include padding(null, px2rpx(20px - 12px), null, px2rpx(20px));
       }
     }
@@ -18,5 +18,11 @@
     @include c(tag) {
       @include margin(null, px2rpx(12px), px2rpx(30px));
     }
+  }
+
+  @include n(no-data) {
+    @include padding(px2rpx(86px - 30px - 30px - 30px), null, px2rpx(86px));
+
+    text-align: center;
   }
 }

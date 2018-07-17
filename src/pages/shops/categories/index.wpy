@@ -1,0 +1,89 @@
+<template>
+  <view class="p-shops-categories c-main c-main--has-nav-bar">
+    <view class="n-search-wrap bg-c1">
+      <c-search class="t-2" placeholder="请输入关键字" placeholderStyle="color: white;" />
+      <view class="c-icon m-message-1" @tap="showModalDownload" />
+    </view>
+    <c-side-tabs />
+    <view class="n-main">
+      <image class="n-ad-image" src="./images/ad.png" />
+      <view class="n-title c2 s3">女士裙装</view>
+      <view class="n-list">
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+      </view>
+      <view class="n-title c2 s3">女士上衣</view>
+      <view class="n-list">
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+        <view class="n-list__item">
+          <image src="./images/product-category.png" />
+          <view class="n-list__item-title c3 s4">背带裙</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <c-modal-download />
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+  import Search from '../../../components/search/index'
+  import SideTabs from '../../../components/side-tabs/index'
+  import ModalDownload from '../../../components/modal-download/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '店铺分类'
+    }
+
+    components = {
+      'c-search': Search,
+      'c-side-tabs': SideTabs,
+      'c-modal-download': ModalDownload
+    }
+
+    mixins = [global]
+
+    methods = {
+      showModalDownload () {
+        this.$invoke('c-modal-download', 'show')
+      }
+    }
+  }
+</script>

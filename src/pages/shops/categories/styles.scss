@@ -1,0 +1,69 @@
+@import "../../../styles/utils/index";
+
+@include p(shops-categories) {
+  background-color: white;
+
+  @include n(search-wrap) {
+    @include padding(px2rpx(18px), px2rpx(30px), px2rpx(18px), px2rpx(30px));
+
+    position: relative;
+
+    @include c(icon) {
+      @include position--absolute(50%, px2rpx(30px - 15px));
+
+      transform: translateY(-50%);
+    }
+  }
+
+  @include c(search) {
+    width: px2rpx(614px);
+  }
+
+  @include n(main) {
+    @include position--absolute(px2rpx(56px + 18px * 2 + 30px), px2rpx(30px), 0);
+
+    width: px2rpx(464px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  @include n(ad-image) {
+    @include size(100%, px2rpx(160px));
+
+    display: block;
+    margin-bottom: px2rpx(50px);
+  }
+
+  @include n(title) {
+    @include padding(px2rpx(60px - 50px), null, px2rpx(34px));
+
+    line-height: 100%;
+    text-align: center;
+  }
+
+  @include n(list) {
+    @include clearfix;
+
+    width: 120%;
+    margin-left: px2rpx(-60px + 10px);
+
+    @include e(item) {
+      @include margin(null, null, px2rpx(50px), px2rpx(60px));
+
+      width: px2rpx(108px);
+      float: left;
+
+      image {
+        @include size(px2rpx(108px), px2rpx(108px));
+
+        display: block;
+        margin-bottom: px2rpx(20px);
+      }
+    }
+
+    @include e(item-title) {
+      text-align: center;
+      line-height: 100%;
+    }
+  }
+}

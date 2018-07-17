@@ -1,10 +1,10 @@
 <template>
   <view class="c-product-search">
     <view class="c-product-search__input">
-      <input class="c2 s4" placeholder="输入你要搜索的商品名称" confirm-type="search" placeholder-style="color: #bbb;"
-             @confirm="confirm" />
+      <input class="c2 s4" placeholder="输入你要搜索的商品名称" focus-type="search" placeholder-style="color: #bbb;"
+             @focus="focus" />
     </view>
-    <view class="c-product-search__category" />
+    <view class="c-product-search__category" @tap="navigateTo" />
     <view class="c-product-search__more" />
   </view>
 </template>
@@ -33,8 +33,11 @@
     }
 
     methods = {
-      confirm (e) {
-        this.$emit('confirm', e)
+      focus (e) {
+        wepy.navigateTo({ url: '/pages/shops/search/index' })
+      },
+      navigateTo () {
+        wepy.navigateTo({ url: '/pages/shops/categories/index' })
       }
     }
   }

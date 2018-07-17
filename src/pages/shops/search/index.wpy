@@ -1,11 +1,11 @@
 <template>
   <view class="p-shops-search c-main c-main--has-nav-bar">
     <view class="n-wrap">
-      <c-search class="u-margin-bottom-20" placeholder="请输入关键字" />
+      <c-search class="t-1 u-margin-bottom-20" placeholder="请输入关键字" />
       <view class="n-card c-panel u-margin-bottom-20">
         <view class="c-panel__head padding-30-20">
           <view class="c-panel__head-title">
-            <text class="c2 s1">热销专区</text>
+            <text class="c2 s1">搜索历史</text>
           </view>
           <view class="c-panel__head-addon right-20">
             <text class="c2 s1">清除</text>
@@ -22,17 +22,20 @@
       <view class="n-card c-panel">
         <view class="c-panel__head padding-30-20">
           <view class="c-panel__head-title">
-            <text class="c2 s1">热销专区</text>
+            <text class="c2 s1">热门推荐</text>
           </view>
           <view class="c-panel__head-addon right-12">
-            <view class="c-icon m-eye" />
+            <view class="c-icon m-eye{{hotVisible ? '' : '-close'}}" @tap="toggleHotVisible" />
           </view>
         </view>
         <view class="c-panel__body">
-          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
-          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
-          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
-          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <block wx:if="{{hotVisible}}">
+            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          </block>
+          <view class="n-no-data c4 s4" wx:else>当前热门搜索已隐藏</view>
         </view>
       </view>
     </view>
@@ -56,5 +59,15 @@
     }
 
     mixins = [global]
+
+    data = {
+      hotVisible: true
+    }
+
+    methods = {
+      toggleHotVisible () {
+        this.hotVisible = !this.hotVisible
+      }
+    }
   }
 </script>

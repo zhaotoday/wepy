@@ -16,6 +16,12 @@
     background-image: image-url("components/icon/message.png");
   }
 
+  @include m(message-1) {
+    @include size(px2rpx(60px), px2rpx(60px));
+
+    background-image: image-url("components/icon/message-1.png");
+  }
+
   @include m(setup) {
     background-image: image-url("components/icon/setup.png");
   }
