@@ -18,4 +18,11 @@
 
     border-radius: px2rpx(34px);
   }
+
+  @include m(height-58) {
+    @include text--middle(px2rpx(58px));
+    @include padding(null, px2rpx(29px), null, px2rpx(29px));
+
+    border-radius: px2rpx(29px);
+  }
 }

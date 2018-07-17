@@ -1,0 +1,60 @@
+<template>
+  <view class="p-shops-search c-main c-main--has-nav-bar">
+    <view class="n-wrap">
+      <c-search class="u-margin-bottom-20" placeholder="请输入关键字" />
+      <view class="n-card c-panel u-margin-bottom-20">
+        <view class="c-panel__head padding-30-20">
+          <view class="c-panel__head-title">
+            <text class="c2 s1">热销专区</text>
+          </view>
+          <view class="c-panel__head-addon right-20">
+            <text class="c2 s1">清除</text>
+          </view>
+        </view>
+        <view class="c-panel__body">
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+        </view>
+      </view>
+
+      <view class="n-card c-panel">
+        <view class="c-panel__head padding-30-20">
+          <view class="c-panel__head-title">
+            <text class="c2 s1">热销专区</text>
+          </view>
+          <view class="c-panel__head-addon right-12">
+            <view class="c-icon m-eye" />
+          </view>
+        </view>
+        <view class="c-panel__body">
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+          <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+  import Search from '../../../components/search/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '店铺搜索'
+    }
+
+    components = {
+      'c-search': Search
+    }
+
+    mixins = [global]
+  }
+</script>

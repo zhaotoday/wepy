@@ -1,0 +1,27 @@
+@import "../../styles/utils/index";
+
+@include b(c-search) {
+  position: relative;
+  background-color: white;
+  background: {
+    image: image-url("components/search/search.png");
+    size: px2rpx(24px) px2rpx(24px);
+    repeat: no-repeat;
+    position: px2rpx(15px) center;
+  }
+
+  @include m(height-60) {
+    @include text--middle(px2rpx(60px));
+
+    border-radius: px2rpx(30px);
+  }
+
+  @include e(input) {
+    @include text--middle(px2rpx(50px));
+    @include position--absolute(50%, px2rpx(50px), null, px2rpx(50px));
+
+    transform: translateY(-50%);
+    color: map-get($colors, c2);
+    font-size: map-get($font-sizes, s4);
+  }
+}

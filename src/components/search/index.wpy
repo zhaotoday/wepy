@@ -1,0 +1,25 @@
+<template>
+  <view class="c-search m-height-60">
+    <input class="c-search__input" placeholder="{{placeholder}}" type="text" confirm-type="search"
+           placeholder-style="color: #bbb;"
+           @confirm="confirm" />
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class extends wepy.component {
+    props = {
+      placeholder: String
+    }
+
+    methods = {
+      confirm (e) {
+        this.$emit('confirm', e)
+      }
+    }
+  }
+</script>

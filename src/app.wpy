@@ -47,9 +47,10 @@
         }]
       },
       pages: [
+        'pages/shops/search/index',
+        'pages/tab-bar/home/index',
         'pages/shops/home/index',
         'pages/products/details/index',
-        'pages/tab-bar/home/index',
         'pages/orders/confirm/index',
         'pages/orders/result/index',
         'pages/tab-bar/cart/home/index',

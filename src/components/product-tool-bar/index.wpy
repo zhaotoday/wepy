@@ -26,11 +26,11 @@
 <script>
   import wepy from 'wepy'
   import request from '../../utils/request'
-  import ModalDownlaod from '../modal-download/index'
+  import ModalDownload from '../modal-download/index'
 
   export default class extends wepy.component {
     components = {
-      'modal-download': ModalDownlaod
+      'modal-download': ModalDownload
     }
 
     props = {

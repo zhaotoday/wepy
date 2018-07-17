@@ -7,9 +7,8 @@
       <product-search />
     </view>
     <view class="n-shop-summary">
-      <image class="n-shop-avatar" mode="aspectFill"
-             src="http://qm.22ca.com/data/upload/mall/adv/05715960161498410.jpg" />
-      <view class="n-shop-name c7 s0">发生大幅度发</view>
+      <image class="n-shop-avatar" mode="aspectFill" src="{{details.share.imgUrl}}" />
+      <view class="n-shop-name c7 s0">{{details.share.title}}</view>
       <view class="n-shop-followers c7">
         <text class="s6" style="margin-right: 10rpx;">粉丝数</text>
         <text class="s4">55.6万</text>

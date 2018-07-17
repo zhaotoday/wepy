@@ -1,19 +1,26 @@
 <template>
   <view class="c-shop-tab-bar s5">
     <repeat for="{{tabs}}" item="item">
-      <view class="c-shop-tab-bar__item m-{{item.key}}{{selected === item.key ? ' is-active' : ''}}" @tap="tap({{item.key}})">
+      <view class="c-shop-tab-bar__item m-{{item.key}}{{selected === item.key ? ' is-active' : ''}}"
+            @tap="tap({{item.key}})">
         {{item.value}}
       </view>
     </repeat>
   </view>
+  <modal-download />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
+  import ModalDownload from '../modal-download/index'
 
   export default class extends wepy.component {
+    components = {
+      'modal-download': ModalDownload
+    }
+
     props = {
       selected: {
         type: String,
@@ -35,8 +42,18 @@
     }
 
     methods = {
-      navigateTo (tab) {
-        wepy.navigateTo({ url: `/pages/shops/${tab}/index` })
+      tap (tab) {
+        switch (tab) {
+          case 'details':
+            break
+          case 'categories':
+            break
+          case 'contact':
+            this.$invoke('modal-download', 'show')
+            break
+          default:
+            break
+        }
       }
     }
   }

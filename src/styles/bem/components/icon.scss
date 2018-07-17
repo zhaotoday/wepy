@@ -97,4 +97,16 @@
 
     background-image: image-url("components/icon/wechat-payment.png");
   }
+
+  @include m(eye) {
+    @include size(px2rpx(48px), px2rpx(48px));
+
+    background-image: image-url("components/icon/eye.png");
+  }
+
+  @include m(eye-close) {
+    @include size(px2rpx(48px), px2rpx(48px));
+
+    background-image: image-url("components/icon/eye-close.png");
+  }
 }
