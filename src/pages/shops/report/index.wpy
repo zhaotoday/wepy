@@ -15,6 +15,9 @@
         <view class="c-panel__head-title">
           <text class="c2 s2">举报说明</text>
         </view>
+        <view class="c-panel__head-addon right-30">
+          <text class="c3 s5">0/200</text>
+        </view>
       </view>
       <view class="c-panel__body">
         <textarea class="n-content c2 s4" auto-height adjust-position placeholder="请输入投诉说明"

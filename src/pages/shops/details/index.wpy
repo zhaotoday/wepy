@@ -45,9 +45,9 @@
         <view class="c-list__item-arrow c-icon m-arrow-right" />
       </view>
     </view>
-
-    <view class="n-report c-button m-height-88 bd-c1 c1 s0" @tap="navigateTo">举报商家</view>
-
+    <view class="n-report-wrap">
+      <view class="n-report c-button m-height-88 bd-c1 c1 s0" @tap="navigateTo">举报商家</view>
+    </view>
   </view>
 </template>
 

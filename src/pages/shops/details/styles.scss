@@ -2,8 +2,6 @@
 @import "../../../styles/components/main";
 
 @include p(shops-details) {
-  background-color: white;
-
   @include n(header) {
     @include padding(px2rpx(30px), null, px2rpx(30px), px2rpx(30px));
 
@@ -37,9 +35,14 @@
     }
   }
 
+  @include n(report-wrap) {
+    @include padding(px2rpx(100px), null, px2rpx(80px));
+
+    background-color: white;
+  }
+
   @include n(report) {
     @include block--center;
-    @include margin(px2rpx(100px), null, px2rpx(80px));
 
     width: px2rpx(690px);
   }

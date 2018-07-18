@@ -47,9 +47,9 @@
         }]
       },
       pages: [
+        'pages/shops/home/index',
         'pages/shops/report/index',
         'pages/tab-bar/home/index',
-        'pages/shops/home/index',
         'pages/shops/details/index',
         'pages/shops/categories/index',
         'pages/shops/search/index',
