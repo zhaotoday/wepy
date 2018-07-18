@@ -45,7 +45,7 @@
                 <image class="o-media__image" src="./images/product.png" />
                 <view class="o-media__body">
                   <view class="c-cart-product__title c2 s2">对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛1</view>
-                  <select value="插画纪念版" />
+                  <select class="t-1" value="插画纪念版" />
                   <view class="c-cart-product__price c1 s2">¥ 22</view>
                   <number-input :value.sync="numberInputValue" />
                 </view>

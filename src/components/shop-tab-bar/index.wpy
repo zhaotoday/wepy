@@ -1,8 +1,7 @@
 <template>
   <view class="c-shop-tab-bar s5">
     <repeat for="{{tabs}}" item="item">
-      <view class="c-shop-tab-bar__item m-{{item.key}}{{selected === item.key ? ' is-active' : ''}}"
-            @tap="tap({{item.key}})">
+      <view class="c-shop-tab-bar__item m-{{item.key}}" hover-class="is-active" @tap="tap({{item.key}})">
         {{item.value}}
       </view>
     </repeat>
@@ -45,6 +44,7 @@
       tap (tab) {
         switch (tab) {
           case 'details':
+            wepy.navigateTo({ url: '/pages/shops/details/index' })
             break
           case 'categories':
             break

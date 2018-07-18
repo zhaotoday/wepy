@@ -86,6 +86,18 @@
     background-image: image-url("components/icon/close-third.png");
   }
 
+  @include m(close-3) {
+    @include size(px2rpx(58px), px2rpx(58px));
+
+    background-image: image-url("components/icon/close-3.png");
+  }
+
+  @include m(close-4) {
+    @include size(px2rpx(30px), px2rpx(30px));
+
+    background-image: image-url("components/icon/close-4.png");
+  }
+
   @include m(arrow-right) {
     @include size(px2rpx(10px), px2rpx(18px));
 

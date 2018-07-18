@@ -1,5 +1,5 @@
 <template>
-  <view class="c-select c3 s3">
+  <view class="c-select">
     {{value}}
   </view>
 </template>

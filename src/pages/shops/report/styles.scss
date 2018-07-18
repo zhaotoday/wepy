@@ -1,0 +1,62 @@
+@import "../../../styles/utils/index";
+@import "../../../styles/components/main";
+
+@include p(shops-report) {
+  @include c(select) {
+    width: px2rpx(690px);
+  }
+
+  @include c(panel) {
+    @include e(body) {
+      @include padding(null, px2rpx(30px), px2rpx(30px), px2rpx(30px));
+    }
+  }
+
+  @include n(content) {
+    width: 100%;
+    height: px2rpx(172px) !important;
+    box-sizing: border-box;
+    border-radius: px2rpx(20px);
+    padding: px2rpx(20px);
+    border: 1px solid #b7b7b7;
+  }
+
+  @include n(images) {
+    @include clearfix;
+
+    @include e(item) {
+      @include size(px2rpx(160px), px2rpx(160px));
+
+      float: left;
+      position: relative;
+      margin-right: px2rpx(20px);
+
+      @include m(add-image) {
+        border: 1px dotted #b1b1b7;
+        background: {
+          color: #f3f5f8;
+          image: image-url("pages/shops/report/add-image.png");
+          size: px2rpx(70px) px2rpx(70px);
+          position: center center;
+          repeat: no-repeat;
+        }
+      }
+    }
+
+    image {
+      @include size(100%, 100%);
+
+      display: block;
+    }
+
+    @include c(icon) {
+      @include position--absolute(px2rpx(-30px / 2), px2rpx(-30px / 2));
+    }
+  }
+
+  @include n(submit) {
+    width: px2rpx(690px);
+
+    @include margin(px2rpx(100px), auto, null, auto);
+  }
+}

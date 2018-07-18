@@ -1,0 +1,73 @@
+<template>
+  <view class="p-shops-report c-main c-main--has-nav-bar">
+    <view class="c-panel u-margin-bottom-20">
+      <view class="c-panel__head padding-30">
+        <view class="c-panel__head-title">
+          <text class="c2 s2">举报类型</text>
+        </view>
+      </view>
+      <view class="c-panel__body">
+        <c-select class="t-2" />
+      </view>
+    </view>
+    <view class="c-panel u-margin-bottom-20">
+      <view class="c-panel__head padding-30">
+        <view class="c-panel__head-title">
+          <text class="c2 s2">举报说明</text>
+        </view>
+      </view>
+      <view class="c-panel__body">
+        <textarea class="n-content c2 s4" auto-height adjust-position placeholder="请输入投诉说明"
+                  placeholderStyle="color: #BBB;" />
+      </view>
+    </view>
+    <view class="c-panel u-margin-bottom-20" style="padding-bottom: 55rpx;">
+      <view class="c-panel__head padding-30">
+        <view class="c-panel__head-title">
+          <text class="c2 s2">上传凭证</text>
+          <text class="c3 s5">（您最多可以上传3张图片，图片大小最大不能超过3M）</text>
+        </view>
+      </view>
+      <view class="n-images c-panel__body">
+        <view class="n-images__item">
+          <image src="./images/shop.png" />
+          <view class="c-icon m-close-4" />
+        </view>
+        <view class="n-images__item">
+          <image src="./images/shop.png" />
+          <view class="c-icon m-close-4" />
+        </view>
+        <view class="n-images__item m-add-image" />
+      </view>
+
+      <view class="n-submit c-button m-height-88 bg-c1 s0 c7">提交</view>
+
+    </view>
+  </view>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import global from '../../../mixins/global'
+  import Select from '../../../components/select/index'
+
+  export default class extends wepy.page {
+    config = {
+      navigationBarTitleText: '举报商家'
+    }
+
+    components = {
+      'c-select': Select
+    }
+
+    mixins = [global]
+
+    methods = {}
+
+    onShow () {
+
+    }
+  }
+</script>
