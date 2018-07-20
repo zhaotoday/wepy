@@ -14,8 +14,7 @@
             <view class="n-list__item">
               <image src="{{item2.gcImage}}"
                      @error="imageError"
-                     data-keys="{{ ['childClasses', index1, 'childClasses', index2, 'gcImage'] }}"
-                     data-type="shop" />
+                     data-options="{{ { type: 'product', keys: ['childClasses', index1, 'childClasses', index2, 'gcImage'] } }}" />
               <view class="n-list__item-title c3 s4">{{item2.gcName}}</view>
             </view>
           </repeat>

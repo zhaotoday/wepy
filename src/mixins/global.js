@@ -35,14 +35,15 @@ export default class extends wepy.mixin {
 
   methods = {
     imageError (e) {
-      const { type, object, index = -1, childobject, childindex, key = 'image' } = e.currentTarget.dataset
+      const { type, keys } = e.currentTarget.dataset.options
       const url = `${consts.IMAGE_CDN_URL}/components/image/${type}.jpg`
-
-      const keys = e.currentTarget.dataset.keys
 
       switch (keys.length) {
         case 1:
           this[keys[0]] = url
+          break
+        case 2:
+          this[keys[0]][keys[1]] = url
           break
         case 3:
           this[keys[0]][keys[1]][keys[2]] = url
@@ -53,18 +54,6 @@ export default class extends wepy.mixin {
         default:
           break
       }
-      /*
-
-      if (childobject) {
-        this[object][index][childobject][childindex][key] = url
-      } else if (key === '') {
-        this[object] = url
-      } else if (index === -1) {
-        this[object][key] = url
-      } else {
-        this[object][index][key] = url
-      }
-      */
     }
   }
 }

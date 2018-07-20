@@ -6,17 +6,16 @@
           <swiper-item>
             <image mode="aspectFill" src="{{item.image}}" @tap="handleTap({{item.url}})"
                    @error="imageError"
-                   data-type="ad"
-                   data-object="items" data-index="{{index}}" />
+                   data-options="{{ { type: 'ad', keys: [ 'items', index, 'image' ] } }}" />
           </swiper-item>
         </repeat>
       </swiper>
       <indicator :theme.sync="theme" :current.sync="current" :length.sync="length" />
     </block>
     <block wx:elif="{{items.length === 1}}">
-      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})" @error="imageError"
-             data-type="ad"
-             data-object="items" data-index="0" />
+      <image mode="aspectFill" src="{{items[0].image}}" @tap="handleTap({items[0].url})"
+             @error="imageError"
+             data-options="{{ { type: 'ad', keys: [ 'items', 0, 'image' ] } }}" />
     </block>
   </view>
 </template>

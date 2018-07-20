@@ -19,8 +19,9 @@
         <view class="l-wing-blank">
           <view class="comments-comment">
             <view class="comments-comment__user">
-              <image src="{{item.userAvatar || 'error'}}" mode="aspectFill" @error="imageError" data-type="avatar"
-                     data-object="items" data-key="userAvatar" data-index="{{index}}" />
+              <image src="{{item.userAvatar || 'error'}}" mode="aspectFill"
+                     @error="imageError"
+                     data-options="{{ { type: 'avatar', keys: [ 'items', index, 'userAvatar' ] } }}" />
               <text>{{item.username}}</text>
               <view class="comments-comment__time c3 s6">{{item.created_at}}</view>
             </view>

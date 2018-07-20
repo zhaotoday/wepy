@@ -63,11 +63,13 @@
           <view class="n-comment__title c2 s1">
             商品评价
             <text class="s4">({{comment.total}})</text>
-            <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/products/comments/index?id={{id}}">查看全部评论</navigator>
+            <navigator class="c-tag c-tag--arrow c1 s5" url="/pages/products/comments/index?id={{id}}">查看全部评论
+            </navigator>
           </view>
           <view class="n-comment__user">
             <image src="{{comment.userAvatar || 'error'}}" mode="aspectFill"
-                   @error="imageError" data-type="avatar" data-object="comment" data-key="userAvatar" />
+                   @error="imageError"
+                   data-options="{{ { type: 'avatar', keys: [ 'comment', 'userAvatar' ] } }}" />
             <text>{{comment.username}}</text>
           </view>
           <view class="n-comment__content c2 s4">{{comment.content}}</view>
@@ -82,8 +84,9 @@
       <view class="n-shop l-list">
         <view class="l-list__item">
           <view class="c-media">
-            <image src="{{shop.image}}" mode="aspectFill" @error="imageError" data-type="shop" data-object="shop"
-            />
+            <image src="{{shop.image}}" mode="aspectFill"
+                   @error="imageError"
+                   data-options="{{ { type: 'shop', keys: [ 'shop', 'image' ] } }}" />
             <view class="c-media__body">
               <view class="c-media__body-title c2 s2">{{shop.name}}</view>
               <view class="c-media__body-content c3 s4">
