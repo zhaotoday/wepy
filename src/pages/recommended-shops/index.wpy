@@ -1,5 +1,5 @@
 <template>
-  <nav-bar :title.sync="navBarTitle" :back.sync="navBarBack"/>
+  <nav-bar :title.sync="navBarTitle" :back.sync="navBarBack" />
   <view class="recommended-shops c-main c-main--has-nav-bar">
     <repeat for="{{childCategories}}" item="item" index="index">
       <view class="recommended-shops-child-categories c-panel">
@@ -9,9 +9,9 @@
             <repeat for="{{item.children}}" item="childItem" index="childIndex">
               <view class="l-list__item">
                 <view class="c-media">
-                  <image src="{{childItem.image}}" mode="aspectFill" @error="imageError" data-type="shop"
-                         data-object="childCategories" data-index="{{index}}"
-                         data-childObject="children" data-childIndex="{{childIndex}}"/>
+                  <image src="{{childItem.image}}" mode="aspectFill"
+                         @error="imageError"
+                         data-options="{{ { type: 'shop', keys: [ 'childCategories', index, 'children', childIndex, 'image' ] } }}" />
                   <view class="c-media__body">
                     <view class="c-media__body-title c2 s2">
                       {{childItem.name}}

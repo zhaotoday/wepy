@@ -3,8 +3,9 @@
   <product-search />
   <view class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar">
     <view class="n-shop-banner-wrap">
-      <image class="n-shop-banner" mode="aspectFill" src="{{image}}" @error="imageError" data-type="shop"
-             data-object="image" />
+      <image class="n-shop-banner" mode="aspectFill" src="{{image}}"
+             @error="imageError"
+             data-options="{{ { type: 'shop', keys: [ 'image', 'image' ] } }}" />
     </view>
     <view class="n-shop-summary">
       <image class="n-shop-avatar" mode="aspectFill" src="{{details.share.imgUrl}}" />
@@ -70,9 +71,9 @@
         </view>
       </view>
     </view>
-    <image class="n-middle-ad u-margin-bottom-20" mode="aspectFill" src="{{adImage}}" @error="imageError"
-           data-type="shop"
-           data-object="adImage" />
+    <image class="n-middle-ad u-margin-bottom-20" mode="aspectFill" src="{{adImage}}"
+           @error="imageError"
+           data-options="{{ { type: 'shop', keys: [ 'adImage', 'image' ] } }}" />
     <view class="c-panel u-margin-bottom-20">
       <view class="c-panel__head padding-30 border-bottom-1">
         <view class="c-panel__head-title">
@@ -117,9 +118,9 @@
       <view class="c-panel__body c-products u-padding-top-20">
         <repeat for="{{[0, 1, 2, 3, 4, 5]}}" item="item" index="index">
           <navigator class="c-products__item" url="">
-            <image src="../_commons/images/product-demo.png" mode="aspectFill" @error="imageError"
-                   data-type="product"
-                   data-object="recommendedProducts" data-index="{{index}}" />
+            <image src="../_commons/images/product-demo.png" mode="aspectFill"
+                   @error="imageError"
+                   data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
             <view class="c-products__item-name c2 s4">女人受惠一生的口才课本女人受惠一生的口才课本</view>
             <view class="c-products__item-price c1 s1">¥ 11</view>
           </navigator>
