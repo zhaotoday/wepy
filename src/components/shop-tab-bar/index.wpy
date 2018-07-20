@@ -6,7 +6,8 @@
       </view>
     </repeat>
   </view>
-  <modal-download />
+  <c-modal-download />
+  <c-shops-categories />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -14,10 +15,12 @@
 <script>
   import wepy from 'wepy'
   import ModalDownload from '../modal-download/index'
+  import ShopsCategories from '../poptip/shops-categories/index'
 
   export default class extends wepy.component {
     components = {
-      'modal-download': ModalDownload
+      'c-modal-download': ModalDownload,
+      'c-shops-categories': ShopsCategories
     }
 
     props = {
@@ -47,9 +50,10 @@
             wepy.navigateTo({ url: '/pages/shops/details/index' })
             break
           case 'categories':
+            this.$invoke('c-shops-categories', 'show')
             break
           case 'contact':
-            this.$invoke('modal-download', 'show')
+            this.$invoke('c-modal-download', 'show')
             break
           default:
             break

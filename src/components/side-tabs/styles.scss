@@ -2,8 +2,6 @@
 @import "../../styles/components/main";
 
 @include c(side-tabs) {
-  @include position--absolute(px2rpx(56px + 18px * 2), null, 0, 0);
-
   width: px2rpx(30px + 166px);
   border-right: 1px solid #F8F8F8;
 

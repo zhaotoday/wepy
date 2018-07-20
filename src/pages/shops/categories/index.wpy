@@ -4,55 +4,23 @@
       <c-search class="t-2" placeholder="请输入关键字" placeholderStyle="color: white;" />
       <view class="c-icon m-message-1" @tap="showModalDownload" />
     </view>
-    <c-side-tabs />
+    <c-side-tabs :items.sync="topClasses" @get.user="getChildClasses" />
     <view class="n-main">
       <image class="n-ad-image" src="./images/ad.png" />
-      <view class="n-title c2 s3">女士裙装</view>
-      <view class="n-list">
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
+      <repeat for="{{childClasses}}" item="item1" index="index1">
+        <view class="n-title c2 s3">{{item1.gcName}}</view>
+        <view class="n-list">
+          <repeat for="{{item1.childClasses}}" item="item2" index="index2">
+            <view class="n-list__item">
+              <image src="{{item2.gcImage}}"
+                     @error="imageError"
+                     data-keys="{{ ['childClasses', index1, 'childClasses', index2, 'gcImage'] }}"
+                     data-type="shop" />
+              <view class="n-list__item-title c3 s4">{{item2.gcName}}</view>
+            </view>
+          </repeat>
         </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-      </view>
-      <view class="n-title c2 s3">女士上衣</view>
-      <view class="n-list">
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-        <view class="n-list__item">
-          <image src="./images/product-category.png" />
-          <view class="n-list__item-title c3 s4">背带裙</view>
-        </view>
-      </view>
+      </repeat>
     </view>
   </view>
   <c-modal-download />
@@ -63,6 +31,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../../../mixins/global'
+  import request from '../../../utils/request'
   import Search from '../../../components/search/index'
   import SideTabs from '../../../components/side-tabs/index'
   import ModalDownload from '../../../components/modal-download/index'
@@ -80,10 +49,40 @@
 
     mixins = [global]
 
+    data = {
+      topClasses: [],
+      childClasses: []
+    }
+
     methods = {
       showModalDownload () {
         this.$invoke('c-modal-download', 'show')
+      },
+      async getChildClasses (topClassId) {
+        const getStoreChildClassesRes = await request({
+          url: 'goodsClass/getStoreChildrenClasses',
+          data: {
+            storeId: 11,
+            gcId: topClassId
+          }
+        })
+
+        this.childClasses = getStoreChildClassesRes.classes
+        this.$apply()
       }
+    }
+
+    async onShow () {
+      const getStoreTopClassesRes = await request({
+        requiresLogin: true,
+        url: 'goodsClass/getStoreTopClasses',
+        data: {
+          storeId: 11
+        }
+      })
+
+      this.topClasses = getStoreTopClassesRes.classes
+      this.$apply()
     }
   }
 </script>

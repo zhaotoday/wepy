@@ -1,10 +1,10 @@
 <template>
   <view class="c-side-tabs s3">
-    <view class="c-side-tabs__item is-active">潮流女装</view>
-    <view class="c-side-tabs__item">潮流女装</view>
-    <view class="c-side-tabs__item">潮流女装</view>
-    <view class="c-side-tabs__item">潮流女装</view>
-    <view class="c-side-tabs__item">潮流女装</view>
+    <repeat for="{{items}}" item="item" index="index">
+      <view class="c-side-tabs__item{{item.gcId === current ? ' is-active' : ''}}" @tap="tap({{item.gcId}})">
+        {{item.gcName}}
+      </view>
+    </repeat>
   </view>
 </template>
 
@@ -14,5 +14,30 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
+    props = {
+      items: {
+        type: Array,
+        default: []
+      }
+    }
+
+    data = {
+      current: ''
+    }
+
+    watch = {
+      items (newVal) {
+        this.current = newVal[0].gcId
+        this.$emit('get', this.current)
+        this.$apply()
+      }
+    }
+
+    methods = {
+      tap (id) {
+        this.current = id
+        this.$emit('get', id)
+      }
+    }
   }
 </script>

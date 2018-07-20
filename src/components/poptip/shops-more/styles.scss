@@ -1,0 +1,13 @@
+@import "../../../styles/utils/index";
+
+@include c(shops-more) {
+  @include position--absolute(px2rpx(100px), px2rpx(30px));
+
+  z-index: 4;
+
+  @include c(poptip) {
+    @include e(arrow-up) {
+      right: px2rpx(15px);
+    }
+  }
+}

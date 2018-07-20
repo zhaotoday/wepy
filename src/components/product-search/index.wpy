@@ -5,14 +5,16 @@
              @focus="focus" />
     </view>
     <view class="c-product-search__category" @tap="navigateTo" />
-    <view class="c-product-search__more" />
+    <view class="c-product-search__more" @tap="showShopsMore" />
   </view>
+  <c-shops-more />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
+  import ShopsMore from '../poptip/shops-more/index'
   import { utils } from 'mp-client'
 
   export default class extends wepy.component {
@@ -21,6 +23,10 @@
         type: String,
         default: ''
       }
+    }
+
+    components = {
+      'c-shops-more': ShopsMore
     }
 
     computed = {
@@ -38,6 +44,9 @@
       },
       navigateTo () {
         wepy.navigateTo({ url: '/pages/shops/categories/index' })
+      },
+      showShopsMore () {
+        this.$invoke('c-shops-more', 'show')
       }
     }
   }

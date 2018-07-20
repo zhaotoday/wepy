@@ -1,0 +1,44 @@
+@import "../../utils/index";
+
+@include b(c-poptip) {
+  @include padding(null, px2rpx(26px), null, px2rpx(26px));
+
+  width: px2rpx(280px);
+  border-radius: px2rpx(8px);
+  background-color: rgba(0, 0, 0, .6);
+
+  @include e(item) {
+    @include text--middle(px2rpx(88px));
+
+    border-bottom: 1px solid rgba(117, 117, 117, .8);
+
+    @include c(icon) {
+      margin-right: px2rpx(20px);
+      vertical-align: middle;
+    }
+
+    &.is-last {
+      border-bottom: 0;
+    }
+  }
+
+  @include e(arrow-up) {
+    @include position--absolute(px2rpx(-13px));
+
+    width: 0;
+    height: 0;
+    border-left: px2rpx(15px) solid transparent;
+    border-right: px2rpx(15px) solid transparent;
+    border-bottom: px2rpx(15px) solid rgba(0, 0, 0, .5);
+  }
+
+  @include e(arrow-down) {
+    @include position--absolute(null, null, px2rpx(-13px));
+
+    width: 0;
+    height: 0;
+    border-left: px2rpx(15px) solid transparent;
+    border-right: px2rpx(15px) solid transparent;
+    border-top: px2rpx(15px) solid rgba(0, 0, 0, .5);
+  }
+}

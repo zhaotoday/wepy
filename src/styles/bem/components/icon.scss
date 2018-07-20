@@ -127,4 +127,34 @@
 
     background-image: image-url("components/icon/eye-close.png");
   }
+
+  @include m(share) {
+    @include size(px2rpx(44px), px2rpx(44px));
+
+    background-image: image-url("components/icon/share.png");
+  }
+
+  @include m(home) {
+    @include size(px2rpx(44px), px2rpx(44px));
+
+    background-image: image-url("components/icon/home.png");
+  }
+
+  @include m(feedback) {
+    @include size(px2rpx(44px), px2rpx(44px));
+
+    background-image: image-url("components/icon/feedback.png");
+  }
+
+  @include m(message-2) {
+    @include size(px2rpx(44px), px2rpx(44px));
+
+    background-image: image-url("components/icon/message-2.png");
+  }
+
+  @include m(user) {
+    @include size(px2rpx(44px), px2rpx(44px));
+
+    background-image: image-url("components/icon/user.png");
+  }
 }

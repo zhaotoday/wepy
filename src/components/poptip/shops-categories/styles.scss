@@ -1,0 +1,19 @@
+@import "../../../styles/utils/index";
+
+@include c(shops-categories) {
+  @include position--absolute(null, null, px2rpx(100px), 50%);
+
+  transform: translateX(-50%);
+  z-index: 4;
+
+  @include c(poptip) {
+    @include e(item) {
+      text-align: center;
+    }
+
+    @include e(arrow-down) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

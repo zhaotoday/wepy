@@ -1,10 +1,10 @@
 <template>
   <nav-bar title="购物车" :back.sync="navBarBack" />
+  <product-search />
   <view class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar">
     <view class="n-shop-banner-wrap">
       <image class="n-shop-banner" mode="aspectFill" src="{{image}}" @error="imageError" data-type="shop"
              data-object="image" />
-      <product-search />
     </view>
     <view class="n-shop-summary">
       <image class="n-shop-avatar" mode="aspectFill" src="{{details.share.imgUrl}}" />

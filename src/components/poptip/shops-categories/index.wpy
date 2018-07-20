@@ -1,0 +1,41 @@
+<template>
+  <view class="c-overlay m-unvisible" hidden="{{!visible}}" @tap="hide" />
+  <view class="c-shops-categories c-poptip c7 s1" hidden="{{!visible}}">
+    <view class="c-poptip__arrow-down" />
+    <view class="c-poptip__item" @tap="tap('1')">分类一</view>
+    <view class="c-poptip__item" @tap="tap('2')">分类二</view>
+    <view class="c-poptip__item" @tap="tap('3')">分类三</view>
+    <view class="c-poptip__item is-last" @tap="tap('4')">分类四</view>
+  </view>
+  <c-modal-download />
+</template>
+
+<style lang="scss" src="styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import ModalDownload from '../../modal-download/index'
+
+  export default class extends wepy.component {
+    data = {
+      visible: false
+    }
+
+    components = {
+      'c-modal-download': ModalDownload
+    }
+
+    methods = {
+      show () {
+        this.visible = true
+      },
+      hide () {
+        this.visible = false
+      },
+      tap (type) {
+        console.log(type)
+        this.visible = false
+      }
+    }
+  }
+</script>

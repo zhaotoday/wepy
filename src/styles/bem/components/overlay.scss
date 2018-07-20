@@ -6,4 +6,8 @@
   background-color: black;
   z-index: 2;
   opacity: 0.5;
+
+  @include m(unvisible) {
+    opacity: 0;
+  }
 }

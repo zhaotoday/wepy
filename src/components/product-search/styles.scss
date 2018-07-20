@@ -5,6 +5,8 @@
   @include position--absolute(px2rpx(20px), null, null, 0);
   @include size(100%, px2rpx(60px));
 
+  z-index: 3;
+
   @include e(input, category, more) {
     float: left;
   }

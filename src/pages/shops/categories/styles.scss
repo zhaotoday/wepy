@@ -19,6 +19,10 @@
     width: px2rpx(614px);
   }
 
+  @include c(side-tabs) {
+    @include position--absolute(px2rpx(56px + 18px * 2), null, 0, 0);
+  }
+
   @include n(main) {
     @include position--absolute(px2rpx(56px + 18px * 2 + 30px), px2rpx(30px), 0);
 
@@ -39,6 +43,25 @@
 
     line-height: 100%;
     text-align: center;
+    position: relative;
+
+    &::before,
+    &::after {
+      @include size(px2rpx(40px), 1px);
+      @include position--absolute(px2rpx(10px + 26px / 2));
+
+      background-color: #eeeeee;
+      display: block;
+      content: '';
+    }
+
+    &::before {
+      left: px2rpx(130px);
+    }
+
+    &::after {
+      right: px2rpx(130px);
+    }
   }
 
   @include n(list) {
