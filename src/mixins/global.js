@@ -54,6 +54,9 @@ export default class extends wepy.mixin {
         default:
           break
       }
+    },
+    navigateTo (url) {
+      wepy.navigateTo({ url })
     }
   }
 }

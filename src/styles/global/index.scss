@@ -33,3 +33,31 @@ page {
 .u-margin-bottom-20 {
   margin-bottom: px2rpx(20px);
 }
+
+.fwb {
+  font-weight: bold;
+}
+
+.tac {
+  text-align: center;
+}
+
+.vam {
+  vertical-align: middle;
+}
+
+.tdu {
+  text-decoration: underline;
+}
+
+.tdl {
+  text-decoration: line-through;
+}
+
+.toe {
+  @include text--overflow;
+}
+
+.toe-2 {
+  @include text--overflow(2);
+}

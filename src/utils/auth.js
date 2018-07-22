@@ -49,8 +49,8 @@ export default {
   async checkLogin () {
     /* global getCurrentPages */
     const pages = getCurrentPages()
-    const {route, options} = pages[pages.length - 1]
-    const currentURL = utils.page.toURL({route, options})
+    const { route, options } = pages[pages.length - 1]
+    const currentURL = utils.page.toURL({ route, options })
 
     // 已授权获取用户信息
     if (this.getUserInfo()) {
@@ -61,7 +61,7 @@ export default {
         this.login()
       }
     } else {
-      wepy.navigateTo({url: `/pages/login/index?page=${utils.url.encode(currentURL)}`})
+      wepy.redirectTo({ url: `/pages/login/index?page=${utils.url.encode(currentURL)}` })
     }
   },
 
@@ -71,7 +71,7 @@ export default {
    */
   async login () {
     const wxLoginRes = await wepy.login()
-    const {nickName: nickname, avatarUrl: avatar, gender = ''} = this.getUserInfo()
+    const { nickName: nickname, avatarUrl: avatar, gender = '' } = this.getUserInfo()
 
     await request({
       url: 'thirdplatform/wechatAppAuth',

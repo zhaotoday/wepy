@@ -3,7 +3,7 @@
   <product-search />
   <view class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar">
     <view class="n-shop-banner-wrap">
-      <image class="n-shop-banner" mode="aspectFill" src="{{image}}"
+      <image class="n-shop-banner" mode="aspectFill" src="{{details.storeLabel}}"
              @error="imageError"
              data-options="{{ { type: 'shop', keys: [ 'image', 'image' ] } }}" />
     </view>
@@ -12,94 +12,115 @@
       <view class="n-shop-name c7 s0">{{details.share.title}}</view>
       <view class="n-shop-followers c7">
         <text class="s6" style="margin-right: 10rpx;">粉丝数</text>
-        <text class="s4">55.6万</text>
+        <text class="s4">{{details.fansCount}}</text>
       </view>
       <view class="n-star"></view>
-      <view class="n-shop-params c7 s4">
-        <view class="n-shop-params__rate">
+      <view class="n-shop-params o-grid c7 s4">
+        <view class="n-shop-params__rate o-grid__cell m-width-fixed" style="width: 260rpx;">
           <rate format="third" :dataItem.sync="rateItem" />
         </view>
-        <view class="n-shop-params__distance">
+        <view class="n-shop-params__distance o-grid__cell">
           <image src="../_commons/images/address.png" />
-          <text>距离4.4km</text>
+          <text>距离{{details.storeDistance / 1000}}m</text>
         </view>
-        <view class="n-shop-params__sales">
-          月售 2000单
+        <view class="n-shop-params__sales o-grid__cell">
+          月售 {{details.monthlySalesCount}}单
         </view>
       </view>
     </view>
-    <view class="n-shop-tip c7 s6">{{details.share.desc}}</view>
+    <view class="n-shop-tip c7 s6" wx:if="{{details.share.desc}}">{{details.share.desc}}</view>
     <view class="c-tabs border-bottom-1 c3 s1">
-      <view class="c-tabs__item">
-        <view class="c-tabs__item-wrap is-active border-bottom-4">首页</view>
-      </view>
-      <view class="c-tabs__item" @tap="redirectTo('/pages/shops/products/index')">
-        <view class="c-tabs__item-wrap">商品</view>
-      </view>
-      <view class="c-tabs__item" @tap="redirectTo('/pages/shops/promotions/index')">
-        <view class="c-tabs__item-wrap">促销</view>
-      </view>
+      <repeat for="{{tabs}}" item="item">
+        <view class="c-tabs__item" @tap="switchTab({{item.value}})">
+          <view class="c-tabs__item-wrap{{currentTab === item.value ? ' is-active border-bottom-4' : ''}}">
+            {{item.name}}
+          </view>
+        </view>
+      </repeat>
     </view>
-    <view class="c-coupon-bar u-margin-bottom-20">
-      <view class="c-coupon-bar__tag"></view>
-      <view class="c-coupons-wrap">
-        <view class="c-coupons">
-          <view class="c-coupons__item">
-            <view class="c-coupons__money c2 sd">
-              15
-              <view class="c-coupons__money-unit s6">¥</view>
-              <view class="c-coupons__get" />
-            </view>
-            <view class="c-coupons__condition c2 s6">无门槛</view>
-          </view>
-          <view class="c-coupons__item">
-            <view class="c-coupons__money c2 sd">
-              15
-              <view class="c-coupons__money-unit s6">¥</view>
-              <view class="c-coupons__get" />
-            </view>
-            <view class="c-coupons__condition c2 s6">无门槛</view>
-          </view>
-          <view class="c-coupons__item">
-            <view class="c-coupons__money c2 sd">
-              15
-              <view class="c-coupons__money-unit s6">¥</view>
-              <view class="c-coupons__get" />
-            </view>
-            <view class="c-coupons__condition c2 s6">无门槛</view>
-          </view>
-        </view>
-      </view>
-    </view>
-    <image class="n-middle-ad u-margin-bottom-20" mode="aspectFill" src="{{adImage}}"
-           @error="imageError"
-           data-options="{{ { type: 'shop', keys: [ 'adImage', 'image' ] } }}" />
-    <view class="c-panel u-margin-bottom-20">
-      <view class="c-panel__head padding-30 border-bottom-1">
-        <view class="c-panel__head-title">
-          <image src="./images/hot-sale.png" />
-          <text class="c1 s1">热销专区</text>
-        </view>
-        <view class="c-panel__head-addon right-30">
-          <text class="c3 s5">更多</text>
-          <view class="c-panel__head-more" />
-        </view>
-      </view>
-      <view class="c-panel__body">
-        <view class="n-hot-sale o-grid">
-          <view class="o-grid__cell o-grid__cell--width-fixed n-hot-sale__image--width-270">
-            <image src="./images/hot-sale-demo-1.png" />
-          </view>
-          <view class="o-grid__cell n-hot-sale__image--width-406">
-            <view class="o-grid o-grid--full">
-              <view class="o-grid__cell" style="margin-bottom: 14rpx;">
-                <image src="./images/hot-sale-demo-2.png" />
+    <block wx:if="{{currentTab === 'home'}}">
+      <view class="c-coupon-bar u-margin-bottom-20">
+        <view class="c-coupon-bar__tag"></view>
+        <scroll-view class="c-coupons-wrap" scroll-x>
+          <view class="c-coupons" style="width: {{186 * coupons.length}}rpx;">
+            <repeat for="{{home.coupons}}" item="item" index="index">
+              <view class="c-coupons__item">
+                <view class="c-coupons__money c2 sd">
+                  {{item.title}}
+                  <view class="c-coupons__money-unit s6">¥</view>
+                  <view class="c-coupons__get" />
+                </view>
+                <view class="c-coupons__condition c2 s6">{{item.subTitle}}</view>
               </view>
-              <view class="o-grid__cell">
-                <view class="c-hot-sale-no-data">
-                  <view class="u-block-middle">
-                    <view class="c-hot-sale-no-data__image vertical-align--middle" />
-                    <text class="c4 s4">期待新品哦！</text>
+            </repeat>
+          </view>
+        </scroll-view>
+      </view>
+      <image class="n-middle-ad u-margin-bottom-20" mode="aspectFill" src="{{home.adv.imageUrl}}"
+             @error="imageError"
+             data-options="{{ { type: 'shop', keys: [ 'details', 'adv', 'imageUrl' ] } }}" />
+      <view class="c-panel u-margin-bottom-20" wx:if="{{home.hotSale.length}}">
+        <view class="c-panel__head padding-30 border-bottom-1">
+          <view class="c-panel__head-title">
+            <image src="./images/hot-sale.png" />
+            <text class="c1 s1">热销专区</text>
+          </view>
+          <view class="c-panel__head-addon right-30">
+            <text class="c3 s5">更多</text>
+            <view class="c-panel__head-more" />
+          </view>
+        </view>
+        <view class="c-panel__body">
+          <view class="n-hot-sale o-grid">
+            <view class="n-hot-sale__1 o-grid__cell o-grid__cell--width-fixed">
+              <image mode="aspectFill" src="{{home.hotSale[0].goodsImage}}" />
+              <view class="c-icon m-hot-1" />
+              <view class="n-hot-sale__title c2 s2 fwb">{{home.hotSale[0].goodsName}}</view>
+              <view class="n-hot-sale__price">
+                <text class="c1 s6 fwb">¥</text>
+                <text class="c1 s1 fwb" style="padding-right: 30rpx;">{{home.hotSale[0].goodsPrice}}</text>
+                <text class="c1 s6 tdl">原价¥{{home.hotSale[0].goodsMarketPrice}}</text>
+              </view>
+            </view>
+            <view class="n-hot-sale__2 o-grid__cell">
+              <view class="o-grid o-grid--full">
+                <view class="o-grid__cell o-media" style="margin-bottom: 14rpx;" wx:if="{{home.hotSale[1]}}">
+                  <image class="o-media__image" mode="aspectFill" src="{{home.hotSale[1].goodsImage}}" />
+                  <view class="o-media__body">
+                    <view class="n-hot-sale__title c2 s2 fwb">{{home.hotSale[1].goodsName}}</view>
+                    <view class="n-hot-sale__price">
+                      <text class="c1 s6 fwb">¥</text>
+                      <text class="c1 s1 fwb" style="padding-right: 30rpx;">{{home.hotSale[1].goodsPrice}}</text>
+                      <text class="c1 s6 tdl">原价¥{{home.hotSale[1].goodsMarketPrice}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="o-grid__cell" style="margin-bottom: 14rpx;" wx:else>
+                  <view class="c-hot-sale-no-data">
+                    <view class="u-block-middle">
+                      <view class="c-hot-sale-no-data__image vertical-align--middle" />
+                      <text class="c4 s4">期待新品哦！</text>
+                    </view>
+                  </view>
+                </view>
+
+                <view class="o-grid__cell o-media" wx:if="{{home.hotSale[2]}}">
+                  <image class="o-media__image" mode="aspectFill" src="{{home.hotSale[2].goodsImage}}" />
+                  <view class="o-media__body">
+                    <view class="n-hot-sale__title c2 s2 fwb">{{home.hotSale[2].goodsName}}</view>
+                    <view class="n-hot-sale__price">
+                      <text class="c1 s6 fwb">¥</text>
+                      <text class="c1 s1 fwb" style="padding-right: 30rpx;">{{home.hotSale[2].goodsPrice}}</text>
+                      <text class="c1 s6 tdl">原价¥{{home.hotSale[2].goodsMarketPrice}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="o-grid__cell" wx:else>
+                  <view class="c-hot-sale-no-data">
+                    <view class="u-block-middle">
+                      <view class="c-hot-sale-no-data__image vertical-align--middle" />
+                      <text class="c4 s4">期待新品哦！</text>
+                    </view>
                   </view>
                 </view>
               </view>
@@ -107,28 +128,65 @@
           </view>
         </view>
       </view>
-    </view>
-    <view class="c-panel u-margin-bottom-20">
-      <view class="c-panel__head padding-30 border-bottom-1">
-        <view class="c-panel__head-title">
-          <image src="./images/recommended.png" />
-          <text class="c1 s1">精品推荐</text>
+      <repeat for="{{home.recommendGoods}}" item="item1">
+        <view class="c-panel u-margin-bottom-20">
+          <view class="c-panel__head padding-30 border-bottom-1">
+            <view class="c-panel__head-title">
+              <image src="./images/recommended.png" />
+              <text class="c1 s1">{{item1.stcName}}</text>
+            </view>
+          </view>
+          <view class="c-panel__body c-products u-padding-top-20">
+            <repeat for="{{item1.goods}}" item="item2">
+              <navigator class="c-products__item" url="/pages/products/details/index?id={{item.goodsId}}">
+                <image src="{{item2.goodsImage}}" mode="aspectFill"
+                       @error="imageError"
+                       data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
+                <view class="c-products__item-name c2 s4">{{item2.goodsName}}</view>
+                <view class="c-products__item-price c1 s1">¥{{item2.goodsPrice}}</view>
+              </navigator>
+            </repeat>
+          </view>
+        </view>
+      </repeat>
+    </block>
+    <block wx:if="{{currentTab === 'products'}}">
+      <view class="c-tabs u-margin-bottom-20 c3 s1">
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap is-active">综合</view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">销量</view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">新品</view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">
+            <text>价格</text>
+            <view class="c-tabs__item-sort vertical-align--middle" />
+          </view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">筛选</view>
         </view>
       </view>
-      <view class="c-panel__body c-products u-padding-top-20">
-        <repeat for="{{[0, 1, 2, 3, 4, 5]}}" item="item" index="index">
-          <navigator class="c-products__item" url="">
-            <image src="../_commons/images/product-demo.png" mode="aspectFill"
-                   @error="imageError"
-                   data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
-            <view class="c-products__item-name c2 s4">女人受惠一生的口才课本女人受惠一生的口才课本</view>
-            <view class="c-products__item-price c1 s1">¥ 11</view>
-          </navigator>
-        </repeat>
+      <view class="c-panel u-margin-bottom-20">
+        <view class="c-panel__body c-products u-padding-top-20">
+          <repeat for="{{products}}" item="item">
+            <navigator class="c-products__item" url="/pages/products/details/index?id={{item.goodsId}}">
+              <image src="{{item.goodsImage}}" mode="aspectFill"
+                     @error="imageError"
+                     data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
+              <view class="c-products__item-name c2 s4">{{item.goodsName}}</view>
+              <view class="c-products__item-price c1 s1">¥{{item.goodsPrice}}</view>
+            </navigator>
+          </repeat>
+        </view>
       </view>
-    </view>
+    </block>
   </view>
-  <shop-tab-bar selected="details" />
+  <shop-tab-bar :details.sync="details" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -162,15 +220,30 @@
         score: 2,
         rate: 1
       },
-      image: '',
-      adImage: '',
-      details: null
+      details: null,
+      home: {},
+      products: [],
+      tabs: [{
+        name: '首页',
+        value: 'home'
+      }, {
+        name: '商品',
+        value: 'products'
+      }, {
+        name: '促销',
+        value: 'promotions'
+      }],
+      currentTab: 'home'
     }
 
     methods = {
-      redirectTo (url) {
-        wepy.redirectTo({ url })
+      switchTab (tab) {
+        this.currentTab = tab
       }
+    }
+
+    onLoad (query) {
+      this.id = query.id || 11
     }
 
     async onShow () {
@@ -178,14 +251,33 @@
         url: 'store/getStoreInfo',
         requiresLocation: true,
         data: {
-          storeId: 12
+          storeId: this.id
         }
       })
+      this.home = await request({
+        url: 'store/index',
+        requiresLocation: true,
+        data: {
+          storeId: this.id
+        }
+      })
+      this.products = (await request({
+        url: 'goods/getGoods',
+        requiresLogin: true,
+        data: {
+          storeId: this.id
+        }
+      }))['goods']
 
-      this.details = getStoreInfoRes
-      this.image = getStoreInfoRes.storeLabel
-      this.adImage = getStoreInfoRes.adv.imageUrl
-      console.log(this.adImage)
+      this.details = Object.assign(getStoreInfoRes, {
+        storeId: this.id
+      })
+
+      this.rateItem = (score => ({
+        score,
+        rate: (score / 2).toFixed(2)
+      }))(getStoreInfoRes.grade)
+
       this.$apply()
     }
   }

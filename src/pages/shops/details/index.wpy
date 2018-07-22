@@ -1,47 +1,49 @@
 <template>
   <view class="p-shops-details c-main c-main--has-nav-bar">
     <view class="n-header o-media u-margin-bottom-20">
-      <image class="o-media__image" src="./images/shop.png" />
+      <image class="o-media__image" src="{{info.storeLabel}}" mode="aspectFill"
+             @error="imageError"
+             data-options="{{ { type: 'shop', keys: [ 'info', 'storeLabel' ] } }}" />
       <view class="o-media__body">
-        <view class="n-name c2 s1">回声书店官方旗舰店</view>
+        <view class="n-name c2 s1">{{details.storeName}}</view>
         <view class="n-follows c2 s4">
-          <text style="font-weight: bold;">22.2万</text>
+          <text style="font-weight: bold;">{{details.fansCount}}</text>
           <text style="padding-left: 10rpx;">粉丝</text>
         </view>
       </view>
     </view>
-
-
     <view class="c-list">
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="c-list__item-label c2 s2">商家相关资质</view>
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="n-photos c-list__item-label">
-          <image src="./images/photo.png" />
-          <image src="./images/photo.png" />
-          <image src="./images/photo.png" />
+          <repeat for="{{details.qualificationImage}}" item="item">
+            <image src="{{item}}" mode="aspectFill" @tap="previewImage({{item}})"
+                   @error="imageError"
+                   data-options="{{ { type: 'product', keys: [ 'details', 'qualificationImage', index ] } }}" />
+          </repeat>
         </view>
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="c-list__item-label c2 s2">商家品类</view>
-        <view class="c-list__item-body c3 s4" style="text-align: right;">图书</view>
+        <view class="c-list__item-body c3 s4 toe" style="text-align: right;">{{details.clazz}}</view>
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="c-list__item-label c2 s2">商家地址</view>
-        <view class="c-list__item-body c3 s4">福州市仓山区金工路 28 号捷福创意产业园 4 号楼 6 层华邦集团</view>
+        <view class="c-list__item-body c3 s4">{{details.address}}</view>
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="c-list__item-label c2 s2">商家电话</view>
-        <view class="c-list__item-body c3 s4" style="text-align: right;">13950442340</view>
+        <view class="c-list__item-body c3 s4" style="text-align: right;">{{details.storePhone}}</view>
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="c-list__item-label c2 s2">营业时间</view>
-        <view class="c-list__item-body c3 s4" style="text-align: right;">09:00-22:00</view>
+        <view class="c-list__item-body c3 s4" style="text-align: right;">{{details.openingHours}}</view>
       </view>
       <view class="c-list__item m-padding-30 m-border-bottom-1">
         <view class="c-list__item-label c2 s2">商家服务</view>
-        <view class="c-list__item-body c3 s4">商家公告地方</view>
+        <view class="c-list__item-body c3 s4">{{details.storeService}}</view>
         <view class="c-list__item-arrow c-icon m-arrow-right" />
       </view>
     </view>
@@ -56,6 +58,7 @@
 <script>
   import wepy from 'wepy'
   import global from '../../../mixins/global'
+  import request from '../../../utils/request'
 
   export default class extends wepy.page {
     config = {
@@ -66,14 +69,45 @@
 
     mixins = [global]
 
+    data = {
+      details: {},
+      info: {}
+    }
+
     methods = {
       navigateTo () {
-        wepy.navigateTo({ url: '/pages/shops/report/index' })
+        wepy.navigateTo({ url: `/pages/shops/report/index?id=${this.id}` })
+      },
+      previewImage (current) {
+        wepy.previewImage({
+          current,
+          urls: this.details.qualificationImage
+        })
       }
     }
 
-    onShow () {
+    onLoad (query) {
+      this.id = query.id || 11
+    }
 
+    async onShow () {
+      this.details = await request({
+        requiresLocation: true,
+        url: 'store/getStoreDetail',
+        data: {
+          storeId: this.id
+        }
+      })
+
+      this.info = await request({
+        url: 'store/getStoreInfo',
+        requiresLocation: true,
+        data: {
+          storeId: this.id
+        }
+      })
+
+      this.$apply()
     }
   }
 </script>

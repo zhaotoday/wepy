@@ -52,11 +52,9 @@
 @include n(shop-params) {
   @include position--absolute(null, px2rpx(30px), px2rpx(30px), px2rpx(30px));
 
-  display: flex;
   align-items: flex-end;
 
   view {
-    flex: 1;
     line-height: 100%;
   }
 

@@ -36,5 +36,9 @@
       size: px2rpx(50px) px2rpx(50px);
       position: right px2rpx(10px) center;
     }
+
+    &.is-active {
+      color: map-get($colors, c2);
+    }
   }
 }

@@ -24,9 +24,9 @@
     }
 
     props = {
-      selected: {
-        type: String,
-        default: 'home'
+      details: {
+        type: Object,
+        default: {}
       }
     }
 
@@ -47,7 +47,7 @@
       tap (tab) {
         switch (tab) {
           case 'details':
-            wepy.navigateTo({ url: '/pages/shops/details/index' })
+            wepy.navigateTo({ url: `/pages/shops/details/index?id=${this.details.storeId}` })
             break
           case 'categories':
             this.$invoke('c-shops-categories', 'show')

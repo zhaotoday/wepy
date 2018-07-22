@@ -7,7 +7,7 @@
         </view>
       </view>
       <view class="c-panel__body">
-        <c-select class="t-2" />
+        <c-select class="t-2" title="请选择举报原因" :options.sync="reasonOptions" :option.sync="reasonOption" />
       </view>
     </view>
     <view class="c-panel u-margin-bottom-20">
@@ -21,7 +21,7 @@
       </view>
       <view class="c-panel__body">
         <textarea class="n-content c2 s4" auto-height adjust-position placeholder="请输入投诉说明"
-                  placeholderStyle="color: #BBB;" />
+                  placeholderStyle="color: #BBB;" @input="textareaInput" />
       </view>
     </view>
     <view class="c-panel u-margin-bottom-20" style="padding-bottom: 55rpx;">
@@ -32,19 +32,15 @@
         </view>
       </view>
       <view class="n-images c-panel__body">
-        <view class="n-images__item">
-          <image src="./images/shop.png" />
-          <view class="c-icon m-close-4" />
-        </view>
-        <view class="n-images__item">
-          <image src="./images/shop.png" />
-          <view class="c-icon m-close-4" />
-        </view>
-        <view class="n-images__item m-add-image" />
+        <repeat for="{{ ['imageA', 'imageB', 'imageC'] }}" item="item">
+          <view class="n-images__item" wx:if="{{!!formData[item]}}">
+            <image src="{{formData[item]}}" mode="aspectFill" />
+            <view class="c-icon m-close-4" @tap="deleteImage({{item}})" />
+          </view>
+          <view class="n-images__item m-add-image" @tap="chooseImage({{item}})" wx:if="{{!formData[item]}}" />
+        </repeat>
       </view>
-
-      <view class="n-submit c-button m-height-88 bg-c1 s0 c7">提交</view>
-
+      <view class="n-submit c-button m-height-88 bg-c1 s0 c7" @tap="confirm">提交</view>
     </view>
   </view>
 </template>
@@ -54,7 +50,9 @@
 <script>
   import wepy from 'wepy'
   import global from '../../../mixins/global'
+  import request from '../../../utils/request'
   import Select from '../../../components/select/index'
+  import { helpers } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
@@ -67,10 +65,135 @@
 
     mixins = [global]
 
-    methods = {}
+    data = {
+      reasonOptions: [],
+      reasonOption: {
+        value: '',
+        name: '请选择',
+        desc: ''
+      },
+      formData: {
+        imageA: '',
+        imageB: '',
+        imageC: '',
+        describe: ''
+      }
+    }
 
-    onShow () {
+    methods = {
+      async chooseImage (image) {
+        const chooseImageRes = await wepy.chooseImage({
+          count: 1,
+          sizeType: ['compressed'],
+          sourceType: ['album', 'camera']
+        })
 
+        if (chooseImageRes.tempFiles[0].size / (1024 * 1024) > 3) {
+          wepy.showToast({
+            icon: 'none',
+            title: '图片大小不能超过3M'
+          })
+        } else {
+          const tempFilePath = chooseImageRes.tempFilePaths[0]
+          this.formData[image] = tempFilePath
+          /*
+          try {
+            const getArrayBufferRes = await wepy.request({
+              url: tempFilePath,
+              method: 'GET',
+              responseType: 'arraybuffer'
+            })
+            const base64 = 'data:image/jpg;base64,' + wepy.arrayBufferToBase64(getArrayBufferRes.data)
+
+            this.formData[image] = base64
+          } catch (e) {
+            console.log(e)
+          }
+          */
+        }
+      },
+      textareaInput (e) {
+        this.formData.describe = e.detail.value
+      },
+      deleteImage (image) {
+        this.formData[image] = ''
+      },
+      async confirm () {
+        const formData = Object.assign(this.formData, {
+          storeId: this.id,
+          reasonId: this.reasonOption.value
+        })
+
+        if (!formData.reasonId) {
+          wepy.showToast({
+            icon: 'none',
+            title: '请选择举报类型'
+          })
+
+          return
+        }
+
+        if (!formData.describe) {
+          wepy.showToast({
+            icon: 'none',
+            title: '请填写举报说明'
+          })
+
+          return
+        }
+
+        if (!(formData.imageA || formData.imageB || formData.imageC)) {
+          wepy.showToast({
+            icon: 'none',
+            title: '请上传凭证'
+          })
+
+          return
+        }
+
+        try {
+          await request({
+            requiresLogin: true,
+            url: 'report/report',
+            data: {
+              ...formData,
+              imageA: 'data:image/jpg;base64,123',
+              imageB: 'data:image/jpg;base64,123',
+              imageC: 'data:image/jpg;base64,123'
+            }
+          })
+
+          wepy.showToast({
+            icon: 'none',
+            title: '举报成功'
+          })
+
+          await helpers.sleep(1500)
+
+          wepy.navigateBack()
+        } catch (e) {
+          wepy.showToast({
+            icon: 'none',
+            title: e.data.shortMessage
+          })
+        }
+      }
+    }
+
+    onLoad (query) {
+      this.id = query.id || 11
+    }
+
+    async onShow () {
+      const getReasonRes = await request({
+        url: 'report/getReason'
+      })
+
+      this.reasonOptions = getReasonRes.reasons.map(item => ({
+        value: item.reasonId,
+        name: item.restoreInfo,
+        desc: item.restoreDescribe
+      }))
     }
   }
 </script>

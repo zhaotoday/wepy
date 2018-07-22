@@ -32,6 +32,7 @@
       margin-right: px2rpx(20px);
 
       @include m(add-image) {
+        box-sizing: border-box;
         border: 1px dotted #b1b1b7;
         background: {
           color: #f3f5f8;

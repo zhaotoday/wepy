@@ -1,19 +1,47 @@
 <template>
-  <view class="c-select">
-    {{value}}
-  </view>
+  <view class="c-select{{option.value !== '' ? ' is-active' : ''}}" @tap="showModalSelect">{{option.name}}</view>
+  <c-modal-select :title.sync="title" :options.sync="options" @set.user="set" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
 
 <script>
   import wepy from 'wepy'
+  import ModalSelect from '../modal-select/index'
 
   export default class extends wepy.component {
+    components = {
+      'c-modal-select': ModalSelect
+    }
+
     props = {
-      value: {
+      title: {
         type: String,
         default: '请选择'
+      },
+      options: {
+        type: Array,
+        default: []
+      },
+      option: {
+        type: Object,
+        twoWay: true,
+        default: {
+          value: '',
+          name: '请选择',
+          desc: ''
+        }
+      }
+    }
+
+    watch = {}
+
+    methods = {
+      showModalSelect () {
+        this.$invoke('c-modal-select', 'show')
+      },
+      set (option) {
+        this.option = option
       }
     }
   }

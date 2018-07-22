@@ -1,0 +1,60 @@
+<template>
+  <modal modifiers="bottom-0">
+    <view slot="content">
+      <view class="c-modal-select">
+        <view class="c-modal-select__title c2 s1 tac">{{title}}</view>
+        <repeat for="{{options}}">
+          <view class="c-modal-select__item" @tap="tap({{item}})">
+            <view class="c-modal-select__item-name c2 s2">{{item.name}}</view>
+            <view class="c-modal-select__item-desc c4 s4">{{item.desc}}</view>
+            <view class="c-icon m-checkbox{{item.value === current.value ? '-active' : ''}}" />
+          </view>
+        </repeat>
+        <view class="c-button m-height-88 bg-c1 s0 c7" @tap="confirm">确定</view>
+      </view>
+    </view>
+  </modal>
+</template>
+
+<style lang="scss" src="./styles.scss"></style>
+
+<script>
+  import wepy from 'wepy'
+  import Modal from '../modal/index'
+  import NumberInput from '../number-input/index'
+
+  export default class extends wepy.component {
+    components = {
+      'modal': Modal,
+      'number-input': NumberInput
+    }
+
+    props = {
+      title: String,
+      options: {
+        type: Array,
+        default: []
+      }
+    }
+
+    data = {
+      current: 0
+    }
+
+    methods = {
+      hide () {
+        this.$invoke('modal', 'hide')
+      },
+      show () {
+        this.$invoke('modal', 'show')
+      },
+      confirm () {
+        this.$emit('set', this.current)
+        this.$invoke('modal', 'hide')
+      },
+      tap (option) {
+        this.current = option
+      }
+    }
+  }
+</script>

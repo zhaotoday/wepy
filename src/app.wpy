@@ -47,12 +47,12 @@
         }]
       },
       pages: [
-        'pages/shops/categories/index',
+        'pages/tab-bar/home/index',
+        'pages/shops/search/index',
         'pages/shops/home/index',
         'pages/shops/report/index',
-        'pages/tab-bar/home/index',
         'pages/shops/details/index',
-        'pages/shops/search/index',
+        'pages/shops/categories/index',
         'pages/products/details/index',
         'pages/orders/confirm/index',
         'pages/orders/result/index',

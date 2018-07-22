@@ -1,12 +1,12 @@
 <template>
   <view class="p-shops-categories c-main c-main--has-nav-bar">
     <view class="n-search-wrap bg-c1">
-      <c-search class="t-2" placeholder="请输入关键字" placeholderStyle="color: white;" />
+      <c-search class="t-2" placeholder="请输入关键字" placeholderStyle="color: white;" @confirm.user="confirmSearch" />
       <view class="c-icon m-message-1" @tap="showModalDownload" />
     </view>
     <c-side-tabs :items.sync="topClasses" @get.user="getChildClasses" />
     <view class="n-main">
-      <image class="n-ad-image" src="./images/ad.png" />
+      <c-swiper class="n-ad-image" theme="third" :items.sync="ads" />
       <repeat for="{{childClasses}}" item="item1" index="index1">
         <view class="n-title c2 s3">{{item1.gcName}}</view>
         <view class="n-list">
@@ -34,6 +34,7 @@
   import Search from '../../../components/search/index'
   import SideTabs from '../../../components/side-tabs/index'
   import ModalDownload from '../../../components/modal-download/index'
+  import Swiper from '../../../components/swiper/index'
 
   export default class extends wepy.page {
     config = {
@@ -43,14 +44,37 @@
     components = {
       'c-search': Search,
       'c-side-tabs': SideTabs,
-      'c-modal-download': ModalDownload
+      'c-modal-download': ModalDownload,
+      'c-swiper': Swiper
     }
 
     mixins = [global]
 
     data = {
       topClasses: [],
-      childClasses: []
+      childClasses: [],
+      ads: [],
+      keywords: '',
+      topClassId: 0
+    }
+
+    async renderChildClasses () {
+      const getStoreChildClassesRes = await request({
+        url: 'goodsClass/getStoreChildrenClasses',
+        data: {
+          storeId: 11,
+          gcId: this.topClassId
+        }
+      })
+
+      this.childClasses = getStoreChildClassesRes.classes.map(item => {
+        return {
+          ...item,
+          childClasses: item.childClasses.filter(item => item.gcName.indexOf(this.keywords) !== -1)
+        }
+      }).filter(item => item.childClasses.length !== 0)
+      this.ads = getStoreChildClassesRes.gcAdvs.advImages
+      this.$apply()
     }
 
     methods = {
@@ -58,16 +82,12 @@
         this.$invoke('c-modal-download', 'show')
       },
       async getChildClasses (topClassId) {
-        const getStoreChildClassesRes = await request({
-          url: 'goodsClass/getStoreChildrenClasses',
-          data: {
-            storeId: 11,
-            gcId: topClassId
-          }
-        })
-
-        this.childClasses = getStoreChildClassesRes.classes
-        this.$apply()
+        this.topClassId = topClassId
+        this.renderChildClasses()
+      },
+      confirmSearch (e) {
+        this.keywords = e.detail.value
+        this.renderChildClasses()
       }
     }
 

@@ -44,6 +44,12 @@
     background-image: image-url("components/icon/hot.png");
   }
 
+  @include m(hot-1) {
+    @include size(px2rpx(42px), px2rpx(42px));
+
+    background-image: image-url("components/icon/hot-1.png");
+  }
+
   @include m(scan) {
     @include size(px2rpx(68px), px2rpx(68px));
 
@@ -156,5 +162,17 @@
     @include size(px2rpx(44px), px2rpx(44px));
 
     background-image: image-url("components/icon/user.png");
+  }
+
+  @include m(checkbox, checkbox-active) {
+    @include size(px2rpx(32px), px2rpx(32px));
+  }
+
+  @include m(checkbox) {
+    background-image: image-url("components/icon/checkbox.png");
+  }
+
+  @include m(checkbox-active) {
+    background-image: image-url("components/icon/checkbox-active.png");
   }
 }

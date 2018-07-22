@@ -1,6 +1,5 @@
 @import "../../../styles/utils/index";
 @import "../../../styles/components/main";
-@import "../../../styles/components/coupon-bar";
 @import "../_commons/styles";
 
 @include p(shops-home) {
@@ -15,18 +14,50 @@
       display: block;
     }
 
-    @include e(image) {
-      @include m(width-270) {
-        margin-right: px2rpx(14px);
+    @include e(title) {
+      @include text--overflow;
+      line-height: 100%;
+      padding-bottom: px2rpx(98px);
+    }
 
-        image {
-          @include size(px2rpx(270px), px2rpx(409px));
-        }
+    @include e(price) {
+      line-height: 100%;
+    }
+
+    @include e(1) {
+      @include size(px2rpx(270px), px2rpx(409px));
+
+      position: relative;
+      margin-right: px2rpx(14px);
+      background-color: map-get($colors, c6);
+      box-sizing: border-box;
+      padding: px2rpx(20px);
+
+      image {
+        @include size(px2rpx(270px), px2rpx(198px + 14px));
+        @include position--absolute(null, null, 0, 0);
       }
 
-      @include m(width-406) {
-        image {
-          @include size(px2rpx(406px), px2rpx(198px));
+      @include c(icon) {
+        @include position--absolute(0, 0);
+      }
+    }
+
+    @include e(2) {
+      @include size(px2rpx(406px), px2rpx(409px));
+
+      image {
+        @include size(px2rpx(148px), px2rpx(198px));
+
+        display: block;
+      }
+
+      @include o(media) {
+        @include e(body) {
+          background-color: map-get($colors, c6);
+          padding: px2rpx(20px);
+          box-sizing: border-box;
+          width: px2rpx(406px - 148px);
         }
       }
     }

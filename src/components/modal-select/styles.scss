@@ -1,0 +1,37 @@
+@import "../../styles/utils/index";
+
+@include c(modal-select) {
+  background-color: white;
+  padding-bottom: px2rpx(90px);
+
+  @include e(title) {
+    @include padding(px2rpx(50px), null, px2rpx(50px));
+  }
+
+  @include e(item) {
+    position: relative;
+    padding: px2rpx(28px) px2rpx(50px);
+    border-top: 1px solid #eee;
+  }
+
+  @include e(item-name, item-desc) {
+    line-height: 100%;
+  }
+
+  @include e(item-name) {
+    padding-bottom: px2rpx(10px);
+  }
+
+  @include c(button) {
+    @include block--center;
+
+    width: px2rpx(690px);
+    margin-top: px2rpx(128px - 28px);
+  }
+
+  @include c(icon) {
+    @include position--absolute(50%, px2rpx(50px));
+
+    transform: translateY(-50%);
+  }
+}
