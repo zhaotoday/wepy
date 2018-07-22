@@ -1,5 +1,5 @@
 <template>
-  <view class="c-address-picker" @tap="handleTapSelectAddress">
+  <view class="c-address-picker" @tap="selectAddress">
     <view class="c-address-picker__detail c7 s1">{{address}}</view>
   </view>
 </template>
@@ -8,20 +8,15 @@
 
 <script>
   import wepy from 'wepy'
-  import AddressSelector from '../address-selector/index'
 
   export default class extends wepy.component {
     props = {
       address: String
     }
 
-    components = {
-      'address-selector': AddressSelector
-    }
-
     methods = {
-      handleTapSelectAddress () {
-        this.$emit('select-address')
+      selectAddress () {
+        wepy.navigateTo({ url: '/pages/addresses/select/index' })
       }
     }
   }

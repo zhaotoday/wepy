@@ -30,22 +30,21 @@ export default async (
   if (requiresAccess) {
     if (requiresLogin) {
       await auth.checkLogin()
-      Object.assign(data, {key: auth.getLoginToken()})
+      Object.assign(data, { key: auth.getLoginToken() })
     } else {
       if (auth.getLoginToken()) {
-        Object.assign(data, {key: auth.getLoginToken()})
+        Object.assign(data, { key: auth.getLoginToken() })
       } else {
         if (!auth.getAccessToken()) {
           await auth.setAccessToken()
         }
-        Object.assign(data, {key: auth.getAccessToken()})
+        Object.assign(data, { key: auth.getAccessToken() })
       }
     }
   }
 
-  /*
-  TODO:
   if (requiresLocation) {
+    /*
     if (addressId.get()) {
       Object.assign(data, {
         addressId: addressId.get()
@@ -53,9 +52,9 @@ export default async (
     } else {
       Object.assign(data, location.get())
     }
+    */
+    Object.assign(data, location.get())
   }
-  */
-  Object.assign(data, location.get())
 
   // mock 数据
   if (mock) {
@@ -85,7 +84,7 @@ export default async (
         .join('&') + `&encryptType=${encryptType}&sign=${sign}`
     })
 
-    const {status, responseContent} = res.data
+    const { status, responseContent } = res.data
 
     return new Promise((resolve, reject) => {
       if (status === 'success') {

@@ -12,7 +12,7 @@
           <view class="c-tag c-tag--text-third{{formData.gender === 1 ? ' active' : ''}}" @tap="select('gender', 1)">
             先生
           </view>
-          <view class="c-tag c-tag--text-third{{formData.gender === 0 ? ' active' : ''}}" @tap="select('gender', 0)">
+          <view class="c-tag c-tag--text-third{{formData.gender === 2 ? ' active' : ''}}" @tap="select('gender', 2)">
             女士
           </view>
         </view>
@@ -36,7 +36,7 @@
         <view class="c-cells__item-input">
           <input class="s4" placeholder="小区/写字楼" confirm-type="done" placeholder-style="color: #bbb;"
                  value="{{formData.address}}"
-                 @focus="navigateToSearchAddress" />
+                 @focus="navigateTo('/pages/addresses/more/index')" />
         </view>
       </view>
       <view class="c-cells__item">
@@ -190,12 +190,6 @@
         }
       },
       getPhoneNumber (e) {
-        console.log(e.detail.errMsg)
-        console.log(e.detail.iv)
-        console.log(e.detail.encryptedData)
-      },
-      navigateToSearchAddress () {
-        wepy.navigateTo({ url: '/pages/addresses/more/index' })
       }
     }
 
@@ -253,7 +247,6 @@
 
         this.$apply()
       } else {
-        console.log(22)
         this.formData.lng = ''
         this.formData.lat = ''
         this.formData.province = ''
@@ -266,8 +259,7 @@
       }
     }
 
-    onUnload () {
-      console.log(222)
+    onHide () {
       this.$parent.globalData.selectedLocation = null
     }
   }

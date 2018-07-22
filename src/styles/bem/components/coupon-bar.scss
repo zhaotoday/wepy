@@ -17,11 +17,10 @@
   }
 }
 
-@include b(c-coupons-wrap) {
-  @include position--absolute(px2rpx(30px), 0, px2rpx(30px), px2rpx(30px + 40px));
+@include c(coupons-wrap) {
+  @include position--absolute(px2rpx(30px), null, px2rpx(30px), px2rpx(30px + 40px));
 
-  overflow-x: auto;
-  overflow-y: hidden;
+  width: px2rpx(750px - 30px - 40px);
 }
 
 @include b(c-coupons) {

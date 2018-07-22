@@ -7,7 +7,7 @@
     </view>
     <view class="n-tip c3 s4">
       登录并授权即代表您已同意
-      <text class="n-tip__protocol" @tap="showProtocal">《身边店服务协议》</text>
+      <text class="n-tip__protocol" @tap="navigateTo('/pages/protocol/index')">《身边店服务协议》</text>
     </view>
   </view>
 </template>
@@ -30,12 +30,6 @@
     computed = {}
 
     methods = {
-      showProtocal () {
-        wepy.navigateTo({
-          url: '/pages/protocol/index'
-        })
-      },
-
       async getUserInfo (e) {
         const getSettingRes = await wepy.getSetting()
 
@@ -58,7 +52,9 @@
 
           await helpers.sleep(2000)
 
-          wepy.navigateBack()
+          const currentPages = utils.currentPages.getPages()
+
+          this.go(currentPages[currentPages.length - 1].url)
         }
       }
     }
@@ -74,12 +70,15 @@
       const page = stopping
         ? currentPages[currentPages.length - 1]
         : currentPages[currentPages.length - 2]
-      const url = page.url
 
+      this.go(page.url)
+    }
+
+    async go (url) {
       try {
         await wepy.switchTab({ url })
       } catch (e) {
-        await wepy.navigateBack({ delta: (stopping ? 1 : 2) })
+        await wepy.redirectTo({ url })
       }
     }
   }

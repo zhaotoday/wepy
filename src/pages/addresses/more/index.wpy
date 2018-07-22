@@ -2,7 +2,7 @@
   <nav-bar title="更多地址" :back.sync="navBarBack" />
   <view class="p-addresses-more c-main c-main--has-nav-bar">
     <address-search modifier="secondary" :city.sync="city" @toggle.user="toggleCitySelector"
-                    @focus.user="navigateToSearchAddress" />
+                    @focus.user="navigateTo" />
     <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}" />
     <view hidden="{{citySelectorVisible}}">
       <view class="n-map-wrap">
@@ -87,6 +87,9 @@
     }
 
     methods = {
+      navigateTo (url) {
+        wepy.navigateTo({ url: `/pages/addresses/search/index?city=${this.city}` })
+      },
       toggleCitySelector (city) {
         if (city) {
           this.city = city
@@ -110,9 +113,6 @@
         } else {
           wepy.navigateBack()
         }
-      },
-      navigateToSearchAddress () {
-        wepy.navigateTo({ url: '/pages/addresses/search/index' })
       }
     }
 

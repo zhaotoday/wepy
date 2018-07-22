@@ -5,7 +5,7 @@
     </view>
     <view class="c-address-search__input">
       <input class="c2 s4" placeholder="请输入地址" confirm-type="search" placeholder-style="color: #bbb;"
-             @confirm="confirm" @focus="focus"/>
+             @confirm="confirm" @focus="focus" />
     </view>
   </view>
 </template>

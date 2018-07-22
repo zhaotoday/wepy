@@ -19,7 +19,7 @@ export default class extends wepy.mixin {
     const currentPages = getCurrentPages()
     const currentPage = currentPages[currentPages.length - 1]
 
-    if (!whiteList.includes(currentPage.route)) {
+    if (!whiteList.includes(currentPage.route) && this.$parent.globalData) {
       this.$parent.globalData.stopping = false
 
       timer = setTimeout(() => {
@@ -30,6 +30,10 @@ export default class extends wepy.mixin {
   }
 
   onHide () {
+    clearTimeout(timer)
+  }
+
+  onUnload () {
     clearTimeout(timer)
   }
 
@@ -47,6 +51,9 @@ export default class extends wepy.mixin {
           break
         case 3:
           this[keys[0]][keys[1]][keys[2]] = url
+          break
+        case 4:
+          this[keys[0]][keys[1]][keys[2]][keys[3]] = url
           break
         case 5:
           this[keys[0]][keys[1]][keys[2]][keys[3]][keys[4]] = url

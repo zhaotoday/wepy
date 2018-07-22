@@ -2,7 +2,7 @@
   <modal>
     <view slot="content">
       <view class="c-address-selector">
-        <view class="c-address-selector__c-icon--close c-icon c-icon--close" @tap="hide"/>
+        <view class="c-address-selector__c-icon--close c-icon c-icon--close" @tap="hide" />
         <view class="c-address-selector__head">
           <text class="c-address-selector__tip c1 s5">
             温馨提示\n
@@ -32,7 +32,7 @@
               </view>
             </view>
           </view>
-          <view class="c-address-selector__btn c7 s0" @tap="handleTapModifyAddress">修改收获地址</view>
+          <view class="c-address-selector__btn c7 s0" @tap="modify">修改收获地址</view>
         </view>
       </view>
     </view>
@@ -77,27 +77,31 @@
         let formData = {}
 
         if (data.addressId) {
+          formData = { addressId: data.addressId }
           addressId.set(data.addressId)
-          formData = {addressId: data.addressId}
         } else {
-          const {lng, lat, cityCode} = data
-          formData = {lng, lat, cityCode}
+          const { lng, lat, cityCode } = data
+          formData = { lng, lat, cityCode }
+          location.set(data)
         }
 
-        try {
-          await request({
-            url: 'common/setCurrentAddress',
-            data: formData
-          })
+        await request({
+          url: 'common/setCurrentAddress',
+          data: formData
+        })
 
-          this.$invoke('modal', 'hide')
-          this.$emit('get', {requiresLocation: true, location: data})
-        } catch (e) {
-          console.log(e)
-        }
+        this.$invoke('modal', 'hide')
+
+        wepy.showToast({
+          icon: 'none',
+          title: '选择地址成功'
+        })
+
+        this.$emit('get', { requiresLocation: true, location: data })
       },
-      handleTapModifyAddress () {
-        wepy.navigateTo({url: '/pages/addresses/select/index'})
+      modify () {
+        this.$invoke('modal', 'hide')
+        wepy.navigateTo({ url: '/pages/addresses/select/index' })
       }
     }
   }

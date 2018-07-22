@@ -1,27 +1,26 @@
 <template>
-  <nav-bar :title.sync="navBarTitle" :back.sync="navBarBack" />
   <view class="recommended-shops c-main c-main--has-nav-bar">
-    <repeat for="{{childCategories}}" item="item" index="index">
+    <repeat for="{{childCategories}}" item="item1" index="index1">
       <view class="recommended-shops-child-categories c-panel">
-        <view class="c-panel__head c2 s1">{{item.name}}</view>
+        <view class="c-panel__head c2 s1">{{item1.name}}</view>
         <view class="c-panel__body">
           <view class="l-list">
-            <repeat for="{{item.children}}" item="childItem" index="childIndex">
-              <view class="l-list__item">
+            <repeat for="{{item1.children}}" item="item2" index="index2">
+              <view class="l-list__item" @tap="navigateTo('/pages/shops/home/index?id={{item2.id}}')">
                 <view class="c-media">
-                  <image src="{{childItem.image}}" mode="aspectFill"
+                  <image src="{{item2.image}}" mode="aspectFill"
                          @error="imageError"
-                         data-options="{{ { type: 'shop', keys: [ 'childCategories', index, 'children', childIndex, 'image' ] } }}" />
+                         data-options="{{ { type: 'shop', keys: [ 'childCategories', index1, 'children', index2, 'image' ] } }}" />
                   <view class="c-media__body">
                     <view class="c-media__body-title c2 s2">
-                      {{childItem.name}}
-                      <text class="recommended-shops-child-categories__enter-shop" wx:if="{{index === 0}}">进店</text>
+                      {{item2.name}}
+                      <text class="recommended-shops-child-categories__enter-shop" wx:if="{{index2 === 0}}">进店</text>
                     </view>
-                    <view class="c-media__body-content c3 s4">{{childItem.introduction}}</view>
+                    <view class="c-media__body-content c3 s4">{{item2.introduction}}</view>
                   </view>
                 </view>
-                <view class="c-tag c-tag--address c3 s6">{{childItem.distance}}</view>
-                <view class="c-tag c-tag--fringe c7 s5" wx:if="{{index !== 0}}">您身边的品牌</view>
+                <view class="c-tag c-tag--address c3 s6">{{item2.distance}}</view>
+                <view class="c-tag c-tag--fringe c7 s5" wx:if="{{index2 !== 0}}">您身边的品牌</view>
               </view>
             </repeat>
           </view>
@@ -36,37 +35,28 @@
 <script>
   import wepy from 'wepy'
   import global from '../../mixins/global'
-  import NavBar from '../../components/nav-bar/index'
   import request from '../../utils/request'
   import filters from '../../utils/filters'
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: '推荐店铺'
-    }
-
-    components = {
-      'nav-bar': NavBar
+      navigationBarTitleText: ''
     }
 
     mixins = [global]
 
     data = {
-      id: 0,
-      name: '',
-      navBarBack: true,
-      navBarTitle: '',
       childCategories: []
     }
 
     async onLoad (query) {
       this.id = query.id
       this.name = query.name
+
+      wepy.setNavigationBarTitle({ title: `${this.name}店铺推荐` })
     }
 
     async onShow () {
-      this.navBarTitle = `${this.name}店铺推荐`
-
       const storeGetRecommendStoresRes = await request({
         url: 'store/getRecommendStores',
         data: {
@@ -76,12 +66,13 @@
 
       this.childCategories = storeGetRecommendStoresRes.map(item => ({
         name: item.gcName,
-        children: item.stores.map(childItem => ({
-          name: childItem.storeName,
-          image: childItem.storeLabel,
-          introduction: childItem.storeIntro,
-          distance: filters.distance(childItem.storeDistance),
-          isPurchased: childItem.isPurchased
+        children: item.stores.map(item2 => ({
+          id: item2.storeId,
+          name: item2.storeName,
+          image: item2.storeLabel,
+          introduction: item2.storeIntro,
+          distance: filters.distance(item2.storeDistance),
+          isPurchased: item2.isPurchased
         }))
       }))
 

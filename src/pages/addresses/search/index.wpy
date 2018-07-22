@@ -1,7 +1,7 @@
 <template>
-  <nav-bar title="选择收货地址" :back.sync="navBarBack"/>
+  <nav-bar title="选择收货地址" :back.sync="navBarBack" />
   <view class="p-addresses-search c-main c-main--has-nav-bar">
-    <address-search modifier="secondary,no-city" :city.sync="city" @confirm.user="confirm"/>
+    <address-search modifier="secondary,no-city" :city.sync="city" @confirm.user="confirm" />
     <view hidden="{{citySelectorVisible}}">
       <view class="c-results">
         <repeat for="{{nearbyLocations}}" item="item">
@@ -23,8 +23,10 @@
   import NavBar from '../../../components/nav-bar/index'
   import AddressSearch from '../../../components/address-search/index'
   import location from '../../../utils/location'
+  import addressId from '../../../utils/addressId'
+  import request from '../../../utils/request'
 
-  const {lng: longitude, lat: latitude} = location.get()
+  const { lng: longitude, lat: latitude } = location.get()
 
   export default class extends wepy.page {
     config = {
@@ -55,10 +57,40 @@
         })
         this.$apply()
       },
-      selectLocation (location) {
-        this.$parent.globalData.selectedLocation = location
-        wepy.navigateBack()
+      async selectLocation (data) {
+        this.$parent.globalData.selectedLocation = data
+
+        if (this.from === 'select') {
+          let formData = {}
+
+          if (data.addressId) {
+            formData = { addressId: data.addressId }
+            addressId.set(data.addressId)
+          } else {
+            const { lng, lat, cityCode } = data
+            formData = { lng, lat, cityCode }
+            location.set(data)
+          }
+
+          await request({
+            url: 'common/setCurrentAddress',
+            data: formData
+          })
+
+          wepy.showToast({
+            icon: 'none',
+            title: '选择地址成功'
+          })
+
+          wepy.navigateTo({ url: '/pages/tab-bar/home/index' })
+        } else {
+          wepy.navigateBack()
+        }
       }
+    }
+
+    onLoad (query) {
+      this.from = query.from
     }
   }
 </script>

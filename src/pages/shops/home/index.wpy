@@ -5,7 +5,7 @@
     <view class="n-shop-banner-wrap">
       <image class="n-shop-banner" mode="aspectFill" src="{{details.storeLabel}}"
              @error="imageError"
-             data-options="{{ { type: 'shop', keys: [ 'image', 'image' ] } }}" />
+             data-options="{{ { type: 'shop', keys: [ 'details', 'storeLabel' ] } }}" />
     </view>
     <view class="n-shop-summary">
       <image class="n-shop-avatar" mode="aspectFill" src="{{details.share.imgUrl}}" />
@@ -42,7 +42,7 @@
       <view class="c-coupon-bar u-margin-bottom-20">
         <view class="c-coupon-bar__tag"></view>
         <scroll-view class="c-coupons-wrap" scroll-x>
-          <view class="c-coupons" style="width: {{186 * coupons.length}}rpx;">
+          <view class="c-coupons" style="width: {{(186 + 1) * home.coupons.length}}rpx;">
             <repeat for="{{home.coupons}}" item="item" index="index">
               <view class="c-coupons__item">
                 <view class="c-coupons__money c2 sd">
@@ -65,14 +65,15 @@
             <image src="./images/hot-sale.png" />
             <text class="c1 s1">热销专区</text>
           </view>
-          <view class="c-panel__head-addon right-30">
+          <view class="c-panel__head-addon right-30" @tap="switchTab('products')">
             <text class="c3 s5">更多</text>
             <view class="c-panel__head-more" />
           </view>
         </view>
         <view class="c-panel__body">
           <view class="n-hot-sale o-grid">
-            <view class="n-hot-sale__1 o-grid__cell o-grid__cell--width-fixed">
+            <view class="n-hot-sale__1 o-grid__cell o-grid__cell--width-fixed"
+                  @tap="navigateTo('/pages/products/details/index?id={{home.hotSale[0].goodsCommonId}}')">
               <image mode="aspectFill" src="{{home.hotSale[0].goodsImage}}" />
               <view class="c-icon m-hot-1" />
               <view class="n-hot-sale__title c2 s2 fwb">{{home.hotSale[0].goodsName}}</view>
@@ -84,7 +85,8 @@
             </view>
             <view class="n-hot-sale__2 o-grid__cell">
               <view class="o-grid o-grid--full">
-                <view class="o-grid__cell o-media" style="margin-bottom: 14rpx;" wx:if="{{home.hotSale[1]}}">
+                <view class="o-grid__cell o-media" style="margin-bottom: 14rpx;" wx:if="{{home.hotSale[1]}}"
+                      @tap="navigateTo('/pages/products/details/index?id={{home.hotSale[1].goodsCommonId}}')">
                   <image class="o-media__image" mode="aspectFill" src="{{home.hotSale[1].goodsImage}}" />
                   <view class="o-media__body">
                     <view class="n-hot-sale__title c2 s2 fwb">{{home.hotSale[1].goodsName}}</view>
@@ -104,7 +106,8 @@
                   </view>
                 </view>
 
-                <view class="o-grid__cell o-media" wx:if="{{home.hotSale[2]}}">
+                <view class="o-grid__cell o-media" wx:if="{{home.hotSale[2]}}"
+                      @tap="navigateTo('/pages/products/details/index?id={{home.hotSale[2].goodsCommonId}}')">
                   <image class="o-media__image" mode="aspectFill" src="{{home.hotSale[2].goodsImage}}" />
                   <view class="o-media__body">
                     <view class="n-hot-sale__title c2 s2 fwb">{{home.hotSale[2].goodsName}}</view>
@@ -185,6 +188,29 @@
         </view>
       </view>
     </block>
+    <block wx:if="{{currentTab === 'promotions'}}">
+      <view class="c-tabs u-margin-bottom-20 c3 s1">
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap is-active">综合</view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">销量</view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">新品</view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">
+            <text>价格</text>
+            <view class="c-tabs__item-sort vertical-align--middle" />
+          </view>
+        </view>
+        <view class="c-tabs__item">
+          <view class="c-tabs__item-wrap">筛选</view>
+        </view>
+      </view>
+
+    </block>
   </view>
   <shop-tab-bar :details.sync="details" />
 </template>
@@ -248,20 +274,21 @@
 
     async onShow () {
       const getStoreInfoRes = await request({
-        url: 'store/getStoreInfo',
         requiresLocation: true,
+        url: 'store/getStoreInfo',
         data: {
           storeId: this.id
         }
       })
       this.home = await request({
-        url: 'store/index',
         requiresLocation: true,
+        url: 'store/index',
         data: {
           storeId: this.id
         }
       })
       this.products = (await request({
+        requiresLocation: true,
         url: 'goods/getGoods',
         data: {
           storeId: this.id

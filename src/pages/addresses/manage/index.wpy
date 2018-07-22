@@ -89,6 +89,7 @@
       async delOk () {
         try {
           request({
+            requiresLogin: true,
             url: 'address/delAddress',
             data: {
               addressId: this.delId
@@ -118,6 +119,7 @@
 
     async renderMyAddress () {
       const getMyAddresses = await request({
+        requiresLogin: true,
         url: 'address/getMyAddresses'
       })
 

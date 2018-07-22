@@ -2,7 +2,8 @@
   <nav-bar title="选择收货地址" :back.sync="navBarBack" />
   <view class="p-addresses-select c-main c-main--has-nav-bar">
     <address-operation title="管理地址" url="/pages/addresses/manage/index" />
-    <address-search class="l-box l-box--margin-bottom" :city.sync="city" @toggle.user="toggleCitySelector" />
+    <address-search class="l-box l-box--margin-bottom" :city.sync="city"
+                    @focus.user="navigateToSearch" @toggle.user="toggleCitySelector" />
     <city-selector @toggle.user="toggleCitySelector" hidden="{{!citySelectorVisible}}" />
     <view class="n-wrap" hidden="{{citySelectorVisible}}">
       <view class="n-addresses c-block">
@@ -14,20 +15,22 @@
             </view>
           </view>
           <view class="c-cells__item">
-            <view class="c-cells__item-body c3 s3">{{currentLocation.address}}</view>
+            <view class="c-cells__item-body c3 s3" @tap="setCurrentAddress({{currentLocation}})">
+              {{currentLocation.address}}
+            </view>
           </view>
           <block wx:if="{{loggedIn}}">
             <view class="c-cells__item">
               <view class="c-cells__item-body">收货地址</view>
               <view class="c-cells__item-body">
-                <view class="n-add-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToAddAddress">
+                <view class="n-add-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToAdd">
                   添加收货地址
                 </view>
               </view>
             </view>
             <view class="c-results c-results--secondary" wx:if="{{!!myAddresses.length}}">
               <repeat for="{{myAddresses}}" item="item">
-                <view class="c-results__item c3 s3" @tap="selectLocation({{item}})">
+                <view class="c-results__item c3 s3" @tap="setCurrentAddress({{item}})">
                   <view class="c-results__item-title">{{item.trueName}}　{{item.mobPhone}}</view>
                   <view class="c-results__item-extra">
                     <view class="n-tag c-tag c-tag--text-third c3 s6">
@@ -51,14 +54,14 @@
           <view class="c-cells__item">
             <view class="c-cells__item-body">附近地址</view>
             <view class="c-cells__item-body">
-              <view class="n-get-more-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToMoreAddress">更多地址
+              <view class="n-get-more-address c-tag c-tag--text-secondary c2 s5" @tap="navigateToMore">更多地址
               </view>
             </view>
           </view>
         </view>
         <view class="n-more-address c3 s3">
           <repeat for="{{nearbyLocations}}" item="item">
-            <view class="n-more-address__item">{{item.address}}</view>
+            <view class="n-more-address__item" @tap="setCurrentAddress({{item}})">{{item.address}}</view>
           </repeat>
         </view>
       </view>
@@ -76,6 +79,7 @@
   import CitySelector from '../../../components/city-selector/index'
   import AddressOperation from '../../../components/address-operation/index'
   import location from '../../../utils/location'
+  import addressId from '../../../utils/addressId'
   import request from '../../../utils/request'
   import auth from '../../../utils/auth'
 
@@ -104,12 +108,46 @@
     }
 
     methods = {
+      async setCurrentAddress (data) {
+        let formData = {}
+
+        if (data.addressId) {
+          formData = { addressId: data.addressId }
+          addressId.set(data.addressId)
+        } else {
+          const { lng, lat, cityCode } = data
+          formData = { lng, lat, cityCode }
+          location.set(data)
+        }
+
+        await request({
+          url: 'common/setCurrentAddress',
+          data: formData
+        })
+
+        wepy.switchTab({ url: '/pages/tab-bar/home/index' })
+
+        wepy.showToast({
+          icon: 'none',
+          title: '选择地址成功'
+        })
+      },
+      navigateToSearch () {
+        wepy.navigateTo({ url: '/pages/addresses/search/index?from=select' })
+      },
       async reloadLocation () {
         try {
           await location.secureClear()
           this.renderLocations()
+          wepy.showToast({
+            icon: 'none',
+            title: '重新定位成功'
+          })
         } catch (e) {
-          console.log(e)
+          wepy.showToast({
+            icon: 'none',
+            title: '重新定位失败'
+          })
         }
       },
       toggleCitySelector (city) {
@@ -118,10 +156,10 @@
         }
         this.citySelectorVisible = !this.citySelectorVisible
       },
-      navigateToAddAddress () {
+      navigateToAdd () {
         wepy.navigateTo({ url: '/pages/addresses/form/index' })
       },
-      navigateToMoreAddress () {
+      navigateToMore () {
         wepy.navigateTo({ url: '/pages/addresses/more/index?from=select-address' })
       }
     }
