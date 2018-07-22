@@ -263,7 +263,6 @@
       })
       this.products = (await request({
         url: 'goods/getGoods',
-        requiresLogin: true,
         data: {
           storeId: this.id
         }

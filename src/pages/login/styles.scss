@@ -1,8 +1,7 @@
 @import "../../styles/utils/index";
 @import "../../styles/components/main";
 
-// login
-@include b(login) {
+@include p(login) {
   background: {
     image: image-url("pages/login/bg.png");
     color: white;
@@ -10,42 +9,39 @@
     position: 0 bottom;
     size: 100% px2rpx(394px);
   }
-}
 
-// login-title
-@include b(login-title) {
-  @include padding(px2rpx(186px), null, px2rpx(60px));
+  @include n(title) {
+    @include padding(px2rpx(186px), null, px2rpx(60px));
 
-  text-align: center;
-  color: #63ac48;
-}
-
-// login-btn
-@include b(login-btn) {
-  @include block--center;
-
-  position: relative;
-
-  @include e(text) {
-    @include position--absolute(px2rpx(205px), null, null,0);
-
-    width: 100%;
     text-align: center;
   }
 
-  button {
-    @include size(px2rpx(350px), px2rpx(350px));
+  @include n(button) {
+    @include block--center;
 
-    opacity: 0;
+    position: relative;
+    display: block;
+
+    @include e(text) {
+      @include position--absolute(px2rpx(205px), null, null, 0);
+
+      width: 100%;
+      text-align: center;
+    }
+
+    button {
+      @include size(px2rpx(350px), px2rpx(350px));
+
+      opacity: 0;
+    }
   }
-}
 
-// login-protocol
-@include b(login-tip) {
-  padding-top: px2rpx(310px);
-  text-align: center;
+  @include n(tip) {
+    padding-top: px2rpx(310px);
+    text-align: center;
 
-  @include e(protocol) {
-    text-decoration: underline;
+    @include e(protocol) {
+      text-decoration: underline;
+    }
   }
 }

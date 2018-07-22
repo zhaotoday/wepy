@@ -10,7 +10,7 @@ export default class extends wepy.mixin {
   }
 
   async onShow () {
-    const whiteList = ['pages/login/index', 'pages/content/index']
+    const whiteList = ['pages/login/index', 'pages/protocol/index']
 
     utils.currentPages.addWhiteList(whiteList)
     utils.currentPages.storePages()

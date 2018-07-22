@@ -1,17 +1,13 @@
 <template>
-  <view class="c-nav-bar c2 s0">
-    <view class="c-icon c-icon--back" @tap="handleTapBack"></view>
-    身边店
-  </view>
-  <view class="login c-main c-main--has-nav-bar">
-    <view class="login-title s0">请先登录账号并授权</view>
-    <view class="login-btn c-icon c-icon--mp-login">
-      <view class="login-btn__text s2 c5">登录并授权</view>
-      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="handleGetUserInfo">获取用户信息</button>
+  <view class="p-login c-main">
+    <view class="n-title c10 s0">请先登录账号并授权</view>
+    <view class="n-button c-icon m-mp-login">
+      <view class="n-button__text s2 c5">登录并授权</view>
+      <button open-type="getUserInfo" lang="zh_CN" @getuserinfo="getUserInfo">获取用户信息</button>
     </view>
-    <view class="login-tip c3 s4">
+    <view class="n-tip c3 s4">
       登录并授权即代表您已同意
-      <text class="login-tip__protocol" @tap="handleTapProtocal">《身边店服务协议》</text>
+      <text class="n-tip__protocol" @tap="showProtocal">《身边店服务协议》</text>
     </view>
   </view>
 </template>
@@ -22,39 +18,25 @@
   import wepy from 'wepy'
   import global from '../../mixins/global'
   import auth from '../../utils/auth'
-  import NavBar from '../../components/nav-bar/index'
   import { utils, helpers } from 'mp-client'
 
   export default class extends wepy.page {
     config = {
-      navigationBarTitleText: ''
-    }
-
-    components = {
-      'nav-bar': NavBar
+      navigationBarTitleText: '身边店'
     }
 
     mixins = [global]
 
-    data = {
-      hasNavBar: true,
-      page: ''
-    }
-
     computed = {}
 
     methods = {
-      handleTapProtocal () {
+      showProtocal () {
         wepy.navigateTo({
-          url: '/pages/content/index'
+          url: '/pages/protocol/index'
         })
       },
 
-      handleTapBack () {
-        this.goBack()
-      },
-
-      async handleGetUserInfo (e) {
+      async getUserInfo (e) {
         const getSettingRes = await wepy.getSetting()
 
         if (!getSettingRes.authSetting['scope.userInfo']) {
@@ -95,9 +77,9 @@
       const url = page.url
 
       try {
-        await wepy.switchTab({url})
+        await wepy.switchTab({ url })
       } catch (e) {
-        await wepy.navigateBack({delta: (stopping ? 1 : 2)})
+        await wepy.navigateBack({ delta: (stopping ? 1 : 2) })
       }
     }
   }

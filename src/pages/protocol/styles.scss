@@ -1,7 +1,7 @@
 @import "../../styles/utils/index";
 @import "../../styles/components/main";
 
-@include b(content) {
+@include p(protocol) {
   background-color: white;
   padding: px2rpx(35px);
 
