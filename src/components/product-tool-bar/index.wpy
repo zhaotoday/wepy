@@ -1,6 +1,6 @@
 <template>
   <view class="c-product-tool-bar">
-    <view class="c-product-tool-bar__shop c3 s5">
+    <view class="c-product-tool-bar__shop c3 s5" @tap="navigateTo('/pages/shops/home/index?id={{details.storeId}}')">
       <view class="c-icon m-shop-1" />
       店铺
     </view>
@@ -25,10 +25,13 @@
 
 <script>
   import wepy from 'wepy'
+  import global from '../../mixins/global'
   import request from '../../utils/request'
   import ModalDownload from '../modal-download/index'
 
   export default class extends wepy.component {
+    mixins = [global]
+    
     components = {
       'modal-download': ModalDownload
     }
@@ -70,6 +73,12 @@
       showModalDownload () {
         this.$invoke('modal-download', 'show')
       }
+    }
+
+    onLoad () {
+      setTimeout(() => {
+        console.log(this.details)
+      }, 1000)
     }
   }
 </script>

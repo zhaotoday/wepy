@@ -5,7 +5,7 @@
       <text class="c1 s2">¥22.22</text>
       <view class="c-icon m-arrow-down" style="margin-left: 20rpx; margin-bottom: 5rpx;" />
     </view>
-    <view class="c-button m-orange m-height-88 c7 s0" style="width: 260rpx;">结算</view>
+    <view class="c-button m-orange m-height-88 c7 s0" style="width: 260rpx;" @tap="settle">结算</view>
   </view>
 </template>
 
@@ -15,5 +15,10 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
+    methods = {
+      settle () {
+        wepy.navigateTo({ url: '/pages/orders/result/index' })
+      }
+    }
   }
 </script>

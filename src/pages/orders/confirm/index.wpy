@@ -174,7 +174,7 @@
     }
 
     onLoad () {
-      this.$invoke('modal-specification', 'show')
+      // this.$invoke('modal-specification', 'show')
     }
   }
 </script>

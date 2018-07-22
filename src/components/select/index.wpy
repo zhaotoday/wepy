@@ -15,6 +15,10 @@
     }
 
     props = {
+      customModal: {
+        type: Boolean,
+        default: false
+      },
       title: {
         type: String,
         default: '请选择'
@@ -38,7 +42,11 @@
 
     methods = {
       showModalSelect () {
-        this.$invoke('c-modal-select', 'show')
+        if (this.customModal) {
+          this.$emit('showModal')
+        } else {
+          this.$invoke('c-modal-select', 'show')
+        }
       },
       set (option) {
         this.option = option

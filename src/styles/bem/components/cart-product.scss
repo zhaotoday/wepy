@@ -20,6 +20,7 @@ $item-height: 30px * 2 + 184px;
   @include e(title) {
     @include text--overflow(2);
 
+    height: px2rpx(67px);
     line-height: px2rpx(36px);
     margin-bottom: px2rpx(20px - 3px);
   }

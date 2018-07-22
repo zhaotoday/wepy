@@ -141,13 +141,13 @@
           </view>
           <view class="c-panel__body c-products u-padding-top-20">
             <repeat for="{{item1.goods}}" item="item2">
-              <navigator class="c-products__item" url="/pages/products/details/index?id={{item.goodsId}}">
+              <view class="c-products__item" @tap="navigateTo('/pages/products/details/index?id={{item.goodsId}}')">
                 <image src="{{item2.goodsImage}}" mode="aspectFill"
                        @error="imageError"
                        data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
                 <view class="c-products__item-name c2 s4">{{item2.goodsName}}</view>
                 <view class="c-products__item-price c1 s1">¥{{item2.goodsPrice}}</view>
-              </navigator>
+              </view>
             </repeat>
           </view>
         </view>
@@ -177,13 +177,13 @@
       <view class="c-panel u-margin-bottom-20">
         <view class="c-panel__body c-products u-padding-top-20">
           <repeat for="{{products}}" item="item">
-            <navigator class="c-products__item" url="/pages/products/details/index?id={{item.goodsId}}">
+            <view class="c-products__item" @tap="navigateTo('/pages/products/details/index?id={{item.goodsCommonId}}')">
               <image src="{{item.goodsImage}}" mode="aspectFill"
                      @error="imageError"
                      data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
               <view class="c-products__item-name c2 s4">{{item.goodsName}}</view>
               <view class="c-products__item-price c1 s1">¥{{item.goodsPrice}}</view>
-            </navigator>
+            </view>
           </repeat>
         </view>
       </view>

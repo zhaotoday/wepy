@@ -1,6 +1,5 @@
 <template>
-  <nav-bar title="购物车" :back.sync="navBarBack" />
-  <view class="p-cart-home c-main c-main--has-nav-bar">
+  <view class="p-cart-home c-main m-has-nav-bar m-has-cart-settlement">
     <view class="n-no-data-wrap" wx:if="{{false}}">
       <c-swiper theme="third" :items.sync="ads" width="100%" height="320rpx" />
       <view class="n-no-data">
@@ -11,74 +10,45 @@
         </view>
       </view>
     </view>
-
     <block wx:else>
       <operation title="管理" url="/pages/tab-bar/home/index" />
-
-
-      <view class="c-panel u-margin-bottom-20">
-        <view class="c-panel__head padding-36-30">
-          <view class="c-panel__head-title">
-            <image src="./images/clean.png" style="margin-right: 20rpx;" />
-            <text class="c2 s2">清理</text>
+      <repeat for="{{items}}" item="item1">
+        <view class="c-panel u-margin-bottom-20">
+          <view class="c-panel__head padding-30 border-bottom-1">
+            <view class="c-panel__head-title">
+              <text class="c-checkbox" @tap.stop="check({{item1.storeCarts}})" />
+              <text class="c-icon m-shop" style="margin-right: 20rpx;" />
+              <text class="c2 s2">{{item1.storeName}}</text>
+              <view class="c-panel__head-more" />
+            </view>
           </view>
-          <view class="n-to-collect c-button m-height-56 m-border-c8 c8 s3" style="width: 190rpx;">移入收藏夹</view>
-          <view class="n-delete c-button m-height-56 m-border-c1 c1 s3" style="width: 150rpx;">删除</view>
-        </view>
-      </view>
-
-      <view class="c-panel u-margin-bottom-20">
-        <view class="c-panel__head padding-30 border-bottom-1">
-          <view class="c-panel__head-title">
-            <text class="c-checkbox is-active" />
-            <text class="c-icon m-shop" style="margin-right: 20rpx;" />
-            <text class="c2 s2">肥西服装店</text>
-            <view class="c-panel__head-more" />
+          <view class="c-panel__body">
+            <repeat for="{{item1.storeCarts}}" item="item2">
+              <movable-area class="o-cart-product">
+                <movable-view class="c-cart-product" x="184rpx" direction="horizontal" inertia friction="0.1"
+                              @touchstart="touchStart" @touchmove="touchMove">
+                  <view class="c-checkbox" @tap.stop="check" />
+                  <view class="o-media">
+                    <image class="o-media__image" src="{{item2.goodsImage}}" />
+                    <view class="o-media__body">
+                      <view class="c-cart-product__title c2 s2">{{item2.goodsName}}</view>
+                      <c-select class="t-1" customModal @showModal.user="showModalSpecification" />
+                      <view class="c-cart-product__price c1 s2">¥{{item2.goodsPrice}}</view>
+                      <number-input :value.sync="numberInputValue" />
+                    </view>
+                    <view class="c-cart-product__collect" />
+                    <view class="c-cart-product__delete" />
+                  </view>
+                </movable-view>
+              </movable-area>
+            </repeat>
           </view>
         </view>
-        <view class="c-panel__body">
-          <movable-area class="o-cart-product">
-            <movable-view class="c-cart-product" x="184rpx" direction="horizontal" inertia friction="0.1"
-                          @touchstart="touchStart" @touchmove="touchMove">
-              <view class="c-checkbox" />
-              <view class="o-media">
-                <image class="o-media__image" src="./images/product.png" />
-                <view class="o-media__body">
-                  <view class="c-cart-product__title c2 s2">对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛1</view>
-                  <select class="t-1" value="插画纪念版" />
-                  <view class="c-cart-product__price c1 s2">¥ 22</view>
-                  <number-input :value.sync="numberInputValue" />
-                </view>
-                <view class="c-cart-product__collect" />
-                <view class="c-cart-product__delete" />
-              </view>
-            </movable-view>
-          </movable-area>
-          <movable-area class="o-cart-product">
-            <movable-view class="c-cart-product" x="184rpx" direction="horizontal" inertia friction="0.1"
-                          @touchstart="touchStart" @touchmove="touchMove">
-              <view class="c-checkbox" />
-              <view class="o-media">
-                <image class="o-media__image" src="./images/product.png" />
-                <view class="o-media__body">
-                  <view class="c-cart-product__title c2 s2">对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛对方水电费是佛挡杀佛1</view>
-                  <select value="插画纪念版" />
-                  <view class="c-cart-product__price c1 s2">¥ 22</view>
-                  <number-input :value.sync="numberInputValue" />
-                </view>
-                <view class="c-cart-product__collect" />
-                <view class="c-cart-product__delete" />
-              </view>
-            </movable-view>
-          </movable-area>
-        </view>
-      </view>
+      </repeat>
     </block>
-
-    <view class="n-group-tip c1 s6">该组合与您添加到购物车时有更新</view>
-
   </view>
   <cart-settlement />
+  <c-modal-specification :details.sync="details" :formData.sync="formData" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -87,11 +57,11 @@
   import wepy from 'wepy'
   import global from '../../../../mixins/global'
   import request from '../../../../utils/request'
-  import NavBar from '../../../../components/nav-bar/index'
   import Swiper from '../../../../components/swiper/index'
   import NumberInput from '../../../../components/number-input/index'
   import Select from '../../../../components/select/index'
   import CartSettlement from '../../../../components/cart-settlement/index'
+  import ModalSpecification from '../../../../components/modal-specification/index'
   import Operation from '../../../../components/operation/index'
 
   export default class extends wepy.page {
@@ -100,20 +70,22 @@
     }
 
     components = {
-      'nav-bar': NavBar,
       'c-swiper': Swiper,
       'number-input': NumberInput,
-      'select': Select,
+      'c-select': Select,
       'cart-settlement': CartSettlement,
-      'operation': Operation
+      'operation': Operation,
+      'c-modal-specification': ModalSpecification
     }
 
     mixins = [global]
 
     data = {
-      navBarBack: false,
       ads: [],
-      numberInputValue: 2
+      numberInputValue: 2,
+      items: [],
+      details: {},
+      formData: {}
     }
 
     methods = {
@@ -125,11 +97,18 @@
       },
       touchMove (e) {
         console.log(e)
+      },
+      showModalSpecification (e) {
+        // this.$invoke('c-modal-specification', 'show')
+      },
+      check () {
+        console.log(33)
       }
     }
 
     async onShow () {
       const cartGetRes = await request({
+        requiresLogin: true,
         url: 'cart/get'
       })
 
@@ -137,6 +116,8 @@
         image: item.imageUrl,
         url: item.href || ''
       }))
+
+      this.items = cartGetRes.list
 
       this.$apply()
     }

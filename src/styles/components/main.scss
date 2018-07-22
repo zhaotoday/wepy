@@ -22,4 +22,8 @@
   @include m(has-settlement-bar) {
     bottom: px2rpx(150px);
   }
+
+  @include m(has-cart-settlement) {
+    bottom: px2rpx(86px);
+  }
 }

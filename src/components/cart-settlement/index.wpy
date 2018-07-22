@@ -8,7 +8,7 @@
       <text class="c2 s3">合计：¥ 11</text>
       <text></text>
     </view>
-    <view class="c-cart-settlement__submit o-grid__cell c7 s0">结算</view>
+    <view class="c-cart-settlement__submit o-grid__cell c7 s0" @tap="settle">结算</view>
   </view>
 </template>
 
@@ -18,5 +18,10 @@
   import wepy from 'wepy'
 
   export default class extends wepy.component {
+    methods = {
+      settle () {
+        wepy.navigateTo({ url: '/pages/orders/confirm/index' })
+      }
+    }
   }
 </script>
