@@ -42,4 +42,16 @@
       size: 100% 100%;
     }
   }
+
+  @include e(item-sort-1) {
+    @include size(px2rpx(30px), px2rpx(30px));
+
+    display: inline-block;
+    transform: rotate(180deg);
+    margin-left: px2rpx(4px);
+    background: {
+      image: image-url("components/tabs/sort.png");
+      size: 100% 100%;
+    }
+  }
 }

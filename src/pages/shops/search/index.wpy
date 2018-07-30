@@ -1,7 +1,7 @@
 <template>
   <view class="p-shops-search c-main c-main--has-nav-bar">
     <view class="n-wrap">
-      <c-search class="t-1 u-margin-bottom-20" placeholder="请输入关键字" />
+      <c-search :value.sync="keyword" class="t-1 u-margin-bottom-20" placeholder="请输入关键字" @confirm="searchConfirm" />
       <view class="n-card c-panel u-margin-bottom-20">
         <view class="c-panel__head padding-30-20">
           <view class="c-panel__head-title">
@@ -28,12 +28,11 @@
             <view class="c-icon m-eye{{hotVisible ? '' : '-close'}}" @tap="toggleHotVisible" />
           </view>
         </view>
-        <view class="c-panel__body">
+        <view class="c-panel__body" wx:if="{{loaded}}">
           <block wx:if="{{hotVisible}}">
-            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
-            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
-            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
-            <text class="c-tag m-height-58 bg-c6 c3 s3">房贷首付</text>
+            <repeat for="{{keywords}}" item="item">
+              <text class="c-tag m-height-58 bg-c6 c3 s3" @tap="selectKeyword({{item}})">{{item}}</text>
+            </repeat>
           </block>
           <view class="n-no-data c4 s4" wx:else>当前热门搜索已隐藏</view>
         </view>
@@ -48,6 +47,10 @@
   import wepy from 'wepy'
   import global from '../../../mixins/global'
   import Search from '../../../components/search/index'
+  import request from '../../../utils/request'
+  import { utils } from 'mp-client'
+
+  const hotVisibleStorage = new utils.Storage('hotVisible')
 
   export default class extends wepy.page {
     config = {
@@ -61,13 +64,37 @@
     mixins = [global]
 
     data = {
-      hotVisible: true
+      hotVisible: true,
+      keyword: '',
+      keywords: []
     }
 
     methods = {
       toggleHotVisible () {
         this.hotVisible = !this.hotVisible
-      }
+        hotVisibleStorage.set(this.hotVisible)
+      },
+      selectKeyword (keyword) {
+        this.keyword = keyword
+      },
+      searchConfirm () {}
+    }
+
+    onLoad (query) {
+      this.id = query
+      this.hotVisible = hotVisibleStorage.get()
+      this.loaded = true
+    }
+
+    async onShow () {
+      this.keywords = (await request({
+        url: 'store/getKeywords',
+        data: {
+          storeId: 11
+        }
+      }))['recommendWord']
+
+      this.$apply()
     }
   }
 </script>

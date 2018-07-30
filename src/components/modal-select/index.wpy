@@ -3,13 +3,17 @@
     <view slot="content">
       <view class="c-modal-select">
         <view class="c-modal-select__title c2 s1 tac">{{title}}</view>
-        <repeat for="{{options}}">
-          <view class="c-modal-select__item" @tap="tap({{item}})">
-            <view class="c-modal-select__item-name c2 s2">{{item.name}}</view>
-            <view class="c-modal-select__item-desc c4 s4">{{item.desc}}</view>
-            <view class="c-icon m-checkbox{{item.value === current.value ? '-active' : ''}}" />
+        <scroll-view class="c-modal-select__body" scroll-y>
+          <view>
+            <repeat for="{{options}}">
+              <view class="c-modal-select__item" @tap="tap({{item}})">
+                <view class="c-modal-select__item-name c2 s2">{{item.name}}</view>
+                <view class="c-modal-select__item-desc c4 s4">{{item.desc}}</view>
+                <view class="c-icon m-checkbox{{item.value === current.value ? '-active' : ''}}" />
+              </view>
+            </repeat>
           </view>
-        </repeat>
+        </scroll-view>
         <view class="c-button m-height-88 bg-c1 s0 c7" @tap="confirm">确定</view>
       </view>
     </view>

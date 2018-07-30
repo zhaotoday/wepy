@@ -1,6 +1,7 @@
 <template>
   <view class="c-search">
-    <input placeholder="{{placeholder}}" type="text" confirm-type="search" placeholder-style="{{placeholderStyle}}"
+    <input value="{{value}}" placeholder="{{placeholder}}" type="text" confirm-type="search"
+           placeholder-style="{{placeholderStyle}}"
            @confirm="confirm" />
   </view>
 </template>
@@ -12,6 +13,7 @@
 
   export default class extends wepy.component {
     props = {
+      value: String,
       placeholder: {
         type: String,
         default: '请输入关键词'

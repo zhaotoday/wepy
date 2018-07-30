@@ -8,6 +8,10 @@
     @include padding(px2rpx(50px), null, px2rpx(50px));
   }
 
+  @include e(body) {
+    @include size(100%, px2rpx(340px));
+  }
+
   @include e(item) {
     position: relative;
     padding: px2rpx(28px) px2rpx(50px);

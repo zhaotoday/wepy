@@ -155,19 +155,20 @@
     </block>
     <block wx:if="{{currentTab === 'products'}}">
       <view class="c-tabs u-margin-bottom-20 c3 s1">
-        <view class="c-tabs__item">
-          <view class="c-tabs__item-wrap is-active">综合</view>
+        <view class="c-tabs__item" @tap="switchProductOrder({{1}})">
+          <view class="c-tabs__item-wrap{{productOrder === 1 ? ' is-active' : ''}}">综合</view>
         </view>
-        <view class="c-tabs__item">
-          <view class="c-tabs__item-wrap">销量</view>
+        <view class="c-tabs__item" @tap="switchProductOrder({{2}})">
+          <view class="c-tabs__item-wrap{{productOrder === 2 ? ' is-active' : ''}}">销量</view>
         </view>
-        <view class="c-tabs__item">
-          <view class="c-tabs__item-wrap">新品</view>
+        <view class="c-tabs__item" @tap="switchProductOrder({{3}})">
+          <view class="c-tabs__item-wrap{{productOrder === 3 ? ' is-active' : ''}}">新品</view>
         </view>
-        <view class="c-tabs__item">
-          <view class="c-tabs__item-wrap">
+        <view class="c-tabs__item" @tap="switchProductOrder({{productOrder === 4 ? 5 : 4}})">
+          <view class="c-tabs__item-wrap{{productOrder === 4 || productOrder === 5 ? ' is-active' : ''}}">
             <text>价格</text>
-            <view class="c-tabs__item-sort vertical-align--middle" />
+            <view class="c-tabs__item-sort{{productOrder === 5 ? '-1' : ''}} vertical-align--middle"
+                  wx:if="{{productOrder === 4 || productOrder === 5}}" />
           </view>
         </view>
         <view class="c-tabs__item">
@@ -262,7 +263,8 @@
         value: 'promotions'
       }],
       currentTab: 'home',
-      productSearchHasBg: false
+      productSearchHasBg: false,
+      productOrder: 1
     }
 
     methods = {
@@ -279,6 +281,10 @@
 
           this.$apply()
         }, 50)
+      },
+      switchProductOrder (order) {
+        this.productOrder = order
+        this.getProducts()
       }
     }
 
@@ -287,6 +293,8 @@
     }
 
     async onShow () {
+      this.getProducts()
+
       const getStoreInfoRes = await request({
         requiresLocation: true,
         url: 'store/getStoreInfo',
@@ -294,6 +302,7 @@
           storeId: this.id
         }
       })
+
       this.home = Object.assign(await request({
         requiresLocation: true,
         url: 'store/index',
@@ -301,13 +310,6 @@
           storeId: this.id
         }
       }), { storeId: this.id })
-      this.products = (await request({
-        requiresLocation: true,
-        url: 'goods/getGoods',
-        data: {
-          storeId: this.id
-        }
-      }))['goods']
 
       this.details = Object.assign(getStoreInfoRes, {
         storeId: this.id
@@ -317,6 +319,19 @@
         score,
         rate: (score / 2).toFixed(2)
       }))(getStoreInfoRes.grade)
+
+      this.$apply()
+    }
+
+    async getProducts () {
+      this.products = (await request({
+        requiresLocation: true,
+        url: 'goods/getGoods',
+        data: {
+          storeId: this.id,
+          goodsSort: this.productOrder
+        }
+      }))['goods']
 
       this.$apply()
     }
