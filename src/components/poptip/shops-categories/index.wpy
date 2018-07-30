@@ -2,10 +2,11 @@
   <view class="c-overlay m-unvisible" hidden="{{!visible}}" @tap="hide" />
   <view class="c-shops-categories c-poptip c7 s1" hidden="{{!visible}}">
     <view class="c-poptip__arrow-down" />
-    <view class="c-poptip__item" @tap="tap('1')">分类一</view>
-    <view class="c-poptip__item" @tap="tap('2')">分类二</view>
-    <view class="c-poptip__item" @tap="tap('3')">分类三</view>
-    <view class="c-poptip__item is-last" @tap="tap('4')">分类四</view>
+    <repeat for="{{details.recommendGoodsClasses}}" item="item" index="index">
+      <view class="c-poptip__item{{index === details.recommendGoodsClasses.length - 1 ? ' is-last' : ''}}" @tap="tap({{item.firstClassId}})">
+        {{item.gcName}}
+      </view>
+    </repeat>
   </view>
   <c-modal-download />
 </template>
@@ -17,6 +18,13 @@
   import ModalDownload from '../../modal-download/index'
 
   export default class extends wepy.component {
+    props = {
+      details: {
+        type: Array,
+        default: []
+      }
+    }
+
     data = {
       visible: false
     }
@@ -32,8 +40,7 @@
       hide () {
         this.visible = false
       },
-      tap (type) {
-        console.log(type)
+      tap () {
         this.visible = false
       }
     }

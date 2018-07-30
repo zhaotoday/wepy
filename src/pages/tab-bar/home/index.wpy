@@ -7,7 +7,7 @@
       <view>
         <c-swiper-top-ads :items.sync="topAds" width="100%" height="465rpx" />
       </view>
-      <view class="n-home-top-bar" style="background-color: rgba(255,133,25, {{opacity}});">
+      <view class="n-home-top-bar{{topBarHasBg ? ' m-has-bg' : ''}}">
         <address-picker :address.sync="address" />
         <view class="c-icon c-icon--scan" @tap="handleTapScan"></view>
       </view>
@@ -84,7 +84,7 @@
       </view>
     </view>
   </scroll-view>
-  <modal-ad :details.sync="modalAd" />
+  <modal-ad :details.sync="modalAdDetails" />
   <block wx:if="{{!!currentAddress}}">
     <address-selector :dataItem.sync="currentAddress" @get.user="get" />
   </block>
@@ -105,6 +105,7 @@
   import ModalAd from '../../../components/modal-ad/index'
   import location from '../../../utils/location'
   import addressSelector from '../../../utils/addressSelector'
+  import modalAd from '../../../utils/modalAd'
 
   let timer
 
@@ -133,9 +134,9 @@
       categories: [],
       shops: [],
       products: [],
-      modalAd: {},
+      modalAdDetails: {},
       currentAddress: null,
-      opacity: 0
+      topBarHasBg: false
     }
 
     computed = {}
@@ -148,14 +149,9 @@
         clearTimeout(timer)
 
         timer = setTimeout(() => {
-          console.log(33)
           const scrollTop = e.detail.scrollTop
 
-          if (scrollTop < 200) {
-            this.opacity = scrollTop / 200
-          } else {
-            this.opacity = 1
-          }
+          this.topBarHasBg = scrollTop > 30
 
           this.$apply()
         }, 50)
@@ -209,7 +205,12 @@
 
     async onShow () {
       if (addressSelector.get()) {
-        this.$invoke('modal-ad', 'show')
+        if (!modalAd.get()) {
+          setTimeout(() => {
+            this.$invoke('modal-ad', 'show')
+            modalAd.set(true)
+          }, 1600)
+        }
       }
 
       try {
@@ -292,7 +293,7 @@
         rate: (item.evalScore / 2).toFixed(0)
       }))
 
-      this.modalAd = (item => ({
+      this.modalAdDetails = (item => ({
         url: item.href || '',
         image: item.imageUrl || ''
       }))(homeIndexRes.advs.popUpAdv)

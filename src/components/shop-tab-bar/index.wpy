@@ -7,7 +7,7 @@
     </repeat>
   </view>
   <c-modal-download />
-  <c-shops-categories />
+  <c-shops-categories :details.sync="details" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -50,6 +50,7 @@
             wepy.navigateTo({ url: `/pages/shops/details/index?id=${this.details.storeId}` })
             break
           case 'categories':
+            console.log(this.details.recommendGoodsClasses)
             this.$invoke('c-shops-categories', 'show')
             break
           case 'contact':

@@ -81,7 +81,6 @@
     async get (commentType = 1) {
       const getEvaluationsRes = await request({
         url: 'evaluation/getEvaluations',
-        mock: true,
         data: {
           goodsCommonId: this.id,
           pageIndex: 0,

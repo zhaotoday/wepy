@@ -82,7 +82,7 @@
             title: '选择地址成功'
           })
 
-          wepy.navigateTo({ url: '/pages/tab-bar/home/index' })
+          wepy.switchTab({ url: '/pages/tab-bar/home/index' })
         } else {
           wepy.navigateBack()
         }

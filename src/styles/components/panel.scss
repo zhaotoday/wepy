@@ -25,6 +25,7 @@
   @include e(head-addon) {
     @include position--absolute(50%, px2rpx(20px), null, null);
     @include padding(px2rpx(10px), px2rpx(10px), px2rpx(10px), px2rpx(50px));
+    @include text--middle(px2rpx(44px));
 
     transform: translateY(-50%);
     background: {

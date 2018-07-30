@@ -44,7 +44,6 @@ export default async (
   }
 
   if (requiresLocation) {
-    /*
     if (addressId.get()) {
       Object.assign(data, {
         addressId: addressId.get()
@@ -52,8 +51,7 @@ export default async (
     } else {
       Object.assign(data, location.get())
     }
-    */
-    Object.assign(data, location.get())
+    // Object.assign(data, location.get())
   }
 
   // mock 数据

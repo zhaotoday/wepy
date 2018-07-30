@@ -8,6 +8,10 @@
 
   z-index: 3;
 
+  @include m(has-bg) {
+    background-color: map-get($colors, c1);
+  }
+
   @include e(input, category, more) {
     float: left;
   }

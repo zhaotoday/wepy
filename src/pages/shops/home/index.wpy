@@ -1,6 +1,6 @@
 <template>
   <nav-bar title="购物车" :back.sync="navBarBack" />
-  <product-search :opacity.sync="opacity" />
+  <product-search :hasBg.sync="productSearchHasBg" />
   <scroll-view scroll-y class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar" @scroll="scroll">
     <view class="n-shop-banner-wrap">
       <image class="n-shop-banner" mode="aspectFill" src="{{details.storeLabel}}"
@@ -131,7 +131,7 @@
           </view>
         </view>
       </view>
-      <repeat for="{{home.recommendGoods}}" item="item1">
+      <repeat for="{{home.recommendGoods}}" item="item1" index="index1">
         <view class="c-panel u-margin-bottom-20">
           <view class="c-panel__head padding-30 border-bottom-1">
             <view class="c-panel__head-title">
@@ -140,11 +140,11 @@
             </view>
           </view>
           <view class="c-panel__body c-products u-padding-top-20">
-            <repeat for="{{item1.goods}}" item="item2">
+            <repeat for="{{item1.goods}}" item="item2" index="index2">
               <view class="c-products__item" @tap="navigateTo('/pages/products/details/index?id={{item.goodsId}}')">
                 <image src="{{item2.goodsImage}}" mode="aspectFill"
                        @error="imageError"
-                       data-options="{{ { type: 'product', keys: [ 'recommendedProducts', index, 'image' ] } }}" />
+                       data-options="{{ { type: 'product', keys: [ 'home',  'recommendGoods', index1, 'goods', index2, 'goodsImage' ] } }}" />
                 <view class="c-products__item-name c2 s4">{{item2.goodsName}}</view>
                 <view class="c-products__item-price c1 s1">¥{{item2.goodsPrice}}</view>
               </view>
@@ -212,7 +212,7 @@
 
     </block>
   </scroll-view>
-  <shop-tab-bar :details.sync="details" />
+  <shop-tab-bar :details.sync="home" />
 </template>
 
 <style lang="scss" src="./styles.scss"></style>
@@ -262,7 +262,7 @@
         value: 'promotions'
       }],
       currentTab: 'home',
-      opacity: 0
+      productSearchHasBg: false
     }
 
     methods = {
@@ -273,14 +273,9 @@
         clearTimeout(timer)
 
         timer = setTimeout(() => {
-          console.log(33)
           const scrollTop = e.detail.scrollTop
 
-          if (scrollTop < 200) {
-            this.opacity = scrollTop / 200
-          } else {
-            this.opacity = 1
-          }
+          this.productSearchHasBg = scrollTop > 30
 
           this.$apply()
         }, 50)
@@ -299,13 +294,13 @@
           storeId: this.id
         }
       })
-      this.home = await request({
+      this.home = Object.assign(await request({
         requiresLocation: true,
         url: 'store/index',
         data: {
           storeId: this.id
         }
-      })
+      }), { storeId: this.id })
       this.products = (await request({
         requiresLocation: true,
         url: 'goods/getGoods',

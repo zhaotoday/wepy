@@ -1,5 +1,5 @@
 <template>
-  <view class="c-product-search" style="background-color: rgba(255,133,25, {{opacity}});">
+  <view class="c-product-search{{hasBg ? ' m-has-bg' : ''}}">
     <view class="c-product-search__input">
       <input class="c2 s4" placeholder="输入你要搜索的商品名称" focus-type="search" placeholder-style="color: #bbb;"
              @focus="focus" />
@@ -19,7 +19,10 @@
 
   export default class extends wepy.component {
     props = {
-      opacity: String,
+      hasBg: {
+        type: Boolean,
+        default: false
+      },
       modifiers: {
         type: String,
         default: ''

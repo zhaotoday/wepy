@@ -10,6 +10,7 @@
   import configStore from './store'
 
   import addressSelector from './utils/addressSelector'
+  import modalAd from './utils/modalAd'
 
   const store = configStore()
   setStore(store)
@@ -96,6 +97,7 @@
 
       utils.currentPages.clearPages()
       addressSelector.clear()
+      modalAd.clear()
     }
   }
 </script>

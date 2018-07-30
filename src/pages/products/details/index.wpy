@@ -95,7 +95,9 @@
               </view>
             </view>
           </view>
-          <view class="n-shop__go-categories c-button orange-ghost height-42 c1 s5" style="width: 140rpx;">查看分类</view>
+          <view class="n-shop__go-categories c-button orange-ghost height-42 c1 s5" style="width: 140rpx;"
+                @tap="navigateTo('/pages/shops/categories/index?id={{shop.id}}')">查看分类
+          </view>
           <view class="n-shop__go-shop c-button orange height-42 c7 s5" style="width: 140rpx;"
                 @tap="navigateTo({{'/pages/shops/home/index?id=' + shop.id}})">进店逛逛
           </view>
@@ -265,29 +267,27 @@
       },
       async handleTapCollect () {
         try {
-          if (this.collected === 1) {
-            await request({
-              requiresLogin: true,
-              url: 'collection/delGoods',
-              data: {
-                goodsCommonId: this.id
-              }
-            })
-          } else {
-            await request({
-              requiresLogin: true,
-              url: 'collection/collectGoods',
-              data: {
-                goodsCommonId: this.id
-              }
-            })
-          }
+          await request({
+            requiresLogin: true,
+            url: this.collected ? 'collection/delGoods' : 'collection/collectGoods',
+            data: {
+              goodsCommonId: this.id
+            }
+          })
 
-          this.collected = !this.collected
+          wepy.showToast({
+            icon: 'none',
+            title: this.collected ? '取消关注成功' : '关注成功'
+          })
+
+          this.collected = this.collected ? 0 : 1
 
           this.$apply()
         } catch (e) {
-          console.log(e)
+          wepy.showToast({
+            icon: 'none',
+            title: e.data.longMessage
+          })
         }
       },
       showModalCoupons () {
