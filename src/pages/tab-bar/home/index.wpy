@@ -1,13 +1,16 @@
 <template>
   <nav-bar title="身边店" :back.user="navBarBack" />
-  <view class="home c-main c-main--has-nav-bar">
+  <scroll-view scroll-y class="home c-main c-main--has-nav-bar" upper-threshold="50" @scroll="scroll"
+               @scrolltoupper="scrollToupper">
     <!-- home-top-ads -->
     <view class="home-top-ads">
       <view>
         <c-swiper-top-ads :items.sync="topAds" width="100%" height="465rpx" />
       </view>
-      <address-picker :address.sync="address" />
-      <view class="c-icon c-icon--scan" @tap="handleTapScan"></view>
+      <view class="n-home-top-bar" style="background-color: rgba(255,133,25, {{opacity}});">
+        <address-picker :address.sync="address" />
+        <view class="c-icon c-icon--scan" @tap="handleTapScan"></view>
+      </view>
     </view>
     <!-- /home-top-ads -->
     <!-- home-categories -->
@@ -80,10 +83,8 @@
         </view>
       </view>
     </view>
-  </view>
-  <!--
-  <modal-ad :item.sync="modalAd"/>
-  -->
+  </scroll-view>
+  <modal-ad :details.sync="modalAd" />
   <block wx:if="{{!!currentAddress}}">
     <address-selector :dataItem.sync="currentAddress" @get.user="get" />
   </block>
@@ -103,6 +104,9 @@
   import AddressSelector from '../../../components/address-selector/index'
   import ModalAd from '../../../components/modal-ad/index'
   import location from '../../../utils/location'
+  import addressSelector from '../../../utils/addressSelector'
+
+  let timer
 
   export default class extends wepy.page {
     config = {
@@ -130,12 +134,32 @@
       shops: [],
       products: [],
       modalAd: {},
-      currentAddress: null
+      currentAddress: null,
+      opacity: 0
     }
 
     computed = {}
 
     methods = {
+      scrollToupper () {
+        console.log(33)
+      },
+      scroll (e) {
+        clearTimeout(timer)
+
+        timer = setTimeout(() => {
+          console.log(33)
+          const scrollTop = e.detail.scrollTop
+
+          if (scrollTop < 200) {
+            this.opacity = scrollTop / 200
+          } else {
+            this.opacity = 1
+          }
+
+          this.$apply()
+        }, 50)
+      },
       async handleTapScan () {
         await wepy.scanCode({
           onlyFromCamera: true
@@ -184,6 +208,10 @@
     events = {}
 
     async onShow () {
+      if (addressSelector.get()) {
+        this.$invoke('modal-ad', 'show')
+      }
+
       try {
         const getCurrentLocationRes = await location.getCurrentLocation()
         this.get({
@@ -196,7 +224,10 @@
     }
 
     showAddressSelector () {
-      this.$invoke('address-selector', 'show')
+      if (!addressSelector.get()) {
+        this.$invoke('address-selector', 'show')
+        addressSelector.set(true)
+      }
     }
 
     hideAddressSelector () {

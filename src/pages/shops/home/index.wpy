@@ -1,7 +1,7 @@
 <template>
   <nav-bar title="购物车" :back.sync="navBarBack" />
-  <product-search />
-  <view class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar">
+  <product-search :opacity.sync="opacity" />
+  <scroll-view scroll-y class="p-shops-home c-main c-main--has-nav-bar c-main--has-shop-tab-bar" @scroll="scroll">
     <view class="n-shop-banner-wrap">
       <image class="n-shop-banner" mode="aspectFill" src="{{details.storeLabel}}"
              @error="imageError"
@@ -211,7 +211,7 @@
       </view>
 
     </block>
-  </view>
+  </scroll-view>
   <shop-tab-bar :details.sync="details" />
 </template>
 
@@ -225,6 +225,8 @@
   import ShopTabBar from '../../../components/shop-tab-bar/index'
   import Rate from '../../../components/rate/index'
   import request from '../../../utils/request'
+
+  let timer
 
   export default class extends wepy.page {
     config = {
@@ -259,12 +261,29 @@
         name: '促销',
         value: 'promotions'
       }],
-      currentTab: 'home'
+      currentTab: 'home',
+      opacity: 0
     }
 
     methods = {
       switchTab (tab) {
         this.currentTab = tab
+      },
+      scroll (e) {
+        clearTimeout(timer)
+
+        timer = setTimeout(() => {
+          console.log(33)
+          const scrollTop = e.detail.scrollTop
+
+          if (scrollTop < 200) {
+            this.opacity = scrollTop / 200
+          } else {
+            this.opacity = 1
+          }
+
+          this.$apply()
+        }, 50)
       }
     }
 

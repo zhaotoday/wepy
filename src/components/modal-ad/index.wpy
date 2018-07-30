@@ -2,8 +2,10 @@
   <modal>
     <view slot="content">
       <view class="c-modal-ad">
-        <view class="c-icon c-icon--close" @tap="hide"/>
-        <image src="{{item.image}}" mode="widthFix" @tap="navigate"/>
+        <view class="c-icon c-icon--close" @tap="hide" />
+        <image src="{{details.image}}" mode="widthFix" @tap="navigateTo"
+               @error="imageError"
+               data-options="{{ { type: 'ad', keys: [ 'details', 'image' ] } }}" />
       </view>
     </view>
   </modal>
@@ -18,7 +20,7 @@
 
   export default class extends wepy.component {
     props = {
-      item: {
+      details: {
         type: Object,
         default: {
           url: '',
@@ -38,9 +40,12 @@
       show () {
         this.$invoke('modal', 'show')
       },
-      navigate () {
-        const url = `/pages/web-view/index?src=${utils.url.encode('https://www.baidu.com/')}`
-        wepy.navigateTo({url})
+      navigateTo () {
+        if (this.url) {
+          const url = `/pages/web-view/index?src=${utils.url.encode(this.url)}`
+
+          wepy.navigateTo({ url })
+        }
       }
     }
   }

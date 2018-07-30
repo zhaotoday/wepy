@@ -12,6 +12,14 @@
   background-color: #f5f5f5;
 }
 
+@include n(home-top-bar) {
+  @include position--fixed(0, null, null, 0);
+  
+  width: 100%;
+  height: px2rpx(88px);
+  z-index: 5;
+}
+
 .home-margin-top {
   margin-top: px2rpx(20px);
 }
@@ -22,11 +30,15 @@
   position: relative;
 
   .c-icon--scan {
-    @include position--absolute(px2rpx(20px), px2rpx(25px));
+    @include position--absolute(50%, px2rpx(25px));
+
+    transform: translateY(-50%);
   }
 
   .c-address-picker {
-    @include position--absolute(px2rpx(38px), null, null, px2rpx(25px));
+    @include position--absolute(50%, null, null, px2rpx(25px));
+
+    transform: translateY(-50%);
   }
 }
 

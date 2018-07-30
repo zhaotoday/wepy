@@ -2,7 +2,8 @@
 @import "../../styles/layouts/box";
 
 @include b(c-product-search) {
-  @include position--absolute(px2rpx(20px), null, null, 0);
+  @include padding(px2rpx(14px), null, px2rpx(14px));
+  @include position--absolute(0, null, null, 0);
   @include size(100%, px2rpx(60px));
 
   z-index: 3;

@@ -1,5 +1,5 @@
 // 接口地址
-const API_URL = 'https://apitest.shenbd.com'
+const API_URL = 'https://apiceshi.shenbd.com'
 
 // 图片 CDN 地址
 const IMAGE_CDN_URL = 'https://images.liruan.cn'

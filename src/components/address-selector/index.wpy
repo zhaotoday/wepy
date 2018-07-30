@@ -32,7 +32,7 @@
               </view>
             </view>
           </view>
-          <view class="c-address-selector__btn c7 s0" @tap="modify">修改收获地址</view>
+          <view class="c-address-selector__btn c7 s0" @tap="modify">修改配送地址</view>
         </view>
       </view>
     </view>
